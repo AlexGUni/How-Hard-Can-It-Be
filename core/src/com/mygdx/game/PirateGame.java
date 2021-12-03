@@ -11,19 +11,19 @@ import static com.mygdx.utils.Constants.BACKGROUND_COLOUR;
 
 public class PirateGame extends ApplicationAdapter {
 	SpriteBatch batch;
-	Texture img;
+	Texture background_img;
 	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		img = new Texture("background.png");
+		background_img = new Texture("background.png");
 	}
 
 	@Override
 	public void render () {
 		ScreenUtils.clear(BACKGROUND_COLOUR.x, BACKGROUND_COLOUR.y, BACKGROUND_COLOUR.z, 1);
 		batch.begin();
-		batch.draw(img, 0, 0);
+		batch.draw(background_img, 0, 0);
 		batch.end();
 
 		if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
@@ -35,6 +35,6 @@ public class PirateGame extends ApplicationAdapter {
 	@Override
 	public void dispose () {
 		batch.dispose();
-		img.dispose();
+		background_img.dispose();
 	}
 }
