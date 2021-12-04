@@ -1,10 +1,13 @@
 package com.mygdx.game.Components;
 
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.utils.ResourceManager;
 
+/**
+ * Add the ability for the object to be shown and positioned
+ */
 public class Renderable extends Component {
     private Sprite sprite;
     public Renderable(){
@@ -14,12 +17,12 @@ public class Renderable extends Component {
     }
 
     /**
-     * Calls the empty constructor and asigns the texture to the sprite
-     * @param image the texture that the sprite will take on
+     * Calls the empty constructor and assigns the texture to the sprite
+     * @param fPath the fPath that will be retrieved from the Resource Manager
      */
-    public Renderable(Texture image) {
+    public Renderable(String fPath) {
         this();
-        sprite = new Sprite(image); // TODO: don't call the constructor
+        sprite = new Sprite(ResourceManager.getTexture(fPath)); // TODO: don't call the constructor
     }
     public void setPosition(float x, float y){
         sprite.setPosition(x, y);
