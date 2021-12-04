@@ -2,9 +2,9 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.Components.ComponentType;
 import com.mygdx.game.Components.Renderable;
-import org.w3c.dom.Text;
 
 public class Player extends Entity {
     private Texture texture;
@@ -13,8 +13,7 @@ public class Player extends Entity {
     }
     public Player(String fPath){
         super();
-        texture = new Texture(fPath);
-        Renderable r = new Renderable(texture);
+        Renderable r = new Renderable(fPath);
         this.addComponent(r);
     }
 
@@ -26,5 +25,12 @@ public class Player extends Entity {
 
     public void draw(SpriteBatch b){
         this.getComponent(ComponentType.Renderable).render(b);
+    }
+
+    public Vector2 getPos(){
+        return getComponent(Renderable.class).getPosition();
+    }
+    public void setPos(Vector2 pos){
+        getComponent(Renderable.class).setPosition(pos);
     }
 }

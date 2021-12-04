@@ -11,7 +11,7 @@ import java.util.ArrayList;
  * However, there is over head with this class so in some cases it's better to just use raw sprites
  */
 public class Entity {
-    private ArrayList<Component> components;
+    private final ArrayList<Component> components;
 
     public Entity(){
         components = new ArrayList<>();
@@ -26,6 +26,21 @@ public class Entity {
         for (Component c : components){
             if(c.getType() == type){
                 return c;
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Gets the components that is of the same type as T
+     * @param type [T].class
+     * @param <T>
+     * @return the component cast to the appropriate type
+     */
+    public <T> T getComponent(Class<T> type){
+        for(Component c : components){
+            if(type.isInstance(c)) {
+                return (T)c;
             }
         }
         return null;
