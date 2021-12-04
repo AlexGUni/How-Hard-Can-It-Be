@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.Entitys;
 
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
@@ -7,7 +7,6 @@ import com.mygdx.game.Components.ComponentType;
 import com.mygdx.game.Components.Renderable;
 
 public class Player extends Entity {
-    private Texture texture;
     public Player(){
         super();
     }
@@ -16,16 +15,20 @@ public class Player extends Entity {
         Renderable r = new Renderable(fPath);
         this.addComponent(r);
     }
+    public Player(int id){
+        super();
+        Renderable r = new Renderable(id);
+        this.addComponent(r);
+    }
 
     @Override
     public void cleanUp() {
         super.cleanUp();
-        texture.dispose();
     }
 
-    public void draw(SpriteBatch b){
+    /*public void draw(){
         this.getComponent(ComponentType.Renderable).render(b);
-    }
+    }*/
 
     public Vector2 getPos(){
         return getComponent(Renderable.class).getPosition();

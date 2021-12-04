@@ -4,42 +4,40 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.mygdx.game.Components.ComponentEvent;
+import com.mygdx.game.Components.EntityManager;
+import com.mygdx.game.Entitys.Background;
+import com.mygdx.game.Entitys.Player;
 import com.mygdx.utils.ResourceManager;
 
 import static com.mygdx.utils.Constants.*;
 
 public class PirateGame extends ApplicationAdapter {
 	OrthographicCamera camera;
-	SpriteBatch batch;
-	Sprite p;
 	Player player;
-	Texture background_img;
+	Background bg;
 
 
 	@Override
 	public void create () {
 		INIT_CONSTANTS();
 
-		ResourceManager.addTexture("ship.png");
-		ResourceManager.addTexture("background.png");
+		int id_ship = ResourceManager.addTexture("ship.png");
+		int id_map = ResourceManager.addTexture("tile map.png");
 
 		ResourceManager.loadAssets();
 
-		batch = new SpriteBatch();
-		batch.enableBlending();
 
-		background_img = ResourceManager.getTexture("background.png");
-
-		player = new Player("ship.png");
+		bg = new Background(id_map);
+		player = new Player(id_ship);
 
 		camera = new OrthographicCamera();
 		camera.setToOrtho(false, VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
+
+		EntityManager.raiseEvents(ComponentEvent.Awake, ComponentEvent.Start);
 	}
 
 	@Override
@@ -48,14 +46,10 @@ public class PirateGame extends ApplicationAdapter {
 
 		camera.position.set(new Vector3(player.getPos(), 0.0f));
 		camera.update();
-		batch.setProjectionMatrix(camera.combined);
-		batch.begin();
 
-		batch.draw(background_img, 0, 0);
-		player.draw(batch);
+		EntityManager.getBatch().setProjectionMatrix(camera.combined);
 
-		batch.end();
-
+		EntityManager.raiseEvents(ComponentEvent.Update, ComponentEvent.Render);
 
 		if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
 			Gdx.app.exit();
@@ -90,10 +84,7 @@ public class PirateGame extends ApplicationAdapter {
 	
 	@Override
 	public void dispose () {
-		batch.dispose();
-
-		player.cleanUp();
-
 		ResourceManager.cleanUp();
+		EntityManager.cleanUp();
 	}
 }

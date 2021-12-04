@@ -1,10 +1,18 @@
 package com.mygdx.game.Components;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.mygdx.game.Components.ComponentType;
 
+/**
+ * Base class for the Components
+ */
 public abstract class Component {
     protected ComponentType type;
+
+    protected Component(){
+        type = ComponentType.Unknown;
+        EntityManager.addComponent(this);
+    }
+
     public ComponentType getType(){
         return type;
     }
@@ -47,12 +55,7 @@ public abstract class Component {
     /**
      * Called once per frame used exclusively for rendering
      */
-    public void render(SpriteBatch batch) {
+    public void render() {
 
     }
-
-    /**
-     * Called at fixed time steps (Not implemented)
-     */
-    // public abstract void fixedUpdate();
 }

@@ -18,7 +18,7 @@ public final class Constants {
         DIMENTIONS = new Vector2(VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
         HALF_DIMENTIONS = new Vector2(HALF_VIEWPORT_WIDTH, HALF_VIEWPORT_HEIGHT);
         VIEWPORT_TITLE = "Jimbo Mc.Fimbo";
-        BACKGROUND_COLOUR = new Vector3(0.5f, 0.5f, 0.5f);
+        BACKGROUND_COLOUR = new Vector3(0.0f, 0.0f, 0.0f);
     }
 
     public static int SCREEN_WIDTH;

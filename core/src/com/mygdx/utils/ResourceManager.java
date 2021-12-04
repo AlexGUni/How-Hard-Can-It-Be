@@ -4,6 +4,9 @@ import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 /**
  * Manages all assets and disposes of them when appropriate
  */
@@ -11,7 +14,7 @@ public final class ResourceManager {
     private static boolean inited = false;
     private static boolean loaded;
     private static AssetManager manager;
-
+    private static ArrayList<String> ids;
     /**
      * The equivalent to a constructor
      */
@@ -22,20 +25,38 @@ public final class ResourceManager {
         inited = true;
         manager = new AssetManager();
         loaded = false;
+        ids = new ArrayList<>();
     }
 
-    public static void addTexture(String fPath){
+    /**
+     * Schedules an asset for loading
+     * @param fPath the file path of the asset
+     * @return returns the id of the asset can be used in place of the name;
+     */
+    public static int addTexture(String fPath){
         tryInit();
         checkAdd();
         manager.load(fPath, Texture.class);
+        ids.add(fPath);
+        return ids.size();
     }
 
-    public static void addTextureAtlas(String fPath){
+    /**
+     * Schedules an asset for loading
+     * @param fPath the file path of the asset
+     * @return returns the id of the asset can be used in place of the name;
+     */
+    public static int addTextureAtlas(String fPath){
         tryInit();
         checkAdd();
         manager.load(fPath, TextureAtlas.class);
+        ids.add(fPath);
+        return ids.size();
     }
 
+    /**
+     * Actually loads the assets
+     */
     public static void loadAssets(){
         tryInit();
         loaded = true;
@@ -48,6 +69,17 @@ public final class ResourceManager {
     }
     public static TextureAtlas getTextureAtlas(String fPath){
         tryInit();
+        return manager.get(fPath);
+    }
+
+    public static Texture getTexture(int id){
+        tryInit();
+        String fPath = ids.get(id - 1);
+        return manager.get(fPath);
+    }
+    public static TextureAtlas getTextureAtlas(int id){
+        tryInit();
+        String fPath = ids.get(id - 1);
         return manager.get(fPath);
     }
 

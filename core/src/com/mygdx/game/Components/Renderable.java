@@ -15,7 +15,10 @@ public class Renderable extends Component {
         type = ComponentType.Renderable;
         sprite = new Sprite();
     }
-
+    public Renderable(int id) {
+        this();
+        sprite = new Sprite(ResourceManager.getTexture(id)); // TODO: don't call the constructor
+    }
     /**
      * Calls the empty constructor and assigns the texture to the sprite
      * @param fPath the fPath that will be retrieved from the Resource Manager
@@ -35,9 +38,9 @@ public class Renderable extends Component {
     }
 
     @Override
-    public void render(SpriteBatch batch) {
-        super.render(batch);
-        sprite.draw(batch);
+    public void render() {
+        super.render();
+        sprite.draw(EntityManager.getBatch());
     }
 
     @Override
