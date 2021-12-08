@@ -1,7 +1,10 @@
-package com.mygdx.game.Components;
+package com.mygdx.game;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.Components.Component;
+import com.mygdx.game.Components.ComponentEvent;
 import com.mygdx.game.Entitys.Entity;
 
 import java.util.ArrayList;
@@ -12,17 +15,25 @@ import java.util.ArrayList;
 public final class EntityManager {
     private static ArrayList<Entity> entities;
     private static ArrayList<Component> components;
-    private static boolean inited = false;
+    private static boolean initialized = false;
     private static SpriteBatch primaryBatch;
     private static OrthographicCamera primaryCamera;
+    private static InputManager inpManager;
 
     public static void Initialize() {
+        inpManager = new InputManager();
         primaryBatch = new SpriteBatch();
         primaryCamera = new OrthographicCamera();
         primaryBatch.enableBlending();
         entities = new ArrayList<>();
         components = new ArrayList<>();
-        inited = true;
+        initialized = true;
+
+        Gdx.input.setInputProcessor(inpManager);
+    }
+
+    public static InputManager getInputManager() {
+        return inpManager;
     }
 
     public static void setCamera(OrthographicCamera cam) {
@@ -73,7 +84,7 @@ public final class EntityManager {
     }
 
     private static void tryInit(){
-        if(!inited){
+        if(!initialized){
             Initialize();
         }
     }

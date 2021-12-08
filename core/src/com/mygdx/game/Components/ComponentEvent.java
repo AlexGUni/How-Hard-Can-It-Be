@@ -6,6 +6,7 @@ public enum ComponentEvent {
     Update,
     Render,
     // FixedUpdate,
-    OnKeyboard,
-    OnMouse
+    OnKeyUp,
+    OnKeyDown,
+    OnMouseMove
 }

@@ -4,12 +4,14 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthoCachedTiledMapRenderer;
+import com.mygdx.game.EntityManager;
 
 public class TileMap extends Component {
     TiledMap map;
     TiledMapRenderer renderer;
-    private TileMap() {
+    private TileMap(){
         super();
+        type = ComponentType.TileMap;
     }
 
     public TileMap(String fPath) {

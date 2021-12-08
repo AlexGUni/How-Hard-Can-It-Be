@@ -1,10 +1,9 @@
 package com.mygdx.game.Entitys;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.Components.Component;
 import com.mygdx.game.Components.ComponentEvent;
 import com.mygdx.game.Components.ComponentType;
-import com.mygdx.game.Components.EntityManager;
+import com.mygdx.game.EntityManager;
 
 import java.util.ArrayList;
 
@@ -57,7 +56,7 @@ public class Entity {
      */
     public final void raiseEvents(ComponentEvent... events){
         for(ComponentEvent e : events){
-            if(e == ComponentEvent.Render){
+            if(e == ComponentEvent.Render) {
                 EntityManager.getBatch().setProjectionMatrix(EntityManager.getCamera().combined);
                 EntityManager.getBatch().begin();
             }
@@ -75,9 +74,14 @@ public class Entity {
                     case Render:
                         c.render();
                         break;
-                    case OnKeyboard:
+                    case OnKeyUp:
+                        c.onKeyUp();
                         break;
-                    case OnMouse:
+                    case OnKeyDown:
+                        c.onKeyDown();
+                        break;
+                    case OnMouseMove:
+                        c.onMouseMove();
                         break;
                 }
             }

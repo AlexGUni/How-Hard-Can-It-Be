@@ -1,6 +1,6 @@
 package com.mygdx.game.Components;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.EntityManager;
 
 /**
  * Base class for the Components
@@ -45,10 +45,13 @@ public abstract class Component {
 
     }
 
-    public void onKeyboard() {
+    public void onKeyUp() {
 
     }
-    public void onMouse() {
+    public void onKeyDown() {
+
+    }
+    public void onMouseMove() {
 
     }
 

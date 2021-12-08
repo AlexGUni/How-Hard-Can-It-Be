@@ -8,7 +8,7 @@ public class WorldMap extends Entity{
     }
 
     public WorldMap(String fPath) {
-        this();
+        super(1);
         TileMap map = new TileMap(fPath);
         addComponent(map);
     }
