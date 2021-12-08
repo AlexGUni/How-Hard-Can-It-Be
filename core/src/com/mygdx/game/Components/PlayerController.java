@@ -7,15 +7,18 @@ import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.EntityManager;
 import com.mygdx.game.Entitys.Player;
 
-public class PlayerControler extends Component {
+/**
+ * Responsible for the keyboard control of the player
+ */
+public class PlayerController extends Component {
     private Player player;
     private float speed;
 
-    public PlayerControler() {
+    public PlayerController() {
         super();
     }
 
-    public PlayerControler(Player player, float speed) {
+    public PlayerController(Player player, float speed) {
         this.player = player;
         this.speed = speed;
     }

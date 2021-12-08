@@ -1,10 +1,7 @@
 package com.mygdx.game.Entitys;
 
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.Components.ComponentType;
-import com.mygdx.game.Components.PlayerControler;
+import com.mygdx.game.Components.PlayerController;
 import com.mygdx.game.Components.Renderable;
 
 public class Player extends Entity {
@@ -20,7 +17,7 @@ public class Player extends Entity {
         super(2);
         Renderable r = new Renderable(id);
         addComponent(r);
-        PlayerControler pc = new PlayerControler(this, speed);
+        PlayerController pc = new PlayerController(this, speed);
         addComponent(pc);
     }
 

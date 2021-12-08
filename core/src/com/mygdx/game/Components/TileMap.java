@@ -7,6 +7,9 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthoCachedTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.mygdx.game.EntityManager;
 
+/**
+ * Component that allows the rendering of tilemaps (has its own sprite batch)
+ */
 public class TileMap extends Component {
     TiledMap map;
     TiledMapRenderer renderer;
