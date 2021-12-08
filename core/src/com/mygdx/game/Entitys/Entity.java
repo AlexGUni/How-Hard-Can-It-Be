@@ -58,6 +58,7 @@ public class Entity {
     public final void raiseEvents(ComponentEvent... events){
         for(ComponentEvent e : events){
             if(e == ComponentEvent.Render){
+                EntityManager.getBatch().setProjectionMatrix(EntityManager.getCamera().combined);
                 EntityManager.getBatch().begin();
             }
             for(Component c : components){
