@@ -4,6 +4,7 @@ import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthoCachedTiledMapRenderer;
+import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.mygdx.game.EntityManager;
 
 public class TileMap extends Component {
@@ -17,7 +18,7 @@ public class TileMap extends Component {
     public TileMap(String fPath) {
         this();
         map = new TmxMapLoader().load(fPath);
-        renderer = new OrthoCachedTiledMapRenderer(map);
+        renderer = new OrthogonalTiledMapRenderer(map);
     }
 
     @Override

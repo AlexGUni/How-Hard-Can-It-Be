@@ -47,5 +47,6 @@ public class PlayerControler extends Component {
             player.setPos(pos);
         }
         EntityManager.getCamera().position.set(new Vector3(player.getPos(), 0.0f));
+        EntityManager.getCamera().update();
     }
 }
