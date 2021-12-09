@@ -14,8 +14,6 @@ import static com.mygdx.utils.Constants.*;
 
 public class PirateGame extends ApplicationAdapter {
 	OrthographicCamera camera;
-	Player player;
-	WorldMap worldMap;
 
 	@Override
 	public void create () {
@@ -25,8 +23,8 @@ public class PirateGame extends ApplicationAdapter {
 
 		ResourceManager.loadAssets();
 
-		worldMap = new WorldMap("Map.tmx");
-		player = new Player(id_ship, 10);
+		WorldMap worldMap = new WorldMap("Map.tmx");
+		Player player = new Player(id_ship, 10);
 
 		camera = new OrthographicCamera();
 		camera.viewportWidth  = VIEWPORT_WIDTH;

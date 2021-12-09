@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Manages all assets and disposes of them when appropriate

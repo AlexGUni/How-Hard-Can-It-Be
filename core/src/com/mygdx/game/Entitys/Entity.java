@@ -55,13 +55,13 @@ public class Entity {
      * Raises the appropriate events on each component
      */
     public final void raiseEvents(ComponentEvent... events){
-        for(ComponentEvent e : events){
-            if(e == ComponentEvent.Render) {
+        for(ComponentEvent event : events){
+            if(event == ComponentEvent.Render) {
                 EntityManager.getBatch().setProjectionMatrix(EntityManager.getCamera().combined);
                 EntityManager.getBatch().begin();
             }
             for(Component c : components){
-                switch (e){
+                switch (event){
                     case Awake:
                         c.awake();
                         break;
@@ -85,7 +85,7 @@ public class Entity {
                         break;
                 }
             }
-            if(e == ComponentEvent.Render){
+            if(event == ComponentEvent.Render){
                 EntityManager.getBatch().end();
             }
         }

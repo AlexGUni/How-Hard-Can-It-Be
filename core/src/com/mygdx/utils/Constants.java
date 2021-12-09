@@ -7,17 +7,23 @@ import com.badlogic.gdx.math.Vector3;
 public final class Constants {
 
     public static void INIT_CONSTANTS() {
-        SCREEN_WIDTH = Gdx.graphics.getWidth();
-        SCREEN_HEIGHT = Gdx.graphics.getHeight();
         FULLSCREEN = true;
+        try{
+            SCREEN_WIDTH = Gdx.graphics.getWidth();
+            SCREEN_HEIGHT = Gdx.graphics.getHeight();
+        }
+        catch (Exception e) {
+            SCREEN_WIDTH = 1920;
+            SCREEN_HEIGHT = 1080;
+        }
         ASPECT_RATIO = !FULLSCREEN ? 1.0f / 1.0f : (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT;
-        VIEWPORT_HEIGHT = !FULLSCREEN ? 1080 : SCREEN_HEIGHT;
+        VIEWPORT_HEIGHT = !FULLSCREEN ? 800 : SCREEN_HEIGHT;
         VIEWPORT_WIDTH = !FULLSCREEN ? (int)(ASPECT_RATIO * VIEWPORT_HEIGHT) : SCREEN_WIDTH;
         HALF_VIEWPORT_HEIGHT = VIEWPORT_WIDTH / 2;
         HALF_VIEWPORT_WIDTH = VIEWPORT_HEIGHT / 2;
         DIMENTIONS = new Vector2(VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
         HALF_DIMENTIONS = new Vector2(HALF_VIEWPORT_WIDTH, HALF_VIEWPORT_HEIGHT);
-        VIEWPORT_TITLE = "Jimbo Mc.Fimbo";
+        VIEWPORT_TITLE = "Pirate Game";
         BACKGROUND_COLOUR = new Vector3(0.0f, 0.0f, 0.0f);
     }
 

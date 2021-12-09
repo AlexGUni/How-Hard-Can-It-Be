@@ -15,9 +15,9 @@ public class Renderable extends Component {
         type = ComponentType.Renderable;
         sprite = new Sprite();
     }
-    public Renderable(int id) {
+    public Renderable(int texId) {
         this();
-        sprite = new Sprite(ResourceManager.getTexture(id)); // TODO: don't call the constructor
+        sprite = new Sprite(ResourceManager.getTexture(texId)); // TODO: don't call the constructor
     }
     /**
      * Calls the empty constructor and assigns the texture to the sprite

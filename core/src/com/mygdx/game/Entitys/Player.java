@@ -3,6 +3,7 @@ package com.mygdx.game.Entitys;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.Components.PlayerController;
 import com.mygdx.game.Components.Renderable;
+import com.mygdx.game.EntityManager;
 
 public class Player extends Entity {
     public Player(){

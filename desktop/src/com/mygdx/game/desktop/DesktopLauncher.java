@@ -7,11 +7,12 @@ import static com.mygdx.utils.Constants.*;
 
 public class DesktopLauncher {
 	public static void main (String[] arg) {
+		INIT_CONSTANTS();
 		LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
 		cfg.title = VIEWPORT_TITLE;
 		cfg.width = VIEWPORT_WIDTH;
 		cfg.height = VIEWPORT_HEIGHT;
-		cfg.fullscreen = true;
+		cfg.fullscreen = FULLSCREEN;
 		new LwjglApplication(new PirateGame(), cfg);
 	}
 }
