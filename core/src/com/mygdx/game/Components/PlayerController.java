@@ -6,6 +6,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.EntityManager;
 import com.mygdx.game.Entitys.Player;
+import com.mygdx.game.RenderingManager;
 
 /**
  * Responsible for the keyboard control of the player
@@ -49,7 +50,7 @@ public class PlayerController extends Component {
             pos.x += speed;
             player.setPos(pos);
         }
-        EntityManager.getCamera().position.set(new Vector3(player.getPos(), 0.0f));
-        EntityManager.getCamera().update();
+        RenderingManager.getCamera().position.set(new Vector3(player.getPos(), 0.0f));
+        RenderingManager.getCamera().update();
     }
 }

@@ -42,6 +42,7 @@ public class Entity {
      * @param <T> the type of the desired component
      * @return the component cast to the appropriate type
      */
+    @SuppressWarnings("unchecked")
     public <T> T getComponent(Class<T> type){
         for(Component c : components){
             if(type.isInstance(c)) {
@@ -52,14 +53,10 @@ public class Entity {
     }
 
     /**
-     * Raises the appropriate events on each component
+     * Raises the appropriate events on each component with exception to rendering
      */
     public final void raiseEvents(ComponentEvent... events){
         for(ComponentEvent event : events){
-            if(event == ComponentEvent.Render) {
-                EntityManager.getBatch().setProjectionMatrix(EntityManager.getCamera().combined);
-                EntityManager.getBatch().begin();
-            }
             for(Component c : components){
                 switch (event){
                     case Awake:
@@ -71,9 +68,6 @@ public class Entity {
                     case Update:
                         c.update();
                         break;
-                    case Render:
-                        c.render();
-                        break;
                     case OnKeyUp:
                         c.onKeyUp();
                         break;
@@ -84,9 +78,6 @@ public class Entity {
                         c.onMouseMove();
                         break;
                 }
-            }
-            if(event == ComponentEvent.Render){
-                EntityManager.getBatch().end();
             }
         }
     }

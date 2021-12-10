@@ -16,15 +16,10 @@ public final class EntityManager {
     private static ArrayList<Entity> entities;
     private static ArrayList<Component> components;
     private static boolean initialized = false;
-    private static SpriteBatch primaryBatch;
-    private static OrthographicCamera primaryCamera;
     private static InputManager inpManager;
 
     public static void Initialize() {
         inpManager = new InputManager();
-        primaryBatch = new SpriteBatch();
-        primaryCamera = new OrthographicCamera();
-        primaryBatch.enableBlending();
         entities = new ArrayList<>();
         components = new ArrayList<>();
         initialized = true;
@@ -34,18 +29,6 @@ public final class EntityManager {
 
     public static InputManager getInputManager() {
         return inpManager;
-    }
-
-    public static void setCamera(OrthographicCamera cam) {
-        primaryCamera = cam;
-    }
-
-    public static OrthographicCamera getCamera() {
-        return primaryCamera;
-    }
-
-    public static SpriteBatch getBatch() {
-        return primaryBatch;
     }
 
     public static void addComponent(Component c){
@@ -59,13 +42,18 @@ public final class EntityManager {
     }
 
     /**
-     * raises the appropriate events for each entity's component
+     * raises the appropriate events for each entity's component. then renders after all entities have being processed
      * @param comps calls the events left to right
      */
     public static void raiseEvents(ComponentEvent... comps){
         tryInit();
         for (Entity e : entities){
             e.raiseEvents(comps);
+        }
+        for (ComponentEvent e : comps){
+            if(e == ComponentEvent.Render) {
+                RenderingManager.render();
+            }
         }
     }
 
@@ -80,7 +68,6 @@ public final class EntityManager {
         for (Component c : components){
             c.cleanUp();
         }
-        primaryBatch.dispose();
     }
 
     private static void tryInit(){

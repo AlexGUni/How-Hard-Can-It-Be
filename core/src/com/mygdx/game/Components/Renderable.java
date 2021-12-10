@@ -3,6 +3,8 @@ package com.mygdx.game.Components;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.EntityManager;
+import com.mygdx.game.RenderLayer;
+import com.mygdx.game.RenderingManager;
 import com.mygdx.utils.ResourceManager;
 
 /**
@@ -15,9 +17,10 @@ public class Renderable extends Component {
         type = ComponentType.Renderable;
         sprite = new Sprite();
     }
-    public Renderable(int texId) {
+    public Renderable(int texId, RenderLayer layer) {
         this();
         sprite = new Sprite(ResourceManager.getTexture(texId)); // TODO: don't call the constructor
+        RenderingManager.addItem(this, layer);
     }
     /**
      * Calls the empty constructor and assigns the texture to the sprite
@@ -40,7 +43,7 @@ public class Renderable extends Component {
     @Override
     public void render() {
         super.render();
-        sprite.draw(EntityManager.getBatch());
+        sprite.draw(RenderingManager.getBatch());
     }
 
     @Override
