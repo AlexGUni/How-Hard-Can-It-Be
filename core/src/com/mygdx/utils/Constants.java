@@ -27,6 +27,16 @@ public final class Constants {
         BACKGROUND_COLOUR = new Vector3(0.0f, 0.0f, 0.0f);
     }
 
+    public static void UPDATE_VIEWPORT(int x, int y) {
+        VIEWPORT_HEIGHT = y;
+        VIEWPORT_WIDTH = x;
+        ASPECT_RATIO = (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT;
+        HALF_VIEWPORT_HEIGHT = VIEWPORT_WIDTH / 2;
+        HALF_VIEWPORT_WIDTH = VIEWPORT_HEIGHT / 2;
+        DIMENTIONS = new Vector2(VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
+        HALF_DIMENTIONS = new Vector2(HALF_VIEWPORT_WIDTH, HALF_VIEWPORT_HEIGHT);
+    }
+
     public static int SCREEN_WIDTH;
     public static int SCREEN_HEIGHT;
     public static boolean FULLSCREEN;
