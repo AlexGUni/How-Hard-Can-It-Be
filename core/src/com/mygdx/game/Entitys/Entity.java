@@ -1,5 +1,6 @@
 package com.mygdx.game.Entitys;
 
+import com.mygdx.game.Collision.CollisionInfo;
 import com.mygdx.game.Components.Component;
 import com.mygdx.game.Components.ComponentEvent;
 import com.mygdx.game.Components.ComponentType;
@@ -87,4 +88,11 @@ public class Entity {
 
     }
 
+    public void onTrigger(CollisionInfo info) {
+
+    }
+
+    public void onCollision(CollisionInfo info) {
+
+    }
 }

@@ -11,7 +11,7 @@ import com.mygdx.utils.ResourceManager;
  * Add the ability for the object to be shown and positioned
  */
 public class Renderable extends Component {
-    private Sprite sprite;
+    protected Sprite sprite;
     public Renderable(){
         super();
         type = ComponentType.Renderable;
@@ -53,5 +53,9 @@ public class Renderable extends Component {
     @Override
     public void cleanUp() {
         super.cleanUp();
+    }
+
+    public Sprite getSprite() {
+        return sprite;
     }
 }

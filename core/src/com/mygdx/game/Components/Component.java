@@ -19,6 +19,9 @@ public abstract class Component {
     public void setParent(Entity e){
         parent = e;
     }
+    public Entity getParent() {
+        return parent;
+    }
 
     public ComponentType getType(){
         return type;

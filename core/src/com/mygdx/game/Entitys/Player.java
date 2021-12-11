@@ -1,6 +1,7 @@
 package com.mygdx.game.Entitys;
 
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.Components.BoundingBox;
 import com.mygdx.game.Components.PlayerController;
 import com.mygdx.game.Components.Renderable;
 import com.mygdx.game.Components.Transform;
@@ -17,11 +18,17 @@ public class Player extends Entity {
      * @param speed speed of movement
      */
     public Player(int id, float speed){
-        super(3);
+        super(4);
+
         Transform t = new Transform();
         addComponent(t);
+
         Renderable r = new Renderable(id, RenderLayer.Transparent);
         addComponent(r);
+
+        BoundingBox bb = new BoundingBox(r, t);
+        addComponent(bb);
+
         PlayerController pc = new PlayerController(this, speed);
         addComponent(pc);
     }

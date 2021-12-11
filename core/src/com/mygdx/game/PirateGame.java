@@ -3,14 +3,12 @@ package com.mygdx.game;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.Components.ComponentEvent;
-import com.mygdx.game.Entitys.Image;
 import com.mygdx.game.Entitys.Player;
 import com.mygdx.game.Entitys.WorldMap;
+import com.mygdx.game.Managers.CollisionManager;
 import com.mygdx.game.Managers.EntityManager;
-import com.mygdx.game.Managers.RenderLayer;
 import com.mygdx.game.Managers.RenderingManager;
 import com.mygdx.utils.ResourceManager;
 
@@ -40,6 +38,7 @@ public class PirateGame extends ApplicationAdapter {
 		ScreenUtils.clear(BACKGROUND_COLOUR.x, BACKGROUND_COLOUR.y, BACKGROUND_COLOUR.z, 1);
 
 		EntityManager.raiseEvents(ComponentEvent.Update, ComponentEvent.Render);
+		CollisionManager.raiseCollisionEvents();
 
 		if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
 			Gdx.app.exit();
@@ -52,5 +51,6 @@ public class PirateGame extends ApplicationAdapter {
 		ResourceManager.cleanUp();
 		EntityManager.cleanUp();
 		RenderingManager.cleanUp();
+		CollisionManager.cleanUp();
 	}
 }
