@@ -57,4 +57,8 @@ public class BoundingBox extends Component implements Collidable {
         Transform t = parent.getComponent(Transform.class);
         pos = t.getPosition();
     }
+
+    public Vector2 getPos() {
+        return pos;
+    }
 }
