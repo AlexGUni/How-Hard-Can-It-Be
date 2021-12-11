@@ -28,7 +28,7 @@ public class PirateGame extends ApplicationAdapter {
 		ResourceManager.loadAssets();
 
 		WorldMap worldMap = new WorldMap(id_map);
-		Player player = new Player(id_ship, 10);
+		Player player = new Player(id_ship, VIEWPORT_WIDTH / 2);
 		Enemy e1 = new Enemy();
 
 		EntityManager.raiseEvents(ComponentEvent.Awake, ComponentEvent.Start);

@@ -73,4 +73,8 @@ public final class EntityManager {
             Initialize();
         }
     }
+
+    public static float getDeltaTime(){
+        return Gdx.graphics.getDeltaTime();
+    }
 }

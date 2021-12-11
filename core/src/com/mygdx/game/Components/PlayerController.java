@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.Entitys.Player;
+import com.mygdx.game.Managers.EntityManager;
 import com.mygdx.game.Managers.RenderingManager;
 
 /**
@@ -26,29 +27,27 @@ public class PlayerController extends Component {
     @Override
     public void update() {
         super.update();
+        float s = speed * EntityManager.getDeltaTime();
+
+        Vector2 pos = player.getPos();
+        Vector2 deltaP = new Vector2(0, 0);
+
         if(Gdx.input.isKeyPressed(Input.Keys.W)){
-            Vector2 pos = player.getPos();
-            pos.y += speed;
-            player.setPos(pos);
+            deltaP.y += 1;
         }
 
         if(Gdx.input.isKeyPressed(Input.Keys.S)){
-            Vector2 pos = player.getPos();
-            pos.y -= speed;
-            player.setPos(pos);
+            deltaP.y -= 1;
         }
 
         if(Gdx.input.isKeyPressed(Input.Keys.A)){
-            Vector2 pos = player.getPos();
-            pos.x -= speed;
-            player.setPos(pos);
+            deltaP.x -= 1;
         }
 
         if(Gdx.input.isKeyPressed(Input.Keys.D)){
-            Vector2 pos = player.getPos();
-            pos.x += speed;
-            player.setPos(pos);
+            deltaP.x += 1;
         }
+        player.setPos(pos.add(deltaP.scl(s)));
         RenderingManager.getCamera().position.set(new Vector3(player.getPos(), 0.0f));
         RenderingManager.getCamera().update();
     }
