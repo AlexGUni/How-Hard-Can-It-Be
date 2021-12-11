@@ -1,8 +1,6 @@
-package com.mygdx.game;
+package com.mygdx.game.Managers;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.Components.Component;
 import com.mygdx.game.Components.ComponentEvent;
 import com.mygdx.game.Entitys.Entity;

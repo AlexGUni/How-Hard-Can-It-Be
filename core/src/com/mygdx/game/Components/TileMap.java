@@ -1,16 +1,12 @@
 package com.mygdx.game.Components;
 
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.badlogic.gdx.maps.tiled.renderers.OrthoCachedTiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.mygdx.game.EntityManager;
-import com.mygdx.game.RenderLayer;
-import com.mygdx.game.RenderingManager;
-
-import java.nio.channels.spi.SelectorProvider;
+import com.mygdx.game.Managers.RenderLayer;
+import com.mygdx.game.Managers.RenderingManager;
+import com.mygdx.utils.ResourceManager;
 
 /**
  * Component that allows the rendering of tilemaps (has its own sprite batch)
@@ -23,9 +19,9 @@ public class TileMap extends Component {
         type = ComponentType.TileMap;
     }
 
-    public TileMap(String fPath, RenderLayer layer) {
+    public TileMap(int id, RenderLayer layer) {
         this();
-        map = new TmxMapLoader().load(fPath);
+        map = ResourceManager.getTileMap(id);
         renderer = new OrthogonalTiledMapRenderer(map);
         RenderingManager.addItem(this, layer);
     }
@@ -45,6 +41,5 @@ public class TileMap extends Component {
     @Override
     public void cleanUp() {
         super.cleanUp();
-        map.dispose();
     }
 }

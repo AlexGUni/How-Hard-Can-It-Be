@@ -1,6 +1,6 @@
 package com.mygdx.game.Components;
 
-import com.mygdx.game.EntityManager;
+import com.mygdx.game.Managers.EntityManager;
 
 /**
  * Base class for the Components

@@ -3,7 +3,7 @@ package com.mygdx.game.Entitys;
 import com.mygdx.game.Components.Component;
 import com.mygdx.game.Components.ComponentEvent;
 import com.mygdx.game.Components.ComponentType;
-import com.mygdx.game.EntityManager;
+import com.mygdx.game.Managers.EntityManager;
 
 import java.util.ArrayList;
 

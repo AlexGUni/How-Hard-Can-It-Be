@@ -1,7 +1,7 @@
 package com.mygdx.game.Entitys;
 
 import com.mygdx.game.Components.TileMap;
-import com.mygdx.game.RenderLayer;
+import com.mygdx.game.Managers.RenderLayer;
 
 /**
  * The world map
@@ -11,9 +11,9 @@ public class WorldMap extends Entity{
         super();
     }
 
-    public WorldMap(String fPath) {
+    public WorldMap(int mapId) {
         super(1);
-        TileMap map = new TileMap(fPath, RenderLayer.Five);
+        TileMap map = new TileMap(mapId, RenderLayer.Five);
         addComponent(map);
     }
 }

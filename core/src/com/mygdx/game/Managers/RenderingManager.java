@@ -1,11 +1,9 @@
-package com.mygdx.game;
+package com.mygdx.game.Managers;
 
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.Components.Component;
-import com.mygdx.game.Components.ComponentType;
-import com.mygdx.game.Components.TileMap;
+
 import static com.mygdx.utils.Constants.*;
 
 import java.util.ArrayList;

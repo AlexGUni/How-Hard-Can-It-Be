@@ -4,9 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import com.mygdx.game.EntityManager;
 import com.mygdx.game.Entitys.Player;
-import com.mygdx.game.RenderingManager;
+import com.mygdx.game.Managers.RenderingManager;
 
 /**
  * Responsible for the keyboard control of the player

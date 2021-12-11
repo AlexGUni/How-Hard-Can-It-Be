@@ -2,9 +2,8 @@ package com.mygdx.game.Components;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.EntityManager;
-import com.mygdx.game.RenderLayer;
-import com.mygdx.game.RenderingManager;
+import com.mygdx.game.Managers.RenderLayer;
+import com.mygdx.game.Managers.RenderingManager;
 import com.mygdx.utils.ResourceManager;
 
 /**
