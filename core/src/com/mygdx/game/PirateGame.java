@@ -30,7 +30,6 @@ public class PirateGame extends ApplicationAdapter {
 
 		WorldMap worldMap = new WorldMap(id_map);
 		Player player = new Player(id_ship, 10);
-		Image img = new Image(id_img, RenderLayer.Two);
 
 
 		EntityManager.raiseEvents(ComponentEvent.Awake, ComponentEvent.Start);

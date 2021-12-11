@@ -1,5 +1,6 @@
 package com.mygdx.game.Components;
 
+import com.mygdx.game.Entitys.Entity;
 import com.mygdx.game.Managers.EntityManager;
 
 /**
@@ -7,10 +8,16 @@ import com.mygdx.game.Managers.EntityManager;
  */
 public abstract class Component {
     protected ComponentType type;
+    protected Entity parent;
 
     protected Component(){
         type = ComponentType.Unknown;
+        parent = null;
         EntityManager.addComponent(this);
+    }
+
+    public void setParent(Entity e){
+        parent = e;
     }
 
     public ComponentType getType(){

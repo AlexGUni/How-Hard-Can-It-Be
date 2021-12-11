@@ -26,6 +26,7 @@ public class Entity {
     }
     public void addComponent(Component component) {
         components.add(component);
+        component.setParent(this);
     }
     public Component getComponent(ComponentType type){
         for (Component c : components){
