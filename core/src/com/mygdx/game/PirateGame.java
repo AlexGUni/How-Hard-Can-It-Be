@@ -3,6 +3,11 @@ package com.mygdx.game;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.Components.ComponentEvent;
 import com.mygdx.game.Entitys.Enemy;
@@ -21,8 +26,9 @@ public class PirateGame extends ApplicationAdapter {
 		INIT_CONSTANTS();
 
 		int id_ship = ResourceManager.addTexture("ship.png");
-		int id_img = ResourceManager.addTexture("background.png");
 		int id_map = ResourceManager.addTileMap("Map.tmx");
+		int arial_gen_id = ResourceManager.addFontGenerator("arial.ttf");
+		int arial_24_id = ResourceManager.createFont(arial_gen_id, 24);
 
 
 		ResourceManager.loadAssets();
@@ -54,5 +60,14 @@ public class PirateGame extends ApplicationAdapter {
 		EntityManager.cleanUp();
 		RenderingManager.cleanUp();
 		CollisionManager.cleanUp();
+	}
+
+	@Override
+	public void resize(int width, int height) {
+		UPDATE_VIEWPORT(width, height);
+		OrthographicCamera cam = RenderingManager.getCamera();
+		cam.viewportWidth = width;
+		cam.viewportHeight = height;
+		cam.update();
 	}
 }
