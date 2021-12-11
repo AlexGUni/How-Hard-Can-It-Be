@@ -71,6 +71,9 @@ public final class CollisionManager {
         Vector2 p = bb.getPos();
 
         TiledMapTileLayer.Cell cell = map.getCell(p);
+        if(cell == null){
+            return info;
+        }
         info.collided = cell.getTile().getId() == 40;
         return info;
     }
