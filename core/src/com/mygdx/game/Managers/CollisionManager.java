@@ -34,8 +34,9 @@ public final class CollisionManager {
         Vector2[] col2 = bb2.getBoundingBox();
 
         Vector2 min1 = col1[0];
-        Vector2 min2 = col2[1];
-        Vector2 max1 = col1[0];
+        Vector2 max1 = col1[1];
+
+        Vector2 min2 = col2[0];
         Vector2 max2 = col2[1];
 
         info.object1 = bb1.getParent();

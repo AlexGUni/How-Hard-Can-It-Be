@@ -9,10 +9,12 @@ public class BoundingBox extends Component implements Collidable {
     public boolean isTrigger;
     private Vector2 max;
     private Vector2 min;
+    Vector2 pos;
 
     public BoundingBox() {
         super();
         isTrigger = false;
+        pos = new Vector2();
         max = new Vector2();
         min = new Vector2();
         type = ComponentType.BoundingBox;
@@ -27,26 +29,32 @@ public class BoundingBox extends Component implements Collidable {
     public BoundingBox(Renderable r, Transform t) {
         this();
         Rectangle re = r.sprite.getBoundingRectangle();
-        min = t.getPosition();
-        max = new Vector2(re.getWidth(), re.getHeight()).add(min);
+        max = new Vector2(re.getWidth(), re.getHeight());
     }
 
     public BoundingBox(Vector2 min, Vector2 max, Transform t) {
         this();
 
-        this.min = min.add(t.getPosition());
-        this.max = max.add(t.getPosition());
+        this.min = min;
+        this.max = max;
     }
 
     /**
      * @return min, max
      */
     public Vector2[] getBoundingBox() {
-        return new Vector2[] { min, max };
+        return new Vector2[] { min.cpy().add(pos), max.cpy().add(pos) };
     }
 
     public void setBoundingBox(Vector2 min, Vector2 max) {
         this.min = min;
         this.max = max;
+    }
+
+    @Override
+    public void update() {
+        super.update();
+        Transform t = parent.getComponent(Transform.class);
+        pos = t.getPosition();
     }
 }

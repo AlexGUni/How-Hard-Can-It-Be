@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.Components.ComponentEvent;
+import com.mygdx.game.Entitys.Enemy;
 import com.mygdx.game.Entitys.Player;
 import com.mygdx.game.Entitys.WorldMap;
 import com.mygdx.game.Managers.CollisionManager;
@@ -28,7 +29,7 @@ public class PirateGame extends ApplicationAdapter {
 
 		WorldMap worldMap = new WorldMap(id_map);
 		Player player = new Player(id_ship, 10);
-
+		Enemy e1 = new Enemy();
 
 		EntityManager.raiseEvents(ComponentEvent.Awake, ComponentEvent.Start);
 	}
@@ -38,6 +39,7 @@ public class PirateGame extends ApplicationAdapter {
 		ScreenUtils.clear(BACKGROUND_COLOUR.x, BACKGROUND_COLOUR.y, BACKGROUND_COLOUR.z, 1);
 
 		EntityManager.raiseEvents(ComponentEvent.Update, ComponentEvent.Render);
+
 		CollisionManager.raiseCollisionEvents();
 
 		if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
