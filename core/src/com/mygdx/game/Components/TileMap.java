@@ -1,15 +1,11 @@
 package com.mygdx.game.Components;
 
-import com.badlogic.gdx.maps.MapLayer;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TiledMapRenderer;
 import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
-import com.badlogic.gdx.maps.tiled.TmxMapLoader;
 import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.Collision.Collidable;
-import com.mygdx.game.Managers.CollisionManager;
 import com.mygdx.game.Managers.RenderLayer;
 import com.mygdx.game.Managers.RenderingManager;
 import com.mygdx.utils.ResourceManager;
@@ -23,7 +19,7 @@ public class TileMap extends Component implements Collidable {
     private TileMap(){
         super();
         type = ComponentType.TileMap;
-        CollisionManager.addTileMap(this);
+        // CollisionManager.addTileMap(this);
     }
 
     public TileMap(int id, RenderLayer layer) {

@@ -24,6 +24,7 @@ public class Text extends Component {
         super();
         position = new Vector2();
         offset = new Vector2();
+        type = ComponentType.Text;
     }
     public Text(int font_id, Vector3 fontColour) {
         this();

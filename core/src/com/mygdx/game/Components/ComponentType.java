@@ -5,5 +5,7 @@ public enum ComponentType {
     Renderable,
     TileMap,
     Transform,
-    BoundingBox
+    BoundingBox,
+    Text,
+    RigidBody
 }

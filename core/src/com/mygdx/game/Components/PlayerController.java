@@ -47,7 +47,13 @@ public class PlayerController extends Component {
         if(Gdx.input.isKeyPressed(Input.Keys.D)){
             deltaP.x += 1;
         }
-        player.setPos(pos.add(deltaP.scl(s)));
+        if(deltaP.x != 0 || deltaP.y != 0){
+            deltaP.scl(1000);
+        }
+
+        RigidBody rb = parent.getComponent(RigidBody.class);
+        rb.setVelocity(deltaP);
+
         RenderingManager.getCamera().position.set(new Vector3(player.getPos(), 0.0f));
         RenderingManager.getCamera().update();
     }

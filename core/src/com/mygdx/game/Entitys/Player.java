@@ -1,11 +1,9 @@
 package com.mygdx.game.Entitys;
 
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.Components.BoundingBox;
-import com.mygdx.game.Components.PlayerController;
-import com.mygdx.game.Components.Renderable;
-import com.mygdx.game.Components.Transform;
+import com.mygdx.game.Components.*;
 import com.mygdx.game.Managers.RenderLayer;
+import com.mygdx.game.Physics.PhysicsBodyType;
 
 public class Player extends Entity {
     public Player(){
@@ -26,7 +24,7 @@ public class Player extends Entity {
         Renderable r = new Renderable(id, RenderLayer.Transparent);
         addComponent(r);
 
-        BoundingBox bb = new BoundingBox(r, t);
+        RigidBody bb = new RigidBody(PhysicsBodyType.Dynamic, r, t);
         addComponent(bb);
 
         PlayerController pc = new PlayerController(this, speed);

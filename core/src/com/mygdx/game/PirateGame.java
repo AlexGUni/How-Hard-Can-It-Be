@@ -8,6 +8,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.physics.box2d.Box2D;
+import com.badlogic.gdx.utils.GdxNativesLoader;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.Components.ComponentEvent;
 import com.mygdx.game.Entitys.Enemy;
@@ -15,15 +17,20 @@ import com.mygdx.game.Entitys.Player;
 import com.mygdx.game.Entitys.WorldMap;
 import com.mygdx.game.Managers.CollisionManager;
 import com.mygdx.game.Managers.EntityManager;
+import com.mygdx.game.Managers.PhysicsManager;
 import com.mygdx.game.Managers.RenderingManager;
 import com.mygdx.utils.ResourceManager;
-
 import static com.mygdx.utils.Constants.*;
 
 public class PirateGame extends ApplicationAdapter {
 	@Override
 	public void create () {
+		GdxNativesLoader.load();
+
+		Box2D.init();
+
 		INIT_CONSTANTS();
+		PhysicsManager.Initialize();
 
 		int id_ship = ResourceManager.addTexture("ship.png");
 		int id_map = ResourceManager.addTileMap("Map.tmx");
@@ -46,7 +53,9 @@ public class PirateGame extends ApplicationAdapter {
 
 		EntityManager.raiseEvents(ComponentEvent.Update, ComponentEvent.Render);
 
-		CollisionManager.raiseCollisionEvents();
+		PhysicsManager.update();
+
+		// CollisionManager.raiseCollisionEvents();
 
 		if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
 			Gdx.app.exit();
@@ -59,7 +68,7 @@ public class PirateGame extends ApplicationAdapter {
 		ResourceManager.cleanUp();
 		EntityManager.cleanUp();
 		RenderingManager.cleanUp();
-		CollisionManager.cleanUp();
+		PhysicsManager.cleanUp();
 	}
 
 	@Override

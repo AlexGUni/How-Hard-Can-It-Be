@@ -21,7 +21,6 @@ public final class EntityManager {
         entities = new ArrayList<>();
         components = new ArrayList<>();
         initialized = true;
-
         Gdx.input.setInputProcessor(inpManager);
     }
 
