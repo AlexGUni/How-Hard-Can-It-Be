@@ -30,7 +30,7 @@ public class PirateGame extends ApplicationAdapter {
 		Box2D.init();
 
 		INIT_CONSTANTS();
-		PhysicsManager.Initialize();
+		PhysicsManager.Initialize(false);
 
 		int id_ship = ResourceManager.addTexture("ship.png");
 		int id_map = ResourceManager.addTileMap("Map.tmx");
@@ -54,8 +54,6 @@ public class PirateGame extends ApplicationAdapter {
 		EntityManager.raiseEvents(ComponentEvent.Update, ComponentEvent.Render);
 
 		PhysicsManager.update();
-
-		// CollisionManager.raiseCollisionEvents();
 
 		if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
 			Gdx.app.exit();
