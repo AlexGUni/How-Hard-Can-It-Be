@@ -16,7 +16,7 @@ public class Enemy extends Entity {
         Renderable r = new Renderable(1, RenderLayer.Five);
         addComponent(r);
 
-        RigidBody bb = new RigidBody(PhysicsBodyType.Dynamic, r, t);
+        RigidBody bb = new RigidBody(PhysicsBodyType.Kinematic, r, t);
         addComponent(bb);
 
         Text text = new Text(4, new Vector3(1, 0, 0));
