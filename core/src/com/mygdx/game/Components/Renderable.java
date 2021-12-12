@@ -15,7 +15,6 @@ public class Renderable extends Component {
     public Renderable(){
         super();
         type = ComponentType.Renderable;
-        sprite = new Sprite();
     }
 
     /**
@@ -25,13 +24,16 @@ public class Renderable extends Component {
      */
     public Renderable(int texId, RenderLayer layer) {
         this();
-        sprite = new Sprite(ResourceManager.getTexture(texId)); // TODO: don't call the constructor
+        sprite = new Sprite(ResourceManager.getTexture(texId));
         RenderingManager.addItem(this, layer);
     }
 
     @Override
     public void update() {
         super.update();
+        if(sprite == null){
+            return;
+        }
         Transform c = parent.getComponent(Transform.class);
         if(c == null){
             return;
@@ -47,6 +49,9 @@ public class Renderable extends Component {
     @Override
     public void render() {
         super.render();
+        if(sprite == null){
+            return;
+        }
         sprite.draw(RenderingManager.getBatch());
     }
 
