@@ -47,9 +47,8 @@ public class PlayerController extends Component {
         if(Gdx.input.isKeyPressed(Input.Keys.D)){
             deltaP.x += 1;
         }
-        if(deltaP.x != 0 || deltaP.y != 0){
-            deltaP.scl(1000);
-        }
+
+        deltaP.scl(s);
 
         RigidBody rb = parent.getComponent(RigidBody.class);
         rb.setVelocity(deltaP);
