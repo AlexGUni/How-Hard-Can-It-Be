@@ -8,6 +8,8 @@ import com.mygdx.game.Physics.PhysicsBodyType;
 
 import java.util.ArrayList;
 
+import static com.mygdx.utils.Constants.PHYSICS_DELTA_TIME;
+
 // TODO: Tweak Physics settings
 // TODO: Map collision
 
@@ -79,7 +81,7 @@ public final class PhysicsManager {
 
     public static void update() {
         tryInit();
-        box2DWorld.step(EntityManager.getDeltaTime(), 3, 3);
+        box2DWorld.step(PHYSICS_DELTA_TIME, 10, 15);
 
         if(debug != null){
             debug.render(box2DWorld, RenderingManager.getCamera().combined);

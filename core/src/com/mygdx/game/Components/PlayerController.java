@@ -8,6 +8,8 @@ import com.mygdx.game.Entitys.Player;
 import com.mygdx.game.Managers.EntityManager;
 import com.mygdx.game.Managers.RenderingManager;
 
+import static com.mygdx.utils.Constants.PHYSICS_DELTA_TIME;
+
 /**
  * Responsible for the keyboard control of the player
  */
@@ -27,7 +29,7 @@ public class PlayerController extends Component {
     @Override
     public void update() {
         super.update();
-        float s = speed * EntityManager.getDeltaTime();
+        float s = speed * PHYSICS_DELTA_TIME;
 
         Vector2 pos = player.getPos();
         Vector2 deltaP = new Vector2(0, 0);

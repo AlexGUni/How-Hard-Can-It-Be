@@ -139,9 +139,9 @@ public final class ResourceManager {
 
         FreeTypeFontGenerator.FreeTypeFontParameter params = new FreeTypeFontGenerator.FreeTypeFontParameter();
         params.size = fontSize;
-        params.color.r = 0;
-        params.color.g = 0;
-        params.color.b = 0;
+        params.color.r = 1;
+        params.color.g = 1;
+        params.color.b = 1;
 
         BitmapFont font = generator.generateFont(params);
 

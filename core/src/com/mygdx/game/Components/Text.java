@@ -39,6 +39,11 @@ public class Text extends Component {
      */
     public void setPosition(Vector2 pos) {
         position.set(pos);
+    }/**
+     * isn't used if parent has a transform component
+     */
+    public void setPosition(float x, float y) {
+        position.set(x, y);
     }
 
     public void setFontColour(Vector3 col) {

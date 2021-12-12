@@ -47,10 +47,11 @@ public final class EntityManager {
         for (Entity e : entities){
             e.raiseEvents(comps);
         }
-        for (ComponentEvent e : comps){
-            if(e == ComponentEvent.Render) {
-                RenderingManager.render();
-            }
+
+        RenderingManager.render();
+
+        for (Entity e : entities){
+            e.update();
         }
     }
 
@@ -75,5 +76,8 @@ public final class EntityManager {
 
     public static float getDeltaTime(){
         return Gdx.graphics.getDeltaTime();
+    }
+    public static int getFPS(){
+        return Gdx.graphics.getFramesPerSecond();
     }
 }

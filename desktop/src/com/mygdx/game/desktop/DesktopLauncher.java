@@ -13,6 +13,10 @@ public class DesktopLauncher {
 		cfg.width = VIEWPORT_WIDTH;
 		cfg.height = VIEWPORT_HEIGHT;
 		cfg.fullscreen = FULLSCREEN;
+
+		cfg.vSyncEnabled = false;
+		cfg.foregroundFPS = 0;
+		cfg.backgroundFPS = 0;
 		new LwjglApplication(new PirateGame(), cfg);
 	}
 }

@@ -11,7 +11,9 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.box2d.Box2D;
 import com.badlogic.gdx.utils.GdxNativesLoader;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.TimeUtils;
 import com.mygdx.game.Components.ComponentEvent;
+import com.mygdx.game.Entitys.DebugText;
 import com.mygdx.game.Entitys.Enemy;
 import com.mygdx.game.Entitys.Player;
 import com.mygdx.game.Entitys.WorldMap;
@@ -43,17 +45,27 @@ public class PirateGame extends ApplicationAdapter {
 		WorldMap worldMap = new WorldMap(id_map);
 		Player player = new Player(id_ship, 10000);
 		Enemy e1 = new Enemy();
+		DebugText t = new DebugText();
 
 		EntityManager.raiseEvents(ComponentEvent.Awake, ComponentEvent.Start);
 	}
 
+	private float accumulator;
 	@Override
 	public void render () {
 		ScreenUtils.clear(BACKGROUND_COLOUR.x, BACKGROUND_COLOUR.y, BACKGROUND_COLOUR.z, 1);
 
 		EntityManager.raiseEvents(ComponentEvent.Update, ComponentEvent.Render);
 
-		PhysicsManager.update();
+
+		float deltaTime = EntityManager.getDeltaTime();
+		accumulator += deltaTime;
+
+		while (accumulator >= PHYSICS_DELTA_TIME) {
+			PhysicsManager.update();
+			accumulator -= PHYSICS_DELTA_TIME;
+		}
+
 
 		if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
 			Gdx.app.exit();

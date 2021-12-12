@@ -86,4 +86,9 @@ public class Entity {
     public void cleanUp() {
 
     }
+
+
+    public void update() {
+
+    }
 }
