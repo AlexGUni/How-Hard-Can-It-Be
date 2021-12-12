@@ -55,7 +55,13 @@ public class RigidBody extends Component implements CollisionCallBack {
     }
 
     public void setVelocity(Vector2 vel){
-        PhysicsManager.getBody(bodyId).setLinearVelocity(vel);
+        Body b = PhysicsManager.getBody(bodyId);
+        b.setLinearVelocity(vel);
+    }
+
+    public void setPosition(Vector2 position) {
+        Body b = PhysicsManager.getBody(bodyId);
+        b.setTransform(position, 0);
     }
 
     @Override

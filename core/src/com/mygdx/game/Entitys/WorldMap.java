@@ -13,7 +13,7 @@ public class WorldMap extends Entity{
 
     public WorldMap(int mapId) {
         super(1);
-        TileMap map = new TileMap(mapId, RenderLayer.Five);
+        TileMap map = new TileMap(mapId, RenderLayer.Five, true);
         addComponent(map);
     }
 }
