@@ -3,34 +3,23 @@ package com.mygdx.game;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
-import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.physics.box2d.Box2D;
-import com.badlogic.gdx.utils.GdxNativesLoader;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.badlogic.gdx.utils.TimeUtils;
 import com.mygdx.game.Components.ComponentEvent;
 import com.mygdx.game.Entitys.DebugText;
 import com.mygdx.game.Entitys.Enemy;
 import com.mygdx.game.Entitys.Player;
 import com.mygdx.game.Entitys.WorldMap;
-import com.mygdx.game.Managers.CollisionManager;
 import com.mygdx.game.Managers.EntityManager;
 import com.mygdx.game.Managers.PhysicsManager;
 import com.mygdx.game.Managers.RenderingManager;
 import com.mygdx.utils.ResourceManager;
+
 import static com.mygdx.utils.Constants.*;
 
 public class PirateGame extends ApplicationAdapter {
 	@Override
 	public void create () {
-		GdxNativesLoader.load();
-
-		Box2D.init();
-
 		INIT_CONSTANTS();
 		PhysicsManager.Initialize(false);
 
@@ -57,9 +46,7 @@ public class PirateGame extends ApplicationAdapter {
 
 		EntityManager.raiseEvents(ComponentEvent.Update, ComponentEvent.Render);
 
-
-		float deltaTime = EntityManager.getDeltaTime();
-		accumulator += deltaTime;
+		accumulator += EntityManager.getDeltaTime();
 
 		while (accumulator >= PHYSICS_DELTA_TIME) {
 			PhysicsManager.update();
