@@ -25,7 +25,7 @@ public final class Constants {
         HALF_DIMENTIONS = new Vector2(HALF_VIEWPORT_WIDTH, HALF_VIEWPORT_HEIGHT);
         VIEWPORT_TITLE = "Pirate Game";
         BACKGROUND_COLOUR = new Vector3(0.0f, 0.0f, 0.0f);
-        PHYSICS_DELTA_TIME = 1.0f / 60.0f;
+        PHYSICS_TIME_STEP = 1.0f / 60.0f;
     }
 
     public static void UPDATE_VIEWPORT(int x, int y) {
@@ -49,7 +49,7 @@ public final class Constants {
     public static Vector2 DIMENTIONS;
     public static Vector2 HALF_DIMENTIONS;
     public static String VIEWPORT_TITLE;
-    public static float PHYSICS_DELTA_TIME;
+    public static float PHYSICS_TIME_STEP;
 
     public static Vector3 BACKGROUND_COLOUR;
 }

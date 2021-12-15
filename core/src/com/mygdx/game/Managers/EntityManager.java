@@ -8,15 +8,17 @@ import com.mygdx.game.Entitys.Entity;
 import java.util.ArrayList;
 
 /**
- * Responsible for Managing the entity and component events
+ * Responsible for Managing the entity and component events. Entity's can be accessed by a String name
  */
 public final class EntityManager {
+    private static ArrayList<String> entityNames;
     private static ArrayList<Entity> entities;
     private static ArrayList<Component> components;
     private static boolean initialized = false;
     private static InputManager inpManager;
 
     public static void Initialize() {
+        entityNames = new ArrayList<>();
         inpManager = new InputManager();
         entities = new ArrayList<>();
         components = new ArrayList<>();
@@ -36,6 +38,15 @@ public final class EntityManager {
     public static void addEntity(Entity e){
         tryInit();
         entities.add(e);
+        entityNames.add(e.getName());
+    }
+
+    public static Entity getEntity(String name) {
+        return entities.get(entityNames.indexOf(name));
+    }
+
+    public static void changeName(String prev, String new_) {
+        entityNames.set(entityNames.indexOf(prev), new_);
     }
 
     /**

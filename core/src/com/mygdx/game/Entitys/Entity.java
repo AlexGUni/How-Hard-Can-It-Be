@@ -13,17 +13,29 @@ import java.util.ArrayList;
  * However, there is over head with this class so in some cases it's better to just use raw sprites
  */
 public class Entity {
+    private static int entityCount = 0;
+    private String entityName;
     private final ArrayList<Component> components;
 
     public Entity(){
         components = new ArrayList<>();
+        entityName = "Entity (" + ++entityCount + ")";
         EntityManager.addEntity(this);
-
     }
     public Entity(int numComponents){
-        components = new ArrayList<>(numComponents);
-        EntityManager.addEntity(this);
+        this();
+        components.ensureCapacity(numComponents);
     }
+
+    public final void setName(String name) {
+        EntityManager.changeName(entityName, name);
+        entityName = name;
+    }
+
+    public final String getName() {
+        return entityName;
+    }
+
     public void addComponent(Component component) {
         components.add(component);
         component.setParent(this);

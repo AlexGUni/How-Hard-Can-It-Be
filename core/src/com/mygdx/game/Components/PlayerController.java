@@ -5,10 +5,9 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.Entitys.Player;
-import com.mygdx.game.Managers.EntityManager;
 import com.mygdx.game.Managers.RenderingManager;
 
-import static com.mygdx.utils.Constants.PHYSICS_DELTA_TIME;
+import static com.mygdx.utils.Constants.PHYSICS_TIME_STEP;
 
 /**
  * Responsible for the keyboard control of the player
@@ -19,6 +18,7 @@ public class PlayerController extends Component {
 
     public PlayerController() {
         super();
+        setRequirements(ComponentType.RigidBody);
     }
 
     public PlayerController(Player player, float speed) {
@@ -29,7 +29,7 @@ public class PlayerController extends Component {
     @Override
     public void update() {
         super.update();
-        float s = speed * PHYSICS_DELTA_TIME;
+        float s = speed * PHYSICS_TIME_STEP;
 
         Vector2 pos = player.getPos();
         Vector2 deltaP = new Vector2(0, 0);

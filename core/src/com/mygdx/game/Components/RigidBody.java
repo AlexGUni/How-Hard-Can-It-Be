@@ -17,6 +17,7 @@ public class RigidBody extends Component implements CollisionCallBack {
         super();
         type = ComponentType.RigidBody;
         halfDim = new Vector2();
+        setRequirements(ComponentType.Transform, ComponentType.Renderable);
     }
 
     public RigidBody(PhysicsBodyType type, Renderable r, Transform t){
@@ -64,12 +65,16 @@ public class RigidBody extends Component implements CollisionCallBack {
         b.setTransform(position, 0);
     }
 
+    public Body getBody() {
+        return PhysicsManager.getBody(bodyId);
+    }
+
     @Override
     public void update() {
         super.update();
         // parent.getComponent(Transform.class).setPosition(PhysicsManager.getBody(bodyId).getPosition());
         Transform t = parent.getComponent(Transform.class);
-        Body b = PhysicsManager.getBody(bodyId);
+        Body b = getBody();
         Vector2 p = b.getPosition().cpy();
         p.sub(halfDim);
         t.setPosition(p);
@@ -83,5 +88,17 @@ public class RigidBody extends Component implements CollisionCallBack {
     @Override
     public void EndContact() {
 
+    }
+
+    public Vector2 getVelocity() {
+        return getBody().getLinearVelocity();
+    }
+
+    public float getAngularVelocity() {
+        return getBody().getAngularVelocity();
+    }
+
+    public void applyForce(Vector2 force) {
+        getBody().applyForceToCenter(force, true);
     }
 }

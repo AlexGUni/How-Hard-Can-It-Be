@@ -4,11 +4,10 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.mygdx.game.Components.RigidBody;
 import com.mygdx.game.Components.TileMap;
-import com.mygdx.game.Physics.PhysicsBodyType;
 
 import java.util.ArrayList;
 
-import static com.mygdx.utils.Constants.PHYSICS_DELTA_TIME;
+import static com.mygdx.utils.Constants.PHYSICS_TIME_STEP;
 
 // TODO: Tweak Physics settings
 // TODO: Map collision
@@ -81,7 +80,7 @@ public final class PhysicsManager {
 
     public static void update() {
         tryInit();
-        box2DWorld.step(PHYSICS_DELTA_TIME, 10, 15);
+        box2DWorld.step(PHYSICS_TIME_STEP, 6, 2);
 
         if(debug != null){
             debug.render(box2DWorld, RenderingManager.getCamera().combined);

@@ -29,6 +29,8 @@ public class Player extends Entity {
 
         PlayerController pc = new PlayerController(this, speed);
         addComponent(pc);
+
+        setName("Player");
     }
 
     @Override

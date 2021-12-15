@@ -48,9 +48,9 @@ public class PirateGame extends ApplicationAdapter {
 
 		accumulator += EntityManager.getDeltaTime();
 
-		while (accumulator >= PHYSICS_DELTA_TIME) {
+		while (accumulator >= PHYSICS_TIME_STEP) {
 			PhysicsManager.update();
-			accumulator -= PHYSICS_DELTA_TIME;
+			accumulator -= PHYSICS_TIME_STEP;
 		}
 
 
