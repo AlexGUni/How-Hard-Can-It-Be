@@ -1,5 +1,6 @@
 package com.mygdx.game.Entitys;
 
+import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.mygdx.game.Components.TileMap;
 import com.mygdx.game.Managers.RenderLayer;
 
@@ -16,5 +17,9 @@ public class WorldMap extends Entity{
         setName("WorldMap");
         TileMap map = new TileMap(mapId, RenderLayer.Five, true);
         addComponent(map);
+    }
+
+    public TiledMap getTileMap() {
+        return getComponent(TileMap.class).getTileMap();
     }
 }

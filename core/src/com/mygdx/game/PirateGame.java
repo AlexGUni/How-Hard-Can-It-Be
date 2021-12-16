@@ -3,8 +3,11 @@ package com.mygdx.game;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.ai.pfa.GraphPath;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.mygdx.game.AI.Node;
+import com.mygdx.game.AI.TileMapGraph;
 import com.mygdx.game.Components.ComponentEvent;
 import com.mygdx.game.Entitys.DebugText;
 import com.mygdx.game.Entitys.Enemy;
@@ -37,6 +40,12 @@ public class PirateGame extends ApplicationAdapter {
 		DebugText t = new DebugText();
 
 		EntityManager.raiseEvents(ComponentEvent.Awake, ComponentEvent.Start);
+
+		TileMapGraph g = new TileMapGraph(worldMap.getTileMap());
+		Node a = g.getNode(46, 46);
+		Node b = g.getNode(3, 3);
+		GraphPath<Node> path = g.findPath(a, b);
+		int i = 0;
 	}
 
 	private float accumulator;

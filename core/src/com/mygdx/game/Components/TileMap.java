@@ -48,6 +48,10 @@ public class TileMap extends Component implements CollisionCallBack {
                 ((TiledMapTileLayer) map.getLayers().get(1)).getTileHeight());
     }
 
+    public TiledMap getTileMap() {
+        return map;
+    }
+
     @Override
     public void update() {
         super.update();

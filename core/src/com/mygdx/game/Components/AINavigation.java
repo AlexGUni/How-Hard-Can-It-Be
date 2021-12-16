@@ -10,10 +10,10 @@ import com.mygdx.utils.Utilities;
 import static com.mygdx.utils.Constants.*;
 
 public class AINavigation extends Component implements Steerable<Vector2> {
-    private class Attributes {
-        public float boundingRadius = 10;
+    private static class Attributes {
+        public float boundingRadius = 64;
         public float maxSpd = 5000;
-        public float maxAcc = 50000;
+        public float maxAcc = 500;
         public float maxAngSpd = 0;
         public float maxAngAcc = 0;
         public boolean isTagged = false;
