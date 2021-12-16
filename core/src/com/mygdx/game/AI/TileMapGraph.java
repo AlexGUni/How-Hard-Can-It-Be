@@ -12,8 +12,17 @@ import com.badlogic.gdx.maps.tiled.TiledMapTileLayer;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectMap;
+import com.mygdx.utils.QueueFIFO;
+import com.mygdx.utils.Utilities;
+
+import java.util.Queue;
+
 import static com.mygdx.utils.TileMapCells.*;
 
+/**
+ * The Graphical representation of the tilemap with each cell being bidirectionally to the adjacent nodes.
+ * (It was an accident, however you can path out of an obstacle but not into one) not fully tested tho
+ */
 public class TileMapGraph implements IndexedGraph<Node> {
     private final NodeHeuristic heuristic;
     private final Array<Node> nodes;
@@ -31,9 +40,7 @@ public class TileMapGraph implements IndexedGraph<Node> {
         mapDim = new Vector2();
     }
 
-    private int getType(TiledMapTileLayer.Cell c) {
-        return c.getTile().getId();
-    }
+    // TODO: don't store obstacle nodes
 
     public TileMapGraph(TiledMap map) {
         this();
@@ -88,10 +95,6 @@ public class TileMapGraph implements IndexedGraph<Node> {
 
                             addNode(x + i, y + j, getType(cell) == OBSTACLE);
                             addPath(x, y, x + i, y + j);
-
-                            /*Node c2 = nodes.get(getIndex(x + i, y + j));
-                            addNode(c2);
-                            addPath(c1, c2);*/
                         }
                     }
                 }
@@ -105,6 +108,9 @@ public class TileMapGraph implements IndexedGraph<Node> {
 
     private int getIndex(float x, float y) {
         return (int) (mapDim.x * y + x);
+    }
+    private int getType(TiledMapTileLayer.Cell c) {
+        return c.getTile().getId();
     }
 
     private int getIndex(int x, int y) {
@@ -137,19 +143,91 @@ public class TileMapGraph implements IndexedGraph<Node> {
         paths.add(path);
     }
 
-    public void addPath(float x1, float y1, float x2, float y2) {
+    private void addPath(float x1, float y1, float x2, float y2) {
         Node a = getNode(x1, y1);
         Node b = getNode(x2, y2);
 
         addPath(a, b);
     }
 
-    public GraphPath<Node> findPath(Node startCity, Node goalCity){
+    /**
+     * Finds the path
+     * @param start the starting node
+     * @param goal the ending node
+     * @return a queue of the nodes to visit
+     */
+    public GraphPath<Node> findPath(Node start, Node goal){
         GraphPath<Node> path = new DefaultGraphPath<>();
-        new IndexedAStarPathFinder<>(this).searchNodePath(startCity, goalCity, heuristic, path);
+        new IndexedAStarPathFinder<>(this).searchNodePath(start, goal, heuristic, path);
         return path;
     }
 
+    /**
+     * Finds a sequence on locations which can be travelled to without collision
+     * @param a starting node
+     * @param b destination node
+     * @return queue of location to travel to in order
+     */
+    public QueueFIFO<Vector2> findOptimisedPath(Node a, Node b) {
+        GraphPath<Node> path = findPath(a, b);
+        QueueFIFO<Vector2> res = new QueueFIFO<>();
+        Vector2 delta = new Vector2();
+        float sequenceLength = 0; // the ammount of times a
+        Vector2 cur = new Vector2();
+
+        Vector2 prev = path.get(0).getPosition();
+        for (int i = 1; i < path.getCount(); i++) {
+            Node n = path.get(i);
+            cur.set(n.getPosition());
+            // d contains the current vector between the current pos an prev
+            Vector2 d = cur.cpy();
+            d.sub(prev);
+
+
+            if(delta.x == d.x && delta.y == d.y){
+                sequenceLength++;
+            }
+            else{
+                res.add(delta.scl(sequenceLength));
+                delta = d;
+                sequenceLength = 1;
+            }
+            prev.set(cur);
+        }
+        res.remove(0);
+        res.add(delta.scl(sequenceLength));
+        return res;
+    }
+
+    /**
+     * Finds a sequence on locations which can be travelled to without collision
+     * @param a starting node location
+     * @param b destination node location
+     * @return queue of location to travel to in order
+     */
+    public QueueFIFO<Vector2> findOptimisedPath(Vector2 a, Vector2 b) {
+        Node n1 = getNode(a.x, a.y);
+        Node n2 = getNode(b.x, b.y);
+        return findOptimisedPath(n1, n2);
+    }
+
+    /**
+     * Finds a sequence on locations which can be travelled to without collision
+     * @param x1 starting node x co-ords
+     * @param y1 starting node y co-ords
+     * @param x2 destination node x co-ords
+     * @param y2 destination node y co-ords
+     * @return queue of location to travel to in order
+     */
+    public QueueFIFO<Vector2> findOptimisedPath(float x1, float y1, float x2, float y2) {
+        Node a = getNode(x1, y1);
+        Node b = getNode(x2, y2);
+        return findOptimisedPath(a, b);
+    }
+
+
+
+    // The Interface
     @Override
     public int getIndex(Node node) {
         return getIndex(node.getPosition().x, node.getPosition().y);

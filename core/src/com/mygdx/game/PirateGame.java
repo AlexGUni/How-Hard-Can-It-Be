@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.ai.pfa.GraphPath;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.AI.Node;
 import com.mygdx.game.AI.TileMapGraph;
@@ -16,6 +17,7 @@ import com.mygdx.game.Entitys.WorldMap;
 import com.mygdx.game.Managers.EntityManager;
 import com.mygdx.game.Managers.PhysicsManager;
 import com.mygdx.game.Managers.RenderingManager;
+import com.mygdx.utils.QueueFIFO;
 import com.mygdx.utils.ResourceManager;
 
 import static com.mygdx.utils.Constants.*;
@@ -42,10 +44,8 @@ public class PirateGame extends ApplicationAdapter {
 		EntityManager.raiseEvents(ComponentEvent.Awake, ComponentEvent.Start);
 
 		TileMapGraph g = new TileMapGraph(worldMap.getTileMap());
-		Node a = g.getNode(3, 3);
-		Node b = g.getNode(6, 5);
-		GraphPath<Node> path = g.findPath(a, b);
-		int i = 0;
+
+		QueueFIFO<Vector2> path = g.findOptimisedPath(10, 10, 13, 8);
 	}
 
 	private float accumulator;

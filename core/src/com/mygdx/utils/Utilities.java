@@ -11,4 +11,17 @@ public final class Utilities {
         out.y = (float)Math.cos(angle);
         return out;
     }
+
+    /**
+     * Doesn't affect 'a'
+     * @return returns an abs of 'a'
+     */
+    public static Vector2 abs(Vector2 a){
+        Vector2 res = a.cpy();
+
+        res.x = Math.abs(res.x);
+        res.y = Math.abs(res.y);
+
+        return res;
+    }
 }
