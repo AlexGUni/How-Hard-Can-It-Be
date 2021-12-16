@@ -42,8 +42,8 @@ public class PirateGame extends ApplicationAdapter {
 		EntityManager.raiseEvents(ComponentEvent.Awake, ComponentEvent.Start);
 
 		TileMapGraph g = new TileMapGraph(worldMap.getTileMap());
-		Node a = g.getNode(46, 46);
-		Node b = g.getNode(3, 3);
+		Node a = g.getNode(3, 3);
+		Node b = g.getNode(6, 5);
 		GraphPath<Node> path = g.findPath(a, b);
 		int i = 0;
 	}

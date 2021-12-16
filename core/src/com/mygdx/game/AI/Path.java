@@ -13,7 +13,7 @@ public class Path implements Connection<Node> {
 
     @Override
     public float getCost() {
-        return 1;
+        return to.cost;
     }
 
     @Override

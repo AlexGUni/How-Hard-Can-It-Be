@@ -4,10 +4,10 @@ import com.badlogic.gdx.math.Vector2;
 
 public class Node {
     private final Vector2 position;
-    public int index;
+    public float cost;
     public Node(float x, float y) {
         position = new Vector2(x, y);
-        index = -1;
+        cost = -1;
     }
 
     public Vector2 getPosition() {

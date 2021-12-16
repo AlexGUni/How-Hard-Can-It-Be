@@ -18,13 +18,12 @@ public class TileMapGraph implements IndexedGraph<Node> {
     private final NodeHeuristic heuristic;
     private final Array<Node> nodes;
     private final Array<Path> paths;
-    private int pathIndex;
     private final Vector2 mapDim;
 
     private final ObjectMap<Node, Array<Connection<Node>>> nodePaths;
 
     private TileMapGraph() {
-        pathIndex = 0;
+
         heuristic = new NodeHeuristic();
         nodes = new Array<>();
         paths = new Array<>();
@@ -32,41 +31,52 @@ public class TileMapGraph implements IndexedGraph<Node> {
         mapDim = new Vector2();
     }
 
+    private int getType(TiledMapTileLayer.Cell c) {
+        return c.getTile().getId();
+    }
+
     public TileMapGraph(TiledMap map) {
         this();
 
         MapLayers layers = map.getLayers();
         TiledMapTileLayer layer = null;
+
+        // find the collision layer
         for(MapLayer l : layers) {
             if(l.getName().equals("Collision")) {
                 layer = (TiledMapTileLayer) l;
             }
         }
+        // if there is no collision layer
         if(layer == null) {
             return;
         }
+        // the map dimensions
         mapDim.set(layer.getWidth(), layer.getHeight());
 
+        // create all the nodes
         for(int i = 0; i < mapDim.x * mapDim.y; i++) {
             nodes.add(new Node(0, 0));
         }
 
+        // for each column
         for (int x = 0; x < layer.getWidth(); x++) {
+            // for each row
             for (int y = 0; y < layer.getHeight(); y++) {
                 TiledMapTileLayer.Cell center = layer.getCell(x, y);
-                // is the center an obstacle
-                if (center == null || center.getTile().getId() == OBSTACLE) {
-                    continue;
-                }
 
-                addNode(x, y);
+                // the central node
+                addNode(x, y, getType(center) == OBSTACLE);
+
                 // all surrounding nodes
                 for (int i = -1; i < 2; i++) {
-                    for (int j = 0; j < 2; j++) {
+                    for (int j = -1; j < 2; j++) {
+
                         // prevents the node pathing to its self
                         if (i == 0 && j == 0){
                             continue;
                         }
+
                         TiledMapTileLayer.Cell cell = layer.getCell(x + i, y + j);
                         // is cell outside the map
                         if (cell == null) {
@@ -76,7 +86,7 @@ public class TileMapGraph implements IndexedGraph<Node> {
                         // is the cell passable
                         if (cell.getTile().getId() == PASSABLE) {
 
-                            addNode(x + i, y + j);
+                            addNode(x + i, y + j, getType(cell) == OBSTACLE);
                             addPath(x, y, x + i, y + j);
 
                             /*Node c2 = nodes.get(getIndex(x + i, y + j));
@@ -87,31 +97,39 @@ public class TileMapGraph implements IndexedGraph<Node> {
                 }
             }
         }
-
-        for(int i = 0; i < nodes.size; i++){
-            if(nodes.get(i).index == -1){
-                nodes.removeIndex(i);
-                i--;
-            }
-        }
     }
 
     public Node getNode(float x, float y){
-        return nodes.get(getIndex((int) x, (int) y));
+        return nodes.get(getIndex(x, y));
+    }
+
+    private int getIndex(float x, float y) {
+        return (int) (mapDim.x * y + x);
     }
 
     private int getIndex(int x, int y) {
         return (int) mapDim.x * y + x;
     }
 
-    public void addNode(float x, float y) {
+    private void addNode(float x, float y, boolean isObstacle) {
         Node n = nodes.get(getIndex((int) x, (int) y));
+        if(n.cost > 0) {
+            return;
+        }
         n.set(x, y);
-        n.index = pathIndex++;
+        if (isObstacle) {
+            n.cost = OBSTACLE_COST;
+        }
+        else {
+            n.cost = 1;
+        }
     }
 
-    public void addPath(Node a, Node b) {
+    private void addPath(Node a, Node b) {
         Path path = new Path(a, b);
+
+        // check if b to a exists
+
         if(!nodePaths.containsKey(a)){
             nodePaths.put(a, new Array<Connection<Node>>());
         }
@@ -134,12 +152,12 @@ public class TileMapGraph implements IndexedGraph<Node> {
 
     @Override
     public int getIndex(Node node) {
-        return getIndex((int) node.getPosition().x, (int) node.getPosition().y);
+        return getIndex(node.getPosition().x, node.getPosition().y);
     }
 
     @Override
     public int getNodeCount() {
-        return pathIndex;
+        return (int) (mapDim.x * mapDim.y);
     }
 
     @Override
