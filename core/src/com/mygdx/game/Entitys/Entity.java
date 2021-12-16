@@ -3,7 +3,7 @@ package com.mygdx.game.Entitys;
 import com.mygdx.game.Components.Component;
 import com.mygdx.game.Components.ComponentEvent;
 import com.mygdx.game.Components.ComponentType;
-import com.mygdx.game.EntityManager;
+import com.mygdx.game.Managers.EntityManager;
 
 import java.util.ArrayList;
 
@@ -13,19 +13,32 @@ import java.util.ArrayList;
  * However, there is over head with this class so in some cases it's better to just use raw sprites
  */
 public class Entity {
+    private static int entityCount = 0;
+    private String entityName;
     private final ArrayList<Component> components;
 
     public Entity(){
         components = new ArrayList<>();
+        entityName = "Entity (" + ++entityCount + ")";
         EntityManager.addEntity(this);
-
     }
     public Entity(int numComponents){
-        components = new ArrayList<>(numComponents);
-        EntityManager.addEntity(this);
+        this();
+        components.ensureCapacity(numComponents);
     }
+
+    public final void setName(String name) {
+        EntityManager.changeName(entityName, name);
+        entityName = name;
+    }
+
+    public final String getName() {
+        return entityName;
+    }
+
     public void addComponent(Component component) {
         components.add(component);
+        component.setParent(this);
     }
     public Component getComponent(ComponentType type){
         for (Component c : components){
@@ -42,6 +55,7 @@ public class Entity {
      * @param <T> the type of the desired component
      * @return the component cast to the appropriate type
      */
+    @SuppressWarnings("unchecked")
     public <T> T getComponent(Class<T> type){
         for(Component c : components){
             if(type.isInstance(c)) {
@@ -52,14 +66,10 @@ public class Entity {
     }
 
     /**
-     * Raises the appropriate events on each component
+     * Raises the appropriate events on each component with exception to rendering
      */
     public final void raiseEvents(ComponentEvent... events){
         for(ComponentEvent event : events){
-            if(event == ComponentEvent.Render) {
-                EntityManager.getBatch().setProjectionMatrix(EntityManager.getCamera().combined);
-                EntityManager.getBatch().begin();
-            }
             for(Component c : components){
                 switch (event){
                     case Awake:
@@ -70,9 +80,6 @@ public class Entity {
                         break;
                     case Update:
                         c.update();
-                        break;
-                    case Render:
-                        c.render();
                         break;
                     case OnKeyUp:
                         c.onKeyUp();
@@ -85,9 +92,6 @@ public class Entity {
                         break;
                 }
             }
-            if(event == ComponentEvent.Render){
-                EntityManager.getBatch().end();
-            }
         }
     }
 
@@ -95,4 +99,8 @@ public class Entity {
 
     }
 
+
+    public void update() {
+
+    }
 }

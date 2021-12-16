@@ -8,6 +8,7 @@ import static com.mygdx.utils.Constants.*;
 public class DesktopLauncher {
 	public static void main (String[] arg) {
 		INIT_CONSTANTS();
+
 		Lwjgl3ApplicationConfiguration cfg = new Lwjgl3ApplicationConfiguration();
 		cfg.setTitle(VIEWPORT_TITLE);
 
@@ -16,5 +17,17 @@ public class DesktopLauncher {
 		cfg.useVsync(false);
 		cfg.setForegroundFPS(0);
 		new Lwjgl3Application(new PirateGame(), cfg);
+
+		/*LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
+		cfg.title = VIEWPORT_TITLE;
+		cfg.width = VIEWPORT_WIDTH;
+		cfg.height = VIEWPORT_HEIGHT;
+		cfg.fullscreen = FULLSCREEN;
+
+		cfg.vSyncEnabled = false;
+		cfg.foregroundFPS = 0;
+		cfg.backgroundFPS = 0;
+		new LwjglApplication(new PirateGame(), cfg);*/
+
 	}
 }

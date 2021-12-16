@@ -1,30 +1,44 @@
 package com.mygdx.utils;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
+import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
+import com.badlogic.gdx.maps.tiled.TiledMap;
+import com.badlogic.gdx.maps.tiled.TmxMapLoader;
+import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.math.Vector3;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Manages all assets and disposes of them when appropriate
  */
 public final class ResourceManager {
-    private static boolean inited = false;
+    private static boolean initialized = false;
     private static boolean loaded;
     private static AssetManager manager;
     private static ArrayList<String> ids;
+    private static ArrayList<TiledMap> tileMaps;
+    private static HashMap<String, FreeTypeFontGenerator> fontGenerators;
+    private static HashMap<String, BitmapFont> fonts;
     /**
      * The equivalent to a constructor
      */
     public static void Initialize() {
-        if(inited){
+        if(initialized){
             return;
         }
-        inited = true;
+        initialized = true;
         manager = new AssetManager();
         loaded = false;
         ids = new ArrayList<>();
+        tileMaps = new ArrayList<>();
+        fontGenerators = new HashMap<>();
+        fonts = new HashMap<>();
     }
 
     /**
@@ -54,6 +68,90 @@ public final class ResourceManager {
     }
 
     /**
+     * Prefaces name with |TM| followed by the internal index of the tilemap however this isn't required to access this asset
+     * @param fPath the file location of the asset
+     * @return id of the asset
+     */
+    public static int addTileMap(String fPath) {
+        tryInit();
+        checkAdd();
+        TiledMap map = new TmxMapLoader().load(fPath);
+        tileMaps.add(map);
+        ids.add("|TM|" + tileMaps.size() + fPath);
+        return ids.size();
+    }
+
+    /**
+     * loads the font file this doesn't create a font
+     * @param fontPath the path of the font file
+     * @return the id of the font generator
+     */
+    public static int addFontGenerator(String fontPath){
+        tryInit();
+        checkAdd();
+        if(fontGenerators.containsKey(fontPath)){
+            return -1;
+        }
+        fontGenerators.put(fontPath, new FreeTypeFontGenerator(Gdx.files.internal(fontPath)));
+        ids.add("|FG|" + fontPath);
+
+        return ids.size();
+    }
+
+    /**
+     * Actually creates a font. Can be created after the final load request
+     * @param font_generator_id the id of the font generator
+     * @param fontSize the size of the desired font this can't be changed later (would have load another font)
+     * @return id of the font -1 not found
+     */
+    public static int createFont(int font_generator_id, int fontSize) {
+        tryInit();
+        String fontName = ids.get(font_generator_id - 1);
+        fontName = fontName.substring(4);
+        FreeTypeFontGenerator generator = fontGenerators.get(fontName);
+
+        FreeTypeFontGenerator.FreeTypeFontParameter params = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        params.size = fontSize;
+        params.color.r = 0;
+        params.color.g = 0;
+        params.color.b = 0;
+
+        BitmapFont font = generator.generateFont(params);
+
+        ids.add("|FT|" + fontSize + fontName);
+        fonts.put(fontSize + fontName, font);
+
+        return ids.size();
+    }
+    /**
+     * Actually creates a font.  Can be created after the final load request
+     * @param fontName the file name of the font
+     * @param fontSize the size of the desired font this can't be changed later (would have load another font)
+     * @return id of the font -1 if not found
+     */
+    public static int createFont(String fontName, int fontSize) {
+        tryInit();
+
+        if(!fontGenerators.containsKey(fontName)){
+            return -1;
+        }
+        FreeTypeFontGenerator generator = fontGenerators.get(fontName);
+
+        FreeTypeFontGenerator.FreeTypeFontParameter params = new FreeTypeFontGenerator.FreeTypeFontParameter();
+        params.size = fontSize;
+        params.color.r = 1;
+        params.color.g = 1;
+        params.color.b = 1;
+
+        BitmapFont font = generator.generateFont(params);
+
+        ids.add("|FT|" + fontSize + fontName);
+        fonts.put(fontSize + fontName, font);
+
+        return ids.size();
+    }
+
+    /**
      * Actually loads the assets
      */
     public static void loadAssets(){
@@ -71,6 +169,30 @@ public final class ResourceManager {
         return manager.get(fPath);
     }
 
+    /**
+     * Looks for fPath in ids then determines if it is a tile map and returns the corresponding map
+     * @param fPath the fPath to the asset
+     * @return The asset if found or null
+     */
+    public static TiledMap getTileMap(String fPath){
+        tryInit();
+        int id = -1;
+        for (String fName : ids) {
+            if (fName.length() < 4) {
+                continue;
+            }
+            String slice = fName.substring(0, 4);
+            if (slice.equals("|TM|") && fName.contains(fPath)) {
+                id = Character.getNumericValue(fName.charAt(4));
+                break;
+            }
+        }
+        if(id < 0){
+            return null;
+        }
+        return tileMaps.get(id - 1);
+    }
+
     public static Texture getTexture(int id){
         tryInit();
         String fPath = ids.get(id - 1);
@@ -83,11 +205,52 @@ public final class ResourceManager {
     }
 
     /**
+     * Gets the tile map returns null if not a tile map
+     * @param id the id of the tile map
+     * @return the tile map
+     */
+    public static TiledMap getTileMap(int id){
+        tryInit();
+
+        String fPath = ids.get(id - 1);
+        if(fPath.length() < 4){
+            return null;
+        }
+        String slice = fPath.substring(0, 4);
+        if (!slice.equals("|TM|")) {
+            return null;
+        }
+        int id_ = Character.getNumericValue(fPath.charAt(4));
+        return tileMaps.get(id_ - 1);
+    }
+
+
+    public static BitmapFont getFont(int font_id) {
+        String fontName = ids.get(font_id - 1);
+        fontName = fontName.substring(4);
+
+        return fonts.get(fontName);
+    }
+
+    public static BitmapFont getFont(String fontName) {
+        return fonts.get(fontName);
+    }
+
+    /**
      * It is imperative that this is called
      */
     public static void cleanUp(){
         tryInit();
         manager.dispose();
+        for (TiledMap map : tileMaps) {
+            map.dispose();
+        }
+        for(BitmapFont font : fonts.values()){
+            font.dispose();
+        }
+        for(FreeTypeFontGenerator generator : fontGenerators.values()){
+            generator.dispose();
+        }
     }
 
     /**
@@ -102,7 +265,7 @@ public final class ResourceManager {
      * Calls Initialize if not already done so
      */
     private static void tryInit(){
-        if(!inited){
+        if(!initialized){
             Initialize();
         }
     }

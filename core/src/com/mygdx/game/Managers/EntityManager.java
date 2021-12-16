@@ -1,8 +1,6 @@
-package com.mygdx.game;
+package com.mygdx.game.Managers;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.Components.Component;
 import com.mygdx.game.Components.ComponentEvent;
 import com.mygdx.game.Entitys.Entity;
@@ -10,42 +8,26 @@ import com.mygdx.game.Entitys.Entity;
 import java.util.ArrayList;
 
 /**
- * Responsible for Managing the entity and component events
+ * Responsible for Managing the entity and component events. Entity's can be accessed by a String name
  */
 public final class EntityManager {
+    private static ArrayList<String> entityNames;
     private static ArrayList<Entity> entities;
     private static ArrayList<Component> components;
     private static boolean initialized = false;
-    private static SpriteBatch primaryBatch;
-    private static OrthographicCamera primaryCamera;
     private static InputManager inpManager;
 
     public static void Initialize() {
+        entityNames = new ArrayList<>();
         inpManager = new InputManager();
-        primaryBatch = new SpriteBatch();
-        primaryCamera = new OrthographicCamera();
-        primaryBatch.enableBlending();
         entities = new ArrayList<>();
         components = new ArrayList<>();
         initialized = true;
-
         Gdx.input.setInputProcessor(inpManager);
     }
 
     public static InputManager getInputManager() {
         return inpManager;
-    }
-
-    public static void setCamera(OrthographicCamera cam) {
-        primaryCamera = cam;
-    }
-
-    public static OrthographicCamera getCamera() {
-        return primaryCamera;
-    }
-
-    public static SpriteBatch getBatch() {
-        return primaryBatch;
     }
 
     public static void addComponent(Component c){
@@ -56,16 +38,31 @@ public final class EntityManager {
     public static void addEntity(Entity e){
         tryInit();
         entities.add(e);
+        entityNames.add(e.getName());
+    }
+
+    public static Entity getEntity(String name) {
+        return entities.get(entityNames.indexOf(name));
+    }
+
+    public static void changeName(String prev, String new_) {
+        entityNames.set(entityNames.indexOf(prev), new_);
     }
 
     /**
-     * raises the appropriate events for each entity's component
+     * raises the appropriate events for each entity's component. then renders after all entities have being processed
      * @param comps calls the events left to right
      */
     public static void raiseEvents(ComponentEvent... comps){
         tryInit();
         for (Entity e : entities){
             e.raiseEvents(comps);
+        }
+
+        RenderingManager.render();
+
+        for (Entity e : entities){
+            e.update();
         }
     }
 
@@ -80,12 +77,18 @@ public final class EntityManager {
         for (Component c : components){
             c.cleanUp();
         }
-        primaryBatch.dispose();
     }
 
     private static void tryInit(){
         if(!initialized){
             Initialize();
         }
+    }
+
+    public static float getDeltaTime(){
+        return Gdx.graphics.getDeltaTime();
+    }
+    public static int getFPS(){
+        return Gdx.graphics.getFramesPerSecond();
     }
 }

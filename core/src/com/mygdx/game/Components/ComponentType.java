@@ -3,5 +3,9 @@ package com.mygdx.game.Components;
 public enum ComponentType {
     Unknown,
     Renderable,
-    TileMap
+    TileMap,
+    Transform,
+    Text,
+    RigidBody,
+    AINavigation
 }
