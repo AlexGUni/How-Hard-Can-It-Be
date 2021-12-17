@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Vector3;
 public final class Constants {
 
     public static void INIT_CONSTANTS() {
-        FULLSCREEN = true;
+        FULLSCREEN = !Boolean.parseBoolean(System.getProperty("windowed"));
         try{
             SCREEN_WIDTH = Gdx.graphics.getWidth();
             SCREEN_HEIGHT = Gdx.graphics.getHeight();
