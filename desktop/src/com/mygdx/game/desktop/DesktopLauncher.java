@@ -12,22 +12,16 @@ public class DesktopLauncher {
 		Lwjgl3ApplicationConfiguration cfg = new Lwjgl3ApplicationConfiguration();
 		cfg.setTitle(VIEWPORT_TITLE);
 
-		cfg.setWindowedMode(VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
-		//cfg.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
+		if(FULLSCREEN){
+			cfg.setFullscreenMode(Lwjgl3ApplicationConfiguration.getDisplayMode());
+		}
+		else{
+			cfg.setWindowedMode(VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
+		}
+
 		cfg.useVsync(false);
 		cfg.setForegroundFPS(0);
+
 		new Lwjgl3Application(new PirateGame(), cfg);
-
-		/*LwjglApplicationConfiguration cfg = new LwjglApplicationConfiguration();
-		cfg.title = VIEWPORT_TITLE;
-		cfg.width = VIEWPORT_WIDTH;
-		cfg.height = VIEWPORT_HEIGHT;
-		cfg.fullscreen = FULLSCREEN;
-
-		cfg.vSyncEnabled = false;
-		cfg.foregroundFPS = 0;
-		cfg.backgroundFPS = 0;
-		new LwjglApplication(new PirateGame(), cfg);*/
-
 	}
 }
