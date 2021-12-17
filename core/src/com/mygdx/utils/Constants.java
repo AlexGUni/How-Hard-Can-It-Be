@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Vector3;
 public final class Constants {
 
     public static void INIT_CONSTANTS() {
-        FULLSCREEN = false;
+        FULLSCREEN = true;
         try{
             SCREEN_WIDTH = Gdx.graphics.getWidth();
             SCREEN_HEIGHT = Gdx.graphics.getHeight();
@@ -26,6 +26,8 @@ public final class Constants {
         VIEWPORT_TITLE = "Pirate Game";
         BACKGROUND_COLOUR = new Vector3(0.0f, 0.0f, 0.0f);
         PHYSICS_TIME_STEP = 1.0f / 60.0f;
+
+        OPERATING_SYSTEM = System.getProperty("os.name");
     }
 
     public static void UPDATE_VIEWPORT(int x, int y) {
@@ -52,4 +54,6 @@ public final class Constants {
     public static float PHYSICS_TIME_STEP;
 
     public static Vector3 BACKGROUND_COLOUR;
+
+    public static String OPERATING_SYSTEM;
 }
