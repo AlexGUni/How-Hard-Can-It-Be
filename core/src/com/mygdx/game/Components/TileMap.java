@@ -61,7 +61,7 @@ public class TileMap extends Component implements CollisionCallBack {
     @Override
     public void render() {
         super.render();
-        renderer.render(new int[] { 1 });
+        renderer.render();
     }
 
     @Override
