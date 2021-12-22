@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.Managers.RenderLayer;
 import com.mygdx.game.Managers.RenderingManager;
-import com.mygdx.utils.ResourceManager;
+import com.mygdx.game.Managers.ResourceManager;
 
 /**
  * Add the ability for the object to be shown and positioned

@@ -15,8 +15,7 @@ import com.mygdx.game.Entitys.WorldMap;
 import com.mygdx.game.Managers.EntityManager;
 import com.mygdx.game.Managers.PhysicsManager;
 import com.mygdx.game.Managers.RenderingManager;
-import com.mygdx.utils.QueueFIFO;
-import com.mygdx.utils.ResourceManager;
+import com.mygdx.game.Managers.ResourceManager;
 
 import static com.mygdx.utils.Constants.*;
 
