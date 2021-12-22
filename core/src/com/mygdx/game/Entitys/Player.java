@@ -1,27 +1,23 @@
 package com.mygdx.game.Entitys;
 
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.Components.*;
-import com.mygdx.game.Managers.RenderLayer;
-import com.mygdx.game.Physics.PhysicsBodyType;
+import com.mygdx.game.Components.PlayerController;
+import com.mygdx.game.Components.Transform;
+import com.mygdx.game.Managers.GameManager;
 
 public class Player extends Ship {
-    public Player(){
-        super();
-    }
 
-    /**
-     * The player
-     * @param id sprite texture id
-     * @param speed speed of movement
-     */
-    public Player(int id, float speed){
+    private Player(float speed){
         super();
 
         PlayerController pc = new PlayerController(this, speed);
         addComponent(pc);
 
         setName("Player");
+    }
+
+    public Player() {
+        this(GameManager.getSettings().get("starting").getFloat("playerSpeed"));
     }
 
     @Override

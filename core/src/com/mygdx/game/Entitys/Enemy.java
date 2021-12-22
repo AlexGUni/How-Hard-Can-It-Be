@@ -15,7 +15,7 @@ public class Enemy extends Ship {
         setName("Enemy");
 
         Text text = new Text(4, new Vector3(1, 0, 0));
-        text.setText("Beta Male No.1");
+        text.setText(getName());
         addComponent(text);
 
         AINavigation nav = new AINavigation();

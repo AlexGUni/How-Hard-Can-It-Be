@@ -3,6 +3,7 @@ package com.mygdx.game.Managers;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
+import com.mygdx.game.Entitys.Enemy;
 import com.mygdx.game.Entitys.Player;
 import com.mygdx.game.Entitys.Ship;
 import com.mygdx.game.Faction;
@@ -39,12 +40,15 @@ public final class GameManager {
     public static void CreatePlayer() {
         tryInit();
         Player p = new Player();
+        p.setFaction(1);
         ships.add(p);
     }
 
     public static void CreateEnemy(int factionId) {
         tryInit();
-
+        Enemy e = new Enemy();
+        e.setFaction(factionId);
+        ships.add(e);
     }
 
     private static void tryInit() {

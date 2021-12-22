@@ -36,6 +36,7 @@ public class Ship extends Entity {
 
     public void setFaction(int factionId) {
         getComponent(Pirate.class).setFactionId(factionId);
+        setShipDirection("-up");
     }
 
     public static String getShipDirection(Vector2 dir) {

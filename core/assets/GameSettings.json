@@ -2,7 +2,8 @@
   "starting" : {
     "health" : 100.0,
     "damage": 10.0,
-    "plunder": 0.0
+    "plunder": 0.0,
+    "playerSpeed" : 10000.0
   },
   "factions" : [
     {
