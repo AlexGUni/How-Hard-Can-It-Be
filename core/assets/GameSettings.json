@@ -1,0 +1,29 @@
+{
+  "starting" : {
+    "health" : 100,
+    "damage": 10,
+    "plunder": 0
+  },
+  "factions" : [
+    {
+      "name" : "Halifax",
+      "colour": "light-blue"
+    },
+    {
+      "name" : "Constantine",
+      "colour": "pink"
+    },
+    {
+      "name" : "Langwidth",
+      "colour": "yellow"
+    },
+    {
+      "name" : "Goodrick",
+      "colour": "green"
+    },
+    {
+      "name" : "Derwent",
+      "colour": "dark-blue"
+    }
+  ]
+}
