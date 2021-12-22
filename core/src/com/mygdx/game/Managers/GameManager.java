@@ -13,7 +13,6 @@ import java.util.ArrayList;
 public final class GameManager {
     private static boolean initialized = false;
     private static ArrayList<Faction> factions;
-    private static ArrayList<Ship> ships;
 
     private static JsonValue settings;
 
@@ -30,8 +29,6 @@ public final class GameManager {
             String col = v.getString("colour");
             factions.add(new Faction(name, col));
         }
-
-        ships = new ArrayList<>();
     }
 
     /**
@@ -41,14 +38,12 @@ public final class GameManager {
         tryInit();
         Player p = new Player();
         p.setFaction(1);
-        ships.add(p);
     }
 
     public static void CreateEnemy(int factionId) {
         tryInit();
         Enemy e = new Enemy();
         e.setFaction(factionId);
-        ships.add(e);
     }
 
     private static void tryInit() {
