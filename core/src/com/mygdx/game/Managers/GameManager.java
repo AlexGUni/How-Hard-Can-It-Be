@@ -14,7 +14,7 @@ public final class GameManager {
     private static ArrayList<Faction> factions;
     private static ArrayList<Ship> ships;
 
-    public static JsonValue settings;
+    private static JsonValue settings;
 
 
     public static void Initialize() {
@@ -56,5 +56,10 @@ public final class GameManager {
     public static Faction getFaction(int factionId) {
         tryInit();
         return factions.get(factionId - 1);
+    }
+
+    public static JsonValue getSettings() {
+        tryInit();
+        return settings;
     }
 }

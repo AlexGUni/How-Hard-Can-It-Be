@@ -1,8 +1,8 @@
 {
   "starting" : {
-    "health" : 100,
-    "damage": 10,
-    "plunder": 0
+    "health" : 100.0,
+    "damage": 10.0,
+    "plunder": 0.0
   },
   "factions" : [
     {

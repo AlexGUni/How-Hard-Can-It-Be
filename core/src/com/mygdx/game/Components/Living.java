@@ -1,5 +1,8 @@
 package com.mygdx.game.Components;
 
+import com.badlogic.gdx.utils.JsonValue;
+import com.mygdx.game.Managers.GameManager;
+
 public class Living extends Component {
     protected boolean isAlive;
     protected float health;
@@ -8,8 +11,9 @@ public class Living extends Component {
     public Living() {
         super();
         isAlive = true;
-        health = 100;
-        attackDmg = 10;
+        JsonValue starting = GameManager.getSettings().get("starting");
+        health = starting.getFloat("health");
+        attackDmg = starting.getFloat("damage");
     }
 
     public void takeDamage(float dmg) {

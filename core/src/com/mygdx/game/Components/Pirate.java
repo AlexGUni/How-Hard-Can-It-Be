@@ -9,7 +9,7 @@ public class Pirate extends Component {
 
     public Pirate() {
         super();
-        plunder = 0;
+        plunder = GameManager.getSettings().get("starting").getFloat("plunder");
         factionId = 1;
     }
 
