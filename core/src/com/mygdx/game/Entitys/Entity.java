@@ -40,6 +40,13 @@ public class Entity {
         components.add(component);
         component.setParent(this);
     }
+
+    public void addComponents(Component... components) {
+        for(Component c : components){
+            addComponent(c);
+        }
+    }
+
     public Component getComponent(ComponentType type){
         for (Component c : components){
             if(c.getType() == type){

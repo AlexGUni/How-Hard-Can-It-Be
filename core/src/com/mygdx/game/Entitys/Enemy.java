@@ -8,21 +8,11 @@ import com.mygdx.game.Managers.EntityManager;
 import com.mygdx.game.Managers.RenderLayer;
 import com.mygdx.game.Physics.PhysicsBodyType;
 
-public class Enemy extends Entity {
+public class Enemy extends Ship {
     public Enemy() {
-        super(5);
+        super();
 
         setName("Enemy");
-
-        Transform t = new Transform();
-        t.setPosition(64, 64);
-        addComponent(t);
-
-        Renderable r = new Renderable(1, RenderLayer.Five);
-        addComponent(r);
-
-        RigidBody bb = new RigidBody(PhysicsBodyType.Dynamic, r, t);
-        addComponent(bb);
 
         Text text = new Text(4, new Vector3(1, 0, 0));
         text.setText("Beta Male No.1");
