@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public final class GameManager {
     private static boolean initialized = false;
     private static ArrayList<Faction> factions;
+    private static ArrayList<Ship> ships;
 
     private static JsonValue settings;
 
@@ -23,12 +24,17 @@ public final class GameManager {
                 parse(Gdx.files.internal("GameSettings.json"));
 
         factions = new ArrayList<>();
+        ships = new ArrayList<>();
 
         for (JsonValue v : settings.get("factions")){
             String name = v.getString("name");
             String col = v.getString("colour");
             factions.add(new Faction(name, col));
         }
+    }
+
+    public static Player getPlayer() {
+        return (Player) ships.get(0);
     }
 
     /**
@@ -38,12 +44,14 @@ public final class GameManager {
         tryInit();
         Player p = new Player();
         p.setFaction(1);
+        ships.add(p);
     }
 
     public static void CreateEnemy(int factionId) {
         tryInit();
         Enemy e = new Enemy();
         e.setFaction(factionId);
+        ships.add(e);
     }
 
     private static void tryInit() {

@@ -26,5 +26,10 @@
       "name" : "Derwent",
       "colour": "dark-blue"
     }
-  ]
+  ],
+  "factionDefaults": {
+    "shipCount": 1,
+    "buildingHealth": 1000,
+    "shipSpawnRadius" : 15
+  }
 }

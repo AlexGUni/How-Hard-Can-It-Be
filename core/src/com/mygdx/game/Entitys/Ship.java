@@ -24,6 +24,10 @@ public class Ship extends Entity {
         shipDirections.put(new Vector2(0, -1), "-down");
         shipDirections.put(new Vector2(1, 0), "-right");
         shipDirections.put(new Vector2(-1, 0), "-left");
+        shipDirections.put(new Vector2(1, 1), "-ur");
+        shipDirections.put(new Vector2(-1, 1), "-ul");
+        shipDirections.put(new Vector2(1, -1), "-dr");
+        shipDirections.put(new Vector2(-1, -1), "-dl");
 
         Transform t = new Transform();
         Living l = new Living();
@@ -32,6 +36,10 @@ public class Ship extends Entity {
         Pirate p = new Pirate();
 
         addComponents(t, r, rb, l, p);
+    }
+
+    public void plunder(float money) {
+        getComponent(Pirate.class).addPlunder(money);
     }
 
     public void setFaction(int factionId) {
