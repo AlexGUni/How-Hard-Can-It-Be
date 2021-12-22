@@ -209,6 +209,11 @@ public final class ResourceManager {
      * @return the found Sprite in the given atlas
      */
     public static Sprite getSprite(int atlas_id, String name){
+        // Sprite s =  getTextureAtlas(atlas_id).createSprite(name);
+        // s.setU(0);
+        // s.setV(0);
+        // s.setU2(0.125f);
+        // s.setV2(0.25f);
         return getTextureAtlas(atlas_id).createSprite(name);
     }
 
