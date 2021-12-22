@@ -33,6 +33,10 @@ public final class GameManager {
         }
     }
 
+    public  static void update() {
+        QuestManager.checkCompleted();
+    }
+
     public static Player getPlayer() {
         return (Player) ships.get(0);
     }

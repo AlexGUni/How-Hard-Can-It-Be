@@ -58,6 +58,8 @@ public class PirateGame extends ApplicationAdapter {
 			accumulator -= PHYSICS_TIME_STEP;
 		}
 
+		GameManager.update();
+
 
 		if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
 			Gdx.app.exit();
