@@ -1,5 +1,8 @@
 package com.mygdx.game.Managers;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.utils.JsonReader;
+import com.badlogic.gdx.utils.JsonValue;
 import com.mygdx.game.Entitys.Player;
 import com.mygdx.game.Entitys.Ship;
 import com.mygdx.game.Faction;
@@ -11,14 +14,21 @@ public final class GameManager {
     private static ArrayList<Faction> factions;
     private static ArrayList<Ship> ships;
 
+    public static JsonValue settings;
+
+
     public static void Initialize() {
         initialized = true;
+        settings = new JsonReader().
+                parse(Gdx.files.internal("GameSettings.json"));
+
         factions = new ArrayList<>();
-        factions.add(new Faction("Halifax", "light-blue"));
-        factions.add(new Faction("Constantine", "pink"));
-        factions.add(new Faction("Langwidth", "yellow"));
-        factions.add(new Faction("Goodrick", "green"));
-        factions.add(new Faction("Derwent", "dark-blue"));
+
+        for (JsonValue v : settings.get("factions")){
+            String name = v.getString("name");
+            String col = v.getString("colour");
+            factions.add(new Faction(name, col));
+        }
 
         ships = new ArrayList<>();
     }
