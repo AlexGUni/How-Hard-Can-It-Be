@@ -4,9 +4,7 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.mygdx.game.AI.TileMapGraph;
 import com.mygdx.game.Components.ComponentEvent;
 import com.mygdx.game.Entitys.DebugText;
 import com.mygdx.game.Entitys.Enemy;
@@ -29,6 +27,7 @@ public class PirateGame extends ApplicationAdapter {
 		int id_map = ResourceManager.addTileMap("Map.tmx");
 		int arial_gen_id = ResourceManager.addFontGenerator("arial.ttf");
 		int arial_24_id = ResourceManager.createFont(arial_gen_id, 24);
+		int atlas_id = ResourceManager.addTextureAtlas("Boats.txt");
 
 
 		ResourceManager.loadAssets();

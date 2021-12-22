@@ -27,6 +27,11 @@ public class Renderable extends Component {
         sprite = new Sprite(ResourceManager.getTexture(texId));
         RenderingManager.addItem(this, layer);
     }
+    public Renderable(int atlasId, String texName, RenderLayer layer) {
+        this();
+        sprite = new Sprite(ResourceManager.getSprite(atlasId, texName));
+        RenderingManager.addItem(this, layer);
+    }
 
     @Override
     public void update() {
