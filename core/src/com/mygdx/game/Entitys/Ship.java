@@ -30,6 +30,7 @@ public class Ship extends Entity {
         shipDirections.put(new Vector2(-1, -1), "-dl");
 
         Transform t = new Transform();
+        t.setPosition(800, 800);
         Living l = new Living();
         Renderable r = new Renderable(4, "white-up", RenderLayer.Transparent);
         RigidBody rb = new RigidBody(PhysicsBodyType.Dynamic, r, t);
@@ -38,7 +39,7 @@ public class Ship extends Entity {
         addComponents(t, r, rb, l, p);
     }
 
-    public void plunder(float money) {
+    public void plunder(int money) {
         getComponent(Pirate.class).addPlunder(money);
     }
 
@@ -68,5 +69,12 @@ public class Ship extends Entity {
         r.getSprite().setV(s.getV());
         r.getSprite().setU2(s.getU2());
         r.getSprite().setV2(s.getV2());
+    }
+
+    public int getHealth() {
+        return getComponent(Living.class).getHealth();
+    }
+    public int getPlunder() {
+        return getComponent(Pirate.class).getPlunder();
     }
 }

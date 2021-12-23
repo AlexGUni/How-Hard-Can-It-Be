@@ -5,7 +5,7 @@ import com.mygdx.game.Entitys.Player;
 public abstract class Quest {
     protected String name;
     protected String description;
-    protected float reward;
+    protected int reward;
     protected boolean isCompleted;
 
     public Quest() {
@@ -17,7 +17,7 @@ public abstract class Quest {
 
     public abstract boolean checkCompleted(Player p);
 
-    public float getReward() {
+    public int getReward() {
         return reward;
     }
     public boolean isCompleted() {
