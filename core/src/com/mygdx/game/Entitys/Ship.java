@@ -31,7 +31,7 @@ public class Ship extends Entity {
 
         Transform t = new Transform();
         Living l = new Living();
-        Renderable r = new Renderable(5, "white-up", RenderLayer.Transparent);
+        Renderable r = new Renderable(4, "white-up", RenderLayer.Transparent);
         RigidBody rb = new RigidBody(PhysicsBodyType.Dynamic, r, t);
         Pirate p = new Pirate();
 
@@ -63,7 +63,7 @@ public class Ship extends Entity {
             return;
         }
         Renderable r = getComponent(Renderable.class);
-        Sprite s = ResourceManager.getSprite(5, getColour() + direction);
+        Sprite s = ResourceManager.getSprite(4, getColour() + direction);
         r.getSprite().setU(s.getU());
         r.getSprite().setV(s.getV());
         r.getSprite().setU2(s.getU2());
