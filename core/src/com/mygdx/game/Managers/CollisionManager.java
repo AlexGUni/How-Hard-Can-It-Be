@@ -19,19 +19,27 @@ public class CollisionManager implements ContactListener {
         Body b = f.getBody();
         Object o = b.getUserData();
         CollisionCallBack cbA = (CollisionCallBack) o;
-        cbA.BeginContact();
+        if (cbA != null){
+            cbA.BeginContact();
+        }
 
         CollisionCallBack cbB = (CollisionCallBack) contact.getFixtureB().getBody().getUserData();
-        cbB.BeginContact();
+        if(cbB != null) {
+            cbB.BeginContact();
+        }
     }
 
     @Override
     public void endContact(Contact contact) {
         CollisionCallBack cbA = (CollisionCallBack) contact.getFixtureA().getBody().getUserData();
-        cbA.EndContact();
+        if(cbA != null) {
+            cbA.EndContact();
+        }
 
         CollisionCallBack cbB = (CollisionCallBack) contact.getFixtureB().getBody().getUserData();
-        cbB.EndContact();
+        if(cbB != null) {
+            cbB.EndContact();
+        }
     }
 
     @Override
