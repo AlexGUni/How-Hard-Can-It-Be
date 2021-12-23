@@ -5,19 +5,19 @@ import com.mygdx.game.Managers.GameManager;
 
 public class Pirate extends Component {
     private int factionId;
-    private float plunder;
+    private int plunder;
 
     public Pirate() {
         super();
-        plunder = GameManager.getSettings().get("starting").getFloat("plunder");
+        plunder = GameManager.getSettings().get("starting").getInt("plunder");
         factionId = 1;
     }
 
-    public float getPlunder() {
+    public int getPlunder() {
         return plunder;
     }
 
-    public void addPlunder(float money) {
+    public void addPlunder(int money) {
         plunder += money;
     }
 

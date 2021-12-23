@@ -14,7 +14,7 @@ public class Enemy extends Ship {
 
         setName("Enemy");
 
-        Text text = new Text(4, new Vector3(1, 0, 0));
+        Text text = new Text(new Vector3(1, 0, 0));
         text.setText(getName());
         addComponent(text);
 

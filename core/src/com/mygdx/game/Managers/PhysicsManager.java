@@ -1,5 +1,9 @@
 package com.mygdx.game.Managers;
 
+import com.badlogic.gdx.maps.MapObject;
+import com.badlogic.gdx.maps.MapObjects;
+import com.badlogic.gdx.maps.objects.RectangleMapObject;
+import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.*;
 import com.mygdx.game.Components.RigidBody;
@@ -16,6 +20,7 @@ import static com.mygdx.utils.Constants.PHYSICS_TIME_STEP;
  * Manages the box2D world and bodies for the collision detection and physics
  */
 public final class PhysicsManager {
+    private static final float TILE_SIZE_INV = 1.0f;
     public static boolean initialized = false;
     private static World box2DWorld;
     private static ArrayList<Body> box2DBodies;
@@ -48,24 +53,37 @@ public final class PhysicsManager {
         return box2DBodies.size();
     }
 
-    public static int createBody(TileMap map) {
-        tryInit();
+    private static Shape tile_getShape(Rectangle rectangle){
+        PolygonShape polygonShape = new PolygonShape();
+        polygonShape.setAsBox(
+                rectangle.width * 0.5f * TILE_SIZE_INV,
+                rectangle.height * 0.5f * TILE_SIZE_INV);
+        return polygonShape;
+    }
 
-        BodyDef def = new BodyDef();
-        def.fixedRotation = true;
-        Body b = box2DWorld.createBody(def);
+    private static Vector2 tile_getCenter(Rectangle rectangle){
+        Vector2 center = new Vector2();
+        rectangle.getCenter(center);
+        return center.scl(TILE_SIZE_INV);
+    }
 
-        PolygonShape shape = new PolygonShape();
-        shape.setAsBox(map.getTileDim().x, map.getTileDim().y);
+    public static void createMapCollision(TileMap map) {
+        MapObjects objects = map.getTileMap().getLayers().get(1).getObjects();
+        for (MapObject object: objects) {
+            Rectangle rectangle = ((RectangleMapObject)object).getRectangle();
 
-        FixtureDef f = new FixtureDef();
-        f.shape = shape;
-        f.density = 0;
+            //create a dynamic within the world body (also can be KinematicBody or StaticBody
+            BodyDef bodyDef = new BodyDef();
+            bodyDef.type = BodyDef.BodyType.StaticBody;
+            Body body = box2DWorld.createBody(bodyDef);
 
-        b.createFixture(f);
-        b.setUserData(map);
-        box2DBodies.add(b);
-        return box2DBodies.size();
+            //create a fixture for each body from the shape
+            Fixture fixture = body.createFixture(tile_getShape(rectangle), 1);
+            fixture.setFriction(0.1f);
+
+            //setting the position of the body's origin. In this case with zero rotation
+            body.setTransform(tile_getCenter(rectangle),0);
+        }
     }
 
     public static Body getBody(int id) {
