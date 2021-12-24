@@ -22,15 +22,11 @@ public class TileMap extends Component implements CollisionCallBack {
         // CollisionManager.addTileMap(this);
     }
 
-    public TileMap(int id, RenderLayer layer, boolean canCollide) {
+    public TileMap(int id, RenderLayer layer) {
         this();
         map = ResourceManager.getTileMap(id);
         renderer = new OrthogonalTiledMapRenderer(map);
         RenderingManager.addItem(this, layer);
-
-        if(canCollide) {
-
-        }
     }
 
     public TiledMapTileLayer.Cell getCell(Vector2 pos){
@@ -61,7 +57,7 @@ public class TileMap extends Component implements CollisionCallBack {
     @Override
     public void render() {
         super.render();
-        renderer.render();
+        renderer.render(new int[] { 0 });
     }
 
     @Override

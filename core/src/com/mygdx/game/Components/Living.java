@@ -5,15 +5,15 @@ import com.mygdx.game.Managers.GameManager;
 
 public class Living extends Component {
     protected boolean isAlive;
-    protected float health;
-    protected float attackDmg;
+    protected int health;
+    protected int attackDmg;
 
     public Living() {
         super();
         isAlive = true;
         JsonValue starting = GameManager.getSettings().get("starting");
-        health = starting.getFloat("health");
-        attackDmg = starting.getFloat("damage");
+        health = starting.getInt("health");
+        attackDmg = starting.getInt("damage");
     }
 
     public void takeDamage(float dmg) {
@@ -22,5 +22,9 @@ public class Living extends Component {
             health = 0;
             isAlive = false;
         }
+    }
+
+    public int getHealth() {
+        return health;
     }
 }

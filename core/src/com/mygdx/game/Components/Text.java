@@ -25,9 +25,10 @@ public class Text extends Component {
         offset = new Vector2();
         type = ComponentType.Text;
     }
-    public Text(int font_id, Vector3 fontColour) {
+    public Text(Vector3 fontColour) {
         this();
-        font = ResourceManager.getFont(font_id);
+        // font = ResourceManager.getFont(font_id);
+        font = new BitmapFont();
         this.fontColour = fontColour;
         RenderingManager.addItem(this, RenderLayer.Transparent);
     }

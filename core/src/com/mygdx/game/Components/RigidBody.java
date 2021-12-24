@@ -48,7 +48,8 @@ public class RigidBody extends Component implements CollisionCallBack {
         FixtureDef f = new FixtureDef();
         f.shape = shape;
         f.density = type == PhysicsBodyType.Static ? 0.0f : 1.0f;
-        f.restitution = 1;
+        f.restitution = 0; // prevents bouncing
+        f.friction = 0;
 
         bodyId = PhysicsManager.createBody(def, f, this);
 

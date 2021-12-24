@@ -237,6 +237,9 @@ public final class ResourceManager {
         return tileMaps.get(id_ - 1);
     }
 
+    public static int getId(String name) {
+        return ids.indexOf(name) + 1;
+    }
 
     public static BitmapFont getFont(int font_id) {
         String fontName = ids.get(font_id - 1);
