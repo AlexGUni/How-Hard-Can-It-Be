@@ -16,7 +16,7 @@ public class Ship extends Entity {
     private static ObjectMap<Vector2, String> shipDirections;
 
     public Ship() {
-        super(5);
+        super(4);
         setName("Ship (" + shipCount++ + ")");
 
         shipDirections = new ObjectMap<>();
@@ -31,12 +31,11 @@ public class Ship extends Entity {
 
         Transform t = new Transform();
         t.setPosition(800, 800);
-        Living l = new Living();
-        Renderable r = new Renderable(4, "white-up", RenderLayer.Transparent);
+        Renderable r = new Renderable(3, "white-up", RenderLayer.Transparent);
         RigidBody rb = new RigidBody(PhysicsBodyType.Dynamic, r, t);
         Pirate p = new Pirate();
 
-        addComponents(t, r, rb, l, p);
+        addComponents(t, r, rb, p);
     }
 
     public void plunder(int money) {
@@ -64,7 +63,7 @@ public class Ship extends Entity {
             return;
         }
         Renderable r = getComponent(Renderable.class);
-        Sprite s = ResourceManager.getSprite(4, getColour() + direction);
+        Sprite s = ResourceManager.getSprite(3, getColour() + direction);
         r.getSprite().setU(s.getU());
         r.getSprite().setV(s.getV());
         r.getSprite().setU2(s.getU2());
@@ -72,7 +71,7 @@ public class Ship extends Entity {
     }
 
     public int getHealth() {
-        return getComponent(Living.class).getHealth();
+        return getComponent(Pirate.class).getHealth();
     }
     public int getPlunder() {
         return getComponent(Pirate.class).getPlunder();

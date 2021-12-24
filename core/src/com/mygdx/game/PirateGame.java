@@ -29,8 +29,6 @@ public class PirateGame extends ApplicationAdapter {
 
 		int id_ship = ResourceManager.addTexture("ship.png");
 		int id_map = ResourceManager.addTileMap("Map.tmx");
-		int arial_gen_id = ResourceManager.addFontGenerator("arial.ttf");
-		// int arial_24_id = ResourceManager.createFont(arial_gen_id, 24);
 		int atlas_id = ResourceManager.addTextureAtlas("Boats.txt");
 
 
@@ -41,6 +39,8 @@ public class PirateGame extends ApplicationAdapter {
 		GameManager.CreatePlayer();
 		GameManager.CreateEnemy(2);
 		GameManager.CreateEnemy(3);
+		GameManager.CreateEnemy(4);
+		GameManager.CreateEnemy(5);
 
 		DebugText t = new DebugText();
 
