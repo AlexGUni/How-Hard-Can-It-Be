@@ -76,4 +76,8 @@ public class Ship extends Entity {
     public int getPlunder() {
         return getComponent(Pirate.class).getPlunder();
     }
+
+    public void shoot() {
+        getComponent(Pirate.class).shoot();
+    }
 }

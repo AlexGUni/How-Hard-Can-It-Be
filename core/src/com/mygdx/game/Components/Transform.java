@@ -18,11 +18,30 @@ public class Transform extends Component implements Location<Vector2> {
         type = ComponentType.Transform;
     }
 
+    public void setPosition(Vector2 pos, boolean rb) {
+        setPosition(pos.x, pos.y, rb);
+    }
+    public void setPosition(float x, float y, boolean rb_) {
+        position.set(x, y);
+        if (parent != null && rb_) {
+            RigidBody rb = parent.getComponent(RigidBody.class);
+            if (rb != null) {
+                rb.setPosition(position);
+            }
+        }
+    }
+
     public void setPosition(Vector2 pos) {
-        position.set(pos);
+        setPosition(pos.x, pos.y);
     }
     public void setPosition(float x, float y) {
         position.set(x, y);
+        if (parent != null) {
+            RigidBody rb = parent.getComponent(RigidBody.class);
+            if (rb != null) {
+                rb.setPosition(position, true);
+            }
+        }
     }
 
     public void setScale(Vector2 pos) {

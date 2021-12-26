@@ -30,6 +30,7 @@ public class PirateGame extends ApplicationAdapter {
 		int id_ship = ResourceManager.addTexture("ship.png");
 		int id_map = ResourceManager.addTileMap("Map.tmx");
 		int atlas_id = ResourceManager.addTextureAtlas("Boats.txt");
+		int extras_id = ResourceManager.addTextureAtlas("UISkin/skin.atlas");
 
 
 		ResourceManager.loadAssets();

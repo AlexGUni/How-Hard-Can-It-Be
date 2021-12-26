@@ -1,6 +1,8 @@
 package com.mygdx.game.Components;
 
+import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.JsonValue;
+import com.mygdx.game.Entitys.Ship;
 import com.mygdx.game.Faction;
 import com.mygdx.game.Managers.GameManager;
 
@@ -43,6 +45,10 @@ public class Pirate extends Component {
             health = 0;
             isAlive = false;
         }
+    }
+
+    public void shoot() {
+        GameManager.shoot((Ship) parent, new Vector2(0, 1));
     }
 
     public int getHealth() {

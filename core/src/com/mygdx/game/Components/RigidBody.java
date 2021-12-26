@@ -66,6 +66,14 @@ public class RigidBody extends Component implements CollisionCallBack {
         b.setTransform(position, 0);
     }
 
+    public void setPosition(Vector2 position, boolean offset) {
+        Body b = PhysicsManager.getBody(bodyId);
+        if(offset){
+            position.add(halfDim);
+        }
+        b.setTransform(position, 0);
+    }
+
     public Body getBody() {
         return PhysicsManager.getBody(bodyId);
     }
@@ -78,7 +86,7 @@ public class RigidBody extends Component implements CollisionCallBack {
         Body b = getBody();
         Vector2 p = b.getPosition().cpy();
         p.sub(halfDim);
-        t.setPosition(p);
+        t.setPosition(p, false);
     }
 
     @Override
