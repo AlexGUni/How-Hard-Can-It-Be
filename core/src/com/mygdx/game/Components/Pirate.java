@@ -47,8 +47,8 @@ public class Pirate extends Component {
         }
     }
 
-    public void shoot() {
-        GameManager.shoot((Ship) parent, new Vector2(0, 1));
+    public void shoot(Vector2 dir) {
+        GameManager.shoot((Ship) parent, dir);
     }
 
     public int getHealth() {

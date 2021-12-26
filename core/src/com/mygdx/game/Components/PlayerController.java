@@ -50,7 +50,7 @@ public class PlayerController extends Component {
             dir.x += 1;
         }
 
-        ((Ship) parent).setShipDirection(Ship.getShipDirection(dir));
+        ((Ship) parent).setShipDirection(((Ship) parent).getShipDirection(dir));
 
         dir.scl(s);
 

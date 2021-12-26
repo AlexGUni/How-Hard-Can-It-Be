@@ -1,7 +1,6 @@
 package com.mygdx.game.Entitys;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.mygdx.game.Components.*;
@@ -15,8 +14,11 @@ public class Ship extends Entity {
     private static int shipCount = 0;
     private static ObjectMap<Vector2, String> shipDirections;
 
+    private final Vector2 currentDir;
+
     public Ship() {
         super(4);
+        currentDir = new Vector2();
         setName("Ship (" + shipCount++ + ")");
 
         shipDirections = new ObjectMap<>();
@@ -47,8 +49,9 @@ public class Ship extends Entity {
         setShipDirection("-up");
     }
 
-    public static String getShipDirection(Vector2 dir) {
-        if (shipDirections.containsKey(dir)){
+    public String getShipDirection(Vector2 dir) {
+        if (!currentDir.equals(dir) && shipDirections.containsKey(dir)){
+            currentDir.set(dir);
             return shipDirections.get(dir);
         }
         return "";
@@ -78,6 +81,6 @@ public class Ship extends Entity {
     }
 
     public void shoot() {
-        getComponent(Pirate.class).shoot();
+        getComponent(Pirate.class).shoot(currentDir);
     }
 }
