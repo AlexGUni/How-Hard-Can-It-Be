@@ -1,7 +1,6 @@
 package com.mygdx.game.Entitys;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.mygdx.game.Components.*;
@@ -15,8 +14,11 @@ public class Ship extends Entity {
     private static int shipCount = 0;
     private static ObjectMap<Vector2, String> shipDirections;
 
+    private final Vector2 currentDir;
+
     public Ship() {
-        super(5);
+        super(4);
+        currentDir = new Vector2();
         setName("Ship (" + shipCount++ + ")");
 
         shipDirections = new ObjectMap<>();
@@ -31,12 +33,11 @@ public class Ship extends Entity {
 
         Transform t = new Transform();
         t.setPosition(800, 800);
-        Living l = new Living();
-        Renderable r = new Renderable(4, "white-up", RenderLayer.Transparent);
+        Renderable r = new Renderable(3, "white-up", RenderLayer.Transparent);
         RigidBody rb = new RigidBody(PhysicsBodyType.Dynamic, r, t);
         Pirate p = new Pirate();
 
-        addComponents(t, r, rb, l, p);
+        addComponents(t, r, rb, p);
     }
 
     public void plunder(int money) {
@@ -48,8 +49,9 @@ public class Ship extends Entity {
         setShipDirection("-up");
     }
 
-    public static String getShipDirection(Vector2 dir) {
-        if (shipDirections.containsKey(dir)){
+    public String getShipDirection(Vector2 dir) {
+        if (!currentDir.equals(dir) && shipDirections.containsKey(dir)){
+            currentDir.set(dir);
             return shipDirections.get(dir);
         }
         return "";
@@ -64,7 +66,7 @@ public class Ship extends Entity {
             return;
         }
         Renderable r = getComponent(Renderable.class);
-        Sprite s = ResourceManager.getSprite(4, getColour() + direction);
+        Sprite s = ResourceManager.getSprite(3, getColour() + direction);
         r.getSprite().setU(s.getU());
         r.getSprite().setV(s.getV());
         r.getSprite().setU2(s.getU2());
@@ -72,9 +74,13 @@ public class Ship extends Entity {
     }
 
     public int getHealth() {
-        return getComponent(Living.class).getHealth();
+        return getComponent(Pirate.class).getHealth();
     }
     public int getPlunder() {
         return getComponent(Pirate.class).getPlunder();
+    }
+
+    public void shoot() {
+        getComponent(Pirate.class).shoot(currentDir);
     }
 }

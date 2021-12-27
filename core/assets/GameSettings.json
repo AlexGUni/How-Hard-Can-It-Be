@@ -3,7 +3,8 @@
     "health" : 100,
     "damage": 10.0,
     "plunder": 10,
-    "playerSpeed" : 10000.0
+    "playerSpeed" : 10000.0,
+    "cannonSpeed": 10000.0
   },
   "factions" : [
     {

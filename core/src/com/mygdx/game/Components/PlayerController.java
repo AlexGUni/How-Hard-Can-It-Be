@@ -50,7 +50,7 @@ public class PlayerController extends Component {
             dir.x += 1;
         }
 
-        ((Ship) parent).setShipDirection(Ship.getShipDirection(dir));
+        ((Ship) parent).setShipDirection(((Ship) parent).getShipDirection(dir));
 
         dir.scl(s);
 
@@ -59,5 +59,9 @@ public class PlayerController extends Component {
 
         RenderingManager.getCamera().position.set(new Vector3(player.getPos(), 0.0f));
         RenderingManager.getCamera().update();
+
+        if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+            ((Ship) parent).shoot();
+        }
     }
 }
