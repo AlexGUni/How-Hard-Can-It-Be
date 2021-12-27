@@ -1,15 +1,14 @@
-package com.mygdx.utils;
+package com.mygdx.game.Managers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.assets.AssetManager;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.freetype.FreeTypeFontGenerator;
 import com.badlogic.gdx.maps.tiled.TiledMap;
 import com.badlogic.gdx.maps.tiled.TmxMapLoader;
-import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -205,6 +204,20 @@ public final class ResourceManager {
     }
 
     /**
+     * @param atlas_id the id of the source texture atlas
+     * @param name the name of the texture
+     * @return the found Sprite in the given atlas
+     */
+    public static Sprite getSprite(int atlas_id, String name){
+        // Sprite s =  getTextureAtlas(atlas_id).createSprite(name);
+        // s.setU(0);
+        // s.setV(0);
+        // s.setU2(0.125f);
+        // s.setV2(0.25f);
+        return getTextureAtlas(atlas_id).createSprite(name);
+    }
+
+    /**
      * Gets the tile map returns null if not a tile map
      * @param id the id of the tile map
      * @return the tile map
@@ -224,6 +237,9 @@ public final class ResourceManager {
         return tileMaps.get(id_ - 1);
     }
 
+    public static int getId(String name) {
+        return ids.indexOf(name) + 1;
+    }
 
     public static BitmapFont getFont(int font_id) {
         String fontName = ids.get(font_id - 1);

@@ -5,6 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.Entitys.Player;
+import com.mygdx.game.Entitys.Ship;
 import com.mygdx.game.Managers.RenderingManager;
 
 import static com.mygdx.utils.Constants.PHYSICS_TIME_STEP;
@@ -31,31 +32,36 @@ public class PlayerController extends Component {
         super.update();
         float s = speed * PHYSICS_TIME_STEP;
 
-        Vector2 pos = player.getPos();
-        Vector2 deltaP = new Vector2(0, 0);
+        Vector2 dir = new Vector2(0, 0);
 
         if(Gdx.input.isKeyPressed(Input.Keys.W)){
-            deltaP.y += 1;
+            dir.y += 1;
         }
 
         if(Gdx.input.isKeyPressed(Input.Keys.S)){
-            deltaP.y -= 1;
+            dir.y -= 1;
         }
 
         if(Gdx.input.isKeyPressed(Input.Keys.A)){
-            deltaP.x -= 1;
+            dir.x -= 1;
         }
 
         if(Gdx.input.isKeyPressed(Input.Keys.D)){
-            deltaP.x += 1;
+            dir.x += 1;
         }
 
-        deltaP.scl(s);
+        ((Ship) parent).setShipDirection(((Ship) parent).getShipDirection(dir));
+
+        dir.scl(s);
 
         RigidBody rb = parent.getComponent(RigidBody.class);
-        rb.setVelocity(deltaP);
+        rb.setVelocity(dir);
 
         RenderingManager.getCamera().position.set(new Vector3(player.getPos(), 0.0f));
         RenderingManager.getCamera().update();
+
+        if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+            ((Ship) parent).shoot();
+        }
     }
 }

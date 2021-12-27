@@ -1,0 +1,36 @@
+{
+  "starting" : {
+    "health" : 100,
+    "damage": 10.0,
+    "plunder": 10,
+    "playerSpeed" : 10000.0,
+    "cannonSpeed": 10000.0
+  },
+  "factions" : [
+    {
+      "name" : "Halifax",
+      "colour": "light-blue"
+    },
+    {
+      "name" : "Constantine",
+      "colour": "pink"
+    },
+    {
+      "name" : "Langwidth",
+      "colour": "yellow"
+    },
+    {
+      "name" : "Goodrick",
+      "colour": "green"
+    },
+    {
+      "name" : "Derwent",
+      "colour": "dark-blue"
+    }
+  ],
+  "factionDefaults": {
+    "shipCount": 1,
+    "buildingHealth": 1000,
+    "shipSpawnRadius" : 15
+  }
+}

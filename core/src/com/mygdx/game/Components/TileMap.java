@@ -8,7 +8,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.Managers.RenderLayer;
 import com.mygdx.game.Managers.RenderingManager;
 import com.mygdx.game.Physics.CollisionCallBack;
-import com.mygdx.utils.ResourceManager;
+import com.mygdx.game.Managers.ResourceManager;
 
 /**
  * Component that allows the rendering of tilemaps (has its own sprite batch)
@@ -22,15 +22,11 @@ public class TileMap extends Component implements CollisionCallBack {
         // CollisionManager.addTileMap(this);
     }
 
-    public TileMap(int id, RenderLayer layer, boolean canCollide) {
+    public TileMap(int id, RenderLayer layer) {
         this();
         map = ResourceManager.getTileMap(id);
         renderer = new OrthogonalTiledMapRenderer(map);
         RenderingManager.addItem(this, layer);
-
-        if(canCollide) {
-
-        }
     }
 
     public TiledMapTileLayer.Cell getCell(Vector2 pos){
@@ -61,7 +57,7 @@ public class TileMap extends Component implements CollisionCallBack {
     @Override
     public void render() {
         super.render();
-        renderer.render(new int[] { 1 });
+        renderer.render(new int[] { 0 });
     }
 
     @Override

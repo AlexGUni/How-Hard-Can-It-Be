@@ -4,10 +4,9 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
-import com.mygdx.game.Managers.CollisionManager;
 import com.mygdx.game.Managers.RenderLayer;
 import com.mygdx.game.Managers.RenderingManager;
-import com.mygdx.utils.ResourceManager;
+import com.mygdx.game.Managers.ResourceManager;
 
 /**
  * Renders text with give font and colour.
@@ -26,9 +25,10 @@ public class Text extends Component {
         offset = new Vector2();
         type = ComponentType.Text;
     }
-    public Text(int font_id, Vector3 fontColour) {
+    public Text(Vector3 fontColour) {
         this();
-        font = ResourceManager.getFont(font_id);
+        // font = ResourceManager.getFont(font_id);
+        font = new BitmapFont();
         this.fontColour = fontColour;
         RenderingManager.addItem(this, RenderLayer.Transparent);
     }

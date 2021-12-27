@@ -8,7 +8,7 @@ public class DebugText extends Entity {
     Text text;
     public DebugText() {
         super(1);
-        text = new Text(4, new Vector3(1, 1, 1));
+        text = new Text(new Vector3(1, 1, 1));
         text.setPosition(230, 0);
         text.setText("FPS: ");
         addComponent(text);
