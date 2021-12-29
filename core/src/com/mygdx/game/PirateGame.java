@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.*;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
+import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
@@ -21,9 +22,11 @@ import com.mygdx.game.Managers.*;
 import static com.mygdx.utils.Constants.*;
 
 public class PirateGame extends ApplicationAdapter {
-
+	Box2DDebugRenderer b2d;
 	@Override
 	public void create () {
+		b2d = new Box2DDebugRenderer(true, true, true, true, true, true);
+
 		INIT_CONSTANTS();
 		PhysicsManager.Initialize(false);
 
@@ -39,9 +42,9 @@ public class PirateGame extends ApplicationAdapter {
 
 		GameManager.CreatePlayer();
 		GameManager.CreateEnemy(2);
-		GameManager.CreateEnemy(3);
-		GameManager.CreateEnemy(4);
-		GameManager.CreateEnemy(5);
+		// GameManager.CreateEnemy(3);
+		// GameManager.CreateEnemy(4);
+		// GameManager.CreateEnemy(5);
 
 		DebugText t = new DebugText();
 
@@ -71,6 +74,8 @@ public class PirateGame extends ApplicationAdapter {
 		UIManager.update();
 		UIManager.render();
 
+		b2d.render(PhysicsManager.box2DWorld, RenderingManager.getCamera().combined);
+
 
 		if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
 			Gdx.app.exit();
@@ -85,6 +90,8 @@ public class PirateGame extends ApplicationAdapter {
 		RenderingManager.cleanUp();
 		PhysicsManager.cleanUp();
 		UIManager.cleanUp();
+
+		b2d.dispose();
 	}
 
 	@Override

@@ -1,28 +1,26 @@
 package com.mygdx.game.Components;
 
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Body;
-import com.badlogic.gdx.physics.box2d.BodyDef;
-import com.badlogic.gdx.physics.box2d.FixtureDef;
-import com.badlogic.gdx.physics.box2d.PolygonShape;
+import com.badlogic.gdx.physics.box2d.*;
 import com.mygdx.game.Managers.PhysicsManager;
 import com.mygdx.game.Physics.CollisionCallBack;
 import com.mygdx.game.Physics.PhysicsBodyType;
 
-public class RigidBody extends Component implements CollisionCallBack {
+public class RigidBody extends Component {
     int bodyId;
-    PhysicsBodyType bodyType;
-    Vector2 halfDim;
+    private final Vector2 halfDim;
     public RigidBody() {
         super();
         type = ComponentType.RigidBody;
         halfDim = new Vector2();
         setRequirements(ComponentType.Transform, ComponentType.Renderable);
     }
+    public RigidBody(PhysicsBodyType type, Renderable r, Transform t) {
+        this(type, r, t, false);
+    }
 
-    public RigidBody(PhysicsBodyType type, Renderable r, Transform t){
+    public RigidBody(PhysicsBodyType type, Renderable r, Transform t, boolean isTrigger){
         this();
-        bodyType = type;
         BodyDef def = new BodyDef();
         switch (type){
             case Static:
@@ -35,8 +33,8 @@ public class RigidBody extends Component implements CollisionCallBack {
                 def.type = BodyDef.BodyType.KinematicBody;
                 break;
         }
-        float h_x = r.sprite.getWidth() * 0.5f;
-        float h_y = r.sprite.getHeight() * 0.5f;
+        final float h_x = r.sprite.getWidth() * 0.5f;
+        final float h_y = r.sprite.getHeight() * 0.5f;
         halfDim.set(h_x, h_y);
 
         def.position.set(t.getPosition().x + h_x, t.getPosition().y + h_y);
@@ -46,14 +44,40 @@ public class RigidBody extends Component implements CollisionCallBack {
         shape.setAsBox(h_x, h_y);
 
         FixtureDef f = new FixtureDef();
+        f.isSensor = isTrigger;
         f.shape = shape;
         f.density = type == PhysicsBodyType.Static ? 0.0f : 1.0f;
         f.restitution = 0; // prevents bouncing
         f.friction = 0;
 
-        bodyId = PhysicsManager.createBody(def, f, this);
+        bodyId = PhysicsManager.createBody(def, f, null);
 
         shape.dispose();
+    }
+
+    /**
+     * Adds a new circular fixture to the body as a trigger
+     */
+    public void addTrigger(float radius) {
+        Body b = getBody();
+
+        FixtureDef fDef = new FixtureDef();
+        fDef.isSensor = true;
+        CircleShape shape = new CircleShape();
+        shape.setPosition(b.getPosition());
+        shape.setRadius(radius);
+
+        fDef.shape = shape;
+
+        fDef.density = 0.0f;
+        fDef.restitution = 0.0f;
+        fDef.friction = 0.0f;
+
+        b.createFixture(fDef);
+    }
+
+    public void setCallback(CollisionCallBack data) {
+        getBody().setUserData(data);
     }
 
     public void setVelocity(Vector2 vel){
@@ -87,16 +111,6 @@ public class RigidBody extends Component implements CollisionCallBack {
         Vector2 p = b.getPosition().cpy();
         p.sub(halfDim);
         t.setPosition(p, false);
-    }
-
-    @Override
-    public void BeginContact() {
-
-    }
-
-    @Override
-    public void EndContact() {
-
     }
 
     public Vector2 getVelocity() {

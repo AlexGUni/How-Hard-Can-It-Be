@@ -7,7 +7,7 @@ import com.mygdx.game.Managers.GameManager;
 
 public class Player extends Ship {
 
-    private Player(float speed){
+    private Player(float speed) {
         super();
 
         PlayerController pc = new PlayerController(this, speed);
@@ -26,10 +26,11 @@ public class Player extends Ship {
     }
 
 
-    public Vector2 getPos(){
+    public Vector2 getPos() {
         return getComponent(Transform.class).getPosition();
     }
-    public void setPos(Vector2 pos){
+
+    public void setPos(Vector2 pos) {
         getComponent(Transform.class).setPosition(pos);
     }
 }

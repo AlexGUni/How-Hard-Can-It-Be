@@ -15,6 +15,7 @@ public class Pirate extends Component {
 
     public Pirate() {
         super();
+        type = ComponentType.Pirate;
         plunder = GameManager.getSettings().get("starting").getInt("plunder");
         factionId = 1;
         isAlive = true;

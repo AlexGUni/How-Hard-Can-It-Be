@@ -7,5 +7,7 @@ public enum ComponentType {
     Transform,
     Text,
     RigidBody,
-    AINavigation
+    AINavigation,
+    Pirate,
+    PlayerController
 }

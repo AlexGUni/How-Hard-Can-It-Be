@@ -19,10 +19,12 @@ public class PlayerController extends Component {
 
     public PlayerController() {
         super();
+        type = ComponentType.PlayerController;
         setRequirements(ComponentType.RigidBody);
     }
 
     public PlayerController(Player player, float speed) {
+        this();
         this.player = player;
         this.speed = speed;
     }

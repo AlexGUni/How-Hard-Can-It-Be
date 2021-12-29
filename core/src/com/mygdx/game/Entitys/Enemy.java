@@ -1,16 +1,23 @@
 package com.mygdx.game.Entitys;
 
+import com.badlogic.gdx.ai.fsm.DefaultStateMachine;
+import com.badlogic.gdx.ai.fsm.StateMachine;
 import com.badlogic.gdx.ai.steer.behaviors.Arrive;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
+import com.mygdx.game.AI.EnemyState;
 import com.mygdx.game.Components.*;
 import com.mygdx.game.Managers.EntityManager;
 import com.mygdx.game.Managers.RenderLayer;
 import com.mygdx.game.Physics.PhysicsBodyType;
 
 public class Enemy extends Ship {
+    public StateMachine<Enemy, EnemyState> stateMachine;
+
     public Enemy() {
         super();
+
+        stateMachine = new DefaultStateMachine<>(this, EnemyState.WANDER);
 
         setName("Enemy");
 
@@ -30,5 +37,11 @@ public class Enemy extends Ship {
         nav.setBehavior(arrives);
 
         addComponent(nav);
+    }
+
+    @Override
+    public void update() {
+        super.update();
+        stateMachine.update();
     }
 }

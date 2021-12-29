@@ -57,7 +57,7 @@ public class Entity {
     }
 
     /**
-     * Gets the components that is of the same type as T
+     * Gets the first component that is of the same type as T
      * @param type [T].class
      * @param <T> the type of the desired component
      * @return the component cast to the appropriate type
@@ -70,6 +70,23 @@ public class Entity {
             }
         }
         return null;
+    }
+
+    /**
+     * Gets the list of components that is of the same type as T
+     * @param type [T].class
+     * @param <T> the type of the desired component
+     * @return the components cast to the appropriate type
+     */
+    @SuppressWarnings("unchecked")
+    public <T> ArrayList<T> getComponents(Class<T> type){
+        ArrayList<T> res = new ArrayList<>();
+        for(Component c : components){
+            if(type.isInstance(c)) {
+                res.add((T)c);
+            }
+        }
+        return res;
     }
 
     /**

@@ -15,30 +15,63 @@ public class CollisionManager implements ContactListener {
 
     @Override
     public void beginContact(Contact contact) {
-        Fixture f = contact.getFixtureA();
-        Body b = f.getBody();
-        Object o = b.getUserData();
-        CollisionCallBack cbA = (CollisionCallBack) o;
+        Fixture fa = contact.getFixtureA();
+        Body ba = fa.getBody();
+        Object oa = ba.getUserData();
+        CollisionCallBack cbA = (CollisionCallBack) oa;
+
+        Fixture fb = contact.getFixtureB();
+        Body bb = fb.getBody();
+        Object ob = bb.getUserData();
+        CollisionCallBack cbB = (CollisionCallBack) ob;
+
         if (cbA != null){
-            cbA.BeginContact();
+            if (fa.isSensor() && cbB != null) {
+                cbB.EnterTrigger();
+            }
+            else {
+                cbA.BeginContact();
+            }
         }
 
-        CollisionCallBack cbB = (CollisionCallBack) contact.getFixtureB().getBody().getUserData();
         if(cbB != null) {
-            cbB.BeginContact();
+            if(fb.isSensor() && cbA != null) {
+                cbA.EnterTrigger();
+            }
+            else {
+                cbB.BeginContact();
+            }
         }
     }
 
     @Override
     public void endContact(Contact contact) {
-        CollisionCallBack cbA = (CollisionCallBack) contact.getFixtureA().getBody().getUserData();
-        if(cbA != null) {
-            cbA.EndContact();
+        Fixture fa = contact.getFixtureA();
+        Body ba = fa.getBody();
+        Object oa = ba.getUserData();
+        CollisionCallBack cbA = (CollisionCallBack) oa;
+
+        Fixture fb = contact.getFixtureB();
+        Body bb = fb.getBody();
+        Object ob = bb.getUserData();
+        CollisionCallBack cbB = (CollisionCallBack) ob;
+
+        if (cbA != null){
+            if (fa.isSensor() && cbB != null) {
+                cbB.ExitTrigger();
+            }
+            else {
+                cbA.EndContact();
+            }
         }
 
-        CollisionCallBack cbB = (CollisionCallBack) contact.getFixtureB().getBody().getUserData();
         if(cbB != null) {
-            cbB.EndContact();
+            if(fb.isSensor() && cbA != null) {
+                cbA.ExitTrigger();
+            }
+            else {
+                cbB.EndContact();
+            }
         }
     }
 

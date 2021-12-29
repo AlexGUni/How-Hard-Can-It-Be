@@ -7,13 +7,12 @@ import com.badlogic.gdx.maps.tiled.renderers.OrthogonalTiledMapRenderer;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.Managers.RenderLayer;
 import com.mygdx.game.Managers.RenderingManager;
-import com.mygdx.game.Physics.CollisionCallBack;
 import com.mygdx.game.Managers.ResourceManager;
 
 /**
  * Component that allows the rendering of tilemaps (has its own sprite batch)
  */
-public class TileMap extends Component implements CollisionCallBack {
+public class TileMap extends Component {
     TiledMap map;
     TiledMapRenderer renderer;
     private TileMap(){
@@ -63,15 +62,5 @@ public class TileMap extends Component implements CollisionCallBack {
     @Override
     public void cleanUp() {
         super.cleanUp();
-    }
-
-    @Override
-    public void BeginContact() {
-
-    }
-
-    @Override
-    public void EndContact() {
-
     }
 }

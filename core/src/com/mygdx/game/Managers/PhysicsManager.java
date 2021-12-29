@@ -22,7 +22,7 @@ import static com.mygdx.utils.Constants.PHYSICS_TIME_STEP;
 public final class PhysicsManager {
     private static final float TILE_SIZE_INV = 1.0f;
     public static boolean initialized = false;
-    private static World box2DWorld;
+    public static World box2DWorld;
     private static ArrayList<Body> box2DBodies;
     private static Box2DDebugRenderer debug;
 
@@ -43,12 +43,12 @@ public final class PhysicsManager {
         }
     }
 
-    public static int createBody(BodyDef bDef, FixtureDef fDef, RigidBody rb){
+    public static int createBody(BodyDef bDef, FixtureDef fDef, Object userData){
         tryInit();
         bDef.fixedRotation = true;
         Body b = box2DWorld.createBody(bDef);
         b.createFixture(fDef);
-        b.setUserData(rb);
+        b.setUserData(userData);
         box2DBodies.add(b);
         return box2DBodies.size();
     }
