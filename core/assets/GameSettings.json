@@ -4,7 +4,9 @@
     "damage": 10.0,
     "plunder": 10,
     "playerSpeed" : 10000.0,
-    "cannonSpeed": 10000.0
+    "cannonSpeed": 10000.0,
+    "argoRange_tiles": 10.0,
+    "attackRange_tiles": 3.0
   },
   "factions" : [
     {

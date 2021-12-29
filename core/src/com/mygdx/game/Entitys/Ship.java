@@ -2,11 +2,14 @@ package com.mygdx.game.Entitys;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.mygdx.game.Components.*;
+import com.mygdx.game.Managers.GameManager;
 import com.mygdx.game.Managers.RenderLayer;
 import com.mygdx.game.Managers.ResourceManager;
 import com.mygdx.game.Physics.CollisionCallBack;
+import com.mygdx.game.Physics.CollisionInfo;
 import com.mygdx.game.Physics.PhysicsBodyType;
 
 import java.util.Objects;
@@ -39,13 +42,24 @@ public class Ship extends Entity implements CollisionCallBack{
         Renderable r = new Renderable(3, "white-up", RenderLayer.Transparent);
         RigidBody rb = new RigidBody(PhysicsBodyType.Dynamic, r, t);
 
-        rb.addTrigger(32);
+        
+        JsonValue starting = GameManager.getSettings().get("starting");
+
+        // agro trigger
+        rb.addTrigger(tilesToSpace(starting.getFloat("argoRange_tiles")), t);
+
+        // attack trigger
+        rb.addTrigger(tilesToSpace(starting.getFloat("attackRange_tiles")), t);
 
         rb.setCallback(this);
 
         Pirate p = new Pirate();
 
         addComponents(t, r, rb, p);
+    }
+    
+    private static float tilesToSpace(float tiles) {
+        return (tiles + 1.0f) * 32.0f;
     }
 
     public void plunder(int money) {
@@ -98,22 +112,22 @@ public class Ship extends Entity implements CollisionCallBack{
     }
 
     @Override
-    public void BeginContact() {
+    public void BeginContact(CollisionInfo info) {
 
     }
 
     @Override
-    public void EndContact() {
+    public void EndContact(CollisionInfo info) {
 
     }
 
     @Override
-    public void EnterTrigger() {
+    public void EnterTrigger(CollisionInfo info) {
         setFaction(3);
     }
 
     @Override
-    public void ExitTrigger() {
+    public void ExitTrigger(CollisionInfo info) {
         setFaction(4);
     }
 }

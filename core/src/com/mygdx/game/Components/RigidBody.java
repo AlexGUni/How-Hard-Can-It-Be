@@ -58,13 +58,12 @@ public class RigidBody extends Component {
     /**
      * Adds a new circular fixture to the body as a trigger
      */
-    public void addTrigger(float radius) {
+    public void addTrigger(float radius, Transform t) {
         Body b = getBody();
 
         FixtureDef fDef = new FixtureDef();
         fDef.isSensor = true;
         CircleShape shape = new CircleShape();
-        shape.setPosition(b.getPosition());
         shape.setRadius(radius);
 
         fDef.shape = shape;

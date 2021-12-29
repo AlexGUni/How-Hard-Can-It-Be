@@ -1,7 +1,9 @@
 package com.mygdx.game.Managers;
 
 import com.badlogic.gdx.physics.box2d.*;
+import com.mygdx.game.Entitys.Entity;
 import com.mygdx.game.Physics.CollisionCallBack;
+import com.mygdx.game.Physics.CollisionInfo;
 
 public class CollisionManager implements ContactListener {
     private static boolean initialized = false;
@@ -25,21 +27,32 @@ public class CollisionManager implements ContactListener {
         Object ob = bb.getUserData();
         CollisionCallBack cbB = (CollisionCallBack) ob;
 
+
+        final CollisionInfo info = new CollisionInfo();
+        info.fA = fa;
+        info.fB = fb;
+
+        info.bA = ba;
+        info.bB = bb;
+
+        info.a = (Entity) cbA;
+        info.b = (Entity) cbB;
+
         if (cbA != null){
             if (fa.isSensor() && cbB != null) {
-                cbB.EnterTrigger();
+                cbB.EnterTrigger(info);
             }
             else {
-                cbA.BeginContact();
+                cbA.BeginContact(info);
             }
         }
 
         if(cbB != null) {
             if(fb.isSensor() && cbA != null) {
-                cbA.EnterTrigger();
+                cbA.EnterTrigger(info);
             }
             else {
-                cbB.BeginContact();
+                cbB.BeginContact(info);
             }
         }
     }
@@ -56,21 +69,31 @@ public class CollisionManager implements ContactListener {
         Object ob = bb.getUserData();
         CollisionCallBack cbB = (CollisionCallBack) ob;
 
+        final CollisionInfo info = new CollisionInfo();
+        info.fA = fa;
+        info.fB = fb;
+
+        info.bA = ba;
+        info.bB = bb;
+
+        info.a = (Entity) cbA;
+        info.b = (Entity) cbA;
+
         if (cbA != null){
             if (fa.isSensor() && cbB != null) {
-                cbB.ExitTrigger();
+                cbB.ExitTrigger(info);
             }
             else {
-                cbA.EndContact();
+                cbA.EndContact(info);
             }
         }
 
         if(cbB != null) {
             if(fb.isSensor() && cbA != null) {
-                cbA.ExitTrigger();
+                cbA.ExitTrigger(info);
             }
             else {
-                cbB.EndContact();
+                cbB.EndContact(info);
             }
         }
     }
