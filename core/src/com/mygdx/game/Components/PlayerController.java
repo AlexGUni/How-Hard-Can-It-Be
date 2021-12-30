@@ -59,7 +59,7 @@ public class PlayerController extends Component {
         RigidBody rb = parent.getComponent(RigidBody.class);
         rb.setVelocity(dir);
 
-        RenderingManager.getCamera().position.set(new Vector3(player.getPos(), 0.0f));
+        RenderingManager.getCamera().position.set(new Vector3(player.getPosition(), 0.0f));
         RenderingManager.getCamera().update();
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {

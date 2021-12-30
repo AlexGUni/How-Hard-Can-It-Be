@@ -27,7 +27,7 @@ public class LocateQuest extends Quest {
         if(radius == -1) {
             return false;
         }
-        Vector2 delta = p.getPos().cpy();
+        Vector2 delta = p.getPosition().cpy();
         delta.sub(loc);
         float l = delta.len2();
         isCompleted = l < radius;

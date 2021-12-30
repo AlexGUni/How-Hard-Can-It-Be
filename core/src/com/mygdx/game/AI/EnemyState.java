@@ -4,15 +4,15 @@ import com.badlogic.gdx.ai.fsm.State;
 import com.badlogic.gdx.ai.fsm.StateMachine;
 import com.badlogic.gdx.ai.msg.Telegram;
 import com.mygdx.game.Components.Pirate;
-import com.mygdx.game.Entitys.Enemy;
+import com.mygdx.game.Entitys.NPCShip;
 
-public enum EnemyState implements State<Enemy> {
+public enum EnemyState implements State<NPCShip> {
     /**
      * Picks random pos and travels to it
      */
     WANDER() {
         @Override
-        public void update(Enemy e) {
+        public void update(NPCShip e) {
             super.update(e);
             System.out.println("WANDER");
             //e.wander();
@@ -23,10 +23,15 @@ public enum EnemyState implements State<Enemy> {
      */
     PURSUE() {
         @Override
-        public void update(Enemy e) {
+        public void update(NPCShip e) {
             super.update(e);
             System.out.println("PURSUE");
-            //e.followPlayer();
+            // e.followTarget();
+        }
+        @Override
+        public void exit(NPCShip e) {
+            super.exit(e);
+            // e.stopFollow();
         }
     },
     /**
@@ -34,10 +39,10 @@ public enum EnemyState implements State<Enemy> {
      */
     HUNT() {
         @Override
-        public void update(Enemy e) {
+        public void update(NPCShip e) {
             super.update(e);
-            System.out.println("HUNT");
-            //e.followPlayer();
+            // System.out.println("HUNT");
+            // e.followTarget();
         }
     },
     /**
@@ -45,26 +50,32 @@ public enum EnemyState implements State<Enemy> {
      */
     ATTACK() {
         @Override
-        public void update(Enemy e) {
+        public void update(NPCShip e) {
             super.update(e);
             System.out.println("ATTACK");
         }
     };
 
     @Override
-    public void enter(Enemy e) {
+    public void enter(NPCShip e) {
 
     }
 
     @Override
-    public void update(Enemy e) {
-        StateMachine<Enemy, EnemyState> m = e.stateMachine;
+    public void update(NPCShip e) {
+        StateMachine<NPCShip, EnemyState> m = e.stateMachine;
         Pirate p = e.getComponent(Pirate.class);
         switch (m.getCurrentState()) {
             case WANDER:
                 // if enter detection range pursue
+                if( p.getTarget() != null){
+                    int i = 0;
+                }
                 if (p.isAgro()) {
                     m.changeState(PURSUE);
+                }
+                else if(p.canAttack()){
+                    m.changeState(ATTACK);
                 }
                 // if college attacked hunt
                 else if (false){
@@ -101,12 +112,12 @@ public enum EnemyState implements State<Enemy> {
     }
 
     @Override
-    public void exit(Enemy e) {
+    public void exit(NPCShip e) {
 
     }
 
     @Override
-    public boolean onMessage(Enemy e, Telegram telegram) {
+    public boolean onMessage(NPCShip e, Telegram telegram) {
         return false;
     }
 }

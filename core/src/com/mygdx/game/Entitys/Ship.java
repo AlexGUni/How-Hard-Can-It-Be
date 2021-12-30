@@ -2,10 +2,11 @@ package com.mygdx.game.Entitys;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.physics.box2d.Fixture;
-import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.utils.ObjectMap;
-import com.mygdx.game.Components.*;
+import com.mygdx.game.Components.Pirate;
+import com.mygdx.game.Components.Renderable;
+import com.mygdx.game.Components.RigidBody;
+import com.mygdx.game.Components.Transform;
 import com.mygdx.game.Managers.GameManager;
 import com.mygdx.game.Managers.RenderLayer;
 import com.mygdx.game.Managers.ResourceManager;
@@ -15,7 +16,7 @@ import com.mygdx.game.Physics.PhysicsBodyType;
 
 import java.util.Objects;
 
-public class Ship extends Entity implements CollisionCallBack{
+public class Ship extends Entity implements CollisionCallBack {
     private static int shipCount = 0;
     private static ObjectMap<Vector2, String> shipDirections;
 
@@ -43,15 +44,9 @@ public class Ship extends Entity implements CollisionCallBack{
         Renderable r = new Renderable(3, "white-up", RenderLayer.Transparent);
         RigidBody rb = new RigidBody(PhysicsBodyType.Dynamic, r, t);
 
-        
-        JsonValue starting = GameManager.getSettings().get("starting");
-
-        // agro trigger
-        rb.addTrigger(tilesToSpace(starting.getFloat("argoRange_tiles")), "agro");
+        Pirate p = new Pirate();
 
         rb.setCallback(this);
-
-        Pirate p = new Pirate();
 
         addComponents(t, r, rb, p);
     }
@@ -64,7 +59,7 @@ public class Ship extends Entity implements CollisionCallBack{
         return tilesToSpace(GameManager.getSettings().get("starting").getFloat("attackRange_tiles"));
     }
     
-    private static float tilesToSpace(float tiles) {
+    protected static float tilesToSpace(float tiles) {
         return (tiles + 1.0f) * 32.0f;
     }
 
@@ -121,6 +116,10 @@ public class Ship extends Entity implements CollisionCallBack{
         return getComponent(Transform.class).getPosition().cpy();
     }
 
+
+
+
+
     @Override
     public void BeginContact(CollisionInfo info) {
 
@@ -131,21 +130,22 @@ public class Ship extends Entity implements CollisionCallBack{
 
     }
 
+    /**
+     * if the agro fixture hit a ship set it as the target
+     * @param info the collision info
+     */
     @Override
     public void EnterTrigger(CollisionInfo info) {
-        // bellow will always be true
-        // !info.fA.isSensor() && info.fB.isSensor() && this == info.a
         if (info.fA.isSensor() || !info.fB.isSensor() || this != info.a) {
             throw new RuntimeException("error in triggers");
         }
 
-        Pirate p = getComponent(Pirate.class);
-        String data = (String) info.fB.getUserData();
+        final Pirate p = info.b.getComponent(Pirate.class);
+        final String data = (String) info.fB.getUserData();
 
-        if (info.b instanceof Ship) {
+        if (info.a instanceof Ship) {
             if (Objects.equals(data, "agro")) {
-                p.setTarget((Ship) info.b);
-                p.canAttack = false;
+                p.setTarget((Ship) info.a);
             }
             else{
                 throw new RuntimeException("error in determining attack state for ships");
@@ -153,10 +153,16 @@ public class Ship extends Entity implements CollisionCallBack{
         }
     }
 
+    /**
+     * Will set the target to null
+     * @param info collision info
+     */
     @Override
     public void ExitTrigger(CollisionInfo info) {
-        Pirate p = getComponent(Pirate.class);
+        if(info.b instanceof Player){
+            return;
+        }
+        final Pirate p = info.b.getComponent(Pirate.class);
         p.setTarget(null);
-        p.canAttack = false;
     }
 }

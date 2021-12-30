@@ -6,7 +6,7 @@ import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 import com.mygdx.game.Components.Transform;
 import com.mygdx.game.Entitys.CannonBall;
-import com.mygdx.game.Entitys.Enemy;
+import com.mygdx.game.Entitys.NPCShip;
 import com.mygdx.game.Entitys.Player;
 import com.mygdx.game.Entitys.Ship;
 import com.mygdx.game.Faction;
@@ -64,9 +64,9 @@ public final class GameManager {
         ships.add(p);
     }
 
-    public static void CreateEnemy(int factionId) {
+    public static void CreateNPCShip(int factionId) {
         tryInit();
-        Enemy e = new Enemy();
+        NPCShip e = new NPCShip();
         e.setFaction(factionId);
         ships.add(e);
     }

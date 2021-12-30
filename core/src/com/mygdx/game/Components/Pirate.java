@@ -14,14 +14,12 @@ public class Pirate extends Component {
     private final int attackDmg;
 
     /**
-     * The enemy that is being targeted
+     * The enemy that is being targeted not used for player
      */
     private Ship target;
-    public boolean canAttack;
 
     public Pirate() {
         super();
-        canAttack = false;
         target = null;
         type = ComponentType.Pirate;
         plunder = GameManager.getSettings().get("starting").getInt("plunder");
@@ -68,6 +66,10 @@ public class Pirate extends Component {
         return health;
     }
 
+    /**
+     * if dst to target is less then attack range
+     * target will be null if not in agro range
+     */
     public boolean canAttack() {
         if (target != null) {
             final Ship p = (Ship) parent;
@@ -78,12 +80,16 @@ public class Pirate extends Component {
         }
         return false;
     }
+    /**
+     * if dst to target is >= attack range
+     * target will be null if not in agro range
+     */
     public boolean isAgro() {
         if (target != null) {
             final Ship p = (Ship) parent;
             final Vector2 pos = p.getPosition();
             final float dst = pos.dst(target.getPosition());
-            // withing attack range
+            // out of attack range
             return dst >= Ship.getAttackRange();
         }
         return false;

@@ -33,7 +33,7 @@ public class PirateGame extends ApplicationAdapter {
 		new WorldMap(id_map);
 
 		GameManager.CreatePlayer();
-		GameManager.CreateEnemy(2);
+		GameManager.CreateNPCShip(2);
 		// GameManager.CreateEnemy(3);
 		// GameManager.CreateEnemy(4);
 		// GameManager.CreateEnemy(5);

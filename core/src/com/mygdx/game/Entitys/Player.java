@@ -24,13 +24,4 @@ public class Player extends Ship {
     public void cleanUp() {
         super.cleanUp();
     }
-
-
-    public Vector2 getPos() {
-        return getComponent(Transform.class).getPosition();
-    }
-
-    public void setPos(Vector2 pos) {
-        getComponent(Transform.class).setPosition(pos);
-    }
 }
