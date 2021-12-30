@@ -13,6 +13,8 @@ import com.mygdx.game.Faction;
 
 import java.util.ArrayList;
 
+import static com.mygdx.utils.Constants.TILE_SIZE;
+
 public final class GameManager {
     private static boolean initialized = false;
     private static ArrayList<Faction> factions;
@@ -89,7 +91,7 @@ public final class GameManager {
 
     public static void shoot(Ship p, Vector2 dir) {
         Vector2 pos = p.getComponent(Transform.class).getPosition().cpy();
-        pos.add(dir.x * 32, (dir.y * 32) + 5);
+        pos.add(dir.x * TILE_SIZE, (dir.y * TILE_SIZE));
         ballCache.get(currentElement++).fire(pos, dir, p);
         currentElement %= cacheSize;
     }

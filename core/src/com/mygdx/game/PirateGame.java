@@ -34,9 +34,6 @@ public class PirateGame extends ApplicationAdapter {
 
 		GameManager.CreatePlayer();
 		GameManager.CreateNPCShip(2);
-		// GameManager.CreateEnemy(3);
-		// GameManager.CreateEnemy(4);
-		// GameManager.CreateEnemy(5);
 
 		DebugText t = new DebugText();
 

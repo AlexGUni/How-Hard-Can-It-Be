@@ -13,12 +13,13 @@ import com.mygdx.game.Managers.ResourceManager;
 import com.mygdx.game.Physics.CollisionCallBack;
 import com.mygdx.game.Physics.CollisionInfo;
 import com.mygdx.game.Physics.PhysicsBodyType;
+import com.mygdx.utils.Utilities;
 
 import java.util.Objects;
 
 public class Ship extends Entity implements CollisionCallBack {
     private static int shipCount = 0;
-    private static ObjectMap<Vector2, String> shipDirections;
+    public static ObjectMap<Vector2, String> shipDirections;
 
     private final Vector2 currentDir;
 
@@ -56,11 +57,7 @@ public class Ship extends Entity implements CollisionCallBack {
     }
 
     public static float getAttackRange() {
-        return tilesToSpace(GameManager.getSettings().get("starting").getFloat("attackRange_tiles"));
-    }
-    
-    protected static float tilesToSpace(float tiles) {
-        return (tiles + 1.0f) * 32.0f;
+        return Utilities.tilesToDistance(GameManager.getSettings().get("starting").getFloat("attackRange_tiles"));
     }
 
     public void plunder(int money) {
@@ -72,7 +69,7 @@ public class Ship extends Entity implements CollisionCallBack {
         setShipDirection("-up");
     }
 
-    public String getShipDirection(Vector2 dir) {
+    private String getShipDirection(Vector2 dir) {
         if (!currentDir.equals(dir) && shipDirections.containsKey(dir)){
             currentDir.set(dir);
             return shipDirections.get(dir);
@@ -84,6 +81,9 @@ public class Ship extends Entity implements CollisionCallBack {
         return getComponent(Pirate.class).getFaction().getColour();
     }
 
+    public void setShipDirection(Vector2 dir) {
+        setShipDirection(getShipDirection(dir));
+    }
     public void setShipDirection(String direction) {
         if(Objects.equals(direction, "")) {
             return;

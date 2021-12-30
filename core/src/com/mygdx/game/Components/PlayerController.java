@@ -52,7 +52,7 @@ public class PlayerController extends Component {
             dir.x += 1;
         }
 
-        ((Ship) parent).setShipDirection(((Ship) parent).getShipDirection(dir));
+        ((Ship) parent).setShipDirection(dir);
 
         dir.scl(s);
 
@@ -64,6 +64,22 @@ public class PlayerController extends Component {
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             ((Ship) parent).shoot();
+        }
+
+        if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)) {
+            ((Ship) parent).setFaction(1);
+        }
+        if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_2)) {
+            ((Ship) parent).setFaction(2);
+        }
+        if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_3)) {
+            ((Ship) parent).setFaction(3);
+        }
+        if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_4)) {
+            ((Ship) parent).setFaction(4);
+        }
+        if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_5)) {
+            ((Ship) parent).setFaction(5);
         }
     }
 }

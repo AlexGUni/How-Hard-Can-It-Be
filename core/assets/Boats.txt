@@ -227,7 +227,7 @@ yellow-ul
   orig: 32, 32
   offset: 0, 0
   index: -1
-green-ur
+green-dr
   rotate: false
   xy: 0, 128
   size: 32, 32

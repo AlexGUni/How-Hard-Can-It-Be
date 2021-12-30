@@ -11,6 +11,9 @@ import com.badlogic.gdx.utils.JsonValue;
 import com.mygdx.game.AI.EnemyState;
 import com.mygdx.game.Components.*;
 import com.mygdx.game.Managers.GameManager;
+import com.mygdx.utils.Utilities;
+
+import java.lang.reflect.UndeclaredThrowableException;
 
 public class NPCShip extends Ship {
     public StateMachine<NPCShip, EnemyState> stateMachine;
@@ -40,7 +43,7 @@ public class NPCShip extends Ship {
         JsonValue starting = GameManager.getSettings().get("starting");
 
         // agro trigger
-        rb.addTrigger(tilesToSpace(starting.getFloat("argoRange_tiles")), "agro");
+        rb.addTrigger(Utilities.tilesToDistance(starting.getFloat("argoRange_tiles")), "agro");
 
     }
 

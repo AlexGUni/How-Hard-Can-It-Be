@@ -4,7 +4,9 @@ import com.badlogic.gdx.ai.steer.Steerable;
 import com.badlogic.gdx.ai.steer.SteeringAcceleration;
 import com.badlogic.gdx.ai.steer.SteeringBehavior;
 import com.badlogic.gdx.ai.utils.Location;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.Entitys.Ship;
 import com.mygdx.game.Managers.GameManager;
 import com.mygdx.utils.Utilities;
 
@@ -58,6 +60,18 @@ public class AINavigation extends Component implements Steerable<Vector2> {
         }
         else {
             stop();
+        }
+
+        Vector2 vel = rb.getVelocity().cpy();
+        if (vel.x == 0 && vel.y == 0){
+            ((Ship) parent).setShipDirection("-up");
+            return;
+        }
+        vel.nor();
+        Utilities.round(vel);
+
+        if (Ship.shipDirections.containsKey(vel)){
+            ((Ship) parent).setShipDirection(vel);
         }
     }
 
