@@ -14,7 +14,7 @@ public enum EnemyState implements State<Enemy> {
         @Override
         public void update(Enemy e) {
             super.update(e);
-            //System.out.println("WANDER");
+            System.out.println("WANDER");
             //e.wander();
         }
     },
@@ -25,7 +25,7 @@ public enum EnemyState implements State<Enemy> {
         @Override
         public void update(Enemy e) {
             super.update(e);
-            //System.out.println("PURSUE");
+            System.out.println("PURSUE");
             //e.followPlayer();
         }
     },
@@ -36,7 +36,7 @@ public enum EnemyState implements State<Enemy> {
         @Override
         public void update(Enemy e) {
             super.update(e);
-            //System.out.println("HUNT");
+            System.out.println("HUNT");
             //e.followPlayer();
         }
     },
@@ -47,7 +47,7 @@ public enum EnemyState implements State<Enemy> {
         @Override
         public void update(Enemy e) {
             super.update(e);
-            //System.out.println("ATTACK");
+            System.out.println("ATTACK");
         }
     };
 
