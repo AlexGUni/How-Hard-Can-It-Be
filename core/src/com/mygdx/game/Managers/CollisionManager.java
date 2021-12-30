@@ -39,7 +39,8 @@ public class CollisionManager implements ContactListener {
         info.b = (Entity) cbB;
 
         if (cbA != null){
-            if (fa.isSensor() && cbB != null) {
+            // fa is sensor but not fb
+            if (fa.isSensor() && cbB != null && !fb.isSensor()) {
                 cbB.EnterTrigger(info);
             }
             else {
@@ -48,7 +49,7 @@ public class CollisionManager implements ContactListener {
         }
 
         if(cbB != null) {
-            if(fb.isSensor() && cbA != null) {
+            if(fb.isSensor() && cbA != null && !fa.isSensor()) {
                 cbA.EnterTrigger(info);
             }
             else {
@@ -80,7 +81,7 @@ public class CollisionManager implements ContactListener {
         info.b = (Entity) cbA;
 
         if (cbA != null){
-            if (fa.isSensor() && cbB != null) {
+            if (fa.isSensor() && cbB != null && !fb.isSensor()) {
                 cbB.ExitTrigger(info);
             }
             else {
@@ -89,7 +90,7 @@ public class CollisionManager implements ContactListener {
         }
 
         if(cbB != null) {
-            if(fb.isSensor() && cbA != null) {
+            if(fb.isSensor() && cbA != null && !fa.isSensor()) {
                 cbA.ExitTrigger(info);
             }
             else {
