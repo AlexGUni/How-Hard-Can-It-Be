@@ -9,6 +9,8 @@ import com.mygdx.game.Managers.RenderLayer;
 import com.mygdx.game.Managers.RenderingManager;
 import com.mygdx.game.Managers.ResourceManager;
 
+import static com.mygdx.utils.Constants.TILE_SIZE;
+
 /**
  * Component that allows the rendering of tilemaps (has its own sprite batch)
  */
@@ -26,6 +28,8 @@ public class TileMap extends Component {
         map = ResourceManager.getTileMap(id);
         renderer = new OrthogonalTiledMapRenderer(map);
         RenderingManager.addItem(this, layer);
+
+        TILE_SIZE = getTileDim().x;
     }
 
     public TiledMapTileLayer.Cell getCell(Vector2 pos){
@@ -39,8 +43,8 @@ public class TileMap extends Component {
 
     public Vector2 getTileDim() {
         return new Vector2(
-                ((TiledMapTileLayer) map.getLayers().get(1)).getTileWidth(),
-                ((TiledMapTileLayer) map.getLayers().get(1)).getTileHeight());
+                ((TiledMapTileLayer) map.getLayers().get(0)).getTileWidth(),
+                ((TiledMapTileLayer) map.getLayers().get(0)).getTileHeight());
     }
 
     public TiledMap getTileMap() {

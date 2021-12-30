@@ -21,13 +21,15 @@ public final class Constants {
         VIEWPORT_WIDTH = !FULLSCREEN ? (int)(ASPECT_RATIO * VIEWPORT_HEIGHT) : SCREEN_WIDTH;
         HALF_VIEWPORT_HEIGHT = VIEWPORT_WIDTH / 2;
         HALF_VIEWPORT_WIDTH = VIEWPORT_HEIGHT / 2;
-        DIMENTIONS = new Vector2(VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
-        HALF_DIMENTIONS = new Vector2(HALF_VIEWPORT_WIDTH, HALF_VIEWPORT_HEIGHT);
+        DIMENSIONS = new Vector2(VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
+        HALF_DIMENSIONS = new Vector2(HALF_VIEWPORT_WIDTH, HALF_VIEWPORT_HEIGHT);
         VIEWPORT_TITLE = "Pirate Game";
         BACKGROUND_COLOUR = new Vector3(0.0f, 0.0f, 0.0f);
         PHYSICS_TIME_STEP = 1.0f / 60.0f;
 
         OPERATING_SYSTEM = System.getProperty("os.name");
+
+        TILE_SIZE = 32;
     }
 
     public static void UPDATE_VIEWPORT(int x, int y) {
@@ -36,8 +38,8 @@ public final class Constants {
         ASPECT_RATIO = (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT;
         HALF_VIEWPORT_HEIGHT = VIEWPORT_WIDTH / 2;
         HALF_VIEWPORT_WIDTH = VIEWPORT_HEIGHT / 2;
-        DIMENTIONS = new Vector2(VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
-        HALF_DIMENTIONS = new Vector2(HALF_VIEWPORT_WIDTH, HALF_VIEWPORT_HEIGHT);
+        DIMENSIONS = new Vector2(VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
+        HALF_DIMENSIONS = new Vector2(HALF_VIEWPORT_WIDTH, HALF_VIEWPORT_HEIGHT);
     }
 
     public static int SCREEN_WIDTH;
@@ -48,10 +50,12 @@ public final class Constants {
     public static int VIEWPORT_WIDTH;
     public static int HALF_VIEWPORT_HEIGHT;
     public static int HALF_VIEWPORT_WIDTH;
-    public static Vector2 DIMENTIONS;
-    public static Vector2 HALF_DIMENTIONS;
+    public static Vector2 DIMENSIONS;
+    public static Vector2 HALF_DIMENSIONS;
     public static String VIEWPORT_TITLE;
     public static float PHYSICS_TIME_STEP;
+
+    public static float TILE_SIZE;
 
     public static Vector3 BACKGROUND_COLOUR;
 
