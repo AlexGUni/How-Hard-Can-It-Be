@@ -2,6 +2,7 @@ package com.mygdx.game.Entitys;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.physics.box2d.Fixture;
 import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.mygdx.game.Components.*;
@@ -46,16 +47,21 @@ public class Ship extends Entity implements CollisionCallBack{
         JsonValue starting = GameManager.getSettings().get("starting");
 
         // agro trigger
-        rb.addTrigger(tilesToSpace(starting.getFloat("argoRange_tiles")), t);
-
-        // attack trigger
-        rb.addTrigger(tilesToSpace(starting.getFloat("attackRange_tiles")), t);
+        rb.addTrigger(tilesToSpace(starting.getFloat("argoRange_tiles")), "agro");
 
         rb.setCallback(this);
 
         Pirate p = new Pirate();
 
         addComponents(t, r, rb, p);
+    }
+
+    public boolean isAlive() {
+        return getComponent(Pirate.class).getHealth() > 0;
+    }
+
+    public static float getAttackRange() {
+        return tilesToSpace(GameManager.getSettings().get("starting").getFloat("attackRange_tiles"));
     }
     
     private static float tilesToSpace(float tiles) {
@@ -111,6 +117,10 @@ public class Ship extends Entity implements CollisionCallBack{
         getComponent(Pirate.class).shoot(currentDir);
     }
 
+    public Vector2 getPosition() {
+        return getComponent(Transform.class).getPosition().cpy();
+    }
+
     @Override
     public void BeginContact(CollisionInfo info) {
 
@@ -123,11 +133,30 @@ public class Ship extends Entity implements CollisionCallBack{
 
     @Override
     public void EnterTrigger(CollisionInfo info) {
-        setFaction(3);
+        // bellow will always be true
+        // !info.fA.isSensor() && info.fB.isSensor() && this == info.a
+        if (info.fA.isSensor() || !info.fB.isSensor() || this != info.a) {
+            throw new RuntimeException("error in triggers");
+        }
+
+        Pirate p = getComponent(Pirate.class);
+        String data = (String) info.fB.getUserData();
+
+        if (info.b instanceof Ship) {
+            if (Objects.equals(data, "agro")) {
+                p.setTarget((Ship) info.b);
+                p.canAttack = false;
+            }
+            else{
+                throw new RuntimeException("error in determining attack state for ships");
+            }
+        }
     }
 
     @Override
     public void ExitTrigger(CollisionInfo info) {
-        setFaction(4);
+        Pirate p = getComponent(Pirate.class);
+        p.setTarget(null);
+        p.canAttack = false;
     }
 }

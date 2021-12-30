@@ -58,7 +58,7 @@ public class RigidBody extends Component {
     /**
      * Adds a new circular fixture to the body as a trigger
      */
-    public void addTrigger(float radius, Transform t) {
+    public void addTrigger(float radius, Object data) {
         Body b = getBody();
 
         FixtureDef fDef = new FixtureDef();
@@ -72,7 +72,8 @@ public class RigidBody extends Component {
         fDef.restitution = 0.0f;
         fDef.friction = 0.0f;
 
-        b.createFixture(fDef);
+        Fixture f = b.createFixture(fDef);
+        f.setUserData(data);
     }
 
     public void setCallback(CollisionCallBack data) {
