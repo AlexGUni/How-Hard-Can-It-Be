@@ -3,17 +3,14 @@ package com.mygdx.game.Entitys;
 import com.badlogic.gdx.ai.fsm.DefaultStateMachine;
 import com.badlogic.gdx.ai.fsm.StateMachine;
 import com.badlogic.gdx.ai.steer.behaviors.Arrive;
+import com.badlogic.gdx.ai.steer.behaviors.Wander;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.JsonValue;
 import com.mygdx.game.AI.EnemyState;
 import com.mygdx.game.Components.*;
-import com.mygdx.game.Managers.EntityManager;
 import com.mygdx.game.Managers.GameManager;
-import com.mygdx.game.Physics.CollisionCallBack;
-import com.mygdx.game.Physics.CollisionInfo;
-
-import java.util.Objects;
 
 public class NPCShip extends Ship {
     public StateMachine<NPCShip, EnemyState> stateMachine;
@@ -59,7 +56,8 @@ public class NPCShip extends Ship {
 
     public void followTarget() {
         if(getTarget() == null){
-            throw new RuntimeException("Cant follow null target");
+            stopMovement();
+            return;
         }
         AINavigation nav = getComponent(AINavigation.class);
 
@@ -72,8 +70,13 @@ public class NPCShip extends Ship {
         nav.setBehavior(arrives);
     }
 
-    public void stopFollow() {
+    public void stopMovement() {
         AINavigation nav = getComponent(AINavigation.class);
         nav.setBehavior(null);
+        nav.stop();
+    }
+
+    public void wander() {
+
     }
 }

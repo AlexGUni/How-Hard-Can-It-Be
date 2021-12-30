@@ -5,15 +5,16 @@ import com.badlogic.gdx.ai.steer.SteeringAcceleration;
 import com.badlogic.gdx.ai.steer.SteeringBehavior;
 import com.badlogic.gdx.ai.utils.Location;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.Managers.GameManager;
 import com.mygdx.utils.Utilities;
 
 import static com.mygdx.utils.Constants.*;
 
 public class AINavigation extends Component implements Steerable<Vector2> {
     private static class Attributes {
-        public float boundingRadius = 64;
-        public float maxSpd = 5000;
-        public float maxAcc = 500;
+        public float boundingRadius = 128;
+        public float maxSpd = GameManager.getSettings().get("AI").getFloat("maxSpeed");
+        public float maxAcc = 50000;
         public float maxAngSpd = 0;
         public float maxAngAcc = 0;
         public boolean isTagged = false;
@@ -34,19 +35,29 @@ public class AINavigation extends Component implements Steerable<Vector2> {
     }
 
     public void setBehavior(SteeringBehavior<Vector2> behavior) {
+        if(behavior == null) {
+            int i = 0;
+        }
         this.behavior = behavior;
+    }
+
+    private void getComps() {
+        if (rb == null){
+            rb = parent.getComponent(RigidBody.class);
+            t = parent.getComponent(Transform.class);
+        }
     }
 
     @Override
     public void update() {
         super.update();
-        if (rb == null){
-            rb = parent.getComponent(RigidBody.class);
-            t = parent.getComponent(Transform.class);
-        }
+        getComps();
         if (behavior != null){
             behavior.calculateSteering(steeringOutput);
             applySteering();
+        }
+        else {
+            stop();
         }
     }
 
@@ -67,13 +78,20 @@ public class AINavigation extends Component implements Steerable<Vector2> {
         }
     }
 
+    public void stop() {
+        getComps();
+        rb.setVelocity(new Vector2(0, 0));
+    }
+
     @Override
     public Vector2 getLinearVelocity() {
+        getComps();
         return rb.getVelocity();
     }
 
     @Override
     public float getAngularVelocity() {
+        getComps();
         return rb.getAngularVelocity();
     }
 
@@ -144,11 +162,13 @@ public class AINavigation extends Component implements Steerable<Vector2> {
 
     @Override
     public Vector2 getPosition() {
+        getComps();
         return t.getPosition();
     }
 
     @Override
     public float getOrientation() {
+        getComps();
         return t.getRotation();
     }
 
@@ -169,6 +189,7 @@ public class AINavigation extends Component implements Steerable<Vector2> {
 
     @Override
     public Location<Vector2> newLocation() {
+        getComps();
         return t;
     }
 }

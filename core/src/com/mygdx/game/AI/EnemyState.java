@@ -12,10 +12,14 @@ public enum EnemyState implements State<NPCShip> {
      */
     WANDER() {
         @Override
+        public void enter(NPCShip e) {
+            e.stopMovement();
+            e.wander();
+        }
+        @Override
         public void update(NPCShip e) {
             super.update(e);
             System.out.println("WANDER");
-            //e.wander();
         }
     },
     /**
@@ -23,15 +27,14 @@ public enum EnemyState implements State<NPCShip> {
      */
     PURSUE() {
         @Override
+        public void enter(NPCShip e) {
+            e.followTarget();
+        }
+
+        @Override
         public void update(NPCShip e) {
             super.update(e);
             System.out.println("PURSUE");
-            // e.followTarget();
-        }
-        @Override
-        public void exit(NPCShip e) {
-            super.exit(e);
-            // e.stopFollow();
         }
     },
     /**
@@ -41,14 +44,16 @@ public enum EnemyState implements State<NPCShip> {
         @Override
         public void update(NPCShip e) {
             super.update(e);
-            // System.out.println("HUNT");
-            // e.followTarget();
         }
     },
     /**
      * Attempts to kill the enemy
      */
     ATTACK() {
+        @Override
+        public void enter(NPCShip e) {
+            e.stopMovement();
+        }
         @Override
         public void update(NPCShip e) {
             super.update(e);
@@ -67,10 +72,6 @@ public enum EnemyState implements State<NPCShip> {
         Pirate p = e.getComponent(Pirate.class);
         switch (m.getCurrentState()) {
             case WANDER:
-                // if enter detection range pursue
-                if( p.getTarget() != null){
-                    int i = 0;
-                }
                 if (p.isAgro()) {
                     m.changeState(PURSUE);
                 }
