@@ -78,7 +78,7 @@ public class CollisionManager implements ContactListener {
         info.bB = bb;
 
         info.a = (Entity) cbA;
-        info.b = (Entity) cbA;
+        info.b = (Entity) cbB;
 
         if (cbA != null){
             if (fa.isSensor() && cbB != null && !fb.isSensor()) {
