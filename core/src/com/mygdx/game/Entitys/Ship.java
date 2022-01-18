@@ -112,6 +112,9 @@ public class Ship extends Entity implements CollisionCallBack {
         getComponent(Pirate.class).shoot(currentDir);
     }
 
+    /**
+     * @return copy of the transform's position
+     */
     public Vector2 getPosition() {
         return getComponent(Transform.class).getPosition().cpy();
     }

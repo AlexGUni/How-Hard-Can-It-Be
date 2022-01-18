@@ -1,5 +1,7 @@
 package com.mygdx.game.Managers;
 
+import com.badlogic.gdx.maps.MapLayer;
+import com.badlogic.gdx.maps.MapLayers;
 import com.badlogic.gdx.maps.MapObject;
 import com.badlogic.gdx.maps.MapObjects;
 import com.badlogic.gdx.maps.objects.RectangleMapObject;
@@ -10,6 +12,7 @@ import com.mygdx.game.Components.RigidBody;
 import com.mygdx.game.Components.TileMap;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 import static com.mygdx.utils.Constants.PHYSICS_TIME_STEP;
 
@@ -68,7 +71,18 @@ public final class PhysicsManager {
     }
 
     public static void createMapCollision(TileMap map) {
-        MapObjects objects = map.getTileMap().getLayers().get(1).getObjects();
+        MapLayers layers = map.getTileMap().getLayers();
+        MapObjects objects = null;
+        for (MapLayer layer : layers) {
+            if (Objects.equals(layer.getName(), "Objects")) {
+                objects = layer.getObjects();
+                break;
+            }
+        }
+        if(objects == null){
+            return;
+        }
+
         for (MapObject object: objects) {
             Rectangle rectangle = ((RectangleMapObject)object).getRectangle();
 

@@ -4,12 +4,11 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
+import com.mygdx.game.AI.TileMapGraph;
 import com.mygdx.game.Components.Transform;
-import com.mygdx.game.Entitys.CannonBall;
-import com.mygdx.game.Entitys.NPCShip;
-import com.mygdx.game.Entitys.Player;
-import com.mygdx.game.Entitys.Ship;
+import com.mygdx.game.Entitys.*;
 import com.mygdx.game.Faction;
+import com.mygdx.utils.QueueFIFO;
 
 import java.util.ArrayList;
 
@@ -26,6 +25,8 @@ public final class GameManager {
 
     private static JsonValue settings;
 
+    private static WorldMap map;
+    private static TileMapGraph mapGraph;
 
     public static void Initialize() {
         initialized = true;
@@ -73,6 +74,12 @@ public final class GameManager {
         ships.add(e);
     }
 
+    public static void CreateWorldMap(int mapId) {
+        tryInit();
+        map = new WorldMap(mapId);
+        mapGraph = new TileMapGraph(map.getTileMap());
+    }
+
     private static void tryInit() {
         if(!initialized){
             Initialize();
@@ -94,5 +101,9 @@ public final class GameManager {
         pos.add(dir.x * TILE_SIZE, (dir.y * TILE_SIZE));
         ballCache.get(currentElement++).fire(pos, dir, p);
         currentElement %= cacheSize;
+    }
+
+    public static QueueFIFO<Vector2> getPath(Vector2 loc, Vector2 dst) {
+        return mapGraph.findOptimisedPath(loc, dst);
     }
 }

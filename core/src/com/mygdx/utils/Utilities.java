@@ -19,6 +19,31 @@ public final class Utilities {
         return TILE_SIZE * tiles;
     }
 
+    public static Vector2 tilesToDistance(Vector2 tiles){
+        return tiles.cpy().scl(TILE_SIZE);
+    }
+
+    public static int distanceToTiles(float dist){
+        return (int) (dist / TILE_SIZE);
+    }
+
+    public static Vector2 distanceToTiles(Vector2 dist){
+        return dist.cpy().scl(1.0f / TILE_SIZE);
+    }
+
+    /**
+     * checks the proximity of point a to point b
+     * @param a first point
+     * @param b second point
+     * @param radius min dist to be considered close
+     * @return |dist(a, b)| < radius
+     */
+    public static boolean checkProximity(Vector2 a, Vector2 b, float radius) {
+        final float d2 = radius * radius;
+        final float d = Math.abs(a.dst2(b));
+        return d < d2;
+    }
+
     public static float angleBetween(Vector2 v, Vector2 w) {
         return MathUtils.atan2(w.y * v.x - w.x * v.y, w.x * v.x + w.y * v.y);
     }

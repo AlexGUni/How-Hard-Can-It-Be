@@ -133,8 +133,9 @@ public class QueueFIFO<T> implements Queue<T> {
         if(isEmpty()){
             throw new RuntimeException("Queue is empty");
         }
+        T t = data.remove(topIndex);
         topIndex--;
-        return data.remove(topIndex);
+        return t;
     }
     public T pop() {
         return remove();
@@ -146,7 +147,7 @@ public class QueueFIFO<T> implements Queue<T> {
             return null;
         }
         topIndex--;
-        return data.remove(topIndex);
+        return data.remove(topIndex + 1);
     }
 
     @Override

@@ -28,7 +28,8 @@ public enum EnemyState implements State<NPCShip> {
     PURSUE() {
         @Override
         public void enter(NPCShip e) {
-            e.followTarget();
+            // e.followTarget();
+            e.goToTarget();
         }
 
         @Override

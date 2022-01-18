@@ -61,6 +61,8 @@ public class TileMapGraph implements IndexedGraph<Node> {
         // the map dimensions
         mapDim.set(layer.getWidth(), layer.getHeight());
 
+        nodes.ensureCapacity((int) mapDim.x * (int) mapDim.y);
+
         // create all the nodes
         for(int i = 0; i < mapDim.x * mapDim.y; i++) {
             nodes.add(new Node(0, 0));
@@ -72,8 +74,11 @@ public class TileMapGraph implements IndexedGraph<Node> {
             for (int y = 0; y < layer.getHeight(); y++) {
                 TiledMapTileLayer.Cell center = layer.getCell(x, y);
 
+                if(getType(center) == OBSTACLE){
+                    continue;
+                }
                 // the central node
-                addNode(x, y, getType(center) == OBSTACLE);
+                addNode(x, y,false);
 
                 // all surrounding nodes
                 for (int i = -1; i < 2; i++) {
@@ -93,7 +98,7 @@ public class TileMapGraph implements IndexedGraph<Node> {
                         // is the cell passable
                         if (cell.getTile().getId() == PASSABLE) {
 
-                            addNode(x + i, y + j, getType(cell) == OBSTACLE);
+                            addNode(x + i, y + j, false);
                             addPath(x, y, x + i, y + j);
                         }
                     }
@@ -103,7 +108,11 @@ public class TileMapGraph implements IndexedGraph<Node> {
     }
 
     public Node getNode(float x, float y){
-        return nodes.get(getIndex(x, y));
+        Node n = nodes.get(getIndex(x, y));
+        if (n.cost == -1) {
+            return null;
+        }
+        return n;
     }
 
     private int getIndex(float x, float y) {
@@ -117,6 +126,12 @@ public class TileMapGraph implements IndexedGraph<Node> {
         return (int) mapDim.x * y + x;
     }
 
+    /**
+     * doesnt add if already there
+     * @param x x pos
+     * @param y y pos
+     * @param isObstacle is an obstacle
+     */
     private void addNode(float x, float y, boolean isObstacle) {
         Node n = nodes.get(getIndex((int) x, (int) y));
         if(n.cost > 0) {
@@ -157,6 +172,9 @@ public class TileMapGraph implements IndexedGraph<Node> {
      * @return a queue of the nodes to visit
      */
     public GraphPath<Node> findPath(Node start, Node goal){
+        if (start == null || goal == null) {
+            return null;
+        }
         GraphPath<Node> path = new DefaultGraphPath<>();
         new IndexedAStarPathFinder<>(this).searchNodePath(start, goal, heuristic, path);
         return path;
@@ -170,9 +188,12 @@ public class TileMapGraph implements IndexedGraph<Node> {
      */
     public QueueFIFO<Vector2> findOptimisedPath(Node a, Node b) {
         GraphPath<Node> path = findPath(a, b);
+        if(path == null) {
+
+        }
         QueueFIFO<Vector2> res = new QueueFIFO<>();
         Vector2 delta = new Vector2();
-        float sequenceLength = 0; // the ammount of times a
+        float sequenceLength = 0; // the amount of times a
         Vector2 cur = new Vector2();
 
         Vector2 prev = path.get(0).getPosition();
@@ -213,10 +234,10 @@ public class TileMapGraph implements IndexedGraph<Node> {
 
     /**
      * Finds a sequence on locations which can be travelled to without collision
-     * @param x1 starting node x co-ords
-     * @param y1 starting node y co-ords
-     * @param x2 destination node x co-ords
-     * @param y2 destination node y co-ords
+     * @param x1 starting node x co-ords tile space
+     * @param y1 starting node y co-ords tile space
+     * @param x2 destination node x co-ords tile space
+     * @param y2 destination node y co-ords tile space
      * @return queue of location to travel to in order
      */
     public QueueFIFO<Vector2> findOptimisedPath(float x1, float y1, float x2, float y2) {
