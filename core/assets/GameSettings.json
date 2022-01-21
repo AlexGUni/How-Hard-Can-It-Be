@@ -41,5 +41,9 @@
     "shipCount": 1,
     "buildingHealth": 1000,
     "shipSpawnRadius" : 15
+  },
+  "college": {
+    "spawnRadius": 10,
+    "numBuildings": 5
   }
 }

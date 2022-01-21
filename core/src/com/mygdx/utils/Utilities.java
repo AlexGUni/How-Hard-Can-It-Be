@@ -3,6 +3,9 @@ package com.mygdx.utils;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 import static com.mygdx.utils.Constants.TILE_SIZE;
 
 public final class Utilities {
@@ -64,5 +67,14 @@ public final class Utilities {
         x.x = Math.round(x.x);
         x.y = Math.round(x.y);
         return x;
+    }
+
+    public static Vector2 randomPos(float min, float max) {
+        Random r = new Random();
+        return new Vector2(min + r.nextFloat() * (max - min), min + r.nextFloat() * (max - min));
+    }
+
+    public static <T> T randomChoice(ArrayList<T> list) {
+        return list.get(new Random().nextInt(list.size()));
     }
 }

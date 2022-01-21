@@ -68,4 +68,13 @@ public class Renderable extends Component {
     public Sprite getSprite() {
         return sprite;
     }
+
+    public void setTexture(Sprite s) {
+        Sprite a = getSprite();
+        a.setU(s.getU());
+        a.setV(s.getV());
+        a.setU2(s.getU2());
+        a.setV2(s.getV2());
+        a.setTexture(s.getTexture());
+    }
 }

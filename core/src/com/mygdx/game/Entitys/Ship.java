@@ -92,10 +92,7 @@ public class Ship extends Entity implements CollisionCallBack {
         Sprite s = ResourceManager.getSprite(3, getColour() + direction);
 
         try {
-            r.getSprite().setU(s.getU());
-            r.getSprite().setV(s.getV());
-            r.getSprite().setU2(s.getU2());
-            r.getSprite().setV2(s.getV2());
+            r.setTexture(s);
         }catch (Exception ignored){
 
         }
