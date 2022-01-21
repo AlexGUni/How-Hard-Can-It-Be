@@ -30,6 +30,8 @@ public final class Constants {
         OPERATING_SYSTEM = System.getProperty("os.name");
 
         TILE_SIZE = 32;
+
+        ZOOM = 1.2f;
     }
 
     public static void UPDATE_VIEWPORT(int x, int y) {
@@ -54,6 +56,7 @@ public final class Constants {
     public static Vector2 HALF_DIMENSIONS;
     public static String VIEWPORT_TITLE;
     public static float PHYSICS_TIME_STEP;
+    public static float ZOOM;
 
     public static float TILE_SIZE;
 

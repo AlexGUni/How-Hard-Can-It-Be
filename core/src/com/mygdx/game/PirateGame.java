@@ -87,8 +87,8 @@ public class PirateGame extends ApplicationAdapter {
 	public void resize(int width, int height) {
 		UPDATE_VIEWPORT(width, height);
 		OrthographicCamera cam = RenderingManager.getCamera();
-		cam.viewportWidth = width;
-		cam.viewportHeight = height;
+		cam.viewportWidth = width / ZOOM;
+		cam.viewportHeight = height / ZOOM;
 		cam.update();
 
 		UIManager.resize(width, height);

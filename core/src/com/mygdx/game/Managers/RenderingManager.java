@@ -25,14 +25,14 @@ public final class RenderingManager {
         batch = new SpriteBatch();
         // batch.enableBlending();
         camera = new OrthographicCamera();
-        camera.viewportHeight = VIEWPORT_HEIGHT;
-        camera.viewportWidth = VIEWPORT_WIDTH;
+        camera.viewportHeight = VIEWPORT_HEIGHT / ZOOM;
+        camera.viewportWidth = VIEWPORT_WIDTH / ZOOM;
         camera.update();
 
         layers = new ArrayList<>(RenderLayer.values().length);
 
         for (int i = 0; i < RenderLayer.values().length; i++){
-            layers.add(new ArrayList<Integer>());
+            layers.add(new ArrayList<>());
         }
     }
 
