@@ -26,6 +26,7 @@ public class CannonBall extends Entity {
     public void fire(Vector2 pos, Vector2 dir, Ship sender) {
         Transform t = getComponent(Transform.class);
         t.setPosition(pos);
+        t.setScale(0.5f, 0.5f);
 
         RigidBody rb = getComponent(RigidBody.class);
         rb.setVelocity(dir.cpy().scl(speed));
