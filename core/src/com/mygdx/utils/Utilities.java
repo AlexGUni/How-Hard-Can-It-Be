@@ -77,4 +77,8 @@ public final class Utilities {
     public static <T> T randomChoice(ArrayList<T> list) {
         return list.get(new Random().nextInt(list.size()));
     }
+
+    public static Vector2 floor(Vector2 a) {
+        return new Vector2(MathUtils.floor(a.x), MathUtils.floor(a.y));
+    }
 }

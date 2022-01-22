@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.Components.Renderable;
 import com.mygdx.game.Components.RigidBody;
 import com.mygdx.game.Components.Transform;
+import com.mygdx.game.Managers.EntityManager;
 import com.mygdx.game.Managers.GameManager;
 import com.mygdx.game.Managers.RenderLayer;
 import com.mygdx.game.Physics.CollisionCallBack;
@@ -21,7 +22,7 @@ public class CannonBall extends Entity implements CollisionCallBack {
         t.setPosition(-100,100);
         t.setScale(0.5f, 0.5f);
         Renderable r = new Renderable(4, "ball", RenderLayer.Transparent);
-        RigidBody rb = new RigidBody(PhysicsBodyType.Dynamic, r, t);
+        RigidBody rb = new RigidBody(PhysicsBodyType.Dynamic, r, t, true);
         rb.setCallback(this);
 
         addComponents(t, r, rb);
@@ -48,7 +49,7 @@ public class CannonBall extends Entity implements CollisionCallBack {
         t.setPosition(pos);
 
         RigidBody rb = getComponent(RigidBody.class);
-        rb.setVelocity(dir.cpy().scl(speed));
+        rb.setVelocity(dir.cpy().scl(speed * EntityManager.getDeltaTime()));
 
     }
 

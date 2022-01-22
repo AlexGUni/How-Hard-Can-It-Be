@@ -6,7 +6,10 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.Entitys.Player;
 import com.mygdx.game.Entitys.Ship;
+import com.mygdx.game.Managers.EntityManager;
+import com.mygdx.game.Managers.GameManager;
 import com.mygdx.game.Managers.RenderingManager;
+import com.mygdx.utils.Utilities;
 
 import static com.mygdx.utils.Constants.PHYSICS_TIME_STEP;
 
@@ -32,7 +35,7 @@ public class PlayerController extends Component {
     @Override
     public void update() {
         super.update();
-        float s = speed * PHYSICS_TIME_STEP;
+        final float s = speed * EntityManager.getDeltaTime();
 
         Vector2 dir = new Vector2(0, 0);
 
@@ -64,22 +67,6 @@ public class PlayerController extends Component {
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             ((Ship) parent).shoot();
-        }
-
-        if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)) {
-            ((Ship) parent).setFaction(1);
-        }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_2)) {
-            ((Ship) parent).setFaction(2);
-        }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_3)) {
-            ((Ship) parent).setFaction(3);
-        }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_4)) {
-            ((Ship) parent).setFaction(4);
-        }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_5)) {
-            ((Ship) parent).setFaction(5);
         }
     }
 }

@@ -137,7 +137,8 @@ public class Ship extends Entity implements CollisionCallBack {
     @Override
     public void EnterTrigger(CollisionInfo info) {
         if (info.fA.isSensor() || !info.fB.isSensor() || this != info.a) {
-            throw new RuntimeException("error in triggers");
+            return;
+            // throw new RuntimeException("error in triggers");
         }
 
         final Pirate p = info.b.getComponent(Pirate.class);

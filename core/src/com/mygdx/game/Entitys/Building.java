@@ -9,6 +9,8 @@ import com.mygdx.game.Physics.CollisionCallBack;
 import com.mygdx.game.Physics.CollisionInfo;
 import com.mygdx.game.Physics.PhysicsBodyType;
 
+import static com.mygdx.utils.Constants.BUILDING_SCALE;
+
 public class Building extends Entity implements CollisionCallBack {
     private String buildingName;
     private static int atlas_id;
@@ -17,7 +19,7 @@ public class Building extends Entity implements CollisionCallBack {
         super();
         isFlag = false;
         Transform t = new Transform();
-        t.setScale(3, 3);
+        t.setScale(BUILDING_SCALE, BUILDING_SCALE);
         Pirate p = new Pirate();
         atlas_id = ResourceManager.getId("Buildings.txt");
         Renderable r = new Renderable(atlas_id, "big", RenderLayer.Transparent);
@@ -56,10 +58,7 @@ public class Building extends Entity implements CollisionCallBack {
 
     @Override
     public void BeginContact(CollisionInfo info) {
-        if(info.a instanceof CannonBall) {
-            destroy();
-            ((CannonBall) info.a).kill();
-        }
+
     }
 
     @Override
@@ -69,6 +68,10 @@ public class Building extends Entity implements CollisionCallBack {
 
     @Override
     public void EnterTrigger(CollisionInfo info) {
+        if(info.a instanceof CannonBall) {
+            destroy();
+            ((CannonBall) info.a).kill();
+        }
     }
 
     @Override
