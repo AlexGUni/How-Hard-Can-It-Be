@@ -31,7 +31,7 @@ public final class Constants {
 
         TILE_SIZE = 32;
 
-        ZOOM = 1.2f;
+        ZOOM = 0.5f;
     }
 
     public static void UPDATE_VIEWPORT(int x, int y) {

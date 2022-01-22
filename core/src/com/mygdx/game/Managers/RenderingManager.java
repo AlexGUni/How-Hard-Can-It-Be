@@ -3,6 +3,7 @@ package com.mygdx.game.Managers;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.Components.Component;
+import com.mygdx.game.Entitys.Building;
 
 import static com.mygdx.utils.Constants.*;
 
@@ -74,6 +75,9 @@ public final class RenderingManager {
         for(ArrayList<Integer> layer : layers){
             for(Integer itemIndex : layer){
                 Component item = renderItems.get(itemIndex);
+                if (item.getParent() instanceof Building) {
+                    int i = 0;
+                }
                 item.render();
             }
         }

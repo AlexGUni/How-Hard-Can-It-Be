@@ -9,6 +9,7 @@ import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.AI.TileMapGraph;
 import com.mygdx.game.Components.ComponentEvent;
+import com.mygdx.game.Entitys.College;
 import com.mygdx.game.Entitys.DebugText;
 import com.mygdx.game.Entitys.WorldMap;
 import com.mygdx.game.Managers.*;
@@ -29,15 +30,18 @@ public class PirateGame extends ApplicationAdapter {
 		int id_map = ResourceManager.addTileMap("Map.tmx");
 		int atlas_id = ResourceManager.addTextureAtlas("Boats.txt");
 		int extras_id = ResourceManager.addTextureAtlas("UISkin/skin.atlas");
+		int buildigns_id = ResourceManager.addTextureAtlas("Buildings.txt");
 
 
 		ResourceManager.loadAssets();
 
 
-		GameManager.CreateWorldMap(id_map);
+
+		//GameManager.CreateWorldMap(id_map);
 
 		GameManager.CreatePlayer();
-		GameManager.CreateNPCShip(2);
+		//GameManager.CreateNPCShip(2);
+		new College(new Vector2(0, 0));
 
 		DebugText t = new DebugText();
 

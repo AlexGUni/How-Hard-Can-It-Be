@@ -80,9 +80,9 @@ public class NPCShip extends Ship {
         }
     }
     public void goToTarget() {
-        path = GameManager.getPath(
+        /*path = GameManager.getPath(
                 Utilities.distanceToTiles(getPosition()),
-                Utilities.distanceToTiles(getTarget().getPosition()));
+                Utilities.distanceToTiles(getTarget().getPosition()));*/
     }
 
     public void followTarget() {

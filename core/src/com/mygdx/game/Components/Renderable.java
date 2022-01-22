@@ -15,6 +15,8 @@ public class Renderable extends Component {
     public Renderable(){
         super();
         type = ComponentType.Renderable;
+        sprite = new Sprite();
+        RenderingManager.addItem(this, RenderLayer.Transparent);
     }
 
     /**
@@ -71,10 +73,10 @@ public class Renderable extends Component {
 
     public void setTexture(Sprite s) {
         Sprite a = getSprite();
+        a.setTexture(s.getTexture());
         a.setU(s.getU());
         a.setV(s.getV());
         a.setU2(s.getU2());
         a.setV2(s.getV2());
-        a.setTexture(s.getTexture());
     }
 }

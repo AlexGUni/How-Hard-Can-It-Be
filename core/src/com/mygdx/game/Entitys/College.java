@@ -15,11 +15,17 @@ import java.util.ArrayList;
 public class College extends Entity {
     private static ArrayList<String> buildingNames;
     private final ArrayList<Building> buildings;
-    public College() {
+    public College(Vector2 pos) {
         super();
         buildings = new ArrayList<>();
+        buildingNames = new ArrayList<>();
+        buildingNames.add("big");
+        buildingNames.add("small");
+        buildingNames.add("clock");
         Transform t = new Transform();
+        t.setPosition(pos);
         addComponent(t);
+        spawn();
     }
 
     private void spawn() {
@@ -31,10 +37,10 @@ public class College extends Entity {
             buildings.add(b);
             Vector2 pos = Utilities.randomPos(-radius, radius).add(origin);
             String b_name = Utilities.randomChoice(buildingNames);
-            b.create(pos, b_name);
+            b.create(pos, "big");
         }
-        Building flag = new Building();
+        /*Building flag = new Building();
         buildings.add(flag);
-        flag.create(origin, "flag_");
+        flag.create(origin, "flag_");*/
     }
 }

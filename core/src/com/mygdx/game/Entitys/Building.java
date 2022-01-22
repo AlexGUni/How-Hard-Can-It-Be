@@ -6,6 +6,7 @@ import com.mygdx.game.Components.Pirate;
 import com.mygdx.game.Components.Renderable;
 import com.mygdx.game.Components.RigidBody;
 import com.mygdx.game.Components.Transform;
+import com.mygdx.game.Managers.RenderLayer;
 import com.mygdx.game.Managers.ResourceManager;
 
 import java.awt.datatransfer.Transferable;
@@ -17,13 +18,15 @@ public class Building extends Entity {
         super();
         Transform t = new Transform();
         Pirate p = new Pirate();
-        Renderable r = new Renderable();
+        atlas_id = ResourceManager.getId("Buildings.txt");
+        Renderable r = new Renderable(atlas_id, "big", RenderLayer.Transparent);
         addComponents(t, p, r);
     }
 
     public void create(Vector2 pos, String name) {
         Sprite s = ResourceManager.getSprite(atlas_id, name);
-        getComponent(Renderable.class).setTexture(s);
+        Renderable r = getComponent(Renderable.class);
+        r.setTexture(s);
         getComponent(Transform.class).setPosition(pos);
         buildingName = name;
     }
