@@ -4,18 +4,11 @@ import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.OrthographicCamera;
-import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.physics.box2d.Box2DDebugRenderer;
 import com.badlogic.gdx.utils.ScreenUtils;
-import com.mygdx.game.AI.TileMapGraph;
 import com.mygdx.game.Components.ComponentEvent;
-import com.mygdx.game.Entitys.College;
 import com.mygdx.game.Entitys.DebugText;
-import com.mygdx.game.Entitys.WorldMap;
 import com.mygdx.game.Managers.*;
-import com.mygdx.game.Quests.KillQuest;
-import com.mygdx.game.Quests.Quest;
-import com.mygdx.utils.QueueFIFO;
 
 import static com.mygdx.utils.Constants.*;
 
@@ -39,10 +32,7 @@ public class PirateGame extends ApplicationAdapter {
 
 
 
-		GameManager.CreateWorldMap(id_map);
-
-		GameManager.CreatePlayer();
-		GameManager.createCollege(5);
+		GameManager.SpawnGame(id_map);
 		//QuestManager.addQuest(new KillQuest(c));
 
 		DebugText t = new DebugText();

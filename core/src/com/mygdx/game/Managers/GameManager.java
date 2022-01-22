@@ -21,7 +21,7 @@ public final class GameManager {
     private static ArrayList<Ship> ships;
     private static ArrayList<College> colleges;
 
-    private static final int cacheSize = 10;
+    private static final int cacheSize = 20;
     private static ArrayList<CannonBall> ballCache;
     private static int currentElement;
 
@@ -62,6 +62,14 @@ public final class GameManager {
         return (Player) ships.get(0);
     }
 
+    public static void SpawnGame(int mapId) {
+        CreateWorldMap(mapId);
+        CreatePlayer();
+        for (int i = 0; i < factions.size(); i++) {
+            CreateCollege(i + 1);
+        }
+    }
+
     /**
      * Creates player that belongs the faction with id 1
      */
@@ -85,7 +93,7 @@ public final class GameManager {
         mapGraph = new TileMapGraph(map.getTileMap());
     }
 
-    public static void createCollege(int factionId) {
+    public static void CreateCollege(int factionId) {
         tryInit();
         College c = new College(factionId);
         colleges.add(c);

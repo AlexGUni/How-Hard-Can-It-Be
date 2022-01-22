@@ -20,8 +20,8 @@
       "name" : "Halifax",
       "colour": "light-blue",
       "position": {
-        "x": 37,
-        "y": 34
+        "x": 33,
+        "y": 35
       }
     },
     {
@@ -44,16 +44,16 @@
       "name" : "Goodrick",
       "colour": "green",
       "position": {
-        "x": 72,
-        "y": 67
+        "x": 75,
+        "y": 77
       }
     },
     {
       "name" : "Derwent",
       "colour": "dark-blue",
       "position": {
-        "x": 67,
-        "y": 33
+        "x": 76,
+        "y": 23
       }
     }
   ],
@@ -63,7 +63,7 @@
     "shipSpawnRadius" : 15
   },
   "college": {
-    "spawnRadius": 5,
-    "numBuildings": 5
+    "spawnRadius": 3,
+    "numBuildings": 7
   }
 }
