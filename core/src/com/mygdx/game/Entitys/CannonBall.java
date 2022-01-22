@@ -12,13 +12,11 @@ import com.mygdx.game.Physics.PhysicsBodyType;
 
 public class CannonBall extends Entity implements CollisionCallBack {
     private static float speed;
-    private static Ship parent;
     private boolean toggleLife;
     public CannonBall() {
         super(3);
         setName("ball");
         toggleLife = false;
-        parent = null;
         Transform t = new Transform();
         t.setPosition(-100,100);
         t.setScale(0.5f, 0.5f);
@@ -52,10 +50,9 @@ public class CannonBall extends Entity implements CollisionCallBack {
         RigidBody rb = getComponent(RigidBody.class);
         rb.setVelocity(dir.cpy().scl(speed));
 
-        parent = sender;
     }
 
-    public void die() {
+    public void kill() {
         toggleLife = true;
     }
 

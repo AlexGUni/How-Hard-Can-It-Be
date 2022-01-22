@@ -44,4 +44,19 @@ public class College extends Entity {
         buildings.add(flag);
         flag.create(origin, "flag_");*/
     }
+
+    public boolean isAlive() {
+        for(Building b : buildings) {
+            if(b.isAlive()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public void update() {
+        super.update();
+        System.out.println(isAlive());
+    }
 }

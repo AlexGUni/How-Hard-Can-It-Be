@@ -98,4 +98,13 @@ public class Pirate extends Component {
     public Ship getTarget() {
         return target;
     }
+
+    public boolean isAlive() {
+        return isAlive;
+    }
+
+    public void kill() {
+        health = 0;
+        isAlive = false;
+    }
 }
