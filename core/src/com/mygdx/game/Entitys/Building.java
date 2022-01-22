@@ -12,14 +12,20 @@ import com.mygdx.game.Physics.PhysicsBodyType;
 public class Building extends Entity implements CollisionCallBack {
     private String buildingName;
     private static int atlas_id;
+    private boolean isFlag;
     Building() {
         super();
+        isFlag = false;
         Transform t = new Transform();
         t.setScale(3, 3);
         Pirate p = new Pirate();
         atlas_id = ResourceManager.getId("Buildings.txt");
         Renderable r = new Renderable(atlas_id, "big", RenderLayer.Transparent);
         addComponents(t, p, r);
+    }
+    Building(boolean isflag) {
+        this();
+        this.isFlag = isflag;
     }
 
     public void create(Vector2 pos, String name) {
@@ -35,6 +41,9 @@ public class Building extends Entity implements CollisionCallBack {
     }
 
     private void destroy() {
+        if(isFlag) {
+            return;
+        }
         Sprite s = ResourceManager.getSprite(atlas_id, buildingName + "-broken");
         Renderable r = getComponent(Renderable.class);
         r.setTexture(s);

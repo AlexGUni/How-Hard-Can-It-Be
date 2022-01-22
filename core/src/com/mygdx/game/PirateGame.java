@@ -13,6 +13,8 @@ import com.mygdx.game.Entitys.College;
 import com.mygdx.game.Entitys.DebugText;
 import com.mygdx.game.Entitys.WorldMap;
 import com.mygdx.game.Managers.*;
+import com.mygdx.game.Quests.KillQuest;
+import com.mygdx.game.Quests.Quest;
 import com.mygdx.utils.QueueFIFO;
 
 import static com.mygdx.utils.Constants.*;
@@ -41,7 +43,8 @@ public class PirateGame extends ApplicationAdapter {
 
 		GameManager.CreatePlayer();
 		//GameManager.CreateNPCShip(2);
-		new College(new Vector2(900, 900));
+		College c = new College(new Vector2(900, 900));
+		QuestManager.addQuest(new KillQuest(c));
 
 		DebugText t = new DebugText();
 

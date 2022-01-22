@@ -1,13 +1,10 @@
 package com.mygdx.game.Entitys;
 
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.JsonValue;
 import com.mygdx.game.Components.Pirate;
-import com.mygdx.game.Components.Renderable;
 import com.mygdx.game.Components.Transform;
 import com.mygdx.game.Managers.GameManager;
-import com.mygdx.game.Managers.ResourceManager;
 import com.mygdx.utils.Utilities;
 
 import java.util.ArrayList;
@@ -24,7 +21,8 @@ public class College extends Entity {
         buildingNames.add("clock");
         Transform t = new Transform();
         t.setPosition(pos);
-        addComponent(t);
+        Pirate p = new Pirate();
+        addComponents(t, p);
         spawn();
     }
 
@@ -40,23 +38,26 @@ public class College extends Entity {
             String b_name = Utilities.randomChoice(buildingNames);
             b.create(pos, b_name);
         }
-        /*Building flag = new Building();
+        Building flag = new Building(true);
         buildings.add(flag);
-        flag.create(origin, "flag_");*/
+        flag.create(origin, "dark-blue");
     }
 
-    public boolean isAlive() {
+    public void isAlive() {
+        boolean res = false;
         for(Building b : buildings) {
             if(b.isAlive()) {
-                return true;
+                res = true;
             }
         }
-        return false;
+        if (!res) {
+           getComponent(Pirate.class).kill();
+        }
     }
 
     @Override
     public void update() {
         super.update();
-        System.out.println(isAlive());
+        isAlive();
     }
 }
