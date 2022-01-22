@@ -42,9 +42,8 @@ public class PirateGame extends ApplicationAdapter {
 		GameManager.CreateWorldMap(id_map);
 
 		GameManager.CreatePlayer();
-		//GameManager.CreateNPCShip(2);
-		College c = new College(new Vector2(900, 900));
-		QuestManager.addQuest(new KillQuest(c));
+		GameManager.createCollege(5);
+		//QuestManager.addQuest(new KillQuest(c));
 
 		DebugText t = new DebugText();
 

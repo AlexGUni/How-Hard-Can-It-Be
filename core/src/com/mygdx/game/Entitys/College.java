@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.JsonValue;
 import com.mygdx.game.Components.Pirate;
 import com.mygdx.game.Components.Transform;
+import com.mygdx.game.Faction;
 import com.mygdx.game.Managers.GameManager;
 import com.mygdx.utils.Utilities;
 
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 public class College extends Entity {
     private static ArrayList<String> buildingNames;
     private final ArrayList<Building> buildings;
-    public College(Vector2 pos) {
+    public College() {
         super();
         buildings = new ArrayList<>();
         buildingNames = new ArrayList<>();
@@ -20,13 +21,21 @@ public class College extends Entity {
         buildingNames.add("small");
         buildingNames.add("clock");
         Transform t = new Transform();
-        t.setPosition(pos);
         Pirate p = new Pirate();
         addComponents(t, p);
-        spawn();
     }
 
-    private void spawn() {
+    public College(int factionId) {
+        this();
+        Faction f = GameManager.getFaction(factionId);
+        Transform t = getComponent(Transform.class);
+        t.setPosition(f.getPosition());
+        Pirate p = new Pirate();
+        addComponents(t, p);
+        spawn(f.getColour());
+    }
+
+    private void spawn(String colour) {
         JsonValue collegeSettings = GameManager.getSettings().get("college");
         float radius = collegeSettings.getFloat("spawnRadius");
         radius = Utilities.tilesToDistance(radius);
@@ -40,7 +49,7 @@ public class College extends Entity {
         }
         Building flag = new Building(true);
         buildings.add(flag);
-        flag.create(origin, "dark-blue");
+        flag.create(origin, colour);
     }
 
     public void isAlive() {

@@ -54,7 +54,7 @@ public final class Constants {
     public static Vector2 HALF_DIMENSIONS;
     public static String VIEWPORT_TITLE;
     public static float PHYSICS_TIME_STEP;
-    public static final float ZOOM = 1.0f;
+    public static final float ZOOM = 0.5f;
     public static final boolean VSYNC = true;
 
     public static float TILE_SIZE;

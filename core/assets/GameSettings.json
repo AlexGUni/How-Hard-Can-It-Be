@@ -18,23 +18,43 @@
   "factions" : [
     {
       "name" : "Halifax",
-      "colour": "light-blue"
+      "colour": "light-blue",
+      "position": {
+        "x": 37,
+        "y": 34
+      }
     },
     {
       "name" : "Constantine",
-      "colour": "pink"
+      "colour": "pink",
+      "position": {
+        "x": 51,
+        "y": 55
+      }
     },
     {
       "name" : "Langwidth",
-      "colour": "yellow"
+      "colour": "yellow",
+      "position": {
+        "x": 34,
+        "y": 72
+      }
     },
     {
       "name" : "Goodrick",
-      "colour": "green"
+      "colour": "green",
+      "position": {
+        "x": 72,
+        "y": 67
+      }
     },
     {
       "name" : "Derwent",
-      "colour": "dark-blue"
+      "colour": "dark-blue",
+      "position": {
+        "x": 67,
+        "y": 33
+      }
     }
   ],
   "factionDefaults": {

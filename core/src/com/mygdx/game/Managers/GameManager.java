@@ -9,6 +9,7 @@ import com.mygdx.game.Components.Transform;
 import com.mygdx.game.Entitys.*;
 import com.mygdx.game.Faction;
 import com.mygdx.utils.QueueFIFO;
+import com.mygdx.utils.Utilities;
 
 import java.util.ArrayList;
 
@@ -18,6 +19,7 @@ public final class GameManager {
     private static boolean initialized = false;
     private static ArrayList<Faction> factions;
     private static ArrayList<Ship> ships;
+    private static ArrayList<College> colleges;
 
     private static final int cacheSize = 10;
     private static ArrayList<CannonBall> ballCache;
@@ -37,6 +39,7 @@ public final class GameManager {
         factions = new ArrayList<>();
         ships = new ArrayList<>();
         ballCache = new ArrayList<>(cacheSize);
+        colleges = new ArrayList<>();
 
         for (int i = 0; i < cacheSize; i++) {
             ballCache.add(new CannonBall());
@@ -45,7 +48,9 @@ public final class GameManager {
         for (JsonValue v : settings.get("factions")){
             String name = v.getString("name");
             String col = v.getString("colour");
-            factions.add(new Faction(name, col));
+            Vector2 pos = new Vector2(v.get("position").getFloat("x"), v.get("position").getFloat("y"));
+            pos = Utilities.tilesToDistance(pos);
+            factions.add(new Faction(name, col, pos));
         }
     }
 
@@ -78,6 +83,12 @@ public final class GameManager {
         tryInit();
         map = new WorldMap(mapId);
         mapGraph = new TileMapGraph(map.getTileMap());
+    }
+
+    public static void createCollege(int factionId) {
+        tryInit();
+        College c = new College(factionId);
+        colleges.add(c);
     }
 
     private static void tryInit() {
