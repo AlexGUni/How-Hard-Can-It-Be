@@ -13,13 +13,10 @@ import com.mygdx.game.Managers.*;
 import static com.mygdx.utils.Constants.*;
 
 public class PirateGame extends ApplicationAdapter {
-	Box2DDebugRenderer b2d;
 	@Override
 	public void create () {
-		b2d = new Box2DDebugRenderer(true, true, true, true, true, true);
-
 		INIT_CONSTANTS();
-		PhysicsManager.Initialize(false);
+		PhysicsManager.Initialize(true);
 
 		int id_ship = ResourceManager.addTexture("ship.png");
 		int id_map = ResourceManager.addTileMap("Map.tmx");
@@ -59,9 +56,6 @@ public class PirateGame extends ApplicationAdapter {
 		UIManager.update();
 		UIManager.render();
 
-		b2d.render(PhysicsManager.box2DWorld, RenderingManager.getCamera().combined);
-
-
 		if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
 			Gdx.app.exit();
 			System.exit(0);
@@ -75,8 +69,6 @@ public class PirateGame extends ApplicationAdapter {
 		RenderingManager.cleanUp();
 		PhysicsManager.cleanUp();
 		UIManager.cleanUp();
-
-		b2d.dispose();
 	}
 
 	@Override
