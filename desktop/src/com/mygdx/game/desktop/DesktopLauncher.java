@@ -19,8 +19,10 @@ public class DesktopLauncher {
 			cfg.setWindowedMode(VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
 		}
 
-		cfg.useVsync(false);
-		cfg.setForegroundFPS(0);
+		if(!VSYNC) {
+			cfg.useVsync(false);
+			cfg.setForegroundFPS(0);
+		}
 
 		new Lwjgl3Application(new PirateGame(), cfg);
 	}
