@@ -6,6 +6,7 @@ import com.mygdx.game.Components.ComponentEvent;
 import com.mygdx.game.Entitys.Entity;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Responsible for Managing the entity and component events. Entity's can be accessed by a String name
@@ -58,9 +59,13 @@ public final class EntityManager {
         for (Entity e : entities){
             e.raiseEvents(comps);
         }
+        for (ComponentEvent c : comps) {
+            if(c == ComponentEvent.Render){
+                RenderingManager.render();
 
-        RenderingManager.render();
-
+                break;
+            }
+        }
         for (Entity e : entities){
             e.update();
         }

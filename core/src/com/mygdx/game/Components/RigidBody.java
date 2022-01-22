@@ -85,6 +85,10 @@ public class RigidBody extends Component {
         b.setLinearVelocity(vel);
     }
 
+    public void setVelocity(float x, float y){
+        setVelocity(new Vector2(x, y));
+    }
+
     public void setPosition(Vector2 position) {
         Body b = PhysicsManager.getBody(bodyId);
         b.setTransform(position, 0);

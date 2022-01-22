@@ -148,7 +148,7 @@ public class Ship extends Entity implements CollisionCallBack {
                 p.setTarget((Ship) info.a);
             }
             else{
-                throw new RuntimeException("error in determining attack state for ships");
+                // throw new RuntimeException("error in determining attack state for ships");
             }
         }
     }

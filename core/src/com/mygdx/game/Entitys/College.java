@@ -31,13 +31,14 @@ public class College extends Entity {
     private void spawn() {
         JsonValue collegeSettings = GameManager.getSettings().get("college");
         float radius = collegeSettings.getFloat("spawnRadius");
+        radius = Utilities.tilesToDistance(radius);
         Vector2 origin = getComponent(Transform.class).getPosition();
         for (int i = 0; i < collegeSettings.getInt("numBuildings"); i++) {
             Building b = new Building();
             buildings.add(b);
             Vector2 pos = Utilities.randomPos(-radius, radius).add(origin);
             String b_name = Utilities.randomChoice(buildingNames);
-            b.create(pos, "big");
+            b.create(pos, b_name);
         }
         /*Building flag = new Building();
         buildings.add(flag);

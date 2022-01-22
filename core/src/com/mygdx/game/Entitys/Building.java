@@ -8,10 +8,13 @@ import com.mygdx.game.Components.RigidBody;
 import com.mygdx.game.Components.Transform;
 import com.mygdx.game.Managers.RenderLayer;
 import com.mygdx.game.Managers.ResourceManager;
+import com.mygdx.game.Physics.CollisionCallBack;
+import com.mygdx.game.Physics.CollisionInfo;
+import com.mygdx.game.Physics.PhysicsBodyType;
 
 import java.awt.datatransfer.Transferable;
 
-public class Building extends Entity {
+public class Building extends Entity implements CollisionCallBack {
     private String buildingName;
     private static int atlas_id;
     Building() {
@@ -29,5 +32,37 @@ public class Building extends Entity {
         r.setTexture(s);
         getComponent(Transform.class).setPosition(pos);
         buildingName = name;
+
+        RigidBody rb = new RigidBody(PhysicsBodyType.Static, r, getComponent(Transform.class));
+        rb.setCallback(this);
+        addComponent(rb);
+    }
+
+    private void destroy() {
+        Sprite s = ResourceManager.getSprite(atlas_id, buildingName + "-broken");
+        Renderable r = getComponent(Renderable.class);
+        r.setTexture(s);
+    }
+
+    @Override
+    public void BeginContact(CollisionInfo info) {
+        if(info.a instanceof CannonBall) {
+            destroy();
+            ((CannonBall) info.a).die();
+        }
+    }
+
+    @Override
+    public void EndContact(CollisionInfo info) {
+
+    }
+
+    @Override
+    public void EnterTrigger(CollisionInfo info) {
+    }
+
+    @Override
+    public void ExitTrigger(CollisionInfo info) {
+
     }
 }

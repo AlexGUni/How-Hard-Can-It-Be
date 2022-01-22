@@ -27,7 +27,6 @@ public class CollisionManager implements ContactListener {
         Object ob = bb.getUserData();
         CollisionCallBack cbB = (CollisionCallBack) ob;
 
-
         final CollisionInfo info = new CollisionInfo();
         info.fA = fa;
         info.fB = fb;

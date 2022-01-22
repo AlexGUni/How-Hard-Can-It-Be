@@ -37,11 +37,11 @@ public class PirateGame extends ApplicationAdapter {
 
 
 
-		//GameManager.CreateWorldMap(id_map);
+		GameManager.CreateWorldMap(id_map);
 
 		GameManager.CreatePlayer();
 		//GameManager.CreateNPCShip(2);
-		new College(new Vector2(0, 0));
+		new College(new Vector2(900, 900));
 
 		DebugText t = new DebugText();
 

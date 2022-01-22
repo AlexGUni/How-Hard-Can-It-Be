@@ -43,7 +43,7 @@
     "shipSpawnRadius" : 15
   },
   "college": {
-    "spawnRadius": 10,
+    "spawnRadius": 5,
     "numBuildings": 5
   }
 }
