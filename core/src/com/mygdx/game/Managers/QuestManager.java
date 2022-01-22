@@ -20,7 +20,12 @@ public class QuestManager {
 
     public static void createRandomQuests() {
         tryInit();
-        LocateQuest q = new LocateQuest(new Vector2(100, 100), 50);
+        // LocateQuest q = new LocateQuest(new Vector2(100, 100), 50);
+        // allQuests.add(q);
+    }
+
+    public static void addQuest(Quest q) {
+        tryInit();
         allQuests.add(q);
     }
 
@@ -38,7 +43,6 @@ public class QuestManager {
             }
         }
     }
-
 
     private static void tryInit() {
         if(!initialized) {
