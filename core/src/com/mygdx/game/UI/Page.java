@@ -3,21 +3,18 @@ package com.mygdx.game.UI;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.scenes.scene2d.Actor;
-import com.badlogic.gdx.scenes.scene2d.Stage;
-import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.mygdx.game.Managers.UIManager;
 
 import java.util.ArrayList;
 
 import static com.mygdx.utils.Constants.UPDATE_VIEWPORT;
 
 public abstract class Page extends ScreenAdapter {
-    protected static Stage mainStage;
-    protected static Skin skin;
+    PageManager parent;
+
+
     protected ArrayList<Actor> actors;
-    public Page() {
-        mainStage = UIManager.getStage();
-        skin = UIManager.getSkin();
+    public Page(PageManager parent) {
+        this.parent = parent;
         actors = new ArrayList<>();
         CreateActors();
     }
@@ -26,32 +23,40 @@ public abstract class Page extends ScreenAdapter {
 
     @Override
     public void show() {
+        // button.addListener(new ChangeListener() {
+        //     public void changed (ChangeEvent event, Actor actor) {
+        //         System.out.println("Clicked! Is checked: " + button.isChecked());
+        //         button.setText("Good job!");
+        //     }
+        // });
         super.show();
-        Gdx.input.setInputProcessor(mainStage);
+        Gdx.input.setInputProcessor(parent.stage);
         for (Actor a : actors) {
-            mainStage.addActor(a);
+            parent.stage.addActor(a);
         }
     }
     @Override
     public void render(float delta) {
         update();
         super.render(delta);
-        mainStage.act(delta);
-        mainStage.draw();
+        parent.stage.act(delta);
+        parent.stage.draw();
     }
 
     @Override
     public void hide() {
         super.hide();
         Gdx.input.setInputProcessor(null);
-        mainStage.clear();
+        parent.stage.clear();
     }
 
     @Override
     public void resize(int width, int height) {
         super.resize(width, height);
         UPDATE_VIEWPORT(width, height);
-        UIManager.resize(width, height);
+        parent.stage.getCamera().viewportWidth = width;
+        parent.stage.getCamera().viewportHeight = height;
+        parent.stage.getViewport().update(width, height, true);
     }
 
     protected void update() {

@@ -17,8 +17,8 @@ import static com.mygdx.utils.Constants.*;
 public class GameScreen extends Page {
     private Label healthLabel;
     private Label dosh;
-    public GameScreen() {
-        super();
+    public GameScreen(PageManager parent) {
+        super(parent);
         INIT_CONSTANTS();
         PhysicsManager.Initialize(false);
 
@@ -58,9 +58,6 @@ public class GameScreen extends Page {
 
         GameManager.update();
 
-        UIManager.update();
-        UIManager.render();
-
         if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
             Gdx.app.exit();
             System.exit(0);
@@ -75,7 +72,6 @@ public class GameScreen extends Page {
         EntityManager.cleanUp();
         RenderingManager.cleanUp();
         PhysicsManager.cleanUp();
-        UIManager.cleanUp();
     }
 
     @Override
@@ -106,14 +102,14 @@ public class GameScreen extends Page {
         actors.add(table);
 
 
-        table.add(new Image(skin.getDrawable("stick"))).top().left().size(1.25f * TILE_SIZE);
-        healthLabel = new Label("N/A", skin);
+        table.add(new Image(parent.skin.getDrawable("stick"))).top().left().size(1.25f * TILE_SIZE);
+        healthLabel = new Label("N/A", parent.skin);
         table.add(healthLabel).top().left().size(50);
 
         table.row();
 
-        table.add(new Image(skin.getDrawable("coin"))).top().left().size(1.25f * TILE_SIZE);
-        dosh = new Label("N/A", skin);
+        table.add(new Image(parent.skin.getDrawable("coin"))).top().left().size(1.25f * TILE_SIZE);
+        dosh = new Label("N/A", parent.skin);
         table.add(dosh).top().left().size(50);
 
         // button.addListener(new ChangeListener() {
@@ -123,7 +119,7 @@ public class GameScreen extends Page {
         //     }
         // });
 
-        table.add(new Image(skin.getDrawable("key"))).size(128);
+        table.add(new Image(parent.skin.getDrawable("key"))).size(128);
 
         table.top().left();
     }
