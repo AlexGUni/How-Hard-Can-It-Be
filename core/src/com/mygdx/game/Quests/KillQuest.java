@@ -18,6 +18,7 @@ public class KillQuest extends Quest {
     public KillQuest(Pirate target) {
         this();
         this.target = target;
+        description = target.getFaction().getName();
     }
 
     public KillQuest(Entity target) {

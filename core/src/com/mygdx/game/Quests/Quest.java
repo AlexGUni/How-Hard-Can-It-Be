@@ -23,4 +23,13 @@ public abstract class Quest {
     public boolean isCompleted() {
         return isCompleted;
     }
+
+
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
 }

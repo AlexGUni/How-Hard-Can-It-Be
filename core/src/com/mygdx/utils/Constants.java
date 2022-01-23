@@ -36,8 +36,8 @@ public final class Constants {
         VIEWPORT_HEIGHT = y;
         VIEWPORT_WIDTH = x;
         ASPECT_RATIO = (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT;
-        HALF_VIEWPORT_HEIGHT = VIEWPORT_WIDTH / 2;
-        HALF_VIEWPORT_WIDTH = VIEWPORT_HEIGHT / 2;
+        HALF_VIEWPORT_HEIGHT = VIEWPORT_HEIGHT / 2;
+        HALF_VIEWPORT_WIDTH = VIEWPORT_WIDTH / 2;
         DIMENSIONS = new Vector2(VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
         HALF_DIMENSIONS = new Vector2(HALF_VIEWPORT_WIDTH, HALF_VIEWPORT_HEIGHT);
     }
@@ -54,7 +54,7 @@ public final class Constants {
     public static Vector2 HALF_DIMENSIONS;
     public static String VIEWPORT_TITLE;
     public static float PHYSICS_TIME_STEP;
-    public static final float ZOOM = 1.25f;
+    public static final float ZOOM = 0.25f;
     public static final boolean VSYNC = true;
     public static final float BUILDING_SCALE = 3.0f;
 

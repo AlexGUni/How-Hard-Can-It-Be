@@ -6,12 +6,18 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
+import com.badlogic.gdx.scenes.scene2d.ui.TextField;
+import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.Components.ComponentEvent;
 import com.mygdx.game.Entitys.DebugText;
 import com.mygdx.game.Entitys.Player;
 import com.mygdx.game.Managers.*;
 import com.mygdx.game.PirateGame;
+import com.mygdx.game.Quests.Quest;
+
+import java.awt.*;
 
 import static com.mygdx.utils.Constants.*;
 
@@ -19,6 +25,7 @@ public class GameScreen extends Page {
     private Label healthLabel;
     private Label dosh;
     private Label ammo;
+    private Label questDesc;
     public GameScreen(PirateGame parent) {
         super(parent);
         INIT_CONSTANTS();
@@ -28,19 +35,26 @@ public class GameScreen extends Page {
         int id_map = ResourceManager.addTileMap("Map.tmx");
         int atlas_id = ResourceManager.addTextureAtlas("Boats.txt");
         int extras_id = ResourceManager.addTextureAtlas("UISkin/skin.atlas");
-        int buildigns_id = ResourceManager.addTextureAtlas("Buildings.txt");
-
+        int buildings_id = ResourceManager.addTextureAtlas("Buildings.txt");
 
         ResourceManager.loadAssets();
-
-
 
         GameManager.SpawnGame(id_map);
         //QuestManager.addQuest(new KillQuest(c));
 
-        DebugText t = new DebugText();
-
         EntityManager.raiseEvents(ComponentEvent.Awake, ComponentEvent.Start);
+
+        Window window = new Window("Current Quest", parent.skin);
+
+        Quest q = QuestManager.currentQuest();
+        Table t = new Table();
+        t.add(new Label(q.getName(), parent.skin));
+        t.row();
+        questDesc = new Label(q.getDescription(), parent.skin);
+
+        t.add(questDesc).left();
+        window.add(t);
+        actors.add(window);
     }
 
     private float accumulator;
@@ -96,6 +110,9 @@ public class GameScreen extends Page {
         healthLabel.setText(String.valueOf(p.getHealth()));
         dosh.setText(String.valueOf(p.getPlunder()));
         ammo.setText(String.valueOf(p.getAmmo()));
+        if(QuestManager.currentQuest().isCompleted()) {
+            questDesc.setText("Completed");
+        }
     }
 
     @Override
@@ -104,12 +121,12 @@ public class GameScreen extends Page {
         table.setFillParent(true);
         actors.add(table);
 
-
         table.add(new Image(parent.skin.getDrawable("heart"))).top().left().size(1.25f * TILE_SIZE);
         healthLabel = new Label("N/A", parent.skin);
         table.add(healthLabel).top().left().size(50);
 
         table.row();
+        table.setDebug(true);
 
         table.add(new Image(parent.skin.getDrawable("coin"))).top().left().size(1.25f * TILE_SIZE);
         dosh = new Label("N/A", parent.skin);

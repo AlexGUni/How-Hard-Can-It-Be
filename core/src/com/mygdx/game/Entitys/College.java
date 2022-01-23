@@ -30,8 +30,8 @@ public class College extends Entity {
         Faction f = GameManager.getFaction(factionId);
         Transform t = getComponent(Transform.class);
         t.setPosition(f.getPosition());
-        Pirate p = new Pirate();
-        addComponents(t, p);
+        Pirate p = getComponent(Pirate.class);
+        p.setFactionId(factionId);
         spawn(f.getColour());
     }
 
@@ -59,7 +59,8 @@ public class College extends Entity {
 
     public void isAlive() {
         boolean res = false;
-        for(Building b : buildings) {
+        for(int i = 0; i < buildings.size() - 1; i++) {
+            Building b = buildings.get(i);
             if(b.isAlive()) {
                 res = true;
             }

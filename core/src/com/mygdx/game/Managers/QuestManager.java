@@ -1,9 +1,15 @@
 package com.mygdx.game.Managers;
 
+import com.mygdx.game.Entitys.College;
 import com.mygdx.game.Entitys.Player;
+import com.mygdx.game.Faction;
+import com.mygdx.game.Quests.KillQuest;
 import com.mygdx.game.Quests.Quest;
+import com.mygdx.utils.Utilities;
 
+import java.io.UTFDataFormatException;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class QuestManager {
     private static boolean initialized = false;
@@ -18,8 +24,9 @@ public class QuestManager {
 
     public static void createRandomQuests() {
         tryInit();
-        // LocateQuest q = new LocateQuest(new Vector2(100, 100), 50);
-        // allQuests.add(q);
+        int primaryEnemyId = new Random().nextInt(5) + 2;
+        College enemy = GameManager.getCollege(primaryEnemyId);
+        addQuest(new KillQuest(enemy));
     }
 
     public static void addQuest(Quest q) {
@@ -46,5 +53,10 @@ public class QuestManager {
         if(!initialized) {
             Initialize();
         }
+    }
+
+    public static Quest currentQuest() {
+        tryInit();
+        return allQuests.get(0);
     }
 }

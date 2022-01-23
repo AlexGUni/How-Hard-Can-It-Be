@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.JsonReader;
 import com.badlogic.gdx.utils.JsonValue;
 import com.mygdx.game.AI.TileMapGraph;
+import com.mygdx.game.Components.Pirate;
 import com.mygdx.game.Components.Transform;
 import com.mygdx.game.Entitys.*;
 import com.mygdx.game.Faction;
@@ -113,6 +114,11 @@ public final class GameManager {
     public static JsonValue getSettings() {
         tryInit();
         return settings;
+    }
+
+    public static College getCollege(int factionId) {
+        tryInit();
+        return colleges.get(factionId - 1);
     }
 
     public static void shoot(Ship p, Vector2 dir) {
