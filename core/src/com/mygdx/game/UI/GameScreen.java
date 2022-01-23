@@ -105,7 +105,7 @@ public class GameScreen extends Page {
         actors.add(table);
 
 
-        table.add(new Image(parent.skin.getDrawable("stick"))).top().left().size(1.25f * TILE_SIZE);
+        table.add(new Image(parent.skin.getDrawable("heart"))).top().left().size(1.25f * TILE_SIZE);
         healthLabel = new Label("N/A", parent.skin);
         table.add(healthLabel).top().left().size(50);
 
@@ -120,8 +120,6 @@ public class GameScreen extends Page {
         table.add(new Image(parent.skin.getDrawable("ball"))).top().left().size(1.25f * TILE_SIZE);
         ammo = new Label("N/A", parent.skin);
         table.add(ammo).top().left().size(50);
-
-        table.add(new Image(parent.skin.getDrawable("key"))).size(128);
 
         table.top().left();
     }
