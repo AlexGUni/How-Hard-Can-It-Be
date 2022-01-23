@@ -1,0 +1,1139 @@
+fixed.png
+size: 1332, 108
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+Beach Tileset-0
+  rotate: false
+  xy: 2, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-1
+  rotate: false
+  xy: 2, 38
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-2
+  rotate: false
+  xy: 542, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-3
+  rotate: false
+  xy: 650, 38
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-4
+  rotate: false
+  xy: 686, 38
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-5
+  rotate: false
+  xy: 758, 38
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-6
+  rotate: false
+  xy: 866, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-7
+  rotate: false
+  xy: 1010, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-8
+  rotate: false
+  xy: 1082, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-9
+  rotate: false
+  xy: 1190, 38
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-10
+  rotate: false
+  xy: 2, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-11
+  rotate: false
+  xy: 38, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-12
+  rotate: false
+  xy: 38, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-13
+  rotate: false
+  xy: 38, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-14
+  rotate: false
+  xy: 362, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-15
+  rotate: false
+  xy: 38, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-16
+  rotate: false
+  xy: 38, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-17
+  rotate: false
+  xy: 38, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-18
+  rotate: false
+  xy: 506, 38
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-19
+  rotate: false
+  xy: 506, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-20
+  rotate: false
+  xy: 542, 38
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-21
+  rotate: false
+  xy: 542, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-22
+  rotate: false
+  xy: 578, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-23
+  rotate: false
+  xy: 578, 38
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-24
+  rotate: false
+  xy: 578, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-25
+  rotate: false
+  xy: 614, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-26
+  rotate: false
+  xy: 614, 38
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-27
+  rotate: false
+  xy: 614, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-28
+  rotate: false
+  xy: 2, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-29
+  rotate: false
+  xy: 650, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-30
+  rotate: false
+  xy: 650, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-31
+  rotate: false
+  xy: 38, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-32
+  rotate: false
+  xy: 362, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-33
+  rotate: false
+  xy: 650, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-34
+  rotate: false
+  xy: 650, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-35
+  rotate: false
+  xy: 38, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-36
+  rotate: false
+  xy: 326, 38
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-37
+  rotate: false
+  xy: 254, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-38
+  rotate: false
+  xy: 254, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-39
+  rotate: false
+  xy: 686, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-40
+  rotate: false
+  xy: 686, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-41
+  rotate: false
+  xy: 38, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-42
+  rotate: false
+  xy: 38, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-43
+  rotate: false
+  xy: 38, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-44
+  rotate: false
+  xy: 38, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-45
+  rotate: false
+  xy: 38, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-46
+  rotate: false
+  xy: 722, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-47
+  rotate: false
+  xy: 722, 38
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-48
+  rotate: false
+  xy: 722, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-49
+  rotate: false
+  xy: 758, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-50
+  rotate: false
+  xy: 758, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-51
+  rotate: false
+  xy: 794, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-52
+  rotate: false
+  xy: 794, 38
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-53
+  rotate: false
+  xy: 794, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-54
+  rotate: false
+  xy: 38, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-55
+  rotate: false
+  xy: 830, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-56
+  rotate: false
+  xy: 830, 38
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-57
+  rotate: false
+  xy: 830, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-58
+  rotate: false
+  xy: 866, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-59
+  rotate: false
+  xy: 866, 38
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-60
+  rotate: false
+  xy: 902, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-61
+  rotate: false
+  xy: 902, 38
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-62
+  rotate: false
+  xy: 902, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-63
+  rotate: false
+  xy: 938, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-64
+  rotate: false
+  xy: 938, 38
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-65
+  rotate: false
+  xy: 938, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-66
+  rotate: false
+  xy: 38, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-67
+  rotate: false
+  xy: 974, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-68
+  rotate: false
+  xy: 974, 38
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-69
+  rotate: false
+  xy: 974, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-70
+  rotate: false
+  xy: 1010, 38
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-71
+  rotate: false
+  xy: 1010, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-72
+  rotate: false
+  xy: 254, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-73
+  rotate: false
+  xy: 1046, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-74
+  rotate: false
+  xy: 686, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-75
+  rotate: false
+  xy: 1046, 38
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-76
+  rotate: false
+  xy: 1046, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-77
+  rotate: false
+  xy: 1082, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-78
+  rotate: false
+  xy: 686, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-79
+  rotate: false
+  xy: 1082, 38
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-80
+  rotate: false
+  xy: 326, 38
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-81
+  rotate: false
+  xy: 1118, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-82
+  rotate: false
+  xy: 1118, 38
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-83
+  rotate: false
+  xy: 1118, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-84
+  rotate: false
+  xy: 326, 38
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-85
+  rotate: false
+  xy: 1154, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-86
+  rotate: false
+  xy: 686, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-87
+  rotate: false
+  xy: 1154, 38
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-88
+  rotate: false
+  xy: 1154, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-89
+  rotate: false
+  xy: 1190, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-90
+  rotate: false
+  xy: 38, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-91
+  rotate: false
+  xy: 1190, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-92
+  rotate: false
+  xy: 1226, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-93
+  rotate: false
+  xy: 1226, 38
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-94
+  rotate: false
+  xy: 1226, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-95
+  rotate: false
+  xy: 1262, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-96
+  rotate: false
+  xy: 38, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-97
+  rotate: false
+  xy: 1262, 38
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-98
+  rotate: false
+  xy: 1262, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-99
+  rotate: false
+  xy: 1298, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-100
+  rotate: false
+  xy: 38, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-101
+  rotate: false
+  xy: 38, 38
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-102
+  rotate: false
+  xy: 38, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-103
+  rotate: false
+  xy: 74, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-104
+  rotate: false
+  xy: 74, 38
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-105
+  rotate: false
+  xy: 74, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-106
+  rotate: false
+  xy: 110, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-107
+  rotate: false
+  xy: 110, 38
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-108
+  rotate: false
+  xy: 38, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-109
+  rotate: false
+  xy: 110, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-110
+  rotate: false
+  xy: 146, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-111
+  rotate: false
+  xy: 146, 38
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-112
+  rotate: false
+  xy: 146, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-113
+  rotate: false
+  xy: 182, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-114
+  rotate: false
+  xy: 182, 38
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-115
+  rotate: false
+  xy: 182, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-116
+  rotate: false
+  xy: 218, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-117
+  rotate: false
+  xy: 218, 38
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-118
+  rotate: false
+  xy: 218, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-119
+  rotate: false
+  xy: 38, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-120
+  rotate: false
+  xy: 38, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-121
+  rotate: false
+  xy: 38, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-122
+  rotate: false
+  xy: 38, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-123
+  rotate: false
+  xy: 38, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-124
+  rotate: false
+  xy: 38, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-125
+  rotate: false
+  xy: 38, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-126
+  rotate: false
+  xy: 254, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-127
+  rotate: false
+  xy: 254, 38
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-128
+  rotate: false
+  xy: 254, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-129
+  rotate: false
+  xy: 290, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-130
+  rotate: false
+  xy: 290, 38
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-131
+  rotate: false
+  xy: 290, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-132
+  rotate: false
+  xy: 326, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-133
+  rotate: false
+  xy: 326, 38
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-134
+  rotate: false
+  xy: 326, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-135
+  rotate: false
+  xy: 362, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-136
+  rotate: false
+  xy: 362, 38
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-137
+  rotate: false
+  xy: 38, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-138
+  rotate: false
+  xy: 38, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-139
+  rotate: false
+  xy: 38, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-140
+  rotate: false
+  xy: 38, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-141
+  rotate: false
+  xy: 38, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-142
+  rotate: false
+  xy: 38, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-143
+  rotate: false
+  xy: 38, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-144
+  rotate: false
+  xy: 38, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-145
+  rotate: false
+  xy: 398, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-146
+  rotate: false
+  xy: 398, 38
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-147
+  rotate: false
+  xy: 398, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-148
+  rotate: false
+  xy: 434, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-149
+  rotate: false
+  xy: 434, 38
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-150
+  rotate: false
+  xy: 434, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-151
+  rotate: false
+  xy: 470, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-152
+  rotate: false
+  xy: 470, 38
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-153
+  rotate: false
+  xy: 470, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-154
+  rotate: false
+  xy: 506, 2
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-155
+  rotate: false
+  xy: 38, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-156
+  rotate: false
+  xy: 38, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-157
+  rotate: false
+  xy: 38, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-158
+  rotate: false
+  xy: 38, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-159
+  rotate: false
+  xy: 38, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-160
+  rotate: false
+  xy: 38, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+Beach Tileset-161
+  rotate: false
+  xy: 38, 74
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
