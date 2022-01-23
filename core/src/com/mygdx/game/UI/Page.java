@@ -3,17 +3,18 @@ package com.mygdx.game.UI;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.ScreenAdapter;
 import com.badlogic.gdx.scenes.scene2d.Actor;
+import com.mygdx.game.PirateGame;
 
 import java.util.ArrayList;
 
 import static com.mygdx.utils.Constants.UPDATE_VIEWPORT;
 
 public abstract class Page extends ScreenAdapter {
-    PageManager parent;
+    PirateGame parent;
 
 
     protected ArrayList<Actor> actors;
-    public Page(PageManager parent) {
+    public Page(PirateGame parent) {
         this.parent = parent;
         actors = new ArrayList<>();
         CreateActors();

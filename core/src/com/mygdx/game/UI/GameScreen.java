@@ -11,13 +11,14 @@ import com.mygdx.game.Components.ComponentEvent;
 import com.mygdx.game.Entitys.DebugText;
 import com.mygdx.game.Entitys.Player;
 import com.mygdx.game.Managers.*;
+import com.mygdx.game.PirateGame;
 
 import static com.mygdx.utils.Constants.*;
 
 public class GameScreen extends Page {
     private Label healthLabel;
     private Label dosh;
-    public GameScreen(PageManager parent) {
+    public GameScreen(PirateGame parent) {
         super(parent);
         INIT_CONSTANTS();
         PhysicsManager.Initialize(false);
