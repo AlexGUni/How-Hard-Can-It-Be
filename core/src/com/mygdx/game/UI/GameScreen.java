@@ -18,6 +18,7 @@ import static com.mygdx.utils.Constants.*;
 public class GameScreen extends Page {
     private Label healthLabel;
     private Label dosh;
+    private Label ammo;
     public GameScreen(PirateGame parent) {
         super(parent);
         INIT_CONSTANTS();
@@ -94,6 +95,7 @@ public class GameScreen extends Page {
 
         healthLabel.setText(String.valueOf(p.getHealth()));
         dosh.setText(String.valueOf(p.getPlunder()));
+        ammo.setText(String.valueOf(p.getAmmo()));
     }
 
     @Override
@@ -113,12 +115,11 @@ public class GameScreen extends Page {
         dosh = new Label("N/A", parent.skin);
         table.add(dosh).top().left().size(50);
 
-        // button.addListener(new ChangeListener() {
-        //     public void changed (ChangeEvent event, Actor actor) {
-        //         System.out.println("Clicked! Is checked: " + button.isChecked());
-        //         button.setText("Good job!");
-        //     }
-        // });
+        table.row();
+
+        table.add(new Image(parent.skin.getDrawable("ball"))).top().left().size(1.25f * TILE_SIZE);
+        ammo = new Label("N/A", parent.skin);
+        table.add(ammo).top().left().size(50);
 
         table.add(new Image(parent.skin.getDrawable("key"))).size(128);
 

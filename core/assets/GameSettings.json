@@ -6,7 +6,8 @@
     "playerSpeed" : 10000.0,
     "cannonSpeed": 10000.0,
     "argoRange_tiles": 11.0,
-    "attackRange_tiles": 4.0
+    "attackRange_tiles": 4.0,
+    "ammo": 50
   },
   "AI": {
     "maxSpeed": 8000.0,

@@ -1,5 +1,6 @@
 package com.mygdx.game.Entitys;
 
+import com.mygdx.game.Components.Pirate;
 import com.mygdx.game.Components.PlayerController;
 import com.mygdx.game.Managers.GameManager;
 
@@ -21,5 +22,9 @@ public class Player extends Ship {
     @Override
     public void cleanUp() {
         super.cleanUp();
+    }
+
+    public int getAmmo() {
+        return getComponent(Pirate.class).getAmmo();
     }
 }

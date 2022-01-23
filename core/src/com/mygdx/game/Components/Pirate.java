@@ -11,6 +11,7 @@ public class Pirate extends Component {
     private int plunder;
     protected boolean isAlive;
     private int health;
+    private int ammo;
     private final int attackDmg;
 
     /**
@@ -28,6 +29,7 @@ public class Pirate extends Component {
         JsonValue starting = GameManager.getSettings().get("starting");
         health = starting.getInt("health");
         attackDmg = starting.getInt("damage");
+        ammo = starting.getInt("ammo");
     }
 
     public void setTarget(Ship target) {
@@ -59,7 +61,15 @@ public class Pirate extends Component {
     }
 
     public void shoot(Vector2 dir) {
+        if(ammo == 0) {
+            return;
+        }
+        ammo--;
         GameManager.shoot((Ship) parent, dir);
+    }
+
+    public void reload(int ammo) {
+        this.ammo += ammo;
     }
 
     public int getHealth() {
@@ -106,5 +116,13 @@ public class Pirate extends Component {
     public void kill() {
         health = 0;
         isAlive = false;
+    }
+
+    public void setAmmo(int ammo) {
+        this.ammo = ammo;
+    }
+
+    public int getAmmo() {
+        return ammo;
     }
 }
