@@ -81,4 +81,11 @@ public final class Utilities {
     public static Vector2 floor(Vector2 a) {
         return new Vector2(MathUtils.floor(a.x), MathUtils.floor(a.y));
     }
+
+    public static void print(String v, String eol) {
+        System.out.print(v + eol);
+    }
+    public static void print(String v) {
+        System.out.println(v);
+    }
 }

@@ -8,6 +8,10 @@ import com.mygdx.game.Entitys.Player;
 import com.mygdx.game.Entitys.Ship;
 import com.mygdx.game.Managers.EntityManager;
 import com.mygdx.game.Managers.RenderingManager;
+import com.mygdx.utils.Utilities;
+import jdk.internal.icu.text.UTF16;
+
+import static com.mygdx.utils.Constants.*;
 
 /**
  * Responsible for the keyboard control of the player
@@ -62,7 +66,16 @@ public class PlayerController extends Component {
         RenderingManager.getCamera().update();
 
         if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-            ((Ship) parent).shoot();
+            int x = Gdx.input.getX();
+            int y = Gdx.input.getY();
+
+            // in range 0 to VIEWPORT 0, 0 bottom left
+            Vector2 delta = new Vector2(x, y);
+            delta.sub(HALF_DIMENSIONS); // center 0, 0
+            delta.nor();
+            delta.y *= -1;
+            // unit dir to fire
+            ((Ship) parent).shoot(delta);
         }
     }
 }

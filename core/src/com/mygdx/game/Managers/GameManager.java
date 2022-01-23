@@ -117,7 +117,7 @@ public final class GameManager {
 
     public static void shoot(Ship p, Vector2 dir) {
         Vector2 pos = p.getComponent(Transform.class).getPosition().cpy();
-        pos.add(dir.x * TILE_SIZE, (dir.y * TILE_SIZE));
+        pos.add(dir.x * TILE_SIZE * 1.25f, dir.y * TILE_SIZE * 1.25f);
         ballCache.get(currentElement++).fire(pos, dir, p);
         currentElement %= cacheSize;
     }
