@@ -2,6 +2,7 @@ package com.mygdx.game.Managers;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -10,7 +11,13 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.*;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
+import com.badlogic.gdx.utils.viewport.FillViewport;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.badlogic.gdx.utils.viewport.StretchViewport;
 import com.mygdx.game.Entitys.Player;
+
+import static com.mygdx.utils.Constants.*;
 
 public final class UIManager {
     private static boolean initialized = false;
@@ -20,16 +27,25 @@ public final class UIManager {
     private static Label dosh;
 
 
+    public static Skin getSkin() {
+        tryInit();
+        return skin;
+    }
+
+    public static Stage getStage() {
+        tryInit();
+        return stage;
+    }
+
     public static void Initialize() {
         initialized = true;
-
-        stage = new Stage();
+        stage = new Stage(new ScreenViewport());
 
         createSkin();
 
         Table table = new Table();
         table.setFillParent(true);
-        stage.addActor(table);
+        // stage.addActor(table);
         Gdx.input.setInputProcessor(stage);
 
         // final TextButton button = new TextButton("Click me!", skin);
@@ -62,10 +78,10 @@ public final class UIManager {
         tryInit();
 
         stage.act(EntityManager.getDeltaTime());
-        Player p = GameManager.getPlayer();
+        /*Player p = GameManager.getPlayer();
 
         healthLabel.setText(String.valueOf(p.getHealth()));
-        dosh.setText(String.valueOf(p.getPlunder()));
+        dosh.setText(String.valueOf(p.getPlunder()));*/
     }
 
     public static void render() {
@@ -75,6 +91,8 @@ public final class UIManager {
 
     public static void resize(int width, int height) {
         tryInit();
+        stage.getCamera().viewportWidth = width;
+        stage.getCamera().viewportHeight = height;
         stage.getViewport().update(width, height, true);
     }
 
