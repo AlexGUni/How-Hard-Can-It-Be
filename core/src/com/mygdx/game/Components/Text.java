@@ -6,7 +6,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.Managers.RenderLayer;
 import com.mygdx.game.Managers.RenderingManager;
-import com.mygdx.game.Managers.ResourceManager;
 
 /**
  * Renders text with give font and colour.

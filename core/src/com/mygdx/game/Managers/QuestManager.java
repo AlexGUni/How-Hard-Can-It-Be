@@ -1,8 +1,6 @@
 package com.mygdx.game.Managers;
 
-import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.Entitys.Player;
-import com.mygdx.game.Quests.LocateQuest;
 import com.mygdx.game.Quests.Quest;
 
 import java.util.ArrayList;

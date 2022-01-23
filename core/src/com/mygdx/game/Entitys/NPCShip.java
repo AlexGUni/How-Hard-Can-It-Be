@@ -3,9 +3,6 @@ package com.mygdx.game.Entitys;
 import com.badlogic.gdx.ai.fsm.DefaultStateMachine;
 import com.badlogic.gdx.ai.fsm.StateMachine;
 import com.badlogic.gdx.ai.steer.behaviors.Arrive;
-import com.badlogic.gdx.ai.steer.behaviors.Wander;
-import com.badlogic.gdx.ai.utils.Location;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.JsonValue;
@@ -14,8 +11,6 @@ import com.mygdx.game.Components.*;
 import com.mygdx.game.Managers.GameManager;
 import com.mygdx.utils.QueueFIFO;
 import com.mygdx.utils.Utilities;
-
-import java.lang.reflect.UndeclaredThrowableException;
 
 public class NPCShip extends Ship {
     public StateMachine<NPCShip, EnemyState> stateMachine;

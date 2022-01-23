@@ -13,9 +13,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.mygdx.utils.QueueFIFO;
-import com.mygdx.utils.Utilities;
-
-import java.util.Queue;
 
 import static com.mygdx.utils.TileMapCells.*;
 

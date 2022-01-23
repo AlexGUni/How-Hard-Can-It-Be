@@ -4,13 +4,12 @@ import com.badlogic.gdx.ai.steer.Steerable;
 import com.badlogic.gdx.ai.steer.SteeringAcceleration;
 import com.badlogic.gdx.ai.steer.SteeringBehavior;
 import com.badlogic.gdx.ai.utils.Location;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.Entitys.Ship;
 import com.mygdx.game.Managers.GameManager;
 import com.mygdx.utils.Utilities;
 
-import static com.mygdx.utils.Constants.*;
+import static com.mygdx.utils.Constants.PHYSICS_TIME_STEP;
 
 public class AINavigation extends Component implements Steerable<Vector2> {
     private static class Attributes {

@@ -1,8 +1,6 @@
 package com.mygdx.game.Entitys;
 
-import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.Components.PlayerController;
-import com.mygdx.game.Components.Transform;
 import com.mygdx.game.Managers.GameManager;
 
 public class Player extends Ship {

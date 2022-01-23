@@ -7,12 +7,8 @@ import com.mygdx.game.Components.Transform;
 import com.mygdx.game.Faction;
 import com.mygdx.game.Managers.GameManager;
 import com.mygdx.utils.Utilities;
-import org.graalvm.compiler.core.common.util.Util;
 
 import java.util.ArrayList;
-
-import static com.mygdx.utils.Constants.BUILDING_SCALE;
-import static com.mygdx.utils.Constants.TILE_SIZE;
 
 public class College extends Entity {
     private static ArrayList<String> buildingNames;

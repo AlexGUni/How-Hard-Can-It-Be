@@ -5,9 +5,9 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.Components.Component;
 import com.mygdx.game.Entitys.Building;
 
-import static com.mygdx.utils.Constants.*;
-
 import java.util.ArrayList;
+
+import static com.mygdx.utils.Constants.*;
 
 /**
  * Responsible for all rending. Renders in layers render items' layers can't be changed

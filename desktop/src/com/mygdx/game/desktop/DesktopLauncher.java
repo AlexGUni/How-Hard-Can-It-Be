@@ -1,9 +1,7 @@
 package com.mygdx.game.desktop;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3ApplicationConfiguration;
-import com.mygdx.game.PirateGame;
 import com.mygdx.game.UI.PageManager;
 
 import static com.mygdx.utils.Constants.*;

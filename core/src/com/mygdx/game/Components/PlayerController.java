@@ -7,11 +7,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.Entitys.Player;
 import com.mygdx.game.Entitys.Ship;
 import com.mygdx.game.Managers.EntityManager;
-import com.mygdx.game.Managers.GameManager;
 import com.mygdx.game.Managers.RenderingManager;
-import com.mygdx.utils.Utilities;
-
-import static com.mygdx.utils.Constants.PHYSICS_TIME_STEP;
 
 /**
  * Responsible for the keyboard control of the player
