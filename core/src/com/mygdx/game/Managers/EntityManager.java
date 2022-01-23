@@ -30,12 +30,12 @@ public final class EntityManager {
         return inpManager;
     }
 
-    public static void addComponent(Component c){
+    public static void addComponent(Component c) {
         tryInit();
         components.add(c);
     }
 
-    public static void addEntity(Entity e){
+    public static void addEntity(Entity e) {
         tryInit();
         entities.add(e);
         entityNames.add(e.getName());
@@ -51,21 +51,22 @@ public final class EntityManager {
 
     /**
      * raises the appropriate events for each entity's component. then renders after all entities have being processed
+     *
      * @param comps calls the events left to right
      */
-    public static void raiseEvents(ComponentEvent... comps){
+    public static void raiseEvents(ComponentEvent... comps) {
         tryInit();
-        for (Entity e : entities){
+        for (Entity e : entities) {
             e.raiseEvents(comps);
         }
         for (ComponentEvent c : comps) {
-            if(c == ComponentEvent.Render){
+            if (c == ComponentEvent.Render) {
                 RenderingManager.render();
 
                 break;
             }
         }
-        for (Entity e : entities){
+        for (Entity e : entities) {
             e.update();
         }
     }
@@ -73,26 +74,27 @@ public final class EntityManager {
     /**
      * Cleans up all entities and components. Disposes of the primary sprite batch
      */
-    public static void cleanUp(){
+    public static void cleanUp() {
         tryInit();
-        for (Entity e : entities){
+        for (Entity e : entities) {
             e.cleanUp();
         }
-        for (Component c : components){
+        for (Component c : components) {
             c.cleanUp();
         }
     }
 
-    private static void tryInit(){
-        if(!initialized){
+    private static void tryInit() {
+        if (!initialized) {
             Initialize();
         }
     }
 
-    public static float getDeltaTime(){
+    public static float getDeltaTime() {
         return Gdx.graphics.getDeltaTime();
     }
-    public static int getFPS(){
+
+    public static int getFPS() {
         return Gdx.graphics.getFramesPerSecond();
     }
 }

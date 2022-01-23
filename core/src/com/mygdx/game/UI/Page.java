@@ -14,6 +14,7 @@ public abstract class Page extends ScreenAdapter {
 
 
     protected ArrayList<Actor> actors;
+
     public Page(PirateGame parent) {
         this.parent = parent;
         actors = new ArrayList<>();
@@ -36,6 +37,7 @@ public abstract class Page extends ScreenAdapter {
             parent.stage.addActor(a);
         }
     }
+
     @Override
     public void render(float delta) {
         update();

@@ -15,7 +15,7 @@ import com.mygdx.utils.Utilities;
 public class NPCShip extends Ship {
     public StateMachine<NPCShip, EnemyState> stateMachine;
     private static JsonValue AISettings;
-    private QueueFIFO<Vector2> path;
+    private final QueueFIFO<Vector2> path;
 
     public NPCShip() {
         super();
@@ -59,21 +59,21 @@ public class NPCShip extends Ship {
         if (!path.isEmpty()) {
             Vector2 goTo = Utilities.tilesToDistance(path.peek()); // goto offset in world space
             goTo.add(getPosition()); // translated to player pos
-            float radius =  GameManager.getSettings().get("starting").getFloat("attackRange_tiles") + 0.5f; // in tile space
-            radius = 1;
+            float radius = GameManager.getSettings().get("starting").getFloat("attackRange_tiles") + 0.5f; // in tile space
+            // radius = 1;
             radius = Utilities.tilesToDistance(radius); // in world space
             boolean proximity = Utilities.checkProximity(goTo, getPosition(), radius);
 
             // has reached target point so remove point
             if (proximity) {
                 path.pop();
-            }
-            else {
+            } else {
                 RigidBody rb = getComponent(RigidBody.class);
                 rb.setVelocity(path.peek().cpy().scl(GameManager.getSettings().get("starting").getFloat("playerSpeed")));
             }
         }
     }
+
     public void goToTarget() {
         /*path = GameManager.getPath(
                 Utilities.distanceToTiles(getPosition()),
@@ -81,7 +81,7 @@ public class NPCShip extends Ship {
     }
 
     public void followTarget() {
-        if(getTarget() == null){
+        if (getTarget() == null) {
             stopMovement();
             return;
         }

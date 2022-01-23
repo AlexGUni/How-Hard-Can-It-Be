@@ -36,14 +36,14 @@ public class AINavigation extends Component implements Steerable<Vector2> {
     }
 
     public void setBehavior(SteeringBehavior<Vector2> behavior) {
-        if(behavior == null) {
+        if (behavior == null) {
             int i = 0;
         }
         this.behavior = behavior;
     }
 
     private void getComps() {
-        if (rb == null){
+        if (rb == null) {
             rb = parent.getComponent(RigidBody.class);
             t = parent.getComponent(Transform.class);
         }
@@ -53,23 +53,22 @@ public class AINavigation extends Component implements Steerable<Vector2> {
     public void update() {
         super.update();
         getComps();
-        if (behavior != null){
+        if (behavior != null) {
             behavior.calculateSteering(steeringOutput);
             applySteering();
-        }
-        else {
+        } else {
             stop();
         }
 
         Vector2 vel = rb.getVelocity().cpy();
-        if (vel.x == 0 && vel.y == 0){
+        if (vel.x == 0 && vel.y == 0) {
             ((Ship) parent).setShipDirection("-up");
             return;
         }
         vel.nor();
         Utilities.round(vel);
 
-        if (Ship.shipDirections.containsKey(vel)){
+        if (Ship.shipDirections.containsKey(vel)) {
             ((Ship) parent).setShipDirection(vel);
         }
     }
@@ -85,7 +84,7 @@ public class AINavigation extends Component implements Steerable<Vector2> {
         if (anyAcc) {
             Vector2 vel = rb.getVelocity();
             float speed = vel.len2();
-            if(speed > attributes.maxSpd * attributes.maxSpd) {
+            if (speed > attributes.maxSpd * attributes.maxSpd) {
                 rb.setVelocity(vel.scl(attributes.maxSpd / (float) Math.sqrt(speed)));
             }
         }

@@ -6,18 +6,13 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.scenes.scene2d.ui.Image;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextArea;
-import com.badlogic.gdx.scenes.scene2d.ui.TextField;
 import com.badlogic.gdx.scenes.scene2d.ui.Window;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.mygdx.game.Components.ComponentEvent;
-import com.mygdx.game.Entitys.DebugText;
 import com.mygdx.game.Entitys.Player;
 import com.mygdx.game.Managers.*;
 import com.mygdx.game.PirateGame;
 import com.mygdx.game.Quests.Quest;
-
-import java.awt.*;
 
 import static com.mygdx.utils.Constants.*;
 
@@ -25,7 +20,8 @@ public class GameScreen extends Page {
     private Label healthLabel;
     private Label dosh;
     private Label ammo;
-    private Label questDesc;
+    private final Label questDesc;
+
     public GameScreen(PirateGame parent) {
         super(parent);
         INIT_CONSTANTS();
@@ -74,7 +70,7 @@ public class GameScreen extends Page {
 
         GameManager.update();
 
-        if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE)){
+        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
             Gdx.app.exit();
             System.exit(0);
         }
@@ -99,7 +95,7 @@ public class GameScreen extends Page {
         cam.viewportHeight = height / ZOOM;
         cam.update();
 
-       // ((Table) actors.get(0)).setFillParent(true);
+        // ((Table) actors.get(0)).setFillParent(true);
     }
 
     @Override
@@ -110,7 +106,7 @@ public class GameScreen extends Page {
         healthLabel.setText(String.valueOf(p.getHealth()));
         dosh.setText(String.valueOf(p.getPlunder()));
         ammo.setText(String.valueOf(p.getAmmo()));
-        if(QuestManager.currentQuest().isCompleted()) {
+        if (QuestManager.currentQuest().isCompleted()) {
             questDesc.setText("Completed");
         }
     }

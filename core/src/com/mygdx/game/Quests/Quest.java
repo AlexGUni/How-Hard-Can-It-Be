@@ -20,6 +20,7 @@ public abstract class Quest {
     public int getReward() {
         return reward;
     }
+
     public boolean isCompleted() {
         return isCompleted;
     }

@@ -70,7 +70,7 @@ public class Ship extends Entity implements CollisionCallBack {
     }
 
     private String getShipDirection(Vector2 dir) {
-        if (!currentDir.equals(dir) && shipDirections.containsKey(dir)){
+        if (!currentDir.equals(dir) && shipDirections.containsKey(dir)) {
             currentDir.set(dir);
             return shipDirections.get(dir);
         }
@@ -84,8 +84,9 @@ public class Ship extends Entity implements CollisionCallBack {
     public void setShipDirection(Vector2 dir) {
         setShipDirection(getShipDirection(dir));
     }
+
     public void setShipDirection(String direction) {
-        if(Objects.equals(direction, "")) {
+        if (Objects.equals(direction, "")) {
             return;
         }
         Renderable r = getComponent(Renderable.class);
@@ -93,7 +94,7 @@ public class Ship extends Entity implements CollisionCallBack {
 
         try {
             r.setTexture(s);
-        }catch (Exception ignored){
+        } catch (Exception ignored) {
 
         }
     }
@@ -101,6 +102,7 @@ public class Ship extends Entity implements CollisionCallBack {
     public int getHealth() {
         return getComponent(Pirate.class).getHealth();
     }
+
     public int getPlunder() {
         return getComponent(Pirate.class).getPlunder();
     }
@@ -117,9 +119,6 @@ public class Ship extends Entity implements CollisionCallBack {
     }
 
 
-
-
-
     @Override
     public void BeginContact(CollisionInfo info) {
 
@@ -132,6 +131,7 @@ public class Ship extends Entity implements CollisionCallBack {
 
     /**
      * if the agro fixture hit a ship set it as the target
+     *
      * @param info the collision info
      */
     @Override
@@ -148,19 +148,17 @@ public class Ship extends Entity implements CollisionCallBack {
             if (Objects.equals(data, "agro")) {
                 p.setTarget((Ship) info.a);
             }
-            else{
-                // throw new RuntimeException("error in determining attack state for ships");
-            }
         }
     }
 
     /**
      * Will set the target to null
+     *
      * @param info collision info
      */
     @Override
     public void ExitTrigger(CollisionInfo info) {
-        if(info.b instanceof Player){
+        if (info.b instanceof Player) {
             return;
         }
         final Pirate p = info.b.getComponent(Pirate.class);

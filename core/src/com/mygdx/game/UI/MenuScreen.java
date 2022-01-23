@@ -25,7 +25,7 @@ public class MenuScreen extends Page {
         Table t = new Table();
         t.setFillParent(true);
 
-        Pixmap bgPixmap = new Pixmap(1,1, Pixmap.Format.RGB565);
+        Pixmap bgPixmap = new Pixmap(1, 1, Pixmap.Format.RGB565);
         bgPixmap.setColor(Color.RED);
         bgPixmap.fill();
         TextureRegionDrawable textureRegionDrawableBg = new TextureRegionDrawable(new TextureRegion(new Texture(bgPixmap)));

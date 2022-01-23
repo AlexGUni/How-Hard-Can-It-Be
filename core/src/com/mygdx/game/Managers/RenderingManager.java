@@ -19,7 +19,7 @@ public final class RenderingManager {
     private static OrthographicCamera camera;
     private static SpriteBatch batch;
 
-    public static void Initialize(){
+    public static void Initialize() {
         initialized = true;
         renderItems = new ArrayList<>();
 
@@ -32,7 +32,7 @@ public final class RenderingManager {
 
         layers = new ArrayList<>(RenderLayer.values().length);
 
-        for (int i = 0; i < RenderLayer.values().length; i++){
+        for (int i = 0; i < RenderLayer.values().length; i++) {
             layers.add(new ArrayList<>());
         }
     }
@@ -48,17 +48,18 @@ public final class RenderingManager {
 
     /**
      * adds item to the list of renderable and adds to the correct layer
-     * @param item component that utilises render
+     *
+     * @param item  component that utilises render
      * @param layer the layer that it will be rendered in
      */
-    public static void addItem(Component item, RenderLayer layer){
+    public static void addItem(Component item, RenderLayer layer) {
         tryInit();
         renderItems.add(item);
         layers.get(layer.ordinal()).add(renderItems.size() - 1);
     }
 
-    private static void tryInit(){
-        if(!initialized){
+    private static void tryInit() {
+        if (!initialized) {
             Initialize();
         }
     }
@@ -72,8 +73,8 @@ public final class RenderingManager {
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
 
-        for(ArrayList<Integer> layer : layers){
-            for(Integer itemIndex : layer){
+        for (ArrayList<Integer> layer : layers) {
+            for (Integer itemIndex : layer) {
                 Component item = renderItems.get(itemIndex);
                 if (item.getParent() instanceof Building) {
                     int i = 0;
@@ -90,7 +91,7 @@ public final class RenderingManager {
         batch.end();
     }
 
-    public static void cleanUp(){
+    public static void cleanUp() {
         batch.dispose();
     }
 

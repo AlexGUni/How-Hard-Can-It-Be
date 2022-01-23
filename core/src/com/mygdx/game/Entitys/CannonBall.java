@@ -14,12 +14,13 @@ import com.mygdx.game.Physics.PhysicsBodyType;
 public class CannonBall extends Entity implements CollisionCallBack {
     private static float speed;
     private boolean toggleLife;
+
     public CannonBall() {
         super(3);
         setName("ball");
         toggleLife = false;
         Transform t = new Transform();
-        t.setPosition(-100,100);
+        t.setPosition(-100, 100);
         t.setScale(0.5f, 0.5f);
         Renderable r = new Renderable(4, "ball", RenderLayer.Transparent);
         RigidBody rb = new RigidBody(PhysicsBodyType.Dynamic, r, t, true);
@@ -33,7 +34,7 @@ public class CannonBall extends Entity implements CollisionCallBack {
     @Override
     public void update() {
         super.update();
-        if(toggleLife) {
+        if (toggleLife) {
             Transform t = getComponent(Transform.class);
             t.setPosition(10000, 10000);
 

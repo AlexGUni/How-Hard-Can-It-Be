@@ -17,12 +17,13 @@ public class Entity {
     private String entityName;
     private final ArrayList<Component> components;
 
-    public Entity(){
+    public Entity() {
         components = new ArrayList<>();
         entityName = "Entity (" + ++entityCount + ")";
         EntityManager.addEntity(this);
     }
-    public Entity(int numComponents){
+
+    public Entity(int numComponents) {
         this();
         components.ensureCapacity(numComponents);
     }
@@ -42,14 +43,14 @@ public class Entity {
     }
 
     public void addComponents(Component... components) {
-        for(Component c : components){
+        for (Component c : components) {
             addComponent(c);
         }
     }
 
-    public Component getComponent(ComponentType type){
-        for (Component c : components){
-            if(c.getType() == type){
+    public Component getComponent(ComponentType type) {
+        for (Component c : components) {
+            if (c.getType() == type) {
                 return c;
             }
         }
@@ -58,15 +59,16 @@ public class Entity {
 
     /**
      * Gets the first component that is of the same type as T
+     *
      * @param type [T].class
-     * @param <T> the type of the desired component
+     * @param <T>  the type of the desired component
      * @return the component cast to the appropriate type
      */
     @SuppressWarnings("unchecked")
-    public <T> T getComponent(Class<T> type){
-        for(Component c : components){
-            if(type.isInstance(c)) {
-                return (T)c;
+    public <T> T getComponent(Class<T> type) {
+        for (Component c : components) {
+            if (type.isInstance(c)) {
+                return (T) c;
             }
         }
         return null;
@@ -74,16 +76,17 @@ public class Entity {
 
     /**
      * Gets the list of components that is of the same type as T
+     *
      * @param type [T].class
-     * @param <T> the type of the desired component
+     * @param <T>  the type of the desired component
      * @return the components cast to the appropriate type
      */
     @SuppressWarnings("unchecked")
-    public <T> ArrayList<T> getComponents(Class<T> type){
+    public <T> ArrayList<T> getComponents(Class<T> type) {
         ArrayList<T> res = new ArrayList<>();
-        for(Component c : components){
-            if(type.isInstance(c)) {
-                res.add((T)c);
+        for (Component c : components) {
+            if (type.isInstance(c)) {
+                res.add((T) c);
             }
         }
         return res;
@@ -92,10 +95,10 @@ public class Entity {
     /**
      * Raises the appropriate events on each component with exception to rendering
      */
-    public final void raiseEvents(ComponentEvent... events){
-        for(ComponentEvent event : events){
-            for(Component c : components){
-                switch (event){
+    public final void raiseEvents(ComponentEvent... events) {
+        for (ComponentEvent event : events) {
+            for (Component c : components) {
+                switch (event) {
                     case Awake:
                         c.awake();
                         break;

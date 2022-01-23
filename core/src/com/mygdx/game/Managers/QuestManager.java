@@ -2,12 +2,9 @@ package com.mygdx.game.Managers;
 
 import com.mygdx.game.Entitys.College;
 import com.mygdx.game.Entitys.Player;
-import com.mygdx.game.Faction;
 import com.mygdx.game.Quests.KillQuest;
 import com.mygdx.game.Quests.Quest;
-import com.mygdx.utils.Utilities;
 
-import java.io.UTFDataFormatException;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -24,7 +21,7 @@ public class QuestManager {
 
     public static void createRandomQuests() {
         tryInit();
-        int primaryEnemyId = new Random().nextInt(5) + 2;
+        int primaryEnemyId = new Random().nextInt(4) + 2;
         College enemy = GameManager.getCollege(primaryEnemyId);
         addQuest(new KillQuest(enemy));
     }
@@ -37,12 +34,12 @@ public class QuestManager {
     public static void checkCompleted() {
         tryInit();
         Player p = GameManager.getPlayer();
-        for(Quest q : allQuests) {
+        for (Quest q : allQuests) {
             if (q.isCompleted()) {
                 return;
             }
             boolean completed = q.checkCompleted(p);
-            if(completed) {
+            if (completed) {
                 System.out.println("locate quest completed");
                 p.plunder(q.getReward());
             }
@@ -50,7 +47,7 @@ public class QuestManager {
     }
 
     private static void tryInit() {
-        if(!initialized) {
+        if (!initialized) {
             Initialize();
         }
     }

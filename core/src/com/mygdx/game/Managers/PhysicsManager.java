@@ -33,19 +33,19 @@ public final class PhysicsManager {
     }
 
     public static void Initialize(boolean drawDebug) {
-        if(initialized){
+        if (initialized) {
             return;
         }
         initialized = true;
         box2DWorld = new World(new Vector2(0, 0), true);
         box2DBodies = new ArrayList<>();
         box2DWorld.setContactListener(new CollisionManager());
-        if(drawDebug){
+        if (drawDebug) {
             debug = new Box2DDebugRenderer(true, false, true, true, false, true);
         }
     }
 
-    public static int createBody(BodyDef bDef, FixtureDef fDef, Object userData){
+    public static int createBody(BodyDef bDef, FixtureDef fDef, Object userData) {
         tryInit();
         bDef.fixedRotation = true;
         Body b = box2DWorld.createBody(bDef);
@@ -55,7 +55,7 @@ public final class PhysicsManager {
         return box2DBodies.size();
     }
 
-    private static Shape tile_getShape(Rectangle rectangle){
+    private static Shape tile_getShape(Rectangle rectangle) {
         PolygonShape polygonShape = new PolygonShape();
         polygonShape.setAsBox(
                 rectangle.width * 0.5f * TILE_SIZE_INV,
@@ -63,7 +63,7 @@ public final class PhysicsManager {
         return polygonShape;
     }
 
-    private static Vector2 tile_getCenter(Rectangle rectangle){
+    private static Vector2 tile_getCenter(Rectangle rectangle) {
         Vector2 center = new Vector2();
         rectangle.getCenter(center);
         return center.scl(TILE_SIZE_INV);
@@ -78,12 +78,12 @@ public final class PhysicsManager {
                 break;
             }
         }
-        if(objects == null){
+        if (objects == null) {
             return;
         }
 
-        for (MapObject object: objects) {
-            Rectangle rectangle = ((RectangleMapObject)object).getRectangle();
+        for (MapObject object : objects) {
+            Rectangle rectangle = ((RectangleMapObject) object).getRectangle();
 
             //create a dynamic within the world body (also can be KinematicBody or StaticBody
             BodyDef bodyDef = new BodyDef();
@@ -95,7 +95,7 @@ public final class PhysicsManager {
             fixture.setFriction(0.1f);
 
             //setting the position of the body's origin. In this case with zero rotation
-            body.setTransform(tile_getCenter(rectangle),0);
+            body.setTransform(tile_getCenter(rectangle), 0);
         }
     }
 
@@ -104,7 +104,7 @@ public final class PhysicsManager {
     }
 
     private static void tryInit() {
-        if(!initialized) {
+        if (!initialized) {
             Initialize();
         }
     }
@@ -113,15 +113,15 @@ public final class PhysicsManager {
         tryInit();
         box2DWorld.step(PHYSICS_TIME_STEP, 6, 2);
 
-        if(debug != null){
+        if (debug != null) {
             debug.render(box2DWorld, RenderingManager.getCamera().combined);
         }
     }
 
-    public static void cleanUp(){
+    public static void cleanUp() {
         tryInit();
         box2DWorld.dispose();
-        if(debug != null) {
+        if (debug != null) {
             debug.dispose();
         }
     }

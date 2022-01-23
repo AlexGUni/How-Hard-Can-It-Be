@@ -54,14 +54,14 @@ public class Pirate extends Component {
 
     public void takeDamage(float dmg) {
         health -= dmg;
-        if(health <= 0){
+        if (health <= 0) {
             health = 0;
             isAlive = false;
         }
     }
 
     public void shoot(Vector2 dir) {
-        if(ammo == 0) {
+        if (ammo == 0) {
             return;
         }
         ammo--;
@@ -90,6 +90,7 @@ public class Pirate extends Component {
         }
         return false;
     }
+
     /**
      * if dst to target is >= attack range
      * target will be null if not in agro range

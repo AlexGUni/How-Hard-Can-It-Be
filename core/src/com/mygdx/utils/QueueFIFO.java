@@ -9,6 +9,7 @@ import java.util.Queue;
 
 /**
  * I wonder what this is
+ *
  * @param <T> Data type to store
  */
 public class QueueFIFO<T> implements Queue<T> {
@@ -62,12 +63,12 @@ public class QueueFIFO<T> implements Queue<T> {
 
     @Override
     public boolean remove(Object o) {
-        if(isEmpty()){
+        if (isEmpty()) {
             return false;
         }
         topIndex--;
         int i = data.indexOf(o);
-        if(i == -1){
+        if (i == -1) {
             return false;
         }
         topIndex--;
@@ -76,7 +77,7 @@ public class QueueFIFO<T> implements Queue<T> {
     }
 
     public void remove(int index) {
-        if(isEmpty()){
+        if (isEmpty()) {
             return;
         }
         topIndex--;
@@ -91,7 +92,7 @@ public class QueueFIFO<T> implements Queue<T> {
     @Override
     public boolean addAll(Collection<? extends T> c) {
         boolean suc = data.addAll(c);
-        if(suc){
+        if (suc) {
             topIndex = data.size();
         }
         return suc;
@@ -100,7 +101,7 @@ public class QueueFIFO<T> implements Queue<T> {
     @Override
     public boolean removeAll(Collection<?> c) {
         boolean suc = data.removeAll(c);
-        if(suc){
+        if (suc) {
             topIndex = data.size();
         }
         return suc;
@@ -109,7 +110,7 @@ public class QueueFIFO<T> implements Queue<T> {
     @Override
     public boolean retainAll(Collection<?> c) {
         boolean suc = data.retainAll(c);
-        if(suc){
+        if (suc) {
             topIndex = data.size();
         }
         return suc;
@@ -130,20 +131,21 @@ public class QueueFIFO<T> implements Queue<T> {
 
     @Override
     public T remove() {
-        if(isEmpty()){
+        if (isEmpty()) {
             throw new RuntimeException("Queue is empty");
         }
         T t = data.remove(topIndex);
         topIndex--;
         return t;
     }
+
     public T pop() {
         return remove();
     }
 
     @Override
     public T poll() {
-        if (isEmpty()){
+        if (isEmpty()) {
             return null;
         }
         topIndex--;
@@ -152,7 +154,7 @@ public class QueueFIFO<T> implements Queue<T> {
 
     @Override
     public T element() {
-        if(isEmpty()){
+        if (isEmpty()) {
             throw new RuntimeException("Queue is empty");
         }
         return data.get(topIndex);
@@ -160,7 +162,7 @@ public class QueueFIFO<T> implements Queue<T> {
 
     @Override
     public T peek() {
-        if (isEmpty()){
+        if (isEmpty()) {
             return null;
         }
         return data.get(topIndex);

@@ -6,10 +6,12 @@ public class Faction {
     private String name;
     private String shipColour;
     private Vector2 position;
+
     public Faction() {
         name = "Faction not named";
         shipColour = "";
     }
+
     public Faction(String name, String colour, Vector2 pos) {
         this();
         this.name = name;

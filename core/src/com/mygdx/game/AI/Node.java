@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 public class Node {
     private final Vector2 position;
     public float cost;
+
     public Node(float x, float y) {
         position = new Vector2(x, y);
         cost = -1;

@@ -18,6 +18,7 @@ public class Building extends Entity implements CollisionCallBack {
     private String buildingName;
     private static int atlas_id;
     private boolean isFlag;
+
     Building() {
         super();
         isFlag = false;
@@ -28,6 +29,7 @@ public class Building extends Entity implements CollisionCallBack {
         Renderable r = new Renderable(atlas_id, "big", RenderLayer.Transparent);
         addComponents(t, p, r);
     }
+
     Building(boolean isflag) {
         this();
         this.isFlag = isflag;
@@ -46,7 +48,7 @@ public class Building extends Entity implements CollisionCallBack {
     }
 
     private void destroy() {
-        if(isFlag) {
+        if (isFlag) {
             return;
         }
         Sprite s = ResourceManager.getSprite(atlas_id, buildingName + "-broken");
@@ -71,7 +73,7 @@ public class Building extends Entity implements CollisionCallBack {
 
     @Override
     public void EnterTrigger(CollisionInfo info) {
-        if(info.a instanceof CannonBall && isAlive()) {
+        if (info.a instanceof CannonBall && isAlive()) {
             destroy();
             ((CannonBall) info.a).kill();
         }

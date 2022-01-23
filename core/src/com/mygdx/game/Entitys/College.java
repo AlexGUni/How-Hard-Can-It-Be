@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class College extends Entity {
     private static ArrayList<String> buildingNames;
     private final ArrayList<Building> buildings;
+
     public College() {
         super();
         buildings = new ArrayList<>();
@@ -59,14 +60,14 @@ public class College extends Entity {
 
     public void isAlive() {
         boolean res = false;
-        for(int i = 0; i < buildings.size() - 1; i++) {
+        for (int i = 0; i < buildings.size() - 1; i++) {
             Building b = buildings.get(i);
-            if(b.isAlive()) {
+            if (b.isAlive()) {
                 res = true;
             }
         }
         if (!res) {
-           getComponent(Pirate.class).kill();
+            getComponent(Pirate.class).kill();
         }
     }
 

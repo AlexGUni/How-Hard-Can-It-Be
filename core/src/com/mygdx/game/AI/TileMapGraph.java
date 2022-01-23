@@ -46,13 +46,13 @@ public class TileMapGraph implements IndexedGraph<Node> {
         TiledMapTileLayer layer = null;
 
         // find the collision layer
-        for(MapLayer l : layers) {
-            if(l.getName().equals("Collision")) {
+        for (MapLayer l : layers) {
+            if (l.getName().equals("Collision")) {
                 layer = (TiledMapTileLayer) l;
             }
         }
         // if there is no collision layer
-        if(layer == null) {
+        if (layer == null) {
             return;
         }
         // the map dimensions
@@ -61,7 +61,7 @@ public class TileMapGraph implements IndexedGraph<Node> {
         nodes.ensureCapacity((int) mapDim.x * (int) mapDim.y);
 
         // create all the nodes
-        for(int i = 0; i < mapDim.x * mapDim.y; i++) {
+        for (int i = 0; i < mapDim.x * mapDim.y; i++) {
             nodes.add(new Node(0, 0));
         }
 
@@ -71,31 +71,31 @@ public class TileMapGraph implements IndexedGraph<Node> {
             for (int y = 0; y < layer.getHeight(); y++) {
                 TiledMapTileLayer.Cell center = layer.getCell(x, y);
 
-                if(getType(center) == OBSTACLE){
+                if (getType(center) == OBSTACLE) {
                     continue;
                 }
                 // the central node
-                addNode(x, y,false);
+                addNode(x, y);
 
                 // all surrounding nodes
                 for (int i = -1; i < 2; i++) {
                     for (int j = -1; j < 2; j++) {
 
                         // prevents the node pathing to its self
-                        if (i == 0 && j == 0){
+                        if (i == 0 && j == 0) {
                             continue;
                         }
 
                         TiledMapTileLayer.Cell cell = layer.getCell(x + i, y + j);
                         // is cell outside the map
                         if (cell == null) {
-                           continue;
+                            continue;
                         }
 
                         // is the cell passable
                         if (cell.getTile().getId() == PASSABLE) {
 
-                            addNode(x + i, y + j, false);
+                            addNode(x + i, y + j);
                             addPath(x, y, x + i, y + j);
                         }
                     }
@@ -104,7 +104,7 @@ public class TileMapGraph implements IndexedGraph<Node> {
         }
     }
 
-    public Node getNode(float x, float y){
+    public Node getNode(float x, float y) {
         Node n = nodes.get(getIndex(x, y));
         if (n.cost == -1) {
             return null;
@@ -115,6 +115,7 @@ public class TileMapGraph implements IndexedGraph<Node> {
     private int getIndex(float x, float y) {
         return (int) (mapDim.x * y + x);
     }
+
     private int getType(TiledMapTileLayer.Cell c) {
         return c.getTile().getId();
     }
@@ -125,22 +126,17 @@ public class TileMapGraph implements IndexedGraph<Node> {
 
     /**
      * doesnt add if already there
-     * @param x x pos
-     * @param y y pos
-     * @param isObstacle is an obstacle
+     *
+     * @param x          x pos
+     * @param y          y pos
      */
-    private void addNode(float x, float y, boolean isObstacle) {
+    private void addNode(float x, float y) {
         Node n = nodes.get(getIndex((int) x, (int) y));
-        if(n.cost > 0) {
+        if (n.cost > 0) {
             return;
         }
         n.set(x, y);
-        if (isObstacle) {
-            n.cost = OBSTACLE_COST;
-        }
-        else {
-            n.cost = 1;
-        }
+        n.cost = 1;
     }
 
     private void addPath(Node a, Node b) {
@@ -148,8 +144,8 @@ public class TileMapGraph implements IndexedGraph<Node> {
 
         // check if b to a exists
 
-        if(!nodePaths.containsKey(a)){
-            nodePaths.put(a, new Array<Connection<Node>>());
+        if (!nodePaths.containsKey(a)) {
+            nodePaths.put(a, new Array<>());
         }
         nodePaths.get(a).add(path);
         paths.add(path);
@@ -164,11 +160,12 @@ public class TileMapGraph implements IndexedGraph<Node> {
 
     /**
      * Finds the path
+     *
      * @param start the starting node
-     * @param goal the ending node
+     * @param goal  the ending node
      * @return a queue of the nodes to visit
      */
-    public GraphPath<Node> findPath(Node start, Node goal){
+    public GraphPath<Node> findPath(Node start, Node goal) {
         if (start == null || goal == null) {
             return null;
         }
@@ -179,15 +176,13 @@ public class TileMapGraph implements IndexedGraph<Node> {
 
     /**
      * Finds a sequence on locations which can be travelled to without collision
+     *
      * @param a starting node
      * @param b destination node
      * @return queue of location to travel to in order
      */
     public QueueFIFO<Vector2> findOptimisedPath(Node a, Node b) {
         GraphPath<Node> path = findPath(a, b);
-        if(path == null) {
-
-        }
         QueueFIFO<Vector2> res = new QueueFIFO<>();
         Vector2 delta = new Vector2();
         float sequenceLength = 0; // the amount of times a
@@ -202,10 +197,9 @@ public class TileMapGraph implements IndexedGraph<Node> {
             d.sub(prev);
 
 
-            if(delta.x == d.x && delta.y == d.y){
+            if (delta.x == d.x && delta.y == d.y) {
                 sequenceLength++;
-            }
-            else{
+            } else {
                 res.add(delta.scl(sequenceLength));
                 delta = d;
                 sequenceLength = 1;
@@ -219,6 +213,7 @@ public class TileMapGraph implements IndexedGraph<Node> {
 
     /**
      * Finds a sequence on locations which can be travelled to without collision
+     *
      * @param a starting node location
      * @param b destination node location
      * @return queue of location to travel to in order
@@ -231,6 +226,7 @@ public class TileMapGraph implements IndexedGraph<Node> {
 
     /**
      * Finds a sequence on locations which can be travelled to without collision
+     *
      * @param x1 starting node x co-ords tile space
      * @param y1 starting node y co-ords tile space
      * @param x2 destination node x co-ords tile space
@@ -242,7 +238,6 @@ public class TileMapGraph implements IndexedGraph<Node> {
         Node b = getNode(x2, y2);
         return findOptimisedPath(a, b);
     }
-
 
 
     // The Interface
@@ -258,7 +253,7 @@ public class TileMapGraph implements IndexedGraph<Node> {
 
     @Override
     public Array<Connection<Node>> getConnections(Node fromNode) {
-        if(nodePaths.containsKey(fromNode)){
+        if (nodePaths.containsKey(fromNode)) {
             return nodePaths.get(fromNode);
         }
 

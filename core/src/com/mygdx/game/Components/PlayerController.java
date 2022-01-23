@@ -8,10 +8,8 @@ import com.mygdx.game.Entitys.Player;
 import com.mygdx.game.Entitys.Ship;
 import com.mygdx.game.Managers.EntityManager;
 import com.mygdx.game.Managers.RenderingManager;
-import com.mygdx.utils.Utilities;
-import jdk.internal.icu.text.UTF16;
 
-import static com.mygdx.utils.Constants.*;
+import static com.mygdx.utils.Constants.HALF_DIMENSIONS;
 
 /**
  * Responsible for the keyboard control of the player
@@ -39,19 +37,19 @@ public class PlayerController extends Component {
 
         Vector2 dir = new Vector2(0, 0);
 
-        if(Gdx.input.isKeyPressed(Input.Keys.W)){
+        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
             dir.y += 1;
         }
 
-        if(Gdx.input.isKeyPressed(Input.Keys.S)){
+        if (Gdx.input.isKeyPressed(Input.Keys.S)) {
             dir.y -= 1;
         }
 
-        if(Gdx.input.isKeyPressed(Input.Keys.A)){
+        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
             dir.x -= 1;
         }
 
-        if(Gdx.input.isKeyPressed(Input.Keys.D)){
+        if (Gdx.input.isKeyPressed(Input.Keys.D)) {
             dir.x += 1;
         }
 
@@ -65,7 +63,7 @@ public class PlayerController extends Component {
         RenderingManager.getCamera().position.set(new Vector3(player.getPosition(), 0.0f));
         RenderingManager.getCamera().update();
 
-        if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             int x = Gdx.input.getX();
             int y = Gdx.input.getY();
 
