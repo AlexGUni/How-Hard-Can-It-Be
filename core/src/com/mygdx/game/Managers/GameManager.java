@@ -67,7 +67,11 @@ public final class GameManager {
         CreatePlayer();
         for (int i = 0; i < factions.size(); i++) {
             CreateCollege(i + 1);
+            for (int j = 0; j < settings.get("factionDefaults").getInt("shipCount"); j++) {
+                CreateNPCShip(i + 1);
+            }
         }
+
     }
 
     /**

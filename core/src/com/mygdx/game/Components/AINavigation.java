@@ -6,6 +6,7 @@ import com.badlogic.gdx.ai.steer.SteeringBehavior;
 import com.badlogic.gdx.ai.utils.Location;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.Entitys.Ship;
+import com.mygdx.game.Managers.EntityManager;
 import com.mygdx.game.Managers.GameManager;
 import com.mygdx.utils.Utilities;
 
@@ -36,9 +37,6 @@ public class AINavigation extends Component implements Steerable<Vector2> {
     }
 
     public void setBehavior(SteeringBehavior<Vector2> behavior) {
-        if (behavior == null) {
-            int i = 0;
-        }
         this.behavior = behavior;
     }
 
@@ -76,7 +74,7 @@ public class AINavigation extends Component implements Steerable<Vector2> {
     private void applySteering() {
         boolean anyAcc = false;
         if (!steeringOutput.linear.isZero()) {
-            Vector2 f = steeringOutput.linear.scl(PHYSICS_TIME_STEP);
+            Vector2 f = steeringOutput.linear;
             rb.applyForce(f);
             anyAcc = true;
         }

@@ -33,7 +33,7 @@ public class PlayerController extends Component {
     @Override
     public void update() {
         super.update();
-        final float s = speed * EntityManager.getDeltaTime();
+        final float s = speed;
 
         Vector2 dir = new Vector2(0, 0);
 

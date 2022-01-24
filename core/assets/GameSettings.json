@@ -10,7 +10,7 @@
     "ammo": 50
   },
   "AI": {
-    "maxSpeed": 8000.0,
+    "maxSpeed": 6500.0,
     "accelerationTime": 0.01,
     "arrivalTolerance": 32.0,
     "slowRadius": 64.0

@@ -56,7 +56,7 @@ public class NPCShip extends Ship {
         stateMachine.update();
 
         // follows path
-        if (!path.isEmpty()) {
+        /*if (!path.isEmpty()) {
             Vector2 goTo = Utilities.tilesToDistance(path.peek()); // goto offset in world space
             goTo.add(getPosition()); // translated to player pos
             float radius = GameManager.getSettings().get("starting").getFloat("attackRange_tiles") + 0.5f; // in tile space
@@ -71,7 +71,7 @@ public class NPCShip extends Ship {
                 RigidBody rb = getComponent(RigidBody.class);
                 rb.setVelocity(path.peek().cpy().scl(GameManager.getSettings().get("starting").getFloat("playerSpeed")));
             }
-        }
+        }*/
     }
 
     public void goToTarget() {
