@@ -18,7 +18,6 @@ import com.mygdx.game.PirateGame;
 import static com.mygdx.utils.Constants.VIEWPORT_HEIGHT;
 
 public class EndScreen extends Page {
-    private boolean hasWon;
     Label wonText;
     Label playerStats;
     public EndScreen(PirateGame game) {
