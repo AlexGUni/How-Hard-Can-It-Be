@@ -108,6 +108,8 @@ public class GameScreen extends Page {
         ammo.setText(String.valueOf(p.getAmmo()));
         if (QuestManager.currentQuest().isCompleted()) {
             questDesc.setText("Completed");
+            parent.end.win();
+            parent.setScreen(parent.end);
         }
     }
 

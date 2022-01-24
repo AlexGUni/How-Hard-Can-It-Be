@@ -5,12 +5,14 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.mygdx.game.UI.EndScreen;
 import com.mygdx.game.UI.GameScreen;
 import com.mygdx.game.UI.MenuScreen;
 
 public class PirateGame extends Game {
     public MenuScreen menu;
     public GameScreen game;
+    public EndScreen end;
     public Stage stage;
     public Skin skin;
 
@@ -20,6 +22,7 @@ public class PirateGame extends Game {
         createSkin();
         menu = new MenuScreen(this);
         game = new GameScreen(this);
+        end = new EndScreen(this);
         setScreen(menu);
     }
 
