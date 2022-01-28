@@ -9,7 +9,7 @@ public class CollisionManager implements ContactListener {
     private static boolean initialized = false;
 
     public CollisionManager() {
-        if(initialized){
+        if (initialized) {
             throw new RuntimeException("Collision manager cant be instantiated more then once");
         }
         initialized = true;
@@ -37,21 +37,19 @@ public class CollisionManager implements ContactListener {
         info.a = (Entity) cbA;
         info.b = (Entity) cbB;
 
-        if (cbA != null){
+        if (cbA != null) {
             // fa is sensor but not fb
             if (fa.isSensor() && cbB != null && !fb.isSensor()) {
                 cbB.EnterTrigger(info);
-            }
-            else {
+            } else {
                 cbA.BeginContact(info);
             }
         }
 
-        if(cbB != null) {
-            if(fb.isSensor() && cbA != null && !fa.isSensor()) {
+        if (cbB != null) {
+            if (fb.isSensor() && cbA != null && !fa.isSensor()) {
                 cbA.EnterTrigger(info);
-            }
-            else {
+            } else {
                 cbB.BeginContact(info);
             }
         }
@@ -79,20 +77,18 @@ public class CollisionManager implements ContactListener {
         info.a = (Entity) cbA;
         info.b = (Entity) cbB;
 
-        if (cbA != null){
+        if (cbA != null) {
             if (fa.isSensor() && cbB != null && !fb.isSensor()) {
                 cbB.ExitTrigger(info);
-            }
-            else {
+            } else {
                 cbA.EndContact(info);
             }
         }
 
-        if(cbB != null) {
-            if(fb.isSensor() && cbA != null && !fa.isSensor()) {
+        if (cbB != null) {
+            if (fb.isSensor() && cbA != null && !fa.isSensor()) {
                 cbA.ExitTrigger(info);
-            }
-            else {
+            } else {
                 cbB.EndContact(info);
             }
         }

@@ -45,7 +45,7 @@ public final class GameManager {
             ballCache.add(new CannonBall());
         }
 
-        for (JsonValue v : settings.get("factions")){
+        for (JsonValue v : settings.get("factions")) {
             String name = v.getString("name");
             String col = v.getString("colour");
             Vector2 pos = new Vector2(v.get("position").getFloat("x"), v.get("position").getFloat("y"));
@@ -54,7 +54,7 @@ public final class GameManager {
         }
     }
 
-    public  static void update() {
+    public static void update() {
         QuestManager.checkCompleted();
     }
 
@@ -67,7 +67,11 @@ public final class GameManager {
         CreatePlayer();
         for (int i = 0; i < factions.size(); i++) {
             CreateCollege(i + 1);
+            for (int j = 0; j < settings.get("factionDefaults").getInt("shipCount"); j++) {
+                // CreateNPCShip(i + 1);
+            }
         }
+
     }
 
     /**
@@ -100,7 +104,7 @@ public final class GameManager {
     }
 
     private static void tryInit() {
-        if(!initialized){
+        if (!initialized) {
             Initialize();
         }
     }
@@ -115,9 +119,14 @@ public final class GameManager {
         return settings;
     }
 
+    public static College getCollege(int factionId) {
+        tryInit();
+        return colleges.get(factionId - 1);
+    }
+
     public static void shoot(Ship p, Vector2 dir) {
         Vector2 pos = p.getComponent(Transform.class).getPosition().cpy();
-        pos.add(dir.x * TILE_SIZE, (dir.y * TILE_SIZE));
+        pos.add(dir.x * TILE_SIZE * 1.25f, dir.y * TILE_SIZE * 1.25f);
         ballCache.get(currentElement++).fire(pos, dir, p);
         currentElement %= cacheSize;
     }

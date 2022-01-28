@@ -7,16 +7,13 @@ import com.mygdx.game.Components.Transform;
 import com.mygdx.game.Faction;
 import com.mygdx.game.Managers.GameManager;
 import com.mygdx.utils.Utilities;
-import org.graalvm.compiler.core.common.util.Util;
 
 import java.util.ArrayList;
-
-import static com.mygdx.utils.Constants.BUILDING_SCALE;
-import static com.mygdx.utils.Constants.TILE_SIZE;
 
 public class College extends Entity {
     private static ArrayList<String> buildingNames;
     private final ArrayList<Building> buildings;
+
     public College() {
         super();
         buildings = new ArrayList<>();
@@ -34,8 +31,8 @@ public class College extends Entity {
         Faction f = GameManager.getFaction(factionId);
         Transform t = getComponent(Transform.class);
         t.setPosition(f.getPosition());
-        Pirate p = new Pirate();
-        addComponents(t, p);
+        Pirate p = getComponent(Pirate.class);
+        p.setFactionId(factionId);
         spawn(f.getColour());
     }
 
@@ -63,13 +60,14 @@ public class College extends Entity {
 
     public void isAlive() {
         boolean res = false;
-        for(Building b : buildings) {
-            if(b.isAlive()) {
+        for (int i = 0; i < buildings.size() - 1; i++) {
+            Building b = buildings.get(i);
+            if (b.isAlive()) {
                 res = true;
             }
         }
         if (!res) {
-           getComponent(Pirate.class).kill();
+            getComponent(Pirate.class).kill();
         }
     }
 

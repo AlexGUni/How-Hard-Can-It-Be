@@ -8,17 +8,16 @@ public final class Constants {
 
     public static void INIT_CONSTANTS() {
         FULLSCREEN = !Boolean.parseBoolean(System.getProperty("windowed"));
-        try{
+        try {
             SCREEN_WIDTH = Gdx.graphics.getWidth();
             SCREEN_HEIGHT = Gdx.graphics.getHeight();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             SCREEN_WIDTH = 1920;
             SCREEN_HEIGHT = 1080;
         }
-        ASPECT_RATIO = !FULLSCREEN ? 1.0f / 1.0f : (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT;
+        ASPECT_RATIO = !FULLSCREEN ? 1.0f / 1.0f : (float) SCREEN_WIDTH / (float) SCREEN_HEIGHT;
         VIEWPORT_HEIGHT = !FULLSCREEN ? 800 : SCREEN_HEIGHT;
-        VIEWPORT_WIDTH = !FULLSCREEN ? (int)(ASPECT_RATIO * VIEWPORT_HEIGHT) : SCREEN_WIDTH;
+        VIEWPORT_WIDTH = !FULLSCREEN ? (int) (ASPECT_RATIO * VIEWPORT_HEIGHT) : SCREEN_WIDTH;
         HALF_VIEWPORT_HEIGHT = VIEWPORT_WIDTH / 2;
         HALF_VIEWPORT_WIDTH = VIEWPORT_HEIGHT / 2;
         DIMENSIONS = new Vector2(VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
@@ -35,9 +34,9 @@ public final class Constants {
     public static void UPDATE_VIEWPORT(int x, int y) {
         VIEWPORT_HEIGHT = y;
         VIEWPORT_WIDTH = x;
-        ASPECT_RATIO = (float)SCREEN_WIDTH / (float)SCREEN_HEIGHT;
-        HALF_VIEWPORT_HEIGHT = VIEWPORT_WIDTH / 2;
-        HALF_VIEWPORT_WIDTH = VIEWPORT_HEIGHT / 2;
+        ASPECT_RATIO = (float) SCREEN_WIDTH / (float) SCREEN_HEIGHT;
+        HALF_VIEWPORT_HEIGHT = VIEWPORT_HEIGHT / 2;
+        HALF_VIEWPORT_WIDTH = VIEWPORT_WIDTH / 2;
         DIMENSIONS = new Vector2(VIEWPORT_WIDTH, VIEWPORT_HEIGHT);
         HALF_DIMENSIONS = new Vector2(HALF_VIEWPORT_WIDTH, HALF_VIEWPORT_HEIGHT);
     }
@@ -54,9 +53,9 @@ public final class Constants {
     public static Vector2 HALF_DIMENSIONS;
     public static String VIEWPORT_TITLE;
     public static float PHYSICS_TIME_STEP;
-    public static final float ZOOM = 1.25f;
+    public static final float ZOOM = 3f;
     public static final boolean VSYNC = true;
-    public static final float BUILDING_SCALE = 3.0f;
+    public static final float BUILDING_SCALE = 1.5f;
 
     public static float TILE_SIZE;
 

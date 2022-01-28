@@ -1,7 +1,5 @@
 package com.mygdx.game.Quests;
 
-import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.Components.ComponentType;
 import com.mygdx.game.Components.Pirate;
 import com.mygdx.game.Entitys.Entity;
 import com.mygdx.game.Entitys.Player;
@@ -20,6 +18,7 @@ public class KillQuest extends Quest {
     public KillQuest(Pirate target) {
         this();
         this.target = target;
+        description = target.getFaction().getName();
     }
 
     public KillQuest(Entity target) {

@@ -11,20 +11,24 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.mygdx.game.Entitys.Player;
+import com.mygdx.game.Managers.GameManager;
 import com.mygdx.game.PirateGame;
 
 import static com.mygdx.utils.Constants.VIEWPORT_HEIGHT;
 
-public class MenuScreen extends Page {
-    public MenuScreen(PirateGame parent) {
-        super(parent);
+public class EndScreen extends Page {
+    Label wonText;
+    Label playerStats;
+    public EndScreen(PirateGame game) {
+        super(game);
     }
-
+    public void win() {
+        wonText.setText("Congrats You Have Won");
+    }
     @Override
     protected void CreateActors() {
         Table t = new Table();
-        t.setFillParent(true);
-
         Pixmap bgPixmap = new Pixmap(1, 1, Pixmap.Format.RGB565);
         bgPixmap.setColor(Color.RED);
         bgPixmap.fill();
@@ -33,47 +37,32 @@ public class MenuScreen extends Page {
         float space = VIEWPORT_HEIGHT * 0.25f;
 
         t.setBackground(textureRegionDrawableBg);
-        Label l = new Label("Pirates the movie the game", parent.skin);
-        l.setFontScale(2);
-        t.add(l).top().spaceBottom(space * 0.5f);
+        t.setFillParent(true);
+        actors.add(t);
+        wonText = new Label("You have lost", parent.skin);
+        wonText.setFontScale(2);
+        t.top();
+        t.add(wonText).top().spaceBottom(space);
         t.row();
-
-        TextButton play = new TextButton("Play", parent.skin);
-        play.addListener(new ChangeListener() {
-            @Override
-            public void changed(ChangeEvent event, Actor actor) {
-                parent.setScreen(parent.game);
-            }
-        });
-        t.add(play).top().spaceBottom(space);
+        playerStats = new Label("Player Stats:\n", parent.skin);
+        t.add(playerStats).spaceBottom(space);
         t.row();
-
-        TextButton quit = new TextButton("Quit", parent.skin);
-        quit.addListener(new ChangeListener() {
+        TextButton b = new TextButton("Exit", parent.skin);
+        b.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
                 Gdx.app.exit();
                 System.exit(0);
             }
         });
-        t.add(quit).top().spaceBottom(space);
-        t.row();
-
-        t.add(new Label("YOU WILL GIVE US GOOD MARKS", parent.skin));
-
-        t.top();
-
-        actors.add(t);
+        t.add(b);
     }
 
     @Override
     public void show() {
         super.show();
-    }
-
-
-    @Override
-    public void hide() {
-        super.hide();
+        Player p = GameManager.getPlayer();
+        String stats = String.format("Health: %s\nAmmo: %s\nPlunder: %s", p.getHealth(), p.getAmmo(), p.getPlunder());
+        playerStats.setText(stats);
     }
 }

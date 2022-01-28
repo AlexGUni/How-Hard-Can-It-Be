@@ -3,9 +3,6 @@ package com.mygdx.game.Entitys;
 import com.badlogic.gdx.ai.fsm.DefaultStateMachine;
 import com.badlogic.gdx.ai.fsm.StateMachine;
 import com.badlogic.gdx.ai.steer.behaviors.Arrive;
-import com.badlogic.gdx.ai.steer.behaviors.Wander;
-import com.badlogic.gdx.ai.utils.Location;
-import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.JsonValue;
@@ -15,12 +12,10 @@ import com.mygdx.game.Managers.GameManager;
 import com.mygdx.utils.QueueFIFO;
 import com.mygdx.utils.Utilities;
 
-import java.lang.reflect.UndeclaredThrowableException;
-
 public class NPCShip extends Ship {
     public StateMachine<NPCShip, EnemyState> stateMachine;
     private static JsonValue AISettings;
-    private QueueFIFO<Vector2> path;
+    private final QueueFIFO<Vector2> path;
 
     public NPCShip() {
         super();
@@ -61,24 +56,24 @@ public class NPCShip extends Ship {
         stateMachine.update();
 
         // follows path
-        if (!path.isEmpty()) {
+        /*if (!path.isEmpty()) {
             Vector2 goTo = Utilities.tilesToDistance(path.peek()); // goto offset in world space
             goTo.add(getPosition()); // translated to player pos
-            float radius =  GameManager.getSettings().get("starting").getFloat("attackRange_tiles") + 0.5f; // in tile space
-            radius = 1;
+            float radius = GameManager.getSettings().get("starting").getFloat("attackRange_tiles") + 0.5f; // in tile space
+            // radius = 1;
             radius = Utilities.tilesToDistance(radius); // in world space
             boolean proximity = Utilities.checkProximity(goTo, getPosition(), radius);
 
             // has reached target point so remove point
             if (proximity) {
                 path.pop();
-            }
-            else {
+            } else {
                 RigidBody rb = getComponent(RigidBody.class);
                 rb.setVelocity(path.peek().cpy().scl(GameManager.getSettings().get("starting").getFloat("playerSpeed")));
             }
-        }
+        }*/
     }
+
     public void goToTarget() {
         /*path = GameManager.getPath(
                 Utilities.distanceToTiles(getPosition()),
@@ -86,7 +81,7 @@ public class NPCShip extends Ship {
     }
 
     public void followTarget() {
-        if(getTarget() == null){
+        if (getTarget() == null) {
             stopMovement();
             return;
         }

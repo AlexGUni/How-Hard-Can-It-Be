@@ -2,7 +2,10 @@ package com.mygdx.game.Entitys;
 
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.Components.*;
+import com.mygdx.game.Components.Pirate;
+import com.mygdx.game.Components.Renderable;
+import com.mygdx.game.Components.RigidBody;
+import com.mygdx.game.Components.Transform;
 import com.mygdx.game.Managers.RenderLayer;
 import com.mygdx.game.Managers.ResourceManager;
 import com.mygdx.game.Physics.CollisionCallBack;
@@ -15,6 +18,7 @@ public class Building extends Entity implements CollisionCallBack {
     private String buildingName;
     private static int atlas_id;
     private boolean isFlag;
+
     Building() {
         super();
         isFlag = false;
@@ -25,6 +29,7 @@ public class Building extends Entity implements CollisionCallBack {
         Renderable r = new Renderable(atlas_id, "big", RenderLayer.Transparent);
         addComponents(t, p, r);
     }
+
     Building(boolean isflag) {
         this();
         this.isFlag = isflag;
@@ -43,7 +48,7 @@ public class Building extends Entity implements CollisionCallBack {
     }
 
     private void destroy() {
-        if(isFlag) {
+        if (isFlag) {
             return;
         }
         Sprite s = ResourceManager.getSprite(atlas_id, buildingName + "-broken");
@@ -68,7 +73,7 @@ public class Building extends Entity implements CollisionCallBack {
 
     @Override
     public void EnterTrigger(CollisionInfo info) {
-        if(info.a instanceof CannonBall) {
+        if (info.a instanceof CannonBall && isAlive()) {
             destroy();
             ((CannonBall) info.a).kill();
         }

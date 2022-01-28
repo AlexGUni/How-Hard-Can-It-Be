@@ -232,3 +232,10 @@ ball
   orig: 32, 32
   offset: 0, 0
   index: -1
+heart
+  rotate: false
+  xy: 64, 128
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
