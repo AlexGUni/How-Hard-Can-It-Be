@@ -37,19 +37,19 @@ public class PlayerController extends Component {
 
         Vector2 dir = new Vector2(0, 0);
 
-        if (Gdx.input.isKeyPressed(Input.Keys.W)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.DPAD_UP)) {
             dir.y += 1;
         }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.S)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.S) || Gdx.input.isKeyPressed(Input.Keys.DPAD_DOWN)) {
             dir.y -= 1;
         }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.A)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT)) {
             dir.x -= 1;
         }
 
-        if (Gdx.input.isKeyPressed(Input.Keys.D)) {
+        if (Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT)) {
             dir.x += 1;
         }
 
@@ -63,7 +63,7 @@ public class PlayerController extends Component {
         RenderingManager.getCamera().position.set(new Vector3(player.getPosition(), 0.0f));
         RenderingManager.getCamera().update();
 
-        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+        if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
             int x = Gdx.input.getX();
             int y = Gdx.input.getY();
 
@@ -74,6 +74,9 @@ public class PlayerController extends Component {
             delta.y *= -1;
             // unit dir to fire
             ((Ship) parent).shoot(delta);
+        }
+        else if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+            ((Ship) parent).shoot(dir);
         }
     }
 }

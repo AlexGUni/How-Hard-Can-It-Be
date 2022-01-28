@@ -3,7 +3,7 @@
     "health": 100,
     "damage": 10.0,
     "plunder": 10,
-    "playerSpeed": 10000.0,
+    "playerSpeed": 100.0,
     "cannonSpeed": 10000.0,
     "argoRange_tiles": 11.0,
     "attackRange_tiles": 4.0,

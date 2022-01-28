@@ -146,6 +146,9 @@ public class Ship extends Entity implements CollisionCallBack {
 
         if (info.a instanceof Ship) {
             if (Objects.equals(data, "agro")) {
+                if (Objects.equals(info.a.getComponent(Pirate.class).getFaction().getName(), p.getFaction().getName())) {
+                    return;
+                }
                 p.setTarget((Ship) info.a);
             }
         }

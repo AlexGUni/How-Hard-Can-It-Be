@@ -169,11 +169,16 @@ public final class ResourceManager {
 
     public static Texture getTexture(String fPath) {
         tryInit();
-        return manager.get(fPath);
+        Texture t = manager.get(fPath);
+        return t;
     }
 
     public static TextureAtlas getTextureAtlas(String fPath) {
         tryInit();
+        TextureAtlas t = manager.get(fPath);
+        for (Texture t0 : t.getTextures()) {
+            t0.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
+        }
         return manager.get(fPath);
     }
 
@@ -211,7 +216,7 @@ public final class ResourceManager {
     public static TextureAtlas getTextureAtlas(int id) {
         tryInit();
         String fPath = ids.get(id - 1);
-        return manager.get(fPath);
+        return getTextureAtlas(fPath);
     }
 
     /**
@@ -225,6 +230,7 @@ public final class ResourceManager {
         // s.setV(0);
         // s.setU2(0.125f);
         // s.setV2(0.25f);
+        TextureAtlas t = getTextureAtlas(atlas_id);
         return getTextureAtlas(atlas_id).createSprite(name);
     }
 
