@@ -1,7 +1,5 @@
 package com.mygdx.game.Physics;
 
-import com.badlogic.gdx.physics.box2d.Fixture;
-
 /**
  * Allows for the callbacks during collision events
  */

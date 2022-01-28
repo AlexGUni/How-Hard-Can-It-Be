@@ -15,7 +15,7 @@ public abstract class Component {
     protected ArrayList<ComponentType> requirements;
     protected boolean reqsMet;
 
-    protected Component(){
+    protected Component() {
         reqsMet = false;
         type = ComponentType.Unknown;
         parent = null;
@@ -23,15 +23,17 @@ public abstract class Component {
         EntityManager.addComponent(this);
     }
 
-    public void setParent(Entity e){
+    public void setParent(Entity e) {
         parent = e;
     }
+
     public Entity getParent() {
         return parent;
     }
 
     /**
      * Sets the required components will crash if they aren't present
+     *
      * @param reqs take a guess
      */
     public final void setRequirements(ComponentType... reqs) {
@@ -39,19 +41,19 @@ public abstract class Component {
     }
 
     private void checkRequirements() {
-        if(reqsMet){
+        if (reqsMet) {
             return;
         }
         for (ComponentType t : requirements) {
             Component c = parent.getComponent(t);
-            if (c == null){
+            if (c == null) {
                 throw new RuntimeException("Component: " + t.name() + " Is not found for " + type.name());
             }
         }
         reqsMet = true;
     }
 
-    public final ComponentType getType(){
+    public final ComponentType getType() {
         return type;
     }
 
@@ -86,9 +88,11 @@ public abstract class Component {
     public void onKeyUp() {
         checkRequirements();
     }
+
     public void onKeyDown() {
         checkRequirements();
     }
+
     public void onMouseMove() {
         checkRequirements();
     }

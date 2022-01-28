@@ -6,6 +6,7 @@ import com.mygdx.game.Managers.EntityManager;
 
 public class DebugText extends Entity {
     Text text;
+
     public DebugText() {
         super(1);
         text = new Text(new Vector3(1, 1, 1));

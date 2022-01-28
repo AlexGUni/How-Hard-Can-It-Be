@@ -12,13 +12,19 @@ import com.mygdx.game.Managers.ResourceManager;
  */
 public class Renderable extends Component {
     protected Sprite sprite;
-    public Renderable(){
+    private boolean isVisible;
+
+    public Renderable() {
         super();
+        isVisible = true;
         type = ComponentType.Renderable;
+        sprite = new Sprite();
+        RenderingManager.addItem(this, RenderLayer.Transparent);
     }
 
     /**
      * Calls default constructor
+     *
      * @param texId the id of the texture the sprite will take on
      * @param layer the rendering layer
      */
@@ -27,6 +33,7 @@ public class Renderable extends Component {
         sprite = new Sprite(ResourceManager.getTexture(texId));
         RenderingManager.addItem(this, layer);
     }
+
     public Renderable(int atlasId, String texName, RenderLayer layer) {
         this();
         sprite = new Sprite(ResourceManager.getSprite(atlasId, texName));
@@ -36,11 +43,11 @@ public class Renderable extends Component {
     @Override
     public void update() {
         super.update();
-        if(sprite == null){
+        if (sprite == null) {
             return;
         }
         Transform c = parent.getComponent(Transform.class);
-        if(c == null){
+        if (c == null) {
             return;
         }
         Vector2 p = c.getPosition();
@@ -54,7 +61,7 @@ public class Renderable extends Component {
     @Override
     public void render() {
         super.render();
-        if(sprite == null){
+        if (sprite == null || !isVisible) {
             return;
         }
         sprite.draw(RenderingManager.getBatch());
@@ -68,4 +75,27 @@ public class Renderable extends Component {
     public Sprite getSprite() {
         return sprite;
     }
+
+    public void setTexture(Sprite s) {
+        Sprite a = getSprite();
+        a.setTexture(s.getTexture());
+        a.setU(s.getU());
+        a.setV(s.getV());
+        a.setU2(s.getU2());
+        a.setV2(s.getV2());
+    }
+
+    public boolean isVisible() {
+        return isVisible;
+    }
+    public void show() {
+        isVisible = true;
+    }
+    public void hide() {
+        isVisible = false;
+    }
+    public void toggleVisibility() {
+        isVisible = !isVisible;
+    }
+
 }

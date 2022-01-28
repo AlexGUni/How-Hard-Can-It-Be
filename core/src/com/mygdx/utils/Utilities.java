@@ -3,38 +3,43 @@ package com.mygdx.utils;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector2;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 import static com.mygdx.utils.Constants.TILE_SIZE;
 
 public final class Utilities {
-    public static float vectorToAngle (Vector2 v) {
+    public static float vectorToAngle(Vector2 v) {
         return (float) Math.atan2(-v.x, v.y);
     }
+
     public static Vector2 angleToVector(Vector2 out, float angle) {
-        out.x = -(float)Math.sin(angle);
-        out.y = (float)Math.cos(angle);
+        out.x = -(float) Math.sin(angle);
+        out.y = (float) Math.cos(angle);
         return out;
     }
 
-    public static float tilesToDistance(float tiles){
+    public static float tilesToDistance(float tiles) {
         return TILE_SIZE * tiles;
     }
 
-    public static Vector2 tilesToDistance(Vector2 tiles){
+    public static Vector2 tilesToDistance(Vector2 tiles) {
         return tiles.cpy().scl(TILE_SIZE);
     }
 
-    public static int distanceToTiles(float dist){
+    public static int distanceToTiles(float dist) {
         return (int) (dist / TILE_SIZE);
     }
 
-    public static Vector2 distanceToTiles(Vector2 dist){
+    public static Vector2 distanceToTiles(Vector2 dist) {
         return dist.cpy().scl(1.0f / TILE_SIZE);
     }
 
     /**
      * checks the proximity of point a to point b
-     * @param a first point
-     * @param b second point
+     *
+     * @param a      first point
+     * @param b      second point
      * @param radius min dist to be considered close
      * @return |dist(a, b)| < radius
      */
@@ -64,5 +69,26 @@ public final class Utilities {
         x.x = Math.round(x.x);
         x.y = Math.round(x.y);
         return x;
+    }
+
+    public static Vector2 randomPos(float min, float max) {
+        Random r = new Random();
+        return new Vector2(min + r.nextFloat() * (max - min), min + r.nextFloat() * (max - min));
+    }
+
+    public static <T> T randomChoice(ArrayList<T> list) {
+        return list.get(new Random().nextInt(list.size()));
+    }
+
+    public static Vector2 floor(Vector2 a) {
+        return new Vector2(MathUtils.floor(a.x), MathUtils.floor(a.y));
+    }
+
+    public static void print(String v, String eol) {
+        System.out.print(v + eol);
+    }
+
+    public static void print(String v) {
+        System.out.println(v);
     }
 }

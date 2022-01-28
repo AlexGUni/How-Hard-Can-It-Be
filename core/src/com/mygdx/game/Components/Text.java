@@ -6,7 +6,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.Managers.RenderLayer;
 import com.mygdx.game.Managers.RenderingManager;
-import com.mygdx.game.Managers.ResourceManager;
 
 /**
  * Renders text with give font and colour.
@@ -19,12 +18,14 @@ public class Text extends Component {
     Vector2 position;
     Vector2 offset;
     String text;
+
     public Text() {
         super();
         position = new Vector2();
         offset = new Vector2();
         type = ComponentType.Text;
     }
+
     public Text(Vector3 fontColour) {
         this();
         // font = ResourceManager.getFont(font_id);
@@ -35,11 +36,14 @@ public class Text extends Component {
 
     /**
      * isn't used if parent has a transform component
+     *
      * @param pos pos to render the text
      */
     public void setPosition(Vector2 pos) {
         position.set(pos);
-    }/**
+    }
+
+    /**
      * isn't used if parent has a transform component
      */
     public void setPosition(float x, float y) {
@@ -50,7 +54,7 @@ public class Text extends Component {
         fontColour.set(col);
     }
 
-    public void setText(String text){
+    public void setText(String text) {
         this.text = text;
     }
 
@@ -58,7 +62,7 @@ public class Text extends Component {
     public void update() {
         super.update();
         Transform t = parent.getComponent(Transform.class);
-        if(t == null){
+        if (t == null) {
             return;
         }
         position.set(t.getPosition());

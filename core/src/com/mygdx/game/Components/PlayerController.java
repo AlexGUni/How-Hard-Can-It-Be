@@ -6,9 +6,10 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.Entitys.Player;
 import com.mygdx.game.Entitys.Ship;
+import com.mygdx.game.Managers.EntityManager;
 import com.mygdx.game.Managers.RenderingManager;
 
-import static com.mygdx.utils.Constants.PHYSICS_TIME_STEP;
+import static com.mygdx.utils.Constants.HALF_DIMENSIONS;
 
 /**
  * Responsible for the keyboard control of the player
@@ -32,23 +33,23 @@ public class PlayerController extends Component {
     @Override
     public void update() {
         super.update();
-        float s = speed * PHYSICS_TIME_STEP;
+        final float s = speed;
 
         Vector2 dir = new Vector2(0, 0);
 
-        if(Gdx.input.isKeyPressed(Input.Keys.W)){
+        if (Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.DPAD_UP)) {
             dir.y += 1;
         }
 
-        if(Gdx.input.isKeyPressed(Input.Keys.S)){
+        if (Gdx.input.isKeyPressed(Input.Keys.S) || Gdx.input.isKeyPressed(Input.Keys.DPAD_DOWN)) {
             dir.y -= 1;
         }
 
-        if(Gdx.input.isKeyPressed(Input.Keys.A)){
+        if (Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT)) {
             dir.x -= 1;
         }
 
-        if(Gdx.input.isKeyPressed(Input.Keys.D)){
+        if (Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT)) {
             dir.x += 1;
         }
 
@@ -62,24 +63,20 @@ public class PlayerController extends Component {
         RenderingManager.getCamera().position.set(new Vector3(player.getPosition(), 0.0f));
         RenderingManager.getCamera().update();
 
-        if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-            ((Ship) parent).shoot();
-        }
+        if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
+            int x = Gdx.input.getX();
+            int y = Gdx.input.getY();
 
-        if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_1)) {
-            ((Ship) parent).setFaction(1);
+            // in range 0 to VIEWPORT 0, 0 bottom left
+            Vector2 delta = new Vector2(x, y);
+            delta.sub(HALF_DIMENSIONS); // center 0, 0
+            delta.nor();
+            delta.y *= -1;
+            // unit dir to fire
+            ((Ship) parent).shoot(delta);
         }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_2)) {
-            ((Ship) parent).setFaction(2);
-        }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_3)) {
-            ((Ship) parent).setFaction(3);
-        }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_4)) {
-            ((Ship) parent).setFaction(4);
-        }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.NUM_5)) {
-            ((Ship) parent).setFaction(5);
+        else if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+            ((Ship) parent).shoot(dir);
         }
     }
 }

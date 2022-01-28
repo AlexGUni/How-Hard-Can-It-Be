@@ -211,14 +211,14 @@ coin
   orig: 32, 32
   offset: 0, 0
   index: -1
-stick
+key-s
   rotate: false
   xy: 160, 128
   size: 32, 32
   orig: 32, 32
   offset: 0, 0
   index: -1
-key
+key-w
   rotate: false
   xy: 128, 128
   size: 32, 32
@@ -228,6 +228,41 @@ key
 ball
   rotate: false
   xy: 96, 128
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+heart
+  rotate: false
+  xy: 64, 128
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+key-d
+  rotate: false
+  xy: 32, 128
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+key-a
+  rotate: false
+  xy: 0, 128
+  size: 32, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+space
+  rotate: false
+  xy: 192, 0
+  size: 64, 32
+  orig: 32, 32
+  offset: 0, 0
+  index: -1
+key-esc
+  rotate: false
+  xy: 160, 0
   size: 32, 32
   orig: 32, 32
   offset: 0, 0

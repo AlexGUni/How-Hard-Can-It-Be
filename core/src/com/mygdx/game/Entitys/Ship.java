@@ -70,7 +70,7 @@ public class Ship extends Entity implements CollisionCallBack {
     }
 
     private String getShipDirection(Vector2 dir) {
-        if (!currentDir.equals(dir) && shipDirections.containsKey(dir)){
+        if (!currentDir.equals(dir) && shipDirections.containsKey(dir)) {
             currentDir.set(dir);
             return shipDirections.get(dir);
         }
@@ -84,19 +84,17 @@ public class Ship extends Entity implements CollisionCallBack {
     public void setShipDirection(Vector2 dir) {
         setShipDirection(getShipDirection(dir));
     }
+
     public void setShipDirection(String direction) {
-        if(Objects.equals(direction, "")) {
+        if (Objects.equals(direction, "")) {
             return;
         }
         Renderable r = getComponent(Renderable.class);
         Sprite s = ResourceManager.getSprite(3, getColour() + direction);
 
         try {
-            r.getSprite().setU(s.getU());
-            r.getSprite().setV(s.getV());
-            r.getSprite().setU2(s.getU2());
-            r.getSprite().setV2(s.getV2());
-        }catch (Exception ignored){
+            r.setTexture(s);
+        } catch (Exception ignored) {
 
         }
     }
@@ -104,12 +102,13 @@ public class Ship extends Entity implements CollisionCallBack {
     public int getHealth() {
         return getComponent(Pirate.class).getHealth();
     }
+
     public int getPlunder() {
         return getComponent(Pirate.class).getPlunder();
     }
 
-    public void shoot() {
-        getComponent(Pirate.class).shoot(currentDir);
+    public void shoot(Vector2 dir) {
+        getComponent(Pirate.class).shoot(dir);
     }
 
     /**
@@ -118,9 +117,6 @@ public class Ship extends Entity implements CollisionCallBack {
     public Vector2 getPosition() {
         return getComponent(Transform.class).getPosition().cpy();
     }
-
-
-
 
 
     @Override
@@ -135,12 +131,14 @@ public class Ship extends Entity implements CollisionCallBack {
 
     /**
      * if the agro fixture hit a ship set it as the target
+     *
      * @param info the collision info
      */
     @Override
     public void EnterTrigger(CollisionInfo info) {
         if (info.fA.isSensor() || !info.fB.isSensor() || this != info.a) {
-            throw new RuntimeException("error in triggers");
+            return;
+            // throw new RuntimeException("error in triggers");
         }
 
         final Pirate p = info.b.getComponent(Pirate.class);
@@ -148,21 +146,22 @@ public class Ship extends Entity implements CollisionCallBack {
 
         if (info.a instanceof Ship) {
             if (Objects.equals(data, "agro")) {
+                if (Objects.equals(info.a.getComponent(Pirate.class).getFaction().getName(), p.getFaction().getName())) {
+                    return;
+                }
                 p.setTarget((Ship) info.a);
-            }
-            else{
-                throw new RuntimeException("error in determining attack state for ships");
             }
         }
     }
 
     /**
      * Will set the target to null
+     *
      * @param info collision info
      */
     @Override
     public void ExitTrigger(CollisionInfo info) {
-        if(info.b instanceof Player){
+        if (info.b instanceof Player) {
             return;
         }
         final Pirate p = info.b.getComponent(Pirate.class);

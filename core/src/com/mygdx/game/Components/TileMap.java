@@ -17,7 +17,8 @@ import static com.mygdx.utils.Constants.TILE_SIZE;
 public class TileMap extends Component {
     TiledMap map;
     TiledMapRenderer renderer;
-    private TileMap(){
+
+    private TileMap() {
         super();
         type = ComponentType.TileMap;
         // CollisionManager.addTileMap(this);
@@ -32,7 +33,7 @@ public class TileMap extends Component {
         TILE_SIZE = getTileDim().x;
     }
 
-    public TiledMapTileLayer.Cell getCell(Vector2 pos){
+    public TiledMapTileLayer.Cell getCell(Vector2 pos) {
         Vector2 p = pos.cpy();
         TiledMapTileLayer l = (TiledMapTileLayer) map.getLayers().get(1);
         p.x /= l.getTileWidth();
@@ -60,7 +61,7 @@ public class TileMap extends Component {
     @Override
     public void render() {
         super.render();
-        renderer.render(new int[] { 0 });
+        renderer.render(new int[]{0, 1});
     }
 
     @Override

@@ -9,20 +9,22 @@ import com.mygdx.game.Physics.PhysicsBodyType;
 public class RigidBody extends Component {
     int bodyId;
     private final Vector2 halfDim;
+
     public RigidBody() {
         super();
         type = ComponentType.RigidBody;
         halfDim = new Vector2();
         setRequirements(ComponentType.Transform, ComponentType.Renderable);
     }
+
     public RigidBody(PhysicsBodyType type, Renderable r, Transform t) {
         this(type, r, t, false);
     }
 
-    public RigidBody(PhysicsBodyType type, Renderable r, Transform t, boolean isTrigger){
+    public RigidBody(PhysicsBodyType type, Renderable r, Transform t, boolean isTrigger) {
         this();
         BodyDef def = new BodyDef();
-        switch (type){
+        switch (type) {
             case Static:
                 def.type = BodyDef.BodyType.StaticBody;
                 break;
@@ -33,11 +35,14 @@ public class RigidBody extends Component {
                 def.type = BodyDef.BodyType.KinematicBody;
                 break;
         }
-        final float h_x = r.sprite.getWidth() * 0.5f;
-        final float h_y = r.sprite.getHeight() * 0.5f;
+        float h_x = r.sprite.getWidth() * 0.5f;
+        float h_y = r.sprite.getHeight() * 0.5f;
         halfDim.set(h_x, h_y);
 
         def.position.set(t.getPosition().x + h_x, t.getPosition().y + h_y);
+        h_x *= t.getScale().x;
+        h_y *= t.getScale().y;
+
         def.angle = t.getRotation();
 
         PolygonShape shape = new PolygonShape();
@@ -80,9 +85,13 @@ public class RigidBody extends Component {
         getBody().setUserData(data);
     }
 
-    public void setVelocity(Vector2 vel){
+    public void setVelocity(Vector2 vel) {
         Body b = PhysicsManager.getBody(bodyId);
         b.setLinearVelocity(vel);
+    }
+
+    public void setVelocity(float x, float y) {
+        setVelocity(new Vector2(x, y));
     }
 
     public void setPosition(Vector2 position) {
@@ -92,7 +101,7 @@ public class RigidBody extends Component {
 
     public void setPosition(Vector2 position, boolean offset) {
         Body b = PhysicsManager.getBody(bodyId);
-        if(offset){
+        if (offset) {
             position.add(halfDim);
         }
         b.setTransform(position, 0);

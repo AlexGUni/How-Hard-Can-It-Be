@@ -11,6 +11,7 @@ public class Transform extends Component implements Location<Vector2> {
     private final Vector2 position;
     private final Vector2 scale;
     private float rotation;
+
     public Transform() {
         position = new Vector2();
         scale = new Vector2(1, 1);
@@ -21,6 +22,7 @@ public class Transform extends Component implements Location<Vector2> {
     public void setPosition(Vector2 pos, boolean rb) {
         setPosition(pos.x, pos.y, rb);
     }
+
     public void setPosition(float x, float y, boolean rb_) {
         position.set(x, y);
         if (parent != null && rb_) {
@@ -34,6 +36,7 @@ public class Transform extends Component implements Location<Vector2> {
     public void setPosition(Vector2 pos) {
         setPosition(pos.x, pos.y);
     }
+
     public void setPosition(float x, float y) {
         position.set(x, y);
         if (parent != null) {
@@ -47,6 +50,7 @@ public class Transform extends Component implements Location<Vector2> {
     public void setScale(Vector2 pos) {
         scale.set(pos);
     }
+
     public void setScale(float x, float y) {
         scale.set(x, y);
     }
@@ -54,17 +58,17 @@ public class Transform extends Component implements Location<Vector2> {
     /**
      * @param rot in Radians
      */
-    public void setRotation(float rot){
+    public void setRotation(float rot) {
         rotation = rot;
     }
 
-    public Vector2 getPosition(){
+    public Vector2 getPosition() {
         return position;
     }
 
     public Vector2 getCenter() {
         RigidBody rb = parent.getComponent(RigidBody.class);
-        if(rb == null){
+        if (rb == null) {
             return getPosition();
         }
         return rb.getBody().getWorldCenter();
@@ -101,14 +105,14 @@ public class Transform extends Component implements Location<Vector2> {
         return new Transform();
     }
 
-    public Vector2 getScale(){
+    public Vector2 getScale() {
         return scale;
     }
 
     /**
      * @return radians
      */
-    public float getRotation(){
+    public float getRotation() {
         return rotation;
     }
 }

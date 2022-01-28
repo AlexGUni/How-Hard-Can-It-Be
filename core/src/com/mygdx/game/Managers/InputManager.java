@@ -9,8 +9,9 @@ import com.mygdx.game.Components.ComponentEvent;
  */
 public class InputManager implements InputProcessor {
     public static boolean initialized = false;
+
     public InputManager() {
-        if (initialized){
+        if (initialized) {
             throw new RuntimeException("Cant have multiple instances of input manager");
         }
         initialized = true;

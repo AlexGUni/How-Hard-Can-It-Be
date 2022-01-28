@@ -24,7 +24,7 @@ public class LocateQuest extends Quest {
 
     @Override
     public boolean checkCompleted(Player p) {
-        if(radius == -1) {
+        if (radius == -1) {
             return false;
         }
         Vector2 delta = p.getPosition().cpy();

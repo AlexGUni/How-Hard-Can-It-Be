@@ -16,6 +16,7 @@ public enum EnemyState implements State<NPCShip> {
             e.stopMovement();
             e.wander();
         }
+
         @Override
         public void update(NPCShip e) {
             super.update(e);
@@ -28,8 +29,8 @@ public enum EnemyState implements State<NPCShip> {
     PURSUE() {
         @Override
         public void enter(NPCShip e) {
-            // e.followTarget();
-            e.goToTarget();
+            e.followTarget();
+            // e.goToTarget();
         }
 
         @Override
@@ -55,6 +56,7 @@ public enum EnemyState implements State<NPCShip> {
         public void enter(NPCShip e) {
             e.stopMovement();
         }
+
         @Override
         public void update(NPCShip e) {
             super.update(e);
@@ -75,22 +77,21 @@ public enum EnemyState implements State<NPCShip> {
             case WANDER:
                 if (p.isAgro()) {
                     m.changeState(PURSUE);
-                }
-                else if(p.canAttack()){
+                } else if (p.canAttack()) {
                     m.changeState(ATTACK);
                 }
                 // if college attacked hunt
-                else if (false){
+                else if (false) {
                     m.changeState(HUNT);
                 }
                 break;
             case PURSUE:
                 // if enter attack range attack
-                if(p.canAttack()){
+                if (p.canAttack()) {
                     m.changeState(ATTACK);
                 }
                 // if leave detection range wander
-                if(!p.canAttack() && !p.isAgro()) {
+                if (!p.canAttack() && !p.isAgro()) {
                     m.changeState(WANDER);
                 }
                 break;
@@ -102,11 +103,11 @@ public enum EnemyState implements State<NPCShip> {
                 break;
             case ATTACK:
                 // if leave attack range pursue
-                if(p.isAgro() && !p.canAttack()){
+                if (p.isAgro() && !p.canAttack()) {
                     m.changeState(PURSUE);
                 }
                 // if target dead
-                else if(!p.getTarget().isAlive()) {
+                else if (!p.getTarget().isAlive()) {
                     m.changeState(WANDER);
                 }
                 break;

@@ -9,6 +9,7 @@ import com.mygdx.game.Components.Transform;
 import com.mygdx.game.Entitys.*;
 import com.mygdx.game.Faction;
 import com.mygdx.utils.QueueFIFO;
+import com.mygdx.utils.Utilities;
 
 import java.util.ArrayList;
 
@@ -18,8 +19,9 @@ public final class GameManager {
     private static boolean initialized = false;
     private static ArrayList<Faction> factions;
     private static ArrayList<Ship> ships;
+    private static ArrayList<College> colleges;
 
-    private static final int cacheSize = 10;
+    private static final int cacheSize = 20;
     private static ArrayList<CannonBall> ballCache;
     private static int currentElement;
 
@@ -37,24 +39,39 @@ public final class GameManager {
         factions = new ArrayList<>();
         ships = new ArrayList<>();
         ballCache = new ArrayList<>(cacheSize);
+        colleges = new ArrayList<>();
 
         for (int i = 0; i < cacheSize; i++) {
             ballCache.add(new CannonBall());
         }
 
-        for (JsonValue v : settings.get("factions")){
+        for (JsonValue v : settings.get("factions")) {
             String name = v.getString("name");
             String col = v.getString("colour");
-            factions.add(new Faction(name, col));
+            Vector2 pos = new Vector2(v.get("position").getFloat("x"), v.get("position").getFloat("y"));
+            pos = Utilities.tilesToDistance(pos);
+            factions.add(new Faction(name, col, pos));
         }
     }
 
-    public  static void update() {
+    public static void update() {
         QuestManager.checkCompleted();
     }
 
     public static Player getPlayer() {
         return (Player) ships.get(0);
+    }
+
+    public static void SpawnGame(int mapId) {
+        CreateWorldMap(mapId);
+        CreatePlayer();
+        for (int i = 0; i < factions.size(); i++) {
+            CreateCollege(i + 1);
+            for (int j = 0; j < settings.get("factionDefaults").getInt("shipCount"); j++) {
+                // CreateNPCShip(i + 1);
+            }
+        }
+
     }
 
     /**
@@ -80,8 +97,14 @@ public final class GameManager {
         mapGraph = new TileMapGraph(map.getTileMap());
     }
 
+    public static void CreateCollege(int factionId) {
+        tryInit();
+        College c = new College(factionId);
+        colleges.add(c);
+    }
+
     private static void tryInit() {
-        if(!initialized){
+        if (!initialized) {
             Initialize();
         }
     }
@@ -96,9 +119,14 @@ public final class GameManager {
         return settings;
     }
 
+    public static College getCollege(int factionId) {
+        tryInit();
+        return colleges.get(factionId - 1);
+    }
+
     public static void shoot(Ship p, Vector2 dir) {
         Vector2 pos = p.getComponent(Transform.class).getPosition().cpy();
-        pos.add(dir.x * TILE_SIZE, (dir.y * TILE_SIZE));
+        pos.add(dir.x * TILE_SIZE * 1.25f, dir.y * TILE_SIZE * 1.25f);
         ballCache.get(currentElement++).fire(pos, dir, p);
         currentElement %= cacheSize;
     }

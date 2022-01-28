@@ -3,10 +3,11 @@ package com.mygdx.game.Managers;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.mygdx.game.Components.Component;
-
-import static com.mygdx.utils.Constants.*;
+import com.mygdx.game.Entitys.Building;
 
 import java.util.ArrayList;
+
+import static com.mygdx.utils.Constants.*;
 
 /**
  * Responsible for all rending. Renders in layers render items' layers can't be changed
@@ -18,21 +19,21 @@ public final class RenderingManager {
     private static OrthographicCamera camera;
     private static SpriteBatch batch;
 
-    public static void Initialize(){
+    public static void Initialize() {
         initialized = true;
         renderItems = new ArrayList<>();
 
         batch = new SpriteBatch();
         // batch.enableBlending();
         camera = new OrthographicCamera();
-        camera.viewportHeight = VIEWPORT_HEIGHT;
-        camera.viewportWidth = VIEWPORT_WIDTH;
+        camera.viewportHeight = VIEWPORT_HEIGHT / ZOOM;
+        camera.viewportWidth = VIEWPORT_WIDTH / ZOOM;
         camera.update();
 
         layers = new ArrayList<>(RenderLayer.values().length);
 
-        for (int i = 0; i < RenderLayer.values().length; i++){
-            layers.add(new ArrayList<Integer>());
+        for (int i = 0; i < RenderLayer.values().length; i++) {
+            layers.add(new ArrayList<>());
         }
     }
 
@@ -47,17 +48,18 @@ public final class RenderingManager {
 
     /**
      * adds item to the list of renderable and adds to the correct layer
-     * @param item component that utilises render
+     *
+     * @param item  component that utilises render
      * @param layer the layer that it will be rendered in
      */
-    public static void addItem(Component item, RenderLayer layer){
+    public static void addItem(Component item, RenderLayer layer) {
         tryInit();
         renderItems.add(item);
         layers.get(layer.ordinal()).add(renderItems.size() - 1);
     }
 
-    private static void tryInit(){
-        if(!initialized){
+    private static void tryInit() {
+        if (!initialized) {
             Initialize();
         }
     }
@@ -71,9 +73,12 @@ public final class RenderingManager {
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
 
-        for(ArrayList<Integer> layer : layers){
-            for(Integer itemIndex : layer){
+        for (ArrayList<Integer> layer : layers) {
+            for (Integer itemIndex : layer) {
                 Component item = renderItems.get(itemIndex);
+                if (item.getParent() instanceof Building) {
+                    int i = 0;
+                }
                 item.render();
             }
         }
@@ -86,7 +91,7 @@ public final class RenderingManager {
         batch.end();
     }
 
-    public static void cleanUp(){
+    public static void cleanUp() {
         batch.dispose();
     }
 

@@ -1,11 +1,12 @@
 package com.mygdx.game.Managers;
 
-import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.Entitys.College;
 import com.mygdx.game.Entitys.Player;
-import com.mygdx.game.Quests.LocateQuest;
+import com.mygdx.game.Quests.KillQuest;
 import com.mygdx.game.Quests.Quest;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class QuestManager {
     private static boolean initialized = false;
@@ -20,29 +21,39 @@ public class QuestManager {
 
     public static void createRandomQuests() {
         tryInit();
-        LocateQuest q = new LocateQuest(new Vector2(100, 100), 50);
+        int primaryEnemyId = new Random().nextInt(4) + 2;
+        College enemy = GameManager.getCollege(primaryEnemyId);
+        addQuest(new KillQuest(enemy));
+    }
+
+    public static void addQuest(Quest q) {
+        tryInit();
         allQuests.add(q);
     }
 
     public static void checkCompleted() {
         tryInit();
         Player p = GameManager.getPlayer();
-        for(Quest q : allQuests) {
+        for (Quest q : allQuests) {
             if (q.isCompleted()) {
                 return;
             }
             boolean completed = q.checkCompleted(p);
-            if(completed) {
+            if (completed) {
                 System.out.println("locate quest completed");
                 p.plunder(q.getReward());
             }
         }
     }
 
-
     private static void tryInit() {
-        if(!initialized) {
+        if (!initialized) {
             Initialize();
         }
+    }
+
+    public static Quest currentQuest() {
+        tryInit();
+        return allQuests.get(0);
     }
 }
