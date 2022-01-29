@@ -5,18 +5,19 @@ import com.badlogic.gdx.math.Vector2;
 public class Faction {
     private String name;
     private String shipColour;
-    private Vector2 position;
+    private Vector2 position, spawnPos;
 
     public Faction() {
         name = "Faction not named";
         shipColour = "";
     }
 
-    public Faction(String name, String colour, Vector2 pos) {
+    public Faction(String name, String colour, Vector2 pos, Vector2 spawn) {
         this();
         this.name = name;
         this.shipColour = colour;
         this.position = pos;
+        spawnPos = spawn;
     }
 
     public String getName() {
@@ -29,5 +30,9 @@ public class Faction {
 
     public Vector2 getPosition() {
         return position;
+    }
+
+    public Vector2 getSpawnPos() {
+        return spawnPos;
     }
 }

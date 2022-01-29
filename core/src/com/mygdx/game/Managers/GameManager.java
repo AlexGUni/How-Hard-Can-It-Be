@@ -50,7 +50,9 @@ public final class GameManager {
             String col = v.getString("colour");
             Vector2 pos = new Vector2(v.get("position").getFloat("x"), v.get("position").getFloat("y"));
             pos = Utilities.tilesToDistance(pos);
-            factions.add(new Faction(name, col, pos));
+            Vector2 spawn = new Vector2(v.get("shipSpawn").getFloat("x"), v.get("shipSpawn").getFloat("y"));
+            spawn = Utilities.tilesToDistance(spawn);
+            factions.add(new Faction(name, col, pos, spawn));
         }
     }
 
@@ -65,15 +67,18 @@ public final class GameManager {
     public static void SpawnGame(int mapId) {
         CreateWorldMap(mapId);
         CreatePlayer();
+        final int cnt = settings.get("factionDefaults").getInt("shipCount");
         for (int i = 0; i < factions.size(); i++) {
             CreateCollege(i + 1);
-            for (int j = 0; j < settings.get("factionDefaults").getInt("shipCount"); j++) {
-                // CreateNPCShip(i + 1);
+            for (int j = 0; j < cnt; j++) {
+                // prevents halifax from having shipcount + player
+                if(i == 0 && j > cnt - 2){
+                    break;
+                }
+                NPCShip s = CreateNPCShip(i + 1);
+                s.getComponent(Transform.class).setPosition(getFaction(i + 1).getSpawnPos());
             }
         }
-        CreateNPCShip(2);
-        CreateNPCShip(3);
-
     }
 
     /**
@@ -86,11 +91,12 @@ public final class GameManager {
         ships.add(p);
     }
 
-    public static void CreateNPCShip(int factionId) {
+    public static NPCShip CreateNPCShip(int factionId) {
         tryInit();
         NPCShip e = new NPCShip();
         e.setFaction(factionId);
         ships.add(e);
+        return e;
     }
 
     public static void CreateWorldMap(int mapId) {
