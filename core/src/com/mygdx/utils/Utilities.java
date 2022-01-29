@@ -91,4 +91,13 @@ public final class Utilities {
     public static void print(String v) {
         System.out.println(v);
     }
+
+    public static <T> boolean contains(ArrayList<T> array, T a) {
+        for(T b : array) {
+            if (b == a) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

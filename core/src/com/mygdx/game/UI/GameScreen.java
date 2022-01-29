@@ -21,6 +21,7 @@ public class GameScreen extends Page {
     private Label dosh;
     private Label ammo;
     private final Label questDesc;
+    private final Label questName;
 
     public GameScreen(PirateGame parent) {
         super(parent);
@@ -44,9 +45,14 @@ public class GameScreen extends Page {
 
         Quest q = QuestManager.currentQuest();
         Table t = new Table();
-        t.add(new Label(q.getName(), parent.skin));
+        questName = new Label("NAME", parent.skin);
+        t.add(questName);
         t.row();
-        questDesc = new Label(q.getDescription(), parent.skin);
+        questDesc = new Label("DESCRIPTION", parent.skin);
+        if(q != null) {
+            questName.setText(q.getName());
+            questDesc.setText(q.getDescription());
+        }
 
         t.add(questDesc).left();
         questWindow.add(t);
@@ -130,10 +136,15 @@ public class GameScreen extends Page {
         healthLabel.setText(String.valueOf(p.getHealth()));
         dosh.setText(String.valueOf(p.getPlunder()));
         ammo.setText(String.valueOf(p.getAmmo()));
-        if (QuestManager.currentQuest().isCompleted()) {
+        if (!QuestManager.anyQuests()) {
             questDesc.setText("Completed");
             parent.end.win();
             parent.setScreen(parent.end);
+
+        }else {
+            Quest q = QuestManager.currentQuest();
+            questName.setText(q.getName());
+            questDesc.setText(q.getDescription());
         }
     }
 
