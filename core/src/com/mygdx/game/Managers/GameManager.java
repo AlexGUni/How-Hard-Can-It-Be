@@ -52,7 +52,7 @@ public final class GameManager {
             pos = Utilities.tilesToDistance(pos);
             Vector2 spawn = new Vector2(v.get("shipSpawn").getFloat("x"), v.get("shipSpawn").getFloat("y"));
             spawn = Utilities.tilesToDistance(spawn);
-            factions.add(new Faction(name, col, pos, spawn));
+            factions.add(new Faction(name, col, pos, spawn, factions.size() + 1));
         }
     }
 

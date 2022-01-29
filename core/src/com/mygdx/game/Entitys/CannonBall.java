@@ -51,13 +51,13 @@ public class CannonBall extends Entity implements CollisionCallBack {
             rb.setVelocity(0, 0);
             toggleLife = false;
         }
-        else{
+        /*else{
             age += EntityManager.getDeltaTime();
         }
         if(age > MAX_AGE) {
             age = 0;
             kill();
-        }
+        }*/
     }
 
     public void fire(Vector2 pos, Vector2 dir, Ship sender) {

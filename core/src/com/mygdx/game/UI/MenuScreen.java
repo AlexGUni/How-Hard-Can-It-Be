@@ -57,9 +57,6 @@ public class MenuScreen extends Page {
             }
         });
         t.add(quit).top().spaceBottom(space);
-        t.row();
-
-        t.add(new Label("YOU WILL GIVE US GOOD MARKS", parent.skin));
 
         t.top();
 

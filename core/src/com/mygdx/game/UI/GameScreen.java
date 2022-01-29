@@ -32,7 +32,7 @@ public class GameScreen extends Page {
     public GameScreen(PirateGame parent) {
         super(parent);
         INIT_CONSTANTS();
-        PhysicsManager.Initialize(true);
+        PhysicsManager.Initialize(false);
 
         int id_ship = ResourceManager.addTexture("ship.png");
         int id_map = ResourceManager.addTileMap("Map.tmx");
@@ -181,7 +181,7 @@ public class GameScreen extends Page {
         table.add(healthLabel).top().left().size(50);
 
         table.row();
-        table.setDebug(true);
+        table.setDebug(false);
 
         table.add(new Image(parent.skin.getDrawable("coin"))).top().left().size(1.25f * TILE_SIZE);
         dosh = new Label("N/A", parent.skin);

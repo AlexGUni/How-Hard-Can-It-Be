@@ -29,14 +29,10 @@ public class NPCShip extends Ship implements CollisionCallBack {
 
         stateMachine = new DefaultStateMachine<>(this, EnemyState.WANDER);
 
-        setName("Enemy");
-
-        Text text = new Text(new Vector3(1, 0, 0));
-        text.setText(getName());
-
+        setName("NPC");
         AINavigation nav = new AINavigation();
 
-        addComponents(nav, text);
+        addComponent(nav);
 
 
         RigidBody rb = getComponent(RigidBody.class);
