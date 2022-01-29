@@ -78,10 +78,10 @@ public class Building extends Entity implements CollisionCallBack {
         if (info.a instanceof CannonBall && isAlive()) {
             CannonBall b = (CannonBall) info.a;
             // the ball if from the same faction
-            if(Objects.equals(b.getShooter().getComponent(Pirate.class).getFaction().getName(),
+            /*if(Objects.equals(b.getShooter().getComponent(Pirate.class).getFaction().getName(),
                     getComponent(Pirate.class).getFaction().getName())) {
                 return;
-            }
+            }*/
             destroy();
             ((CannonBall) info.a).kill();
         }
