@@ -14,16 +14,20 @@ import com.mygdx.game.Managers.*;
 import com.mygdx.game.PirateGame;
 import com.mygdx.game.Quests.Quest;
 
+import java.util.Objects;
+
 import static com.mygdx.utils.Constants.*;
 
-/**
- * Contains widgets for game UI, loads game textures, basically boots up the game.
- */
 public class GameScreen extends Page {
     private Label healthLabel;
     private Label dosh;
     private Label ammo;
-    private Label questDesc; //TODO: was there any need for it to be final?
+    private final Label questDesc;
+    private final Label questName;
+    /*private final Label questComplete;
+    private float showTimer = 0;
+    // in seconds
+    private static final float showDuration = 1;*/
 
     /**
      * Boots up the actual game: starts PhysicsManager, GameManager, EntityManager,
@@ -34,52 +38,35 @@ public class GameScreen extends Page {
     public GameScreen(PirateGame parent) {
         super(parent);
         INIT_CONSTANTS();
-        PhysicsManager.Initialize(true);
+        PhysicsManager.Initialize(false);
 
-        int id_ship = ResourceManager.addTexture("ship.png");
-        int id_map = ResourceManager.addTileMap("Map.tmx");
-        int atlas_id = ResourceManager.addTextureAtlas("Boats.txt");
-        int extras_id = ResourceManager.addTextureAtlas("UISkin/skin.atlas");
-        int buildings_id = ResourceManager.addTextureAtlas("Buildings.txt");
+        int id_map = ResourceManager.getId("Map.tmx");
 
-        ResourceManager.loadAssets();
 
         GameManager.SpawnGame(id_map);
         //QuestManager.addQuest(new KillQuest(c));
 
         EntityManager.raiseEvents(ComponentEvent.Awake, ComponentEvent.Start);
 
-        //TODO: extracted methods - why tf does game crash if we put them in CreateActors?
-        drawQuestHint(parent);
-        drawControlsHint(parent);
-    }
-
-    /**
-     * Draw current quest info box.
-     *
-     * @param parent PirateGame UI screen container
-     */
-    private void drawQuestHint(PirateGame parent) {
-        //final Label questDesc;
         Window questWindow = new Window("Current Quest", parent.skin);
 
         Quest q = QuestManager.currentQuest();
         Table t = new Table();
-        t.add(new Label(q.getName(), parent.skin));
+        questName = new Label("NAME", parent.skin);
+        t.add(questName);
         t.row();
-        questDesc = new Label(q.getDescription(), parent.skin);
+        questDesc = new Label("DESCRIPTION", parent.skin);
+        if(q != null) {
+            questName.setText(q.getName());
+            questDesc.setText(q.getDescription());
+        }
+        /*questComplete = new Label("", parent.skin);
+        actors.add(questComplete);*/
 
         t.add(questDesc).left();
         questWindow.add(t);
         actors.add(questWindow);
-    }
 
-    /**
-     * Draw hint screen to remind player of keybindings.
-     *
-     * @param parent PirateGame UI screen container
-     */
-    private void drawControlsHint(PirateGame parent) {
         Table t1 = new Table();
         t1.top().right();
         t1.setFillParent(true);
@@ -97,10 +84,13 @@ public class GameScreen extends Page {
         table.add(new Image(parent.skin, "key-d"));
         table.row();
         table.add(new Label("Shoot in direction of mouse", parent.skin));
+        //table.add(new Image(parent.skin, "space"));
+        table.add(new Image(parent.skin, "mouse")).spaceRight(32);
         table.add(new Image(parent.skin, "space"));
         table.row();
         table.add(new Label("Quit", parent.skin)).left();
         table.add(new Image(parent.skin, "key-esc"));
+
     }
 
     private float accumulator;
@@ -109,7 +99,7 @@ public class GameScreen extends Page {
     @Override
     public void render(float delta) {
         ScreenUtils.clear(BACKGROUND_COLOUR.x, BACKGROUND_COLOUR.y, BACKGROUND_COLOUR.z, 1);
-        
+
         EntityManager.raiseEvents(ComponentEvent.Update, ComponentEvent.Render);
 
         accumulator += EntityManager.getDeltaTime();
@@ -159,6 +149,7 @@ public class GameScreen extends Page {
     /**
      * Update the UI with new values for health, quest status, etc.
      */
+    //private String prevQuest = "";
     @Override
     protected void update() {
         super.update();
@@ -167,11 +158,29 @@ public class GameScreen extends Page {
         healthLabel.setText(String.valueOf(p.getHealth()));
         dosh.setText(String.valueOf(p.getPlunder()));
         ammo.setText(String.valueOf(p.getAmmo()));
-        if (QuestManager.currentQuest().isCompleted()) {
-            questDesc.setText("Completed");
+        if (!QuestManager.anyQuests()) {
             parent.end.win();
             parent.setScreen(parent.end);
+
+        }else {
+            Quest q = QuestManager.currentQuest();
+            /*if(Objects.equals(prevQuest, "")) {
+                prevQuest = q.getDescription();
+            }
+            if(!Objects.equals(prevQuest, q.getDescription())) {
+                questComplete.setText("Quest Competed");
+                prevQuest = "";
+            }*/
+            questName.setText(q.getName());
+            questDesc.setText(q.getDescription());
         }
+        /*if(!questComplete.getText().equals("")) {
+            showTimer += EntityManager.getDeltaTime();
+        }
+        if(showTimer >= showDuration) {
+            showTimer = 0;
+            questComplete.setText("");
+        }*/
     }
 
     /**
@@ -188,7 +197,7 @@ public class GameScreen extends Page {
         table.add(healthLabel).top().left().size(50);
 
         table.row();
-        table.setDebug(true);
+        table.setDebug(false);
 
         table.add(new Image(parent.skin.getDrawable("coin"))).top().left().size(1.25f * TILE_SIZE);
         dosh = new Label("N/A", parent.skin);

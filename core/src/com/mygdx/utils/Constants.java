@@ -7,7 +7,8 @@ import com.badlogic.gdx.math.Vector3;
 public final class Constants {
 
     public static void INIT_CONSTANTS() {
-        FULLSCREEN = !Boolean.parseBoolean(System.getProperty("windowed"));
+        // FULLSCREEN = !Boolean.parseBoolean(System.getProperty("windowed"));
+        FULLSCREEN = false;
         try {
             SCREEN_WIDTH = Gdx.graphics.getWidth();
             SCREEN_HEIGHT = Gdx.graphics.getHeight();
@@ -53,7 +54,7 @@ public final class Constants {
     public static Vector2 HALF_DIMENSIONS;
     public static String VIEWPORT_TITLE;
     public static float PHYSICS_TIME_STEP;
-    public static final float ZOOM = 2.25f;
+    public static final float ZOOM = 3f;
     public static final boolean VSYNC = true;
     public static final float BUILDING_SCALE = 1.5f;
 

@@ -11,6 +11,7 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.mygdx.game.Managers.ResourceManager;
 import com.mygdx.game.PirateGame;
 
 import static com.mygdx.utils.Constants.VIEWPORT_HEIGHT;
@@ -63,9 +64,6 @@ public class MenuScreen extends Page {
             }
         });
         t.add(quit).top().spaceBottom(space);
-        t.row();
-
-        t.add(new Label("YOU WILL GIVE US GOOD MARKS", parent.skin));
 
         t.top();
 

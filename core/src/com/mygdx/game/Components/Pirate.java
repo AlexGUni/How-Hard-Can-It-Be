@@ -5,6 +5,7 @@ import com.badlogic.gdx.utils.JsonValue;
 import com.mygdx.game.Entitys.Ship;
 import com.mygdx.game.Faction;
 import com.mygdx.game.Managers.GameManager;
+import com.mygdx.utils.QueueFIFO;
 
 /**
  * Contains metadata on entities which can be viewed as "enemies", such as buildings or ships.
@@ -20,11 +21,11 @@ public class Pirate extends Component {
     /**
      * The enemy that is being targeted by the AI.
      */
-    private Ship target;
+    private QueueFIFO<Ship> targets;
 
     public Pirate() {
         super();
-        target = null;
+        targets = new QueueFIFO<>();
         type = ComponentType.Pirate;
         plunder = GameManager.getSettings().get("starting").getInt("plunder");
         factionId = 1;
@@ -35,8 +36,8 @@ public class Pirate extends Component {
         ammo = starting.getInt("ammo");
     }
 
-    public void setTarget(Ship target) {
-        this.target = target;
+    public void addTarget(Ship target) {
+        targets.add(target);
     }
 
     public int getPlunder() {
@@ -84,10 +85,10 @@ public class Pirate extends Component {
      * target will be null if not in agro range
      */
     public boolean canAttack() {
-        if (target != null) {
+        if (targets.peek() != null) {
             final Ship p = (Ship) parent;
             final Vector2 pos = p.getPosition();
-            final float dst = pos.dst(target.getPosition());
+            final float dst = pos.dst(targets.peek().getPosition());
             // withing attack range
             return dst < Ship.getAttackRange();
         }
@@ -99,18 +100,21 @@ public class Pirate extends Component {
      * target will be null if not in agro range
      */
     public boolean isAgro() {
-        if (target != null) {
+        if (targets.peek() != null) {
             final Ship p = (Ship) parent;
             final Vector2 pos = p.getPosition();
-            final float dst = pos.dst(target.getPosition());
-            // out of attack range
+            final float dst = pos.dst(targets.peek().getPosition());
+            // out of attack range but in agro range
             return dst >= Ship.getAttackRange();
         }
         return false;
     }
 
     public Ship getTarget() {
-        return target;
+        return targets.peek();
+    }
+    public void removeTarget() {
+        targets.pop();
     }
 
     public boolean isAlive() {
@@ -128,5 +132,13 @@ public class Pirate extends Component {
 
     public int getAmmo() {
         return ammo;
+    }
+
+    public int targetCount() {
+        return targets.size();
+    }
+
+    public QueueFIFO<Ship> getTargets() {
+        return targets;
     }
 }

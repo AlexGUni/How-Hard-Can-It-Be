@@ -10,6 +10,9 @@ import com.mygdx.game.Managers.RenderLayer;
 import com.mygdx.game.Physics.CollisionCallBack;
 import com.mygdx.game.Physics.CollisionInfo;
 import com.mygdx.game.Physics.PhysicsBodyType;
+import sun.jvm.hotspot.runtime.bsd_aarch64.BsdAARCH64JavaThreadPDAccess;
+
+import static com.mygdx.utils.Constants.TILE_SIZE;
 
 /**
  * Cannonball entity and the methods to get it flying.
@@ -17,6 +20,9 @@ import com.mygdx.game.Physics.PhysicsBodyType;
 public class CannonBall extends Entity implements CollisionCallBack {
     private static float speed;
     private boolean toggleLife;
+    private static final int MAX_AGE = 5;
+    private float age = 0;
+    private Ship shooter;
 
     public CannonBall() {
         super(3);
@@ -55,6 +61,13 @@ public class CannonBall extends Entity implements CollisionCallBack {
             rb.setVelocity(0, 0);
             toggleLife = false;
         }
+        /*else{
+            age += EntityManager.getDeltaTime();
+        }
+        if(age > MAX_AGE) {
+            age = 0;
+            kill();
+        }*/
     }
 
     /**
@@ -69,9 +82,12 @@ public class CannonBall extends Entity implements CollisionCallBack {
         t.setPosition(pos);
 
         RigidBody rb = getComponent(RigidBody.class);
-        rb.setVelocity(dir.cpy().scl(speed * EntityManager.getDeltaTime()));
+        Vector2 v = dir.cpy().scl(speed * EntityManager.getDeltaTime());
+        v.sub(TILE_SIZE * t.getScale().x * 0.5f, TILE_SIZE * t.getScale().y * 0.5f);
+        rb.setVelocity(v);
 
         getComponent(Renderable.class).show();
+        shooter = sender;
     }
 
     /**
@@ -79,6 +95,10 @@ public class CannonBall extends Entity implements CollisionCallBack {
      */
     public void kill() {
         toggleLife = true;
+    }
+
+    public Ship getShooter() {
+        return shooter;
     }
 
     @Override
