@@ -256,6 +256,7 @@ public final class ResourceManager {
     }
 
     public static int getId(String name) {
+        //tryInit();
         return ids.indexOf(name) + 1;
     }
 

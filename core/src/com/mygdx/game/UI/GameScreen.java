@@ -40,8 +40,12 @@ public class GameScreen extends Page {
         INIT_CONSTANTS();
         PhysicsManager.Initialize(false);
 
-        int id_map = ResourceManager.getId("Map.tmx");
-
+        int id_ship = ResourceManager.addTexture("ship.png");
+        int id_map = ResourceManager.addTileMap("Map.tmx");
+        int atlas_id = ResourceManager.addTextureAtlas("Boats.txt");
+        int extras_id = ResourceManager.addTextureAtlas("UISkin/skin.atlas");
+        int buildings_id = ResourceManager.addTextureAtlas("Buildings.txt");
+        ResourceManager.loadAssets();
 
         GameManager.SpawnGame(id_map);
         //QuestManager.addQuest(new KillQuest(c));
