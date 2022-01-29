@@ -267,3 +267,10 @@ key-esc
   orig: 32, 32
   offset: 0, 0
   index: -1
+mouse
+  rotate: false
+  xy: 96, 0
+  size: 64, 28
+  orig: 32, 28
+  offset: 0, 0
+  index: -1
