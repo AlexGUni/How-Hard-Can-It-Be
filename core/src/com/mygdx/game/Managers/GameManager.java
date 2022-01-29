@@ -71,6 +71,8 @@ public final class GameManager {
                 // CreateNPCShip(i + 1);
             }
         }
+        CreateNPCShip(2);
+        CreateNPCShip(3);
 
     }
 

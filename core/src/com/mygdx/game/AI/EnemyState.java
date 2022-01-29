@@ -20,7 +20,7 @@ public enum EnemyState implements State<NPCShip> {
         @Override
         public void update(NPCShip e) {
             super.update(e);
-            System.out.println("WANDER");
+            //System.out.println("WANDER");
         }
     },
     /**
@@ -36,7 +36,7 @@ public enum EnemyState implements State<NPCShip> {
         @Override
         public void update(NPCShip e) {
             super.update(e);
-            System.out.println("PURSUE");
+            //System.out.println("PURSUE");
         }
     },
     /**
@@ -60,7 +60,7 @@ public enum EnemyState implements State<NPCShip> {
         @Override
         public void update(NPCShip e) {
             super.update(e);
-            System.out.println("ATTACK");
+            //System.out.println("ATTACK");
         }
     };
 
