@@ -19,6 +19,7 @@ public class CannonBall extends Entity implements CollisionCallBack {
     private boolean toggleLife;
     private static final int MAX_AGE = 5;
     private float age = 0;
+    private Ship shooter;
 
     public CannonBall() {
         super(3);
@@ -69,10 +70,15 @@ public class CannonBall extends Entity implements CollisionCallBack {
         rb.setVelocity(v);
 
         getComponent(Renderable.class).show();
+        shooter = sender;
     }
 
     public void kill() {
         toggleLife = true;
+    }
+
+    public Ship getShooter() {
+        return shooter;
     }
 
     @Override
