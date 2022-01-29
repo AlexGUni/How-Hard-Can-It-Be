@@ -19,6 +19,7 @@ import static com.mygdx.utils.Constants.VIEWPORT_HEIGHT;
 public class MenuScreen extends Page {
     public MenuScreen(PirateGame parent) {
         super(parent);
+//        ResourceManager.addTexture("gamescreenshot hd - dark door.png");
     }
 
     @Override
