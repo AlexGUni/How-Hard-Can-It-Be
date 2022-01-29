@@ -11,6 +11,9 @@ import com.mygdx.game.Physics.CollisionCallBack;
 import com.mygdx.game.Physics.CollisionInfo;
 import com.mygdx.game.Physics.PhysicsBodyType;
 
+/**
+ * Cannonball entity and the methods to get it flying.
+ */
 public class CannonBall extends Entity implements CollisionCallBack {
     private static float speed;
     private boolean toggleLife;
@@ -35,6 +38,13 @@ public class CannonBall extends Entity implements CollisionCallBack {
     @Override
     public void update() {
         super.update();
+        removeOnCollision();
+    }
+
+    /**
+     * Removes the cannonball offscreen once it hits a target.
+     */
+    private void removeOnCollision() {
         if (toggleLife) {
             getComponent(Renderable.class).hide();
             Transform t = getComponent(Transform.class);
@@ -47,6 +57,13 @@ public class CannonBall extends Entity implements CollisionCallBack {
         }
     }
 
+    /**
+     * Teleport the cannonball in from offscreen and set in flying away from the ship.
+     *
+     * @param pos 2D vector location from where it sets off
+     * @param dir 2D vector direction for its movement
+     * @param sender ship entity firing it
+     */
     public void fire(Vector2 pos, Vector2 dir, Ship sender) {
         Transform t = getComponent(Transform.class);
         t.setPosition(pos);
@@ -57,6 +74,9 @@ public class CannonBall extends Entity implements CollisionCallBack {
         getComponent(Renderable.class).show();
     }
 
+    /**
+     * Marks cannonball for removal on next update.
+     */
     public void kill() {
         toggleLife = true;
     }

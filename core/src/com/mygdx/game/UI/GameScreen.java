@@ -16,12 +16,21 @@ import com.mygdx.game.Quests.Quest;
 
 import static com.mygdx.utils.Constants.*;
 
+/**
+ * Contains widgets for game UI, loads game textures, basically boots up the game.
+ */
 public class GameScreen extends Page {
     private Label healthLabel;
     private Label dosh;
     private Label ammo;
-    private final Label questDesc;
+    private Label questDesc; //TODO: was there any need for it to be final?
 
+    /**
+     * Boots up the actual game: starts PhysicsManager, GameManager, EntityManager,
+     * loads texture atlases into ResourceManager. Draws quest and control info.
+     *
+     * @param parent PirateGame UI screen container
+     */
     public GameScreen(PirateGame parent) {
         super(parent);
         INIT_CONSTANTS();
@@ -40,6 +49,18 @@ public class GameScreen extends Page {
 
         EntityManager.raiseEvents(ComponentEvent.Awake, ComponentEvent.Start);
 
+        //TODO: extracted methods - why tf does game crash if we put them in CreateActors?
+        drawQuestHint(parent);
+        drawControlsHint(parent);
+    }
+
+    /**
+     * Draw current quest info box.
+     *
+     * @param parent PirateGame UI screen container
+     */
+    private void drawQuestHint(PirateGame parent) {
+        //final Label questDesc;
         Window questWindow = new Window("Current Quest", parent.skin);
 
         Quest q = QuestManager.currentQuest();
@@ -51,7 +72,14 @@ public class GameScreen extends Page {
         t.add(questDesc).left();
         questWindow.add(t);
         actors.add(questWindow);
+    }
 
+    /**
+     * Draw hint screen to remind player of keybindings.
+     *
+     * @param parent PirateGame UI screen container
+     */
+    private void drawControlsHint(PirateGame parent) {
         Table t1 = new Table();
         t1.top().right();
         t1.setFillParent(true);
@@ -73,15 +101,15 @@ public class GameScreen extends Page {
         table.row();
         table.add(new Label("Quit", parent.skin)).left();
         table.add(new Image(parent.skin, "key-esc"));
-
     }
 
     private float accumulator;
 
+    //TODO: I think I get it but I don't really get it...
     @Override
     public void render(float delta) {
         ScreenUtils.clear(BACKGROUND_COLOUR.x, BACKGROUND_COLOUR.y, BACKGROUND_COLOUR.z, 1);
-
+        
         EntityManager.raiseEvents(ComponentEvent.Update, ComponentEvent.Render);
 
         accumulator += EntityManager.getDeltaTime();
@@ -109,6 +137,13 @@ public class GameScreen extends Page {
         PhysicsManager.cleanUp();
     }
 
+    /**
+     * Resize camera, effectively setting the viewport to display game assets
+     * at pixel ratios other than 1:1.
+     *
+     * @param width of camera viewport
+     * @param height of camera viewport
+     */
     @Override
     public void resize(int width, int height) {
         //((Table) actors.get(0)).setFillParent(false);
@@ -121,6 +156,9 @@ public class GameScreen extends Page {
         // ((Table) actors.get(0)).setFillParent(true);
     }
 
+    /**
+     * Update the UI with new values for health, quest status, etc.
+     */
     @Override
     protected void update() {
         super.update();
@@ -136,6 +174,9 @@ public class GameScreen extends Page {
         }
     }
 
+    /**
+     * Draw UI elements showing player health, plunder, and ammo.
+     */
     @Override
     protected void CreateActors() {
         Table table = new Table();
