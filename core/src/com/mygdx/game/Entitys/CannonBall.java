@@ -11,6 +11,8 @@ import com.mygdx.game.Physics.CollisionCallBack;
 import com.mygdx.game.Physics.CollisionInfo;
 import com.mygdx.game.Physics.PhysicsBodyType;
 
+import static com.mygdx.utils.Constants.TILE_SIZE;
+
 public class CannonBall extends Entity implements CollisionCallBack {
     private static float speed;
     private boolean toggleLife;
@@ -52,7 +54,9 @@ public class CannonBall extends Entity implements CollisionCallBack {
         t.setPosition(pos);
 
         RigidBody rb = getComponent(RigidBody.class);
-        rb.setVelocity(dir.cpy().scl(speed * EntityManager.getDeltaTime()));
+        Vector2 v = dir.cpy().scl(speed * EntityManager.getDeltaTime());
+        v.sub(TILE_SIZE * t.getScale().x * 0.5f, TILE_SIZE * t.getScale().y * 0.5f);
+        rb.setVelocity(v);
 
         getComponent(Renderable.class).show();
     }
