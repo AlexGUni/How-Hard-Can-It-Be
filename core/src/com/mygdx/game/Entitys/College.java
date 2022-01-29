@@ -49,7 +49,7 @@ public class College extends Entity {
             pos = Utilities.floor(pos);
 
             pos = Utilities.tilesToDistance(pos).add(origin);
-            String b_name = Utilities.randomChoice(buildingNames);
+            String b_name = Utilities.randomChoice(buildingNames, 0);
 
             b.create(pos, b_name);
         }

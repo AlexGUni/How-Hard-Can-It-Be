@@ -76,8 +76,9 @@ public final class Utilities {
         return new Vector2(min + r.nextFloat() * (max - min), min + r.nextFloat() * (max - min));
     }
 
-    public static <T> T randomChoice(ArrayList<T> list) {
-        return list.get(new Random().nextInt(list.size()));
+    public static <T> T randomChoice(ArrayList<T> list, Integer choice) {
+        choice = new Random().nextInt(list.size());
+        return list.get(choice);
     }
 
     public static Vector2 floor(Vector2 a) {

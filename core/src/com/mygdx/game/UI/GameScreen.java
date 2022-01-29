@@ -14,6 +14,8 @@ import com.mygdx.game.Managers.*;
 import com.mygdx.game.PirateGame;
 import com.mygdx.game.Quests.Quest;
 
+import java.util.Objects;
+
 import static com.mygdx.utils.Constants.*;
 
 public class GameScreen extends Page {
@@ -22,6 +24,10 @@ public class GameScreen extends Page {
     private Label ammo;
     private final Label questDesc;
     private final Label questName;
+    /*private final Label questComplete;
+    private float showTimer = 0;
+    // in seconds
+    private static final float showDuration = 1;*/
 
     public GameScreen(PirateGame parent) {
         super(parent);
@@ -53,6 +59,8 @@ public class GameScreen extends Page {
             questName.setText(q.getName());
             questDesc.setText(q.getDescription());
         }
+        /*questComplete = new Label("", parent.skin);
+        actors.add(questComplete);*/
 
         t.add(questDesc).left();
         questWindow.add(t);
@@ -127,7 +135,7 @@ public class GameScreen extends Page {
 
         // ((Table) actors.get(0)).setFillParent(true);
     }
-
+    //private String prevQuest = "";
     @Override
     protected void update() {
         super.update();
@@ -137,15 +145,28 @@ public class GameScreen extends Page {
         dosh.setText(String.valueOf(p.getPlunder()));
         ammo.setText(String.valueOf(p.getAmmo()));
         if (!QuestManager.anyQuests()) {
-            questDesc.setText("Completed");
             parent.end.win();
             parent.setScreen(parent.end);
 
         }else {
             Quest q = QuestManager.currentQuest();
+            /*if(Objects.equals(prevQuest, "")) {
+                prevQuest = q.getDescription();
+            }
+            if(!Objects.equals(prevQuest, q.getDescription())) {
+                questComplete.setText("Quest Competed");
+                prevQuest = "";
+            }*/
             questName.setText(q.getName());
             questDesc.setText(q.getDescription());
         }
+        /*if(!questComplete.getText().equals("")) {
+            showTimer += EntityManager.getDeltaTime();
+        }
+        if(showTimer >= showDuration) {
+            showTimer = 0;
+            questComplete.setText("");
+        }*/
     }
 
     @Override
