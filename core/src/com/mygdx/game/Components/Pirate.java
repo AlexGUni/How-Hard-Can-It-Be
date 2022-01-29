@@ -6,6 +6,9 @@ import com.mygdx.game.Entitys.Ship;
 import com.mygdx.game.Faction;
 import com.mygdx.game.Managers.GameManager;
 
+/**
+ * Contains metadata on entities which can be viewed as "enemies", such as buildings or ships.
+ */
 public class Pirate extends Component {
     private int factionId;
     private int plunder;
@@ -15,7 +18,7 @@ public class Pirate extends Component {
     private final int attackDmg;
 
     /**
-     * The enemy that is being targeted not used for player
+     * The enemy that is being targeted by the AI.
      */
     private Ship target;
 

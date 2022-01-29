@@ -4,6 +4,7 @@ import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.Components.Text;
 import com.mygdx.game.Managers.EntityManager;
 
+//TODO: never used, get rid?
 public class DebugText extends Entity {
     Text text;
 

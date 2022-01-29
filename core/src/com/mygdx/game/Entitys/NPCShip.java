@@ -12,6 +12,9 @@ import com.mygdx.game.Managers.GameManager;
 import com.mygdx.utils.QueueFIFO;
 import com.mygdx.utils.Utilities;
 
+/**
+ * NPC ship entity class.
+ */
 public class NPCShip extends Ship {
     public StateMachine<NPCShip, EnemyState> stateMachine;
     private static JsonValue AISettings;
