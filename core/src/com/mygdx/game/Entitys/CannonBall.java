@@ -10,12 +10,15 @@ import com.mygdx.game.Managers.RenderLayer;
 import com.mygdx.game.Physics.CollisionCallBack;
 import com.mygdx.game.Physics.CollisionInfo;
 import com.mygdx.game.Physics.PhysicsBodyType;
+import sun.jvm.hotspot.runtime.bsd_aarch64.BsdAARCH64JavaThreadPDAccess;
 
 import static com.mygdx.utils.Constants.TILE_SIZE;
 
 public class CannonBall extends Entity implements CollisionCallBack {
     private static float speed;
     private boolean toggleLife;
+    private static final int MAX_AGE = 5;
+    private float age = 0;
 
     public CannonBall() {
         super(3);
@@ -46,6 +49,13 @@ public class CannonBall extends Entity implements CollisionCallBack {
             rb.setPosition(t.getPosition());
             rb.setVelocity(0, 0);
             toggleLife = false;
+        }
+        else{
+            age += EntityManager.getDeltaTime();
+        }
+        if(age > MAX_AGE) {
+            age = 0;
+            kill();
         }
     }
 
