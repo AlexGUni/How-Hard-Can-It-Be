@@ -84,7 +84,9 @@ public class GameScreen extends Page {
         table.row();
         table.add(new Label("Shoot in direction of mouse", parent.skin));
         //table.add(new Image(parent.skin, "space"));
-        table.add(new Image(parent.skin, "mouse")).spaceRight(32);
+        table.add(new Image(parent.skin, "mouse"));
+        table.row();
+        table.add(new Label("Shoot in direction of ship", parent.skin));
         table.add(new Image(parent.skin, "space"));
         table.row();
         table.add(new Label("Quit", parent.skin)).left();
