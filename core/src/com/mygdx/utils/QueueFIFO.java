@@ -66,7 +66,6 @@ public class QueueFIFO<T> implements Queue<T> {
         if (isEmpty()) {
             return false;
         }
-        topIndex--;
         int i = data.indexOf(o);
         if (i == -1) {
             return false;

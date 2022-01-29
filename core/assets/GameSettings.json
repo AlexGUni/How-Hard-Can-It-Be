@@ -3,14 +3,14 @@
     "health": 100,
     "damage": 10.0,
     "plunder": 10,
-    "playerSpeed": 10000.0,
+    "playerSpeed": 100.0,
     "cannonSpeed": 10000.0,
     "argoRange_tiles": 11.0,
     "attackRange_tiles": 4.0,
     "ammo": 50
   },
   "AI": {
-    "maxSpeed": 8000.0,
+    "maxSpeed": 6500.0,
     "accelerationTime": 0.01,
     "arrivalTolerance": 32.0,
     "slowRadius": 64.0

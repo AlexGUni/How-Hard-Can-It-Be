@@ -61,7 +61,7 @@ public class TileMap extends Component {
     @Override
     public void render() {
         super.render();
-        renderer.render(new int[]{0});
+        renderer.render(new int[]{0, 1});
     }
 
     @Override

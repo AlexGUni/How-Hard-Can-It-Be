@@ -44,10 +44,11 @@ public class Ship extends Entity implements CollisionCallBack {
         t.setPosition(800, 800);
         Renderable r = new Renderable(3, "white-up", RenderLayer.Transparent);
         RigidBody rb = new RigidBody(PhysicsBodyType.Dynamic, r, t);
+        rb.setCallback(this);
 
         Pirate p = new Pirate();
 
-        rb.setCallback(this);
+        // rb.setCallback(this);
 
         addComponents(t, r, rb, p);
     }
@@ -118,7 +119,6 @@ public class Ship extends Entity implements CollisionCallBack {
         return getComponent(Transform.class).getPosition().cpy();
     }
 
-
     @Override
     public void BeginContact(CollisionInfo info) {
 
@@ -129,39 +129,17 @@ public class Ship extends Entity implements CollisionCallBack {
 
     }
 
-    /**
-     * if the agro fixture hit a ship set it as the target
-     *
-     * @param info the collision info
-     */
     @Override
     public void EnterTrigger(CollisionInfo info) {
-        if (info.fA.isSensor() || !info.fB.isSensor() || this != info.a) {
-            return;
-            // throw new RuntimeException("error in triggers");
-        }
-
-        final Pirate p = info.b.getComponent(Pirate.class);
-        final String data = (String) info.fB.getUserData();
-
-        if (info.a instanceof Ship) {
-            if (Objects.equals(data, "agro")) {
-                p.setTarget((Ship) info.a);
-            }
+        if(this instanceof Player && !(info.b instanceof Player)) {
+            ((CollisionCallBack) info.b).EnterTrigger(info);
         }
     }
 
-    /**
-     * Will set the target to null
-     *
-     * @param info collision info
-     */
     @Override
     public void ExitTrigger(CollisionInfo info) {
-        if (info.b instanceof Player) {
-            return;
+        if(this instanceof Player && !(info.b instanceof Player)) {
+            ((CollisionCallBack) info.b).ExitTrigger(info);
         }
-        final Pirate p = info.b.getComponent(Pirate.class);
-        p.setTarget(null);
     }
 }

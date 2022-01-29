@@ -29,12 +29,14 @@ public class CannonBall extends Entity implements CollisionCallBack {
         addComponents(t, r, rb);
 
         speed = GameManager.getSettings().get("starting").getFloat("cannonSpeed");
+        r.hide();
     }
 
     @Override
     public void update() {
         super.update();
         if (toggleLife) {
+            getComponent(Renderable.class).hide();
             Transform t = getComponent(Transform.class);
             t.setPosition(10000, 10000);
 
@@ -52,6 +54,7 @@ public class CannonBall extends Entity implements CollisionCallBack {
         RigidBody rb = getComponent(RigidBody.class);
         rb.setVelocity(dir.cpy().scl(speed * EntityManager.getDeltaTime()));
 
+        getComponent(Renderable.class).show();
     }
 
     public void kill() {

@@ -12,9 +12,11 @@ import com.mygdx.game.Managers.ResourceManager;
  */
 public class Renderable extends Component {
     protected Sprite sprite;
+    private boolean isVisible;
 
     public Renderable() {
         super();
+        isVisible = true;
         type = ComponentType.Renderable;
         sprite = new Sprite();
         RenderingManager.addItem(this, RenderLayer.Transparent);
@@ -59,7 +61,7 @@ public class Renderable extends Component {
     @Override
     public void render() {
         super.render();
-        if (sprite == null) {
+        if (sprite == null || !isVisible) {
             return;
         }
         sprite.draw(RenderingManager.getBatch());
@@ -82,4 +84,18 @@ public class Renderable extends Component {
         a.setU2(s.getU2());
         a.setV2(s.getV2());
     }
+
+    public boolean isVisible() {
+        return isVisible;
+    }
+    public void show() {
+        isVisible = true;
+    }
+    public void hide() {
+        isVisible = false;
+    }
+    public void toggleVisibility() {
+        isVisible = !isVisible;
+    }
+
 }

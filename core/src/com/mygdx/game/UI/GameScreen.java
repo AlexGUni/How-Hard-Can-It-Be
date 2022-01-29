@@ -25,7 +25,7 @@ public class GameScreen extends Page {
     public GameScreen(PirateGame parent) {
         super(parent);
         INIT_CONSTANTS();
-        PhysicsManager.Initialize(false);
+        PhysicsManager.Initialize(true);
 
         int id_ship = ResourceManager.addTexture("ship.png");
         int id_map = ResourceManager.addTileMap("Map.tmx");
@@ -40,7 +40,7 @@ public class GameScreen extends Page {
 
         EntityManager.raiseEvents(ComponentEvent.Awake, ComponentEvent.Start);
 
-        Window window = new Window("Current Quest", parent.skin);
+        Window questWindow = new Window("Current Quest", parent.skin);
 
         Quest q = QuestManager.currentQuest();
         Table t = new Table();
@@ -49,8 +49,32 @@ public class GameScreen extends Page {
         questDesc = new Label(q.getDescription(), parent.skin);
 
         t.add(questDesc).left();
-        window.add(t);
-        actors.add(window);
+        questWindow.add(t);
+        actors.add(questWindow);
+
+        Table t1 = new Table();
+        t1.top().right();
+        t1.setFillParent(true);
+        actors.add(t1);
+
+        Window tutWindow = new Window("Controls", parent.skin);
+        Table table = new Table();
+        tutWindow.add(table);
+        t1.add(tutWindow);
+
+        table.add(new Label("Move with", parent.skin)).top().left();
+        table.add(new Image(parent.skin, "key-w"));
+        table.add(new Image(parent.skin, "key-s"));
+        table.add(new Image(parent.skin, "key-a"));
+        table.add(new Image(parent.skin, "key-d"));
+        table.row();
+        table.add(new Label("Shoot in direction of mouse", parent.skin));
+        //table.add(new Image(parent.skin, "space"));
+        table.add(new Image(parent.skin, "mouse"));
+        table.row();
+        table.add(new Label("Quit", parent.skin)).left();
+        table.add(new Image(parent.skin, "key-esc"));
+
     }
 
     private float accumulator;
@@ -108,6 +132,8 @@ public class GameScreen extends Page {
         ammo.setText(String.valueOf(p.getAmmo()));
         if (QuestManager.currentQuest().isCompleted()) {
             questDesc.setText("Completed");
+            parent.end.win();
+            parent.setScreen(parent.end);
         }
     }
 

@@ -9,10 +9,12 @@ import com.badlogic.gdx.utils.JsonValue;
 import com.mygdx.game.AI.EnemyState;
 import com.mygdx.game.Components.*;
 import com.mygdx.game.Managers.GameManager;
+import com.mygdx.game.Physics.CollisionCallBack;
+import com.mygdx.game.Physics.CollisionInfo;
 import com.mygdx.utils.QueueFIFO;
 import com.mygdx.utils.Utilities;
 
-public class NPCShip extends Ship {
+public class NPCShip extends Ship implements CollisionCallBack {
     public StateMachine<NPCShip, EnemyState> stateMachine;
     private static JsonValue AISettings;
     private final QueueFIFO<Vector2> path;
@@ -38,6 +40,7 @@ public class NPCShip extends Ship {
 
 
         RigidBody rb = getComponent(RigidBody.class);
+        // rb.setCallback(this);
 
         JsonValue starting = GameManager.getSettings().get("starting");
 
@@ -55,23 +58,7 @@ public class NPCShip extends Ship {
         super.update();
         stateMachine.update();
 
-        // follows path
-        if (!path.isEmpty()) {
-            Vector2 goTo = Utilities.tilesToDistance(path.peek()); // goto offset in world space
-            goTo.add(getPosition()); // translated to player pos
-            float radius = GameManager.getSettings().get("starting").getFloat("attackRange_tiles") + 0.5f; // in tile space
-            // radius = 1;
-            radius = Utilities.tilesToDistance(radius); // in world space
-            boolean proximity = Utilities.checkProximity(goTo, getPosition(), radius);
-
-            // has reached target point so remove point
-            if (proximity) {
-                path.pop();
-            } else {
-                RigidBody rb = getComponent(RigidBody.class);
-                rb.setVelocity(path.peek().cpy().scl(GameManager.getSettings().get("starting").getFloat("playerSpeed")));
-            }
-        }
+        // System.out.println(getComponent(Pirate.class).targetCount());
     }
 
     public void goToTarget() {
@@ -104,5 +91,56 @@ public class NPCShip extends Ship {
 
     public void wander() {
 
+    }
+
+    @Override
+    public void BeginContact(CollisionInfo info) {
+
+    }
+
+    @Override
+    public void EndContact(CollisionInfo info) {
+
+    }
+
+    /**
+     * if the agro fixture hit a ship set it as the target
+     *
+     * @param info the collision info
+     */
+    @Override
+    public void EnterTrigger(CollisionInfo info) {
+        if(!(info.a instanceof Ship)) {
+            return;
+        }
+        Ship other = (Ship) info.a;
+        if (other.getComponent(Pirate.class).getFaction().getName() == getComponent(Pirate.class).getFaction().getName()) {
+           // is the same faction
+           return;
+        }
+        // add the new collision as a new target
+        Pirate pirate = getComponent(Pirate.class);
+        pirate.addTarget(other);
+    }
+
+    /**
+     * Will set the target to null
+     *
+     * @param info collision info
+     */
+    @Override
+    public void ExitTrigger(CollisionInfo info) {
+        if(!(info.a instanceof Ship)) {
+            return;
+        }
+        Pirate pirate = getComponent(Pirate.class);
+        Ship o = (Ship) info.a;
+        // remove the object from the targets list
+        for (Ship targ : pirate.getTargets()) {
+            if(targ == o) {
+                pirate.getTargets().remove(targ);
+                break;
+            }
+        }
     }
 }

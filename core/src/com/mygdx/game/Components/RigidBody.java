@@ -35,11 +35,14 @@ public class RigidBody extends Component {
                 def.type = BodyDef.BodyType.KinematicBody;
                 break;
         }
-        final float h_x = r.sprite.getWidth() * 0.5f;
-        final float h_y = r.sprite.getHeight() * 0.5f;
+        float h_x = r.sprite.getWidth() * 0.5f;
+        float h_y = r.sprite.getHeight() * 0.5f;
         halfDim.set(h_x, h_y);
 
         def.position.set(t.getPosition().x + h_x, t.getPosition().y + h_y);
+        h_x *= t.getScale().x;
+        h_y *= t.getScale().y;
+
         def.angle = t.getRotation();
 
         PolygonShape shape = new PolygonShape();
