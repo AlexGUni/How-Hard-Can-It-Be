@@ -5,6 +5,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.viewport.ScreenViewport;
+import com.mygdx.game.Managers.ResourceManager;
 import com.mygdx.game.UI.EndScreen;
 import com.mygdx.game.UI.GameScreen;
 import com.mygdx.game.UI.MenuScreen;
@@ -15,6 +16,16 @@ public class PirateGame extends Game {
     public EndScreen end;
     public Stage stage;
     public Skin skin;
+
+    private void loadRes() {
+        ResourceManager.addTexture("gamescreenshot hd - dark door.png");
+        int id_ship = ResourceManager.addTexture("ship.png");
+        int id_map = ResourceManager.addTileMap("Map.tmx");
+        int atlas_id = ResourceManager.addTextureAtlas("Boats.txt");
+        int extras_id = ResourceManager.addTextureAtlas("UISkin/skin.atlas");
+        int buildings_id = ResourceManager.addTextureAtlas("Buildings.txt");
+        ResourceManager.loadAssets();
+    }
 
     @Override
     public void create() {
