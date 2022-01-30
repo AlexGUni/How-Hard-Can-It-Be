@@ -1,6 +1,7 @@
 package com.mygdx.game.UI;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Pixmap;
 import com.badlogic.gdx.graphics.Texture;
@@ -63,6 +64,16 @@ public class EndScreen extends Page {
             }
         });
         t.add(b);
+    }
+
+    @Override
+    protected void update() {
+        super.update();
+
+        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
+            Gdx.app.exit();
+            System.exit(0);
+        }
     }
 
     /**

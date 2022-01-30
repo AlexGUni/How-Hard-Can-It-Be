@@ -34,11 +34,9 @@ public class PirateGame extends Game {
         int extras_id = ResourceManager.addTextureAtlas("UISkin/skin.atlas");
         int buildings_id = ResourceManager.addTextureAtlas("Buildings.txt");
         ResourceManager.addTexture("menuBG.jpg");
+        ResourceManager.addTexture("Chest.png");
         ResourceManager.loadAssets();
-    }
 
-    @Override
-    public void create() {
         stage = new Stage(new ScreenViewport());
         createSkin();
         menu = new MenuScreen(this);
