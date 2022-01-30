@@ -7,7 +7,7 @@
     "cannonSpeed": 10000.0,
     "argoRange_tiles": 9.0,
     "attackRange_tiles": 4.0,
-    "ammo": 100
+    "ammo": 50
   },
   "AI": {
     "maxSpeed": 500.0,
@@ -94,7 +94,12 @@
   "quests": {
     "count": 6,
     "locations" : [
-      20,20,25,50,20,85,53,80,58,30,77,50
+      20,20,
+      25,50,
+      20,85,
+      53,80,
+      58,30,
+      77,50
     ]
   }
 }

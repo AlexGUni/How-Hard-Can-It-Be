@@ -3,6 +3,7 @@ package com.mygdx.game.Managers;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.Components.Renderable;
+import com.mygdx.game.Entitys.Chest;
 import com.mygdx.game.Entitys.College;
 import com.mygdx.game.Entitys.Player;
 import com.mygdx.game.Quests.KillQuest;
@@ -17,14 +18,17 @@ import java.util.Vector;
 import java.util.stream.IntStream;
 
 import static com.mygdx.utils.Constants.TILE_SIZE;
+import static com.mygdx.utils.Constants.ZOOM;
 
 public class QuestManager {
     private static boolean initialized = false;
     private static ArrayList<Quest> allQuests;
+    private static Chest chest;
 
     public static void Initialize() {
         initialized = true;
         allQuests = new ArrayList<>();
+        chest = new Chest();
 
         createRandomQuests();
     }
@@ -64,11 +68,11 @@ public class QuestManager {
         }
         x *= TILE_SIZE;
         y *= TILE_SIZE;
-        addQuest(new LocateQuest(new Vector2(x, y), 2 * TILE_SIZE));
+        addQuest(new LocateQuest(new Vector2(x, y), 5 * TILE_SIZE));
     }
 
     private static void rndQuest(ArrayList<Integer> exclude) {
-        if(new Random().nextFloat() > 0.5) {
+        if(new Random().nextFloat() >= 0) {
             rndLocateQuest();
         }
         else {
@@ -102,8 +106,15 @@ public class QuestManager {
             }
             boolean completed = q.checkCompleted(p);
             if (completed) {
-                System.out.println("locate quest completed");
                 p.plunder(q.getReward());
+            }
+            else if (q instanceof LocateQuest){
+                chest.setPosition(((LocateQuest) q).getLocation());
+                break;
+            }
+            else {
+                chest.setPosition(new Vector2(-1000, -1000));
+                break;
             }
         }
     }
