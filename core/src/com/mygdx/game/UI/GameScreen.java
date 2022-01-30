@@ -29,6 +29,13 @@ public class GameScreen extends Page {
     // in seconds
     private static final float showDuration = 1;*/
 
+    /**
+     * Boots up the actual game: starts PhysicsManager, GameManager, EntityManager,
+     * loads texture atlases into ResourceManager. Draws quest and control info.
+     *
+     * @param parent PirateGame UI screen container
+     * @param id_map
+     */
     public GameScreen(PirateGame parent, int id_map) {
         super(parent);
         INIT_CONSTANTS();
@@ -96,6 +103,7 @@ public class GameScreen extends Page {
 
     private float accumulator;
 
+    //TODO: I think I get it but I don't really get it...
     @Override
     public void render(float delta) {
         ScreenUtils.clear(BACKGROUND_COLOUR.x, BACKGROUND_COLOUR.y, BACKGROUND_COLOUR.z, 1);
@@ -126,6 +134,13 @@ public class GameScreen extends Page {
         PhysicsManager.cleanUp();
     }
 
+    /**
+     * Resize camera, effectively setting the viewport to display game assets
+     * at pixel ratios other than 1:1.
+     *
+     * @param width of camera viewport
+     * @param height of camera viewport
+     */
     @Override
     public void resize(int width, int height) {
         //((Table) actors.get(0)).setFillParent(false);
@@ -137,6 +152,10 @@ public class GameScreen extends Page {
 
         // ((Table) actors.get(0)).setFillParent(true);
     }
+
+    /**
+     * Update the UI with new values for health, quest status, etc.
+     */
     //private String prevQuest = "";
     @Override
     protected void update() {
@@ -171,6 +190,9 @@ public class GameScreen extends Page {
         }*/
     }
 
+    /**
+     * Draw UI elements showing player health, plunder, and ammo.
+     */
     @Override
     protected void CreateActors() {
         Table table = new Table();

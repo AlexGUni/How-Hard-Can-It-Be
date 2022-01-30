@@ -32,6 +32,11 @@ public final class PhysicsManager {
         Initialize(false);
     }
 
+    /**
+     * Draw the box2D world with debug borders shown.
+     *
+     * @param drawDebug true to show debug borders
+     */
     public static void Initialize(boolean drawDebug) {
         if (initialized) {
             return;
@@ -69,6 +74,11 @@ public final class PhysicsManager {
         return center.scl(TILE_SIZE_INV);
     }
 
+    /**
+     * Populates the map with box2D bodies necessary for collisions to happen.
+     *
+     * @param map tilemap we are operating on
+     */
     public static void createMapCollision(TileMap map) {
         MapLayers layers = map.getTileMap().getLayers();
         MapObjects objects = null;

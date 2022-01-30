@@ -9,6 +9,9 @@ import java.util.ArrayList;
 
 import static com.mygdx.utils.Constants.UPDATE_VIEWPORT;
 
+/**
+ * Base class for UI screens. Contains and draws UI actors added in subclasses.
+ */
 public abstract class Page extends ScreenAdapter {
     PirateGame parent;
 

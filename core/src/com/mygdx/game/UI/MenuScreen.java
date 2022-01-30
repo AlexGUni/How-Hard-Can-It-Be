@@ -16,11 +16,17 @@ import com.mygdx.game.PirateGame;
 
 import static com.mygdx.utils.Constants.VIEWPORT_HEIGHT;
 
+/**
+ * Contains widgets defining the start-of-game menu screen.
+ */
 public class MenuScreen extends Page {
     public MenuScreen(PirateGame parent) {
         super(parent);
     }
 
+    /**
+     * Create menu widgets such as start button, labels, etc.
+     */
     @Override
     protected void CreateActors() {
         Table t = new Table();

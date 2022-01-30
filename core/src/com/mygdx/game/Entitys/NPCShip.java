@@ -14,6 +14,9 @@ import com.mygdx.game.Physics.CollisionInfo;
 import com.mygdx.utils.QueueFIFO;
 import com.mygdx.utils.Utilities;
 
+/**
+ * NPC ship entity class.
+ */
 public class NPCShip extends Ship implements CollisionCallBack {
     public StateMachine<NPCShip, EnemyState> stateMachine;
     private static JsonValue AISettings;

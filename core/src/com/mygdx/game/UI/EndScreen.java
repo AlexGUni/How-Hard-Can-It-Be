@@ -18,15 +18,26 @@ import com.mygdx.game.PirateGame;
 
 import static com.mygdx.utils.Constants.VIEWPORT_HEIGHT;
 
+/**
+ * Contains widgets defining the game end screen.
+ */
 public class EndScreen extends Page {
     Label wonText;
     Label playerStats;
     public EndScreen(PirateGame game) {
         super(game);
     }
+
+    /**
+     * Set game end screen status to report a win.
+     */
     public void win() {
         wonText.setText("Congrats You Have Won");
     }
+
+    /**
+     * Create game end screen widgets, initialised to game loss status.
+     */
     @Override
     protected void CreateActors() {
         Table t = new Table();
@@ -54,6 +65,9 @@ public class EndScreen extends Page {
         t.add(b);
     }
 
+    /**
+     * Get player stats such as plunder etc. and display game end screen.
+     */
     @Override
     public void show() {
         super.show();

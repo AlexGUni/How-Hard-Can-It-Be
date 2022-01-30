@@ -17,12 +17,18 @@ import com.mygdx.utils.Utilities;
 
 import java.util.Objects;
 
+/**
+ * Base class for game ships, PC & NPC.
+ */
 public class Ship extends Entity implements CollisionCallBack {
     private static int shipCount = 0;
     public static ObjectMap<Vector2, String> shipDirections;
 
     private final Vector2 currentDir;
 
+    /**
+     * Creates a ship entity, containing Transform, Renderable, RigidBody, and Pirate components.
+     */
     public Ship() {
         super(4);
         currentDir = new Vector2();
@@ -65,6 +71,11 @@ public class Ship extends Entity implements CollisionCallBack {
         getComponent(Pirate.class).addPlunder(money);
     }
 
+    /**
+     * Associates ship with faction and orients it to the default northern direction.
+     *
+     * @param factionId
+     */
     public void setFaction(int factionId) {
         getComponent(Pirate.class).setFactionId(factionId);
         setShipDirection("-up");

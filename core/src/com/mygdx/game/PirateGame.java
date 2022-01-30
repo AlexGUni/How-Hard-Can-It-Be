@@ -10,6 +10,9 @@ import com.mygdx.game.UI.EndScreen;
 import com.mygdx.game.UI.GameScreen;
 import com.mygdx.game.UI.MenuScreen;
 
+/**
+ * Contains class instances of game UI screens.
+ */
 public class PirateGame extends Game {
     public MenuScreen menu;
     public GameScreen game;
@@ -20,6 +23,9 @@ public class PirateGame extends Game {
     private void loadRes() {
     }
 
+    /**
+     * Create instances of game stage and UI screens.
+     */
     @Override
     public void create() {
         int id_ship = ResourceManager.addTexture("ship.png");
