@@ -34,7 +34,7 @@
       "colour": "pink",
       "position": {
         "x": 51,
-        "y": 55
+        "y": 51
       },
       "shipSpawn":
       {
@@ -89,7 +89,7 @@
   },
   "college": {
     "spawnRadius": 3,
-    "numBuildings": 7
+    "numBuildings": 200
   },
   "quests": {
     "count": 6,

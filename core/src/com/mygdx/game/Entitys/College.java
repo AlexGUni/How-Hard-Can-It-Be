@@ -13,6 +13,7 @@ import java.util.ArrayList;
 public class College extends Entity {
     private static ArrayList<String> buildingNames;
     private final ArrayList<Building> buildings;
+    private static ArrayList<Vector2> posList;
 
     public College() {
         super();
@@ -21,6 +22,8 @@ public class College extends Entity {
         buildingNames.add("big");
         buildingNames.add("small");
         buildingNames.add("clock");
+        posList = new ArrayList<>();
+        posList.add(new Vector2(0, 0));
         Transform t = new Transform();
         Pirate p = new Pirate();
         addComponents(t, p);
@@ -43,15 +46,23 @@ public class College extends Entity {
         final Vector2 origin = getComponent(Transform.class).getPosition();
 
         for (int i = 0; i < collegeSettings.getInt("numBuildings"); i++) {
-            Building b = new Building();
-            buildings.add(b);
             Vector2 pos = Utilities.randomPos(-radius, radius);
             pos = Utilities.floor(pos);
 
-            pos = Utilities.tilesToDistance(pos).add(origin);
-            String b_name = Utilities.randomChoice(buildingNames, 0);
+            if (!posList.contains(pos)) {
+                posList.add(pos);
 
-            b.create(pos, b_name);
+                pos = Utilities.tilesToDistance(pos).add(origin);
+
+                Building b = new Building();
+                buildings.add(b);
+
+                String b_name = Utilities.randomChoice(buildingNames, 0);
+
+                b.create(pos, b_name);
+            }
+
+
         }
         Building flag = new Building(true);
         buildings.add(flag);
