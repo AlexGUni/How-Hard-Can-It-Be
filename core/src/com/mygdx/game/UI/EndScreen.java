@@ -70,7 +70,7 @@ public class EndScreen extends Page {
     protected void update() {
         super.update();
 
-        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
             Gdx.app.exit();
             System.exit(0);
         }

@@ -49,8 +49,8 @@ public class PlayerController extends Component {
         RenderingManager.getCamera().update();
 
         if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
-            int x = Gdx.input.getX() - 45;
-            int y = Gdx.input.getY() + 45;
+            int x = Gdx.input.getX();
+            int y = Gdx.input.getY();
 
             // in range 0 to VIEWPORT 0, 0 bottom left
             Vector2 delta = new Vector2(x, y);
