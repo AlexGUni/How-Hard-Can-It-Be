@@ -10,6 +10,9 @@ import com.mygdx.utils.Utilities;
 
 import java.util.ArrayList;
 
+/**
+ * Defines a college and its associated buildings.
+ */
 public class College extends Entity {
     private static ArrayList<String> buildingNames;
     private final ArrayList<Building> buildings;
@@ -29,6 +32,11 @@ public class College extends Entity {
         addComponents(t, p);
     }
 
+    /**
+     * Creates a college at the location associated with the given faction id.
+     *
+     * @param factionId numerical id of the faction
+     */
     public College(int factionId) {
         this();
         Faction f = GameManager.getFaction(factionId);
@@ -39,6 +47,11 @@ public class College extends Entity {
         spawn(f.getColour());
     }
 
+    /**
+     * Randomly populates the college radius with buildings.
+     *
+     * @param colour used to pull the appropriate building sprites
+     */
     private void spawn(String colour) {
         JsonValue collegeSettings = GameManager.getSettings().get("college");
         float radius = collegeSettings.getFloat("spawnRadius");
@@ -69,6 +82,9 @@ public class College extends Entity {
         flag.create(origin, colour);
     }
 
+    /**
+     * True as long as unharmed buildings remain, false otherwise.
+     */
     public void isAlive() {
         boolean res = false;
         for (int i = 0; i < buildings.size() - 1; i++) {
@@ -77,6 +93,8 @@ public class College extends Entity {
                 res = true;
             }
         }
+        //TODO: am I wrong thinking that if the last building in list was dead
+        // while the rest are alive, it would mark the college as dead?
         if (!res) {
             getComponent(Pirate.class).kill();
         }

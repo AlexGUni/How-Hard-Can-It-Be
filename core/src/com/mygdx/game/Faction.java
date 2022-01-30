@@ -2,6 +2,9 @@ package com.mygdx.game;
 
 import com.badlogic.gdx.math.Vector2;
 
+/**
+ * Represents a rival college as an in-game faction.
+ */
 public class Faction {
     private String name;
     private String shipColour;
@@ -13,6 +16,13 @@ public class Faction {
         shipColour = "";
     }
 
+    /**
+     * Creates a faction with the specified name, colour, and in-game location.
+     *
+     * @param name name of faction
+     * @param colour colour name (used as prefix to retrieve ship sprites)
+     * @param pos 2D vector location
+     */
     public Faction(String name, String colour, Vector2 pos, Vector2 spawn, int id) {
         this();
         this.name = name;

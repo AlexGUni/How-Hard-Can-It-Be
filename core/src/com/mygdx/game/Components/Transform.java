@@ -19,10 +19,23 @@ public class Transform extends Component implements Location<Vector2> {
         type = ComponentType.Transform;
     }
 
+    /**
+     * Set position associated with the Transform component.
+     *
+     * @param pos 2D vector specifying the position
+     * @param rb true to pass on the position to the parent's RigidBody
+     */
     public void setPosition(Vector2 pos, boolean rb) {
         setPosition(pos.x, pos.y, rb);
     }
 
+    /**
+     * Set position associated with the Transform component.
+     *
+     * @param x coordinate
+     * @param y coordinate
+     * @param rb_ true to pass on the position to the parent's RigidBody
+     */
     public void setPosition(float x, float y, boolean rb_) {
         position.set(x, y);
         if (parent != null && rb_) {
@@ -33,10 +46,21 @@ public class Transform extends Component implements Location<Vector2> {
         }
     }
 
+    /**
+     * Set position associated with the Transform component.
+     *
+     * @param pos 2D vector specifying the position
+     */
     public void setPosition(Vector2 pos) {
         setPosition(pos.x, pos.y);
     }
 
+    /**
+     * Set position associated with the Transform component.
+     *
+     * @param x coordinate
+     * @param y coordinate
+     */
     public void setPosition(float x, float y) {
         position.set(x, y);
         if (parent != null) {
@@ -55,6 +79,7 @@ public class Transform extends Component implements Location<Vector2> {
         scale.set(x, y);
     }
 
+    //TODO: rotation redundant with orientation?
     /**
      * @param rot in Radians
      */
@@ -95,6 +120,13 @@ public class Transform extends Component implements Location<Vector2> {
         return Utilities.vectorToAngle(vector);
     }
 
+    /**
+     * Return new vector combining input vector with input angle in radians.
+     *
+     * @param outVector 2D vector
+     * @param angle in radians
+     * @return
+     */
     @Override
     public Vector2 angleToVector(Vector2 outVector, float angle) {
         return Utilities.angleToVector(outVector, angle);

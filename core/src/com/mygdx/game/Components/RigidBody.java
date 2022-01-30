@@ -6,6 +6,9 @@ import com.mygdx.game.Managers.PhysicsManager;
 import com.mygdx.game.Physics.CollisionCallBack;
 import com.mygdx.game.Physics.PhysicsBodyType;
 
+/**
+ * Defines parameters related to collisions of sprites.
+ */
 public class RigidBody extends Component {
     int bodyId;
     private final Vector2 halfDim;

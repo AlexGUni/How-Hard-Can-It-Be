@@ -10,6 +10,9 @@ import com.mygdx.game.UI.EndScreen;
 import com.mygdx.game.UI.GameScreen;
 import com.mygdx.game.UI.MenuScreen;
 
+/**
+ * Contains class instances of game UI screens.
+ */
 public class PirateGame extends Game {
     public MenuScreen menu;
     public GameScreen game;
@@ -18,21 +21,24 @@ public class PirateGame extends Game {
     public Skin skin;
 
     private void loadRes() {
-        ResourceManager.addTexture("gamescreenshot hd - dark door.png");
+    }
+
+    /**
+     * Create instances of game stage and UI screens.
+     */
+    @Override
+    public void create() {
         int id_ship = ResourceManager.addTexture("ship.png");
         int id_map = ResourceManager.addTileMap("Map.tmx");
         int atlas_id = ResourceManager.addTextureAtlas("Boats.txt");
         int extras_id = ResourceManager.addTextureAtlas("UISkin/skin.atlas");
         int buildings_id = ResourceManager.addTextureAtlas("Buildings.txt");
+        ResourceManager.addTexture("menuBG.jpg");
         ResourceManager.loadAssets();
-    }
-
-    @Override
-    public void create() {
         stage = new Stage(new ScreenViewport());
         createSkin();
         menu = new MenuScreen(this);
-        game = new GameScreen(this);
+        game = new GameScreen(this, id_map);
         end = new EndScreen(this);
         setScreen(menu);
     }

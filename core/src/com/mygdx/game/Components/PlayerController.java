@@ -30,31 +30,16 @@ public class PlayerController extends Component {
         this.speed = speed;
     }
 
+    /**
+     * Reads KB&M inputs, moving and shooting as necessary.
+     */
     @Override
     public void update() {
         super.update();
         final float s = speed;
 
-        Vector2 dir = new Vector2(0, 0);
-
-        if (Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.DPAD_UP)) {
-            dir.y += 1;
-        }
-
-        if (Gdx.input.isKeyPressed(Input.Keys.S) || Gdx.input.isKeyPressed(Input.Keys.DPAD_DOWN)) {
-            dir.y -= 1;
-        }
-
-        if (Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT)) {
-            dir.x -= 1;
-        }
-
-        if (Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT)) {
-            dir.x += 1;
-        }
-
+        Vector2 dir = getDirFromWASDInput();
         ((Ship) parent).setShipDirection(dir);
-
         dir.scl(s);
 
         RigidBody rb = parent.getComponent(RigidBody.class);
@@ -80,5 +65,26 @@ public class PlayerController extends Component {
             // unit dir to fire
             ((Ship) parent).shoot();
         }
+    }
+
+    private Vector2 getDirFromWASDInput() {
+        Vector2 dir = new Vector2(0, 0);
+
+        if (Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.DPAD_UP)) {
+            dir.y += 1;
+        }
+
+        if (Gdx.input.isKeyPressed(Input.Keys.S) || Gdx.input.isKeyPressed(Input.Keys.DPAD_DOWN)) {
+            dir.y -= 1;
+        }
+
+        if (Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT)) {
+            dir.x -= 1;
+        }
+
+        if (Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT)) {
+            dir.x += 1;
+        }
+        return dir;
     }
 }
