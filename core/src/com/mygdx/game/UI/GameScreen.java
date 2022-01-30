@@ -34,18 +34,20 @@ public class GameScreen extends Page {
      * loads texture atlases into ResourceManager. Draws quest and control info.
      *
      * @param parent PirateGame UI screen container
+     * @param id_map
      */
-    public GameScreen(PirateGame parent) {
+    public GameScreen(PirateGame parent, int id_map) {
         super(parent);
         INIT_CONSTANTS();
         PhysicsManager.Initialize(false);
 
-        int id_ship = ResourceManager.addTexture("ship.png");
+        /*int id_ship = ResourceManager.addTexture("ship.png");
         int id_map = ResourceManager.addTileMap("Map.tmx");
         int atlas_id = ResourceManager.addTextureAtlas("Boats.txt");
         int extras_id = ResourceManager.addTextureAtlas("UISkin/skin.atlas");
         int buildings_id = ResourceManager.addTextureAtlas("Buildings.txt");
-        ResourceManager.loadAssets();
+        ResourceManager.loadAssets();*/
+
 
         GameManager.SpawnGame(id_map);
         //QuestManager.addQuest(new KillQuest(c));
@@ -87,9 +89,11 @@ public class GameScreen extends Page {
         table.add(new Image(parent.skin, "key-a"));
         table.add(new Image(parent.skin, "key-d"));
         table.row();
-        table.add(new Label("Shoot in direction of mouse", parent.skin));
+        table.add(new Label("Shoot in direction of mouse", parent.skin)).left();
         //table.add(new Image(parent.skin, "space"));
-        table.add(new Image(parent.skin, "mouse")).spaceRight(32);
+        table.add(new Image(parent.skin, "mouse"));
+        table.row();
+        table.add(new Label("Shoot in direction of ship", parent.skin)).left();
         table.add(new Image(parent.skin, "space"));
         table.row();
         table.add(new Label("Quit", parent.skin)).left();
@@ -116,8 +120,7 @@ public class GameScreen extends Page {
         GameManager.update();
 
         if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
-            Gdx.app.exit();
-            System.exit(0);
+            parent.setScreen(parent.end);
         }
         super.render(delta);
     }

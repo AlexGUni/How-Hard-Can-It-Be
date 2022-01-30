@@ -32,14 +32,9 @@ public class MenuScreen extends Page {
         Table t = new Table();
         t.setFillParent(true);
 
-        Pixmap bgPixmap = new Pixmap(1, 1, Pixmap.Format.RGB565);
-        bgPixmap.setColor(Color.RED);
-        bgPixmap.fill();
-        TextureRegionDrawable textureRegionDrawableBg = new TextureRegionDrawable(new TextureRegion(new Texture(bgPixmap)));
-
         float space = VIEWPORT_HEIGHT * 0.25f;
 
-        t.setBackground(textureRegionDrawableBg);
+        t.setBackground(new TextureRegionDrawable(ResourceManager.getTexture("menuBG.jpg")));
         Label l = new Label("Pirates the movie the game", parent.skin);
         l.setFontScale(2);
         t.add(l).top().spaceBottom(space * 0.5f);
@@ -52,7 +47,7 @@ public class MenuScreen extends Page {
                 parent.setScreen(parent.game);
             }
         });
-        t.add(play).top().spaceBottom(space);
+        t.add(play).top().size(100, 25).spaceBottom(space);
         t.row();
 
         TextButton quit = new TextButton("Quit", parent.skin);
@@ -63,7 +58,7 @@ public class MenuScreen extends Page {
                 System.exit(0);
             }
         });
-        t.add(quit).top().spaceBottom(space);
+        t.add(quit).size(100, 25).top().spaceBottom(space);
 
         t.top();
 
@@ -79,5 +74,12 @@ public class MenuScreen extends Page {
     @Override
     public void hide() {
         super.hide();
+    }
+
+    @Override
+    public void resize(int width, int height) {
+        super.resize(width, height);
+        Table t = (Table) actors.get(0);
+        t.setBackground(new TextureRegionDrawable(ResourceManager.getTexture("menuBG.jpg")));
     }
 }

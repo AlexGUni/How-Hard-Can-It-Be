@@ -48,9 +48,9 @@ public class PlayerController extends Component {
         RenderingManager.getCamera().position.set(new Vector3(player.getPosition(), 0.0f));
         RenderingManager.getCamera().update();
 
-        if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT) ^ Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-            int x = Gdx.input.getX();
-            int y = Gdx.input.getY();
+        if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
+            int x = Gdx.input.getX() - 45;
+            int y = Gdx.input.getY() + 45;
 
             // in range 0 to VIEWPORT 0, 0 bottom left
             Vector2 delta = new Vector2(x, y);
@@ -59,6 +59,11 @@ public class PlayerController extends Component {
             delta.y *= -1;
             // unit dir to fire
             ((Ship) parent).shoot(delta);
+        }
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+            // unit dir to fire
+            ((Ship) parent).shoot();
         }
     }
 
