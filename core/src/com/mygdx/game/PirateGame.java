@@ -18,21 +18,21 @@ public class PirateGame extends Game {
     public Skin skin;
 
     private void loadRes() {
-        ResourceManager.addTexture("gamescreenshot hd - dark door.png");
+    }
+
+    @Override
+    public void create() {
         int id_ship = ResourceManager.addTexture("ship.png");
         int id_map = ResourceManager.addTileMap("Map.tmx");
         int atlas_id = ResourceManager.addTextureAtlas("Boats.txt");
         int extras_id = ResourceManager.addTextureAtlas("UISkin/skin.atlas");
         int buildings_id = ResourceManager.addTextureAtlas("Buildings.txt");
+        ResourceManager.addTexture("menuBG.jpg");
         ResourceManager.loadAssets();
-    }
-
-    @Override
-    public void create() {
         stage = new Stage(new ScreenViewport());
         createSkin();
         menu = new MenuScreen(this);
-        game = new GameScreen(this);
+        game = new GameScreen(this, id_map);
         end = new EndScreen(this);
         setScreen(menu);
     }

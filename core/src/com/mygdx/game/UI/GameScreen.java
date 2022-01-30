@@ -29,18 +29,17 @@ public class GameScreen extends Page {
     // in seconds
     private static final float showDuration = 1;*/
 
-    public GameScreen(PirateGame parent) {
+    public GameScreen(PirateGame parent, int id_map) {
         super(parent);
         INIT_CONSTANTS();
         PhysicsManager.Initialize(false);
 
-        int id_ship = ResourceManager.addTexture("ship.png");
+        /*int id_ship = ResourceManager.addTexture("ship.png");
         int id_map = ResourceManager.addTileMap("Map.tmx");
         int atlas_id = ResourceManager.addTextureAtlas("Boats.txt");
         int extras_id = ResourceManager.addTextureAtlas("UISkin/skin.atlas");
         int buildings_id = ResourceManager.addTextureAtlas("Buildings.txt");
-        ResourceManager.loadAssets();
-
+        ResourceManager.loadAssets();*/
 
 
         GameManager.SpawnGame(id_map);
@@ -113,8 +112,7 @@ public class GameScreen extends Page {
         GameManager.update();
 
         if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
-            Gdx.app.exit();
-            System.exit(0);
+            parent.setScreen(parent.end);
         }
         super.render(delta);
     }
