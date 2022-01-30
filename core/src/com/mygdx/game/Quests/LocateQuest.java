@@ -24,11 +24,11 @@ public class LocateQuest extends Quest {
 
     public LocateQuest(Vector2 pos, float r) {
         this();
+        Chest chest = new Chest();
+        chest.setPosition(pos);
         loc.set(pos);
         radius = r * r;
         pos.scl(1/TILE_SIZE).sub(50, 50); // centres on 0, 0
-        Chest chest = new Chest();
-        chest.setPosition(pos);
         description = "";
         if(pos.y > 0) {
             description += "North ";
