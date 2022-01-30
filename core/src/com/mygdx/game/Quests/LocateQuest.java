@@ -1,7 +1,11 @@
 package com.mygdx.game.Quests;
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.Components.Renderable;
+import com.mygdx.game.Entitys.Chest;
 import com.mygdx.game.Entitys.Player;
+import com.mygdx.game.Managers.ResourceManager;
 
 import static com.mygdx.utils.Constants.TILE_SIZE;
 
@@ -23,6 +27,8 @@ public class LocateQuest extends Quest {
         loc.set(pos);
         radius = r * r;
         pos.scl(1/TILE_SIZE).sub(50, 50); // centres on 0, 0
+        Chest chest = new Chest();
+        chest.setPosition(pos);
         description = "";
         if(pos.y > 0) {
             description += "North ";

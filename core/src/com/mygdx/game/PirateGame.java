@@ -35,6 +35,10 @@ public class PirateGame extends Game {
         int buildings_id = ResourceManager.addTextureAtlas("Buildings.txt");
         ResourceManager.addTexture("menuBG.jpg");
         ResourceManager.loadAssets();
+    }
+
+    @Override
+    public void create() {
         stage = new Stage(new ScreenViewport());
         createSkin();
         menu = new MenuScreen(this);

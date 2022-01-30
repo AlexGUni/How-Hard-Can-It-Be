@@ -1,6 +1,8 @@
 package com.mygdx.game.Managers;
 
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
+import com.mygdx.game.Components.Renderable;
 import com.mygdx.game.Entitys.College;
 import com.mygdx.game.Entitys.Player;
 import com.mygdx.game.Quests.KillQuest;
@@ -62,7 +64,7 @@ public class QuestManager {
         }
         x *= TILE_SIZE;
         y *= TILE_SIZE;
-        addQuest(new LocateQuest(new Vector2(x, y), 10 * TILE_SIZE));
+        addQuest(new LocateQuest(new Vector2(x, y), 2 * TILE_SIZE));
     }
 
     private static void rndQuest(ArrayList<Integer> exclude) {

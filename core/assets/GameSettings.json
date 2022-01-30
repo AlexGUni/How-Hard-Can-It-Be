@@ -7,7 +7,7 @@
     "cannonSpeed": 10000.0,
     "argoRange_tiles": 9.0,
     "attackRange_tiles": 4.0,
-    "ammo": 50
+    "ammo": 100
   },
   "AI": {
     "maxSpeed": 500.0,
@@ -89,7 +89,7 @@
   },
   "college": {
     "spawnRadius": 3,
-    "numBuildings": 200
+    "numBuildings": 12
   },
   "quests": {
     "count": 6,
