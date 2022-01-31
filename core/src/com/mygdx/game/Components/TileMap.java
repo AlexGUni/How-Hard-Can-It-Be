@@ -25,7 +25,7 @@ public class TileMap extends Component {
     }
 
     /**
-     * @param id resource id of the tilemap
+     * @param id    resource id of the tilemap
      * @param layer rendering layer
      */
     public TileMap(int id, RenderLayer layer) {
@@ -39,6 +39,7 @@ public class TileMap extends Component {
 
     /**
      * Gets cell at position (in world space, must be n the maps range)
+     *
      * @param pos pos in world space
      * @return the cell found
      */

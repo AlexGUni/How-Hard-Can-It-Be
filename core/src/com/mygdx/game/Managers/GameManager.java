@@ -13,8 +13,6 @@ import com.mygdx.utils.Utilities;
 
 import java.util.ArrayList;
 
-import static com.mygdx.utils.Constants.TILE_SIZE;
-
 /**
  * Responsible for creating most entity's associated with the game. Also the cached chest and cannonballs
  */
@@ -30,7 +28,6 @@ public final class GameManager {
 
     private static JsonValue settings;
 
-    private static WorldMap map;
     private static TileMapGraph mapGraph;
 
     /**
@@ -71,6 +68,7 @@ public final class GameManager {
 
     /**
      * Player is always in ships at index 0
+     *
      * @return the ship
      */
     public static Player getPlayer() {
@@ -79,6 +77,7 @@ public final class GameManager {
 
     /**
      * Creates the game with player maps, NPCs, colleges
+     *
      * @param mapId the resource id of the tilemap
      */
     public static void SpawnGame(int mapId) {
@@ -89,7 +88,7 @@ public final class GameManager {
             CreateCollege(i + 1);
             for (int j = 0; j < cnt; j++) {
                 // prevents halifax from having shipcount + player
-                if(i == 0 && j > cnt - 2){
+                if (i == 0 && j > cnt - 2) {
                     break;
                 }
                 NPCShip s = CreateNPCShip(i + 1);
@@ -110,6 +109,7 @@ public final class GameManager {
 
     /**
      * Creates an NPC ship with the given faction
+     *
      * @param factionId desired faction
      * @return the created ship
      */
@@ -123,16 +123,18 @@ public final class GameManager {
 
     /**
      * Creates the world map
+     *
      * @param mapId resource id
      */
     public static void CreateWorldMap(int mapId) {
         tryInit();
-        map = new WorldMap(mapId);
+        WorldMap map = new WorldMap(mapId);
         mapGraph = new TileMapGraph(map.getTileMap());
     }
 
     /**
      * Creates the college with it's building for the desired college
+     *
      * @param factionId desired faction
      */
     public static void CreateCollege(int factionId) {
@@ -154,7 +156,8 @@ public final class GameManager {
 
     /**
      * Gets the setting object from the GameSetting.json
-     * @return
+     *
+     * @return the JSON representation fo settings
      */
     public static JsonValue getSettings() {
         tryInit();
@@ -168,7 +171,8 @@ public final class GameManager {
 
     /**
      * Utilises the cached cannonballs to fire one
-     * @param p parent
+     *
+     * @param p   parent
      * @param dir shoot direction
      */
     public static void shoot(Ship p, Vector2 dir) {
@@ -180,6 +184,7 @@ public final class GameManager {
 
     /**
      * uses a* not sure if it works but i think it does
+     *
      * @param loc src
      * @param dst dst
      * @return queue of delta postions

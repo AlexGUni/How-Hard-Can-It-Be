@@ -14,8 +14,6 @@ import com.mygdx.game.Managers.*;
 import com.mygdx.game.PirateGame;
 import com.mygdx.game.Quests.Quest;
 
-import java.util.Objects;
-
 import static com.mygdx.utils.Constants.*;
 
 public class GameScreen extends Page {
@@ -34,7 +32,7 @@ public class GameScreen extends Page {
      * loads texture atlases into ResourceManager. Draws quest and control info.
      *
      * @param parent PirateGame UI screen container
-     * @param id_map
+     * @param id_map the resource id of the tile map
      */
     public GameScreen(PirateGame parent, int id_map) {
         super(parent);
@@ -62,7 +60,7 @@ public class GameScreen extends Page {
         t.add(questName);
         t.row();
         questDesc = new Label("DESCRIPTION", parent.skin);
-        if(q != null) {
+        if (q != null) {
             questName.setText(q.getName());
             questDesc.setText(q.getDescription());
         }
@@ -104,8 +102,9 @@ public class GameScreen extends Page {
     private float accumulator;
 
     /**
-     * Called every frame calls all other function that need to be called every frame by rasing events and update methods
-     * @param delta
+     * Called every frame calls all other functions that need to be called every frame by rasing events and update methods
+     *
+     * @param delta delta time
      */
     @Override
     public void render(float delta) {
@@ -145,7 +144,7 @@ public class GameScreen extends Page {
      * Resize camera, effectively setting the viewport to display game assets
      * at pixel ratios other than 1:1.
      *
-     * @param width of camera viewport
+     * @param width  of camera viewport
      * @param height of camera viewport
      */
     @Override
@@ -177,7 +176,7 @@ public class GameScreen extends Page {
             parent.end.win();
             parent.setScreen(parent.end);
 
-        }else {
+        } else {
             Quest q = QuestManager.currentQuest();
             /*if(Objects.equals(prevQuest, "")) {
                 prevQuest = q.getDescription();

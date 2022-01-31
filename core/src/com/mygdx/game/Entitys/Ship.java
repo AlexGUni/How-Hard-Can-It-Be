@@ -74,7 +74,7 @@ public class Ship extends Entity implements CollisionCallBack {
     /**
      * Associates ship with faction and orients it to the default northern direction.
      *
-     * @param factionId
+     * @param factionId the desired faction id
      */
     public void setFaction(int factionId) {
         getComponent(Pirate.class).setFactionId(factionId);
@@ -83,6 +83,7 @@ public class Ship extends Entity implements CollisionCallBack {
 
     /**
      * gets the string representation of the direction the ship is facing
+     *
      * @param dir the vector dir the ship is facing
      * @return the string representation of the direction
      */
@@ -96,6 +97,7 @@ public class Ship extends Entity implements CollisionCallBack {
 
     /**
      * gets the faction colour
+     *
      * @return the faction colour
      */
     private String getColour() {
@@ -104,6 +106,7 @@ public class Ship extends Entity implements CollisionCallBack {
 
     /**
      * will rotate the ship to face the direction (just changes the sprite doesn't actually rotate)
+     *
      * @param dir the dir to face (used to get the correct sprite from the texture atlas
      */
     public void setShipDirection(Vector2 dir) {
@@ -112,6 +115,7 @@ public class Ship extends Entity implements CollisionCallBack {
 
     /**
      * will rotate the ship to face the direction (just changes the sprite doesn't actually rotate)
+     *
      * @param direction the dir to face (used to get the correct sprite from the texture atlas
      */
     public void setShipDirection(String direction) {
@@ -140,7 +144,9 @@ public class Ship extends Entity implements CollisionCallBack {
         getComponent(Pirate.class).shoot(dir);
     }
 
-    public void shoot() { getComponent(Pirate.class).shoot(currentDir); }
+    public void shoot() {
+        getComponent(Pirate.class).shoot(currentDir);
+    }
 
     /**
      * @return copy of the transform's position
@@ -164,7 +170,7 @@ public class Ship extends Entity implements CollisionCallBack {
      */
     @Override
     public void EnterTrigger(CollisionInfo info) {
-        if(this instanceof Player && !(info.b instanceof Player)) {
+        if (this instanceof Player && !(info.b instanceof Player)) {
             ((CollisionCallBack) info.b).EnterTrigger(info);
         }
     }
@@ -174,7 +180,7 @@ public class Ship extends Entity implements CollisionCallBack {
      */
     @Override
     public void ExitTrigger(CollisionInfo info) {
-        if(this instanceof Player && !(info.b instanceof Player)) {
+        if (this instanceof Player && !(info.b instanceof Player)) {
             ((CollisionCallBack) info.b).ExitTrigger(info);
         }
     }

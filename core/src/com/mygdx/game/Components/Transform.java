@@ -29,7 +29,7 @@ public class Transform extends Component implements Location<Vector2> {
      * Set position associated with the Transform component.
      *
      * @param pos 2D vector specifying the position
-     * @param rb true to pass on the position to the parent's RigidBody
+     * @param rb  true to pass on the position to the parent's RigidBody
      */
     public void setPosition(Vector2 pos, boolean rb) {
         setPosition(pos.x, pos.y, rb);
@@ -38,8 +38,8 @@ public class Transform extends Component implements Location<Vector2> {
     /**
      * Set position associated with the Transform component.
      *
-     * @param x coordinate
-     * @param y coordinate
+     * @param x   coordinate
+     * @param y   coordinate
      * @param rb_ true to pass on the position to the parent's RigidBody
      */
     public void setPosition(float x, float y, boolean rb_) {
@@ -98,7 +98,8 @@ public class Transform extends Component implements Location<Vector2> {
 
     /**
      * returns the box2d position of the parent or the transform pos if no rigidbody found
-     * @return
+     *
+     * @return the center of the Entity or bottom left
      */
     public Vector2 getCenter() {
         RigidBody rb = parent.getComponent(RigidBody.class);
@@ -133,8 +134,8 @@ public class Transform extends Component implements Location<Vector2> {
      * Return new vector combining input vector with input angle in radians.
      *
      * @param outVector 2D vector
-     * @param angle in radians
-     * @return
+     * @param angle     in radians
+     * @return the angle as a vector
      */
     @Override
     public Vector2 angleToVector(Vector2 outVector, float angle) {

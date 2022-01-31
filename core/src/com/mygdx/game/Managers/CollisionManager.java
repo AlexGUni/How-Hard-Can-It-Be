@@ -20,6 +20,7 @@ public class CollisionManager implements ContactListener {
 
     /**
      * called for every contact that box2d detects prior to collision restitution (doesn't matter if it is a trigger/sensor)
+     *
      * @param contact the contact data
      */
     @Override
@@ -62,8 +63,10 @@ public class CollisionManager implements ContactListener {
             }
         }
     }
+
     /**
      * called for every contact that box2d detects after collision restitution (doesn't matter if it is a trigger/sensor)
+     *
      * @param contact the contact data
      */
     @Override

@@ -9,7 +9,8 @@ import com.badlogic.gdx.math.Vector2;
 public class NodeHeuristic implements Heuristic<Node> {
     /**
      * Euclidean distance squared
-     * @param node src
+     *
+     * @param node    src
      * @param endNode dst
      * @return distance^2
      */

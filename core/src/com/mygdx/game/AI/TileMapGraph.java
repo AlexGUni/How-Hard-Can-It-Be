@@ -14,7 +14,8 @@ import com.badlogic.gdx.utils.Array;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.mygdx.utils.QueueFIFO;
 
-import static com.mygdx.utils.TileMapCells.*;
+import static com.mygdx.utils.TileMapCells.OBSTACLE;
+import static com.mygdx.utils.TileMapCells.PASSABLE;
 
 /**
  * The Graphical representation of the tilemap with each cell being bidirectionally to the adjacent nodes.
@@ -38,6 +39,7 @@ public class TileMapGraph implements IndexedGraph<Node> {
 
     /**
      * Creates a Graph from the given tilemap
+     *
      * @param map the source tilemap
      */
     public TileMapGraph(TiledMap map) {
@@ -107,6 +109,7 @@ public class TileMapGraph implements IndexedGraph<Node> {
 
     /**
      * Node a position (x, y)
+     *
      * @param x co-ord
      * @param y co-ord
      * @return Node at (x, y) or null
@@ -137,8 +140,8 @@ public class TileMapGraph implements IndexedGraph<Node> {
     /**
      * doesn't add if already there
      *
-     * @param x          x pos
-     * @param y          y pos
+     * @param x x pos
+     * @param y y pos
      */
     private void addNode(float x, float y) {
         Node n = nodes.get(getIndex((int) x, (int) y));
@@ -151,6 +154,7 @@ public class TileMapGraph implements IndexedGraph<Node> {
 
     /**
      * Adds path to map doesn't check for duplicates
+     *
      * @param a src
      * @param b dst
      */
@@ -166,6 +170,7 @@ public class TileMapGraph implements IndexedGraph<Node> {
 
     /**
      * Adds path to map doesn't check for duplicates
+     *
      * @param x1 src.x
      * @param y1 src.y
      * @param x2 dst.x

@@ -11,6 +11,7 @@ public class Node {
 
     /**
      * Position the node exists at
+     *
      * @param x co-ord
      * @param y co-ord
      */
@@ -25,6 +26,7 @@ public class Node {
 
     /**
      * Sets position
+     *
      * @param x co-ord
      * @param y co-ord
      */

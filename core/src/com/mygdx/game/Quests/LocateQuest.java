@@ -1,11 +1,7 @@
 package com.mygdx.game.Quests;
 
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.Components.Renderable;
-import com.mygdx.game.Entitys.Chest;
 import com.mygdx.game.Entitys.Player;
-import com.mygdx.game.Managers.ResourceManager;
 
 import static com.mygdx.utils.Constants.TILE_SIZE;
 
@@ -27,29 +23,28 @@ public class LocateQuest extends Quest {
 
     /**
      * The loc to go to and radius that the play has to be in to completed it
+     *
      * @param pos location to find
-     * @param r leeway in completion
+     * @param r   leeway in completion
      */
     public LocateQuest(Vector2 pos, float r) {
         this();
         loc.set(pos);
         radius = r * r;
-        pos.scl(1/TILE_SIZE).sub(50, 50); // centres on 0, 0
+        pos.scl(1 / TILE_SIZE).sub(50, 50); // centres on 0, 0
         description = "";
-        if(pos.y > 0) {
+        if (pos.y > 0) {
             description += "North ";
-        }
-        else if(pos.y < 0) {
+        } else if (pos.y < 0) {
             description += "South ";
         }
-        if(pos.x > 0) {
+        if (pos.x > 0) {
             description += "West";
-        }
-        else if(pos.x < 0) {
+        } else if (pos.x < 0) {
             description += "East";
         }
 
-        }
+    }
 
     @Override
     public boolean checkCompleted(Player p) {

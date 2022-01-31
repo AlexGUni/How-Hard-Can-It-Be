@@ -46,6 +46,7 @@ public abstract class Page extends ScreenAdapter {
 
     /**
      * draws the stage and acts upon it also calls update
+     *
      * @param delta delta time
      */
     @Override
@@ -69,7 +70,8 @@ public abstract class Page extends ScreenAdapter {
     /**
      * Called once the window is resized
      * updates constants and stage
-     * @param width new dim x
+     *
+     * @param width  new dim x
      * @param height new dom y
      */
     @Override

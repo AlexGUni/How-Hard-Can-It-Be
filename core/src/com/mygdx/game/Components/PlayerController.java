@@ -6,7 +6,6 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.Entitys.Player;
 import com.mygdx.game.Entitys.Ship;
-import com.mygdx.game.Managers.EntityManager;
 import com.mygdx.game.Managers.RenderingManager;
 
 import static com.mygdx.utils.Constants.HALF_DIMENSIONS;
@@ -26,7 +25,7 @@ public class PlayerController extends Component {
 
     /**
      * @param player the parent
-     * @param speed speed
+     * @param speed  speed
      */
     public PlayerController(Player player, float speed) {
         this();
@@ -73,6 +72,7 @@ public class PlayerController extends Component {
 
     /**
      * Converts WASD or arrows to direction of travel
+     *
      * @return -1 <= (x, y) <= 1
      */
     private Vector2 getDirFromWASDInput() {

@@ -25,6 +25,7 @@ public class Entity {
 
     /**
      * Allocates the correct amount of memory for components
+     *
      * @param numComponents number of components to allocate memory for
      */
     public Entity(int numComponents) {
@@ -54,6 +55,7 @@ public class Entity {
 
     /**
      * gets component of type
+     *
      * @param type the type of the desired component
      * @return the component not cast
      */

@@ -2,10 +2,6 @@ package com.mygdx.game.UI;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.Pixmap;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
@@ -25,6 +21,7 @@ import static com.mygdx.utils.Constants.VIEWPORT_HEIGHT;
 public class EndScreen extends Page {
     Label wonText;
     Label playerStats;
+
     public EndScreen(PirateGame game) {
         super(game);
     }
@@ -86,6 +83,7 @@ public class EndScreen extends Page {
         String stats = String.format("Health: %s\nAmmo: %s\nPlunder: %s", p.getHealth(), p.getAmmo(), p.getPlunder());
         playerStats.setText(stats);
     }
+
     @Override
     public void resize(int width, int height) {
         super.resize(width, height);

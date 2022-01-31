@@ -169,8 +169,7 @@ public final class ResourceManager {
 
     public static Texture getTexture(String fPath) {
         tryInit();
-        Texture t = manager.get(fPath);
-        return t;
+        return manager.get(fPath);
     }
 
     public static TextureAtlas getTextureAtlas(String fPath) {
@@ -257,6 +256,7 @@ public final class ResourceManager {
 
     /**
      * only looks for simple assets not specialty ones so largely only textures
+     *
      * @param name the desired asset name
      * @return the id of the asset found if found
      */

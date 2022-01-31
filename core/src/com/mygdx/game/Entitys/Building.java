@@ -12,8 +12,6 @@ import com.mygdx.game.Physics.CollisionCallBack;
 import com.mygdx.game.Physics.CollisionInfo;
 import com.mygdx.game.Physics.PhysicsBodyType;
 
-import java.util.Objects;
-
 import static com.mygdx.utils.Constants.BUILDING_SCALE;
 
 /**
@@ -48,7 +46,7 @@ public class Building extends Entity implements CollisionCallBack {
     /**
      * Creates a building with the given name at the specified location.
      *
-     * @param pos 2D position vector
+     * @param pos  2D position vector
      * @param name name of building
      */
     public void create(Vector2 pos, String name) {

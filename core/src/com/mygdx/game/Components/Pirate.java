@@ -21,7 +21,7 @@ public class Pirate extends Component {
     /**
      * The enemy that is being targeted by the AI.
      */
-    private QueueFIFO<Ship> targets;
+    private final QueueFIFO<Ship> targets;
 
     public Pirate() {
         super();
@@ -66,6 +66,7 @@ public class Pirate extends Component {
 
     /**
      * Will shoot a cannonball assigning this.parent as the cannonball's parent (must be Ship atm)
+     *
      * @param dir the direction to shoot in
      */
     public void shoot(Vector2 dir) {
@@ -78,6 +79,7 @@ public class Pirate extends Component {
 
     /**
      * Adds ammo
+     *
      * @param ammo amount to add
      */
     public void reload(int ammo) {
@@ -121,6 +123,7 @@ public class Pirate extends Component {
     public Ship getTarget() {
         return targets.peek();
     }
+
     public void removeTarget() {
         targets.pop();
     }

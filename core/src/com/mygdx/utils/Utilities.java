@@ -76,6 +76,7 @@ public final class Utilities {
 
     /**
      * Random Vec2 in range
+     *
      * @param min inclusive
      * @param max exclusive
      * @return rand Vector2
@@ -87,9 +88,10 @@ public final class Utilities {
 
     /**
      * Chooses a random element
-     * @param list source
+     *
+     * @param list   source
      * @param choice the index of the chosen element
-     * @param <T> type of element to return
+     * @param <T>    type of element to return
      * @return the random element
      */
     public static <T> T randomChoice(ArrayList<T> list, Integer choice) {
@@ -99,6 +101,7 @@ public final class Utilities {
 
     /**
      * floors the vector
+     *
      * @param a given vector
      * @return new vector floored
      */
@@ -108,7 +111,8 @@ public final class Utilities {
 
     /**
      * helper for System.out.print
-     * @param v string
+     *
+     * @param v   string
      * @param eol eol msg
      */
     public static void print(String v, String eol) {
@@ -118,6 +122,7 @@ public final class Utilities {
 
     /**
      * helper for System.out.println
+     *
      * @param v string
      */
     public static void print(String v) {
@@ -126,13 +131,14 @@ public final class Utilities {
 
     /**
      * does array contain a
+     *
      * @param array source
-     * @param a desired
-     * @param <T> type of element looking for
+     * @param a     desired
+     * @param <T>   type of element looking for
      * @return true if contained otherwise false
      */
     public static <T> boolean contains(ArrayList<T> array, T a) {
-        for(T b : array) {
+        for (T b : array) {
             if (b == a) {
                 return true;
             }

@@ -22,18 +22,21 @@ public class RigidBody extends Component {
 
     /**
      * Calls constructor with is trigger false
+     *
      * @param type defines how it interacts with other objects
-     * @param r used for creating the fixture (aka the collider)
-     * @param t used for positioning and scaling the collider
+     * @param r    used for creating the fixture (aka the collider)
+     * @param t    used for positioning and scaling the collider
      */
     public RigidBody(PhysicsBodyType type, Renderable r, Transform t) {
         this(type, r, t, false);
     }
+
     /**
      * Can create body that is trigger or callable
-     * @param type defines how it interacts with other objects
-     * @param r used for creating the fixture (aka the collider)
-     * @param t used for positioning and scaling the collider
+     *
+     * @param type      defines how it interacts with other objects
+     * @param r         used for creating the fixture (aka the collider)
+     * @param t         used for positioning and scaling the collider
      * @param isTrigger false allows for collision true doesn't
      */
     public RigidBody(PhysicsBodyType type, Renderable r, Transform t, boolean isTrigger) {
@@ -98,6 +101,7 @@ public class RigidBody extends Component {
 
     /**
      * Is used during collision phase to add more functionality
+     *
      * @param data class that inherits from CollisionCallBack
      */
     public void setCallback(CollisionCallBack data) {
@@ -122,6 +126,7 @@ public class RigidBody extends Component {
 
     /**
      * Sets the bottom left position of the object
+     *
      * @param offset should plly offset
      */
     public void setPosition(Vector2 position, boolean offset) {

@@ -39,6 +39,7 @@ public final class Constants {
 
     /**
      * Update viewport data on resize
+     *
      * @param x new dim x
      * @param y new dim y
      */

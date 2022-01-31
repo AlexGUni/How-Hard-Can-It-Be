@@ -19,9 +19,9 @@ public class Faction {
     /**
      * Creates a faction with the specified name, colour, and in-game location.
      *
-     * @param name name of faction
+     * @param name   name of faction
      * @param colour colour name (used as prefix to retrieve ship sprites)
-     * @param pos 2D vector location
+     * @param pos    2D vector location
      */
     public Faction(String name, String colour, Vector2 pos, Vector2 spawn, int id) {
         this();

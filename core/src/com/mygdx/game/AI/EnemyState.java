@@ -69,6 +69,7 @@ public enum EnemyState implements State<NPCShip> {
 
     /**
      * Called every from for every NPC ship (there or there abouts)
+     *
      * @param e the sender
      */
     @Override
@@ -118,6 +119,7 @@ public enum EnemyState implements State<NPCShip> {
 
     /**
      * Called when a state is left
+     *
      * @param e the sender
      */
     @Override
@@ -127,6 +129,7 @@ public enum EnemyState implements State<NPCShip> {
 
     /**
      * Called when a state is entered
+     *
      * @param entity the sender
      */
     @Override

@@ -20,6 +20,7 @@ public abstract class Quest {
 
     /**
      * Checks if the given player has met the complete condition
+     *
      * @param p the player
      * @return has completed
      */

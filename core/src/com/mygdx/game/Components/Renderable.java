@@ -42,7 +42,7 @@ public class Renderable extends Component {
      *
      * @param atlasId the id of the texture atlas containing the sprite
      * @param texName the name of the texture the sprite will take on
-     * @param layer the rendering layer
+     * @param layer   the rendering layer
      */
     public Renderable(int atlasId, String texName, RenderLayer layer) {
         this();
@@ -91,6 +91,7 @@ public class Renderable extends Component {
 
     /**
      * Asignes a new texture compatible with textures sourced from atlas
+     *
      * @param s the sprite contain the texture
      */
     public void setTexture(Sprite s) {
@@ -105,12 +106,15 @@ public class Renderable extends Component {
     public boolean isVisible() {
         return isVisible;
     }
+
     public void show() {
         isVisible = true;
     }
+
     public void hide() {
         isVisible = false;
     }
+
     public void toggleVisibility() {
         isVisible = !isVisible;
     }

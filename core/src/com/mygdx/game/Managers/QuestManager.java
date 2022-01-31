@@ -1,8 +1,6 @@
 package com.mygdx.game.Managers;
 
-import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.math.Vector2;
-import com.mygdx.game.Components.Renderable;
 import com.mygdx.game.Entitys.Chest;
 import com.mygdx.game.Entitys.College;
 import com.mygdx.game.Entitys.Player;
@@ -10,15 +8,11 @@ import com.mygdx.game.Quests.KillQuest;
 import com.mygdx.game.Quests.LocateQuest;
 import com.mygdx.game.Quests.Quest;
 import com.mygdx.utils.Utilities;
-import com.sun.tools.javac.util.ArrayUtils;
 
 import java.util.ArrayList;
 import java.util.Random;
-import java.util.Vector;
-import java.util.stream.IntStream;
 
 import static com.mygdx.utils.Constants.TILE_SIZE;
-import static com.mygdx.utils.Constants.ZOOM;
 
 /**
  * Creates the quests and manages their completion and order
@@ -38,11 +32,12 @@ public class QuestManager {
 
     /**
      * Creates a random kill quest on a random college
+     *
      * @param exclude the id of factions to not kill
      * @return the id of the faction targeted
      */
     private static int rndKillQuest(ArrayList<Integer> exclude) {
-        int id = 0;
+        int id;
         College enemy;
         int i = 0;
         do {
@@ -50,8 +45,8 @@ public class QuestManager {
             enemy = GameManager.getCollege(id);
             i++;
         }
-        while(Utilities.contains(exclude, id) && i < 5);
-        if(i == 5) {
+        while (Utilities.contains(exclude, id) && i < 5);
+        if (i == 5) {
             return 0;
         }
         addQuest(new KillQuest(enemy));
@@ -63,7 +58,7 @@ public class QuestManager {
      */
     private static void rndLocateQuest() {
         final ArrayList<Float> locations = new ArrayList<>();
-        for(float f : GameManager.getSettings().get("quests").get("locations").asFloatArray()) {
+        for (float f : GameManager.getSettings().get("quests").get("locations").asFloatArray()) {
             locations.add(f);
         }
         // in game settings the positions are stored as ints with y following x it doesnt wrap
@@ -71,13 +66,12 @@ public class QuestManager {
         // v1: (a, b) v2: (c, d)
         Integer choice = -1;
         float x = Utilities.randomChoice(locations, choice);
-        float y = 0;
+        float y;
         assert (choice > -1);
-        if(choice == locations.size() - 1) {
+        if (choice == locations.size() - 1) {
             y = x;
             x = locations.get(choice - 1);
-        }
-        else {
+        } else {
             y = locations.get(choice + 1);
         }
         x *= TILE_SIZE;
@@ -87,13 +81,13 @@ public class QuestManager {
 
     /**
      * 50/50 chance of kill quest or locate quest
+     *
      * @param exclude list of factions to exclude from killing
      */
     private static void rndQuest(ArrayList<Integer> exclude) {
-        if(new Random().nextFloat() > 0.5) {
+        if (new Random().nextFloat() > 0.5) {
             rndLocateQuest();
-        }
-        else {
+        } else {
             exclude.add(rndKillQuest(exclude));
         }
     }
@@ -106,7 +100,7 @@ public class QuestManager {
         int primaryEnemyId = new Random().nextInt(4) + 2;
         ArrayList<Integer> exclude = new ArrayList<>();
         exclude.add(primaryEnemyId);
-        for(int i = 0; i < GameManager.getSettings().get("quests").getInt("count"); i++) {
+        for (int i = 0; i < GameManager.getSettings().get("quests").getInt("count"); i++) {
             rndQuest(exclude);
         }
         College enemy = GameManager.getCollege(primaryEnemyId);
@@ -132,12 +126,10 @@ public class QuestManager {
             boolean completed = q.checkCompleted(p);
             if (completed) {
                 p.plunder(q.getReward());
-            }
-            else if (q instanceof LocateQuest){
+            } else if (q instanceof LocateQuest) {
                 chest.setPosition(((LocateQuest) q).getLocation());
                 break;
-            }
-            else {
+            } else {
                 chest.setPosition(new Vector2(-1000, -1000));
                 break;
             }
@@ -152,12 +144,13 @@ public class QuestManager {
 
     /**
      * Returns the next un-completed quest
+     *
      * @return the quest null if no un-completed quests found
      */
     public static Quest currentQuest() {
         tryInit();
-        for(Quest q : allQuests) {
-            if(!q.isCompleted()) {
+        for (Quest q : allQuests) {
+            if (!q.isCompleted()) {
                 return q;
             }
         }
@@ -166,6 +159,7 @@ public class QuestManager {
 
     /**
      * Are there any quests
+     *
      * @return true if any non completed quest exirs
      */
     public static boolean anyQuests() {

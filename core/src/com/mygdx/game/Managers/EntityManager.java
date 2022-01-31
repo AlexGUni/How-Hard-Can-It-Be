@@ -28,6 +28,7 @@ public final class EntityManager {
 
     /**
      * Dont call manually
+     *
      * @param c the comp to add
      */
     public static void addComponent(Component c) {
@@ -37,6 +38,7 @@ public final class EntityManager {
 
     /**
      * Dont call manually
+     *
      * @param e the entity to add
      */
     public static void addEntity(Entity e) {
@@ -47,6 +49,7 @@ public final class EntityManager {
 
     /**
      * gets the first entity found with the given name
+     *
      * @param name name of the entity
      * @return the found entity
      */
@@ -56,6 +59,7 @@ public final class EntityManager {
 
     /**
      * changes the entity's name
+     *
      * @param prev old name
      * @param new_ new name
      */
@@ -109,6 +113,7 @@ public final class EntityManager {
 
     /**
      * gets the time between the last from and the current
+     *
      * @return 1/FPS
      */
     public static float getDeltaTime() {

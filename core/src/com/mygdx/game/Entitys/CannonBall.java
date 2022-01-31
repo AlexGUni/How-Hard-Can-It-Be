@@ -20,7 +20,7 @@ public class CannonBall extends Entity implements CollisionCallBack {
     private static float speed;
     private boolean toggleLife;
     private static final int MAX_AGE = 5;
-    private float age = 0;
+    // private float age = 0;
     private Ship shooter;
 
     public CannonBall() {
@@ -72,8 +72,8 @@ public class CannonBall extends Entity implements CollisionCallBack {
     /**
      * Teleport the cannonball in from offscreen and set in flying away from the ship.
      *
-     * @param pos 2D vector location from where it sets off
-     * @param dir 2D vector direction for its movement
+     * @param pos    2D vector location from where it sets off
+     * @param dir    2D vector direction for its movement
      * @param sender ship entity firing it
      */
     public void fire(Vector2 pos, Vector2 dir, Ship sender) {

@@ -6,11 +6,8 @@ import com.badlogic.gdx.ai.steer.SteeringBehavior;
 import com.badlogic.gdx.ai.utils.Location;
 import com.badlogic.gdx.math.Vector2;
 import com.mygdx.game.Entitys.Ship;
-import com.mygdx.game.Managers.EntityManager;
 import com.mygdx.game.Managers.GameManager;
 import com.mygdx.utils.Utilities;
-
-import static com.mygdx.utils.Constants.PHYSICS_TIME_STEP;
 
 /**
  * Used to control NPCs with steerable for movement and state machines for behaviour
