@@ -18,7 +18,7 @@ import com.mygdx.utils.Utilities;
 import java.util.Objects;
 
 /**
- * Base class for game ships, PC & NPC.
+ * Base class for game ships, Player & NPC.
  */
 public class Ship extends Entity implements CollisionCallBack {
     private static int shipCount = 0;
@@ -32,7 +32,7 @@ public class Ship extends Entity implements CollisionCallBack {
     public Ship() {
         super(4);
         currentDir = new Vector2();
-        setName("Ship (" + shipCount++ + ")");
+        setName("Ship (" + shipCount++ + ")"); // each ship has a unique name
 
         if (shipDirections == null) {
             shipDirections = new ObjectMap<>();
@@ -81,6 +81,11 @@ public class Ship extends Entity implements CollisionCallBack {
         setShipDirection("-up");
     }
 
+    /**
+     * gets the string representation of the direction the ship is facing
+     * @param dir the vector dir the ship is facing
+     * @return the string representation of the direction
+     */
     private String getShipDirection(Vector2 dir) {
         if (!currentDir.equals(dir) && shipDirections.containsKey(dir)) {
             currentDir.set(dir);
@@ -89,14 +94,26 @@ public class Ship extends Entity implements CollisionCallBack {
         return "";
     }
 
+    /**
+     * gets the faction colour
+     * @return the faction colour
+     */
     private String getColour() {
         return getComponent(Pirate.class).getFaction().getColour();
     }
 
+    /**
+     * will rotate the ship to face the direction (just changes the sprite doesn't actually rotate)
+     * @param dir the dir to face (used to get the correct sprite from the texture atlas
+     */
     public void setShipDirection(Vector2 dir) {
         setShipDirection(getShipDirection(dir));
     }
 
+    /**
+     * will rotate the ship to face the direction (just changes the sprite doesn't actually rotate)
+     * @param direction the dir to face (used to get the correct sprite from the texture atlas
+     */
     public void setShipDirection(String direction) {
         if (Objects.equals(direction, "")) {
             return;
@@ -142,6 +159,9 @@ public class Ship extends Entity implements CollisionCallBack {
 
     }
 
+    /**
+     * if called on a Player against anything else call it on the other thing
+     */
     @Override
     public void EnterTrigger(CollisionInfo info) {
         if(this instanceof Player && !(info.b instanceof Player)) {
@@ -149,6 +169,9 @@ public class Ship extends Entity implements CollisionCallBack {
         }
     }
 
+    /**
+     * if called on a Player against anything else call it on the other thing
+     */
     @Override
     public void ExitTrigger(CollisionInfo info) {
         if(this instanceof Player && !(info.b instanceof Player)) {

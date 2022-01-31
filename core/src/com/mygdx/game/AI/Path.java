@@ -2,6 +2,9 @@ package com.mygdx.game.AI;
 
 import com.badlogic.gdx.ai.pfa.Connection;
 
+/**
+ * The path that exists between 2 nodes not bidirectional
+ */
 public class Path implements Connection<Node> {
     Node from;
     Node to;

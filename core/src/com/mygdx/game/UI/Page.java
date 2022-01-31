@@ -26,6 +26,9 @@ public abstract class Page extends ScreenAdapter {
 
     protected abstract void CreateActors();
 
+    /**
+     * Called once the page is show sets input handler and adds actors
+     */
     @Override
     public void show() {
         // button.addListener(new ChangeListener() {
@@ -41,6 +44,10 @@ public abstract class Page extends ScreenAdapter {
         }
     }
 
+    /**
+     * draws the stage and acts upon it also calls update
+     * @param delta delta time
+     */
     @Override
     public void render(float delta) {
         update();
@@ -49,6 +56,9 @@ public abstract class Page extends ScreenAdapter {
         parent.stage.draw();
     }
 
+    /**
+     * Called once the page is hidden. sets input handler to null and clears teh stage
+     */
     @Override
     public void hide() {
         super.hide();
@@ -56,6 +66,12 @@ public abstract class Page extends ScreenAdapter {
         parent.stage.clear();
     }
 
+    /**
+     * Called once the window is resized
+     * updates constants and stage
+     * @param width new dim x
+     * @param height new dom y
+     */
     @Override
     public void resize(int width, int height) {
         super.resize(width, height);
@@ -65,6 +81,9 @@ public abstract class Page extends ScreenAdapter {
         parent.stage.getViewport().update(width, height, true);
     }
 
+    /**
+     * Called once per frame
+     */
     protected void update() {
 
     }

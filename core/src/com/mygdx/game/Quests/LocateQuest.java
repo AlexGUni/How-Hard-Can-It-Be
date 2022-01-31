@@ -9,6 +9,9 @@ import com.mygdx.game.Managers.ResourceManager;
 
 import static com.mygdx.utils.Constants.TILE_SIZE;
 
+/**
+ * Competed once the player has gone to a specific position
+ */
 public class LocateQuest extends Quest {
     private final Vector2 loc;
     private float radius;
@@ -22,6 +25,11 @@ public class LocateQuest extends Quest {
         radius = -1;
     }
 
+    /**
+     * The loc to go to and radius that the play has to be in to completed it
+     * @param pos location to find
+     * @param r leeway in completion
+     */
     public LocateQuest(Vector2 pos, float r) {
         this();
         loc.set(pos);

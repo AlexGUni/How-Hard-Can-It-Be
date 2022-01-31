@@ -16,7 +16,6 @@ import java.util.ArrayList;
 public class College extends Entity {
     private static ArrayList<String> buildingNames;
     private final ArrayList<Building> buildings;
-    private static ArrayList<Vector2> posList;
 
     public College() {
         super();
@@ -25,8 +24,6 @@ public class College extends Entity {
         buildingNames.add("big");
         buildingNames.add("small");
         buildingNames.add("clock");
-        posList = new ArrayList<>();
-        posList.add(new Vector2(0, 0));
         Transform t = new Transform();
         Pirate p = new Pirate();
         addComponents(t, p);
@@ -50,13 +47,15 @@ public class College extends Entity {
     /**
      * Randomly populates the college radius with buildings.
      *
-     * @param colour used to pull the appropriate building sprites
+     * @param colour used to pull the appropriate flag sprite
      */
     private void spawn(String colour) {
         JsonValue collegeSettings = GameManager.getSettings().get("college");
         float radius = collegeSettings.getFloat("spawnRadius");
         // radius = Utilities.tilesToDistance(radius) * BUILDING_SCALE;
         final Vector2 origin = getComponent(Transform.class).getPosition();
+        ArrayList<Vector2> posList = new ArrayList<>();
+        posList.add(new Vector2(0, 0));
 
         for (int i = 0; i < collegeSettings.getInt("numBuildings"); i++) {
             Vector2 pos = Utilities.randomPos(-radius, radius);
@@ -93,8 +92,6 @@ public class College extends Entity {
                 res = true;
             }
         }
-        //TODO: am I wrong thinking that if the last building in list was dead
-        // while the rest are alive, it would mark the college as dead?
         if (!res) {
             getComponent(Pirate.class).kill();
         }

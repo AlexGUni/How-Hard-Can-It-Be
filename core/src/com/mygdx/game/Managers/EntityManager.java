@@ -15,42 +15,56 @@ public final class EntityManager {
     private static ArrayList<Entity> entities;
     private static ArrayList<Component> components;
     private static boolean initialized = false;
-    private static InputManager inpManager;
 
+    /**
+     * Should only be called once although if it isn't called at all it will be called automatically
+     */
     public static void Initialize() {
         entityNames = new ArrayList<>();
-        inpManager = new InputManager();
         entities = new ArrayList<>();
         components = new ArrayList<>();
         initialized = true;
-        Gdx.input.setInputProcessor(inpManager);
     }
 
-    public static InputManager getInputManager() {
-        return inpManager;
-    }
-
+    /**
+     * Dont call manually
+     * @param c the comp to add
+     */
     public static void addComponent(Component c) {
         tryInit();
         components.add(c);
     }
 
+    /**
+     * Dont call manually
+     * @param e the entity to add
+     */
     public static void addEntity(Entity e) {
         tryInit();
         entities.add(e);
         entityNames.add(e.getName());
     }
 
+    /**
+     * gets the first entity found with the given name
+     * @param name name of the entity
+     * @return the found entity
+     */
     public static Entity getEntity(String name) {
         return entities.get(entityNames.indexOf(name));
     }
 
+    /**
+     * changes the entity's name
+     * @param prev old name
+     * @param new_ new name
+     */
     public static void changeName(String prev, String new_) {
         entityNames.set(entityNames.indexOf(prev), new_);
     }
 
     /**
-     * raises the appropriate events for each entity's component. then renders after all entities have being processed
+     * raises the appropriate events for each entity's component. then renders after all entities have being processed if render is requested
      *
      * @param comps calls the events left to right
      */
@@ -84,12 +98,19 @@ public final class EntityManager {
         }
     }
 
+    /**
+     * automatically calls initialised if not done so
+     */
     private static void tryInit() {
         if (!initialized) {
             Initialize();
         }
     }
 
+    /**
+     * gets the time between the last from and the current
+     * @return 1/FPS
+     */
     public static float getDeltaTime() {
         return Gdx.graphics.getDeltaTime();
     }

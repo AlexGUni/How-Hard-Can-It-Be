@@ -12,6 +12,12 @@ public class Transform extends Component implements Location<Vector2> {
     private final Vector2 scale;
     private float rotation;
 
+    /**
+     * position = (0, 0)
+     * scale = (0, 0)
+     * rotation = 0
+     * rot not used but easy to add functionality for
+     */
     public Transform() {
         position = new Vector2();
         scale = new Vector2(1, 1);
@@ -79,7 +85,6 @@ public class Transform extends Component implements Location<Vector2> {
         scale.set(x, y);
     }
 
-    //TODO: rotation redundant with orientation?
     /**
      * @param rot in Radians
      */
@@ -91,6 +96,10 @@ public class Transform extends Component implements Location<Vector2> {
         return position;
     }
 
+    /**
+     * returns the box2d position of the parent or the transform pos if no rigidbody found
+     * @return
+     */
     public Vector2 getCenter() {
         RigidBody rb = parent.getComponent(RigidBody.class);
         if (rb == null) {

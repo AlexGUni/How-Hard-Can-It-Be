@@ -12,7 +12,7 @@ import com.mygdx.game.Managers.RenderingManager;
 import static com.mygdx.utils.Constants.HALF_DIMENSIONS;
 
 /**
- * Responsible for the keyboard control of the player
+ * Responsible for the keyboard/mouse control of the player
  */
 public class PlayerController extends Component {
     private Player player;
@@ -24,6 +24,10 @@ public class PlayerController extends Component {
         setRequirements(ComponentType.RigidBody);
     }
 
+    /**
+     * @param player the parent
+     * @param speed speed
+     */
     public PlayerController(Player player, float speed) {
         this();
         this.player = player;
@@ -31,7 +35,7 @@ public class PlayerController extends Component {
     }
 
     /**
-     * Reads KB&M inputs, moving and shooting as necessary.
+     * Reads keyboard and mouse inputs, moving and shooting as required.
      */
     @Override
     public void update() {
@@ -67,6 +71,10 @@ public class PlayerController extends Component {
         }
     }
 
+    /**
+     * Converts WASD or arrows to direction of travel
+     * @return -1 <= (x, y) <= 1
+     */
     private Vector2 getDirFromWASDInput() {
         Vector2 dir = new Vector2(0, 0);
 

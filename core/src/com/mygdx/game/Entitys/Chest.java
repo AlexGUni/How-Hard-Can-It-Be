@@ -9,6 +9,9 @@ import com.mygdx.game.Managers.ResourceManager;
 
 import static com.mygdx.utils.Constants.BUILDING_SCALE;
 
+/**
+ * Simple entity shown on locate quests origin
+ */
 public class Chest extends Entity{
     public Chest() {
         super(2);

@@ -12,7 +12,13 @@ import com.mygdx.utils.Utilities;
 
 import static com.mygdx.utils.Constants.PHYSICS_TIME_STEP;
 
+/**
+ * Used to control NPCs with steerable for movement and state machines for behaviour
+ */
 public class AINavigation extends Component implements Steerable<Vector2> {
+    /**
+     * NPC settings for steerable
+     */
     private static class Attributes {
         public float boundingRadius = 128;
         public float maxSpd = GameManager.getSettings().get("AI").getFloat("maxSpeed");
@@ -40,6 +46,9 @@ public class AINavigation extends Component implements Steerable<Vector2> {
         this.behavior = behavior;
     }
 
+    /**
+     * Gets the components if != null
+     */
     private void getComps() {
         if (rb == null) {
             rb = parent.getComponent(RigidBody.class);
@@ -47,6 +56,9 @@ public class AINavigation extends Component implements Steerable<Vector2> {
         }
     }
 
+    /**
+     * Called once per frame. Apply the steering behaviour and sets the ship direction, so it faces the right way
+     */
     @Override
     public void update() {
         super.update();
@@ -71,6 +83,9 @@ public class AINavigation extends Component implements Steerable<Vector2> {
         }
     }
 
+    /**
+     * Calculates the forces required by the steering behaviour (no rotation)
+     */
     private void applySteering() {
         boolean anyAcc = false;
         if (!steeringOutput.linear.isZero()) {
@@ -88,10 +103,15 @@ public class AINavigation extends Component implements Steerable<Vector2> {
         }
     }
 
+    /**
+     * Stops all motion
+     */
     public void stop() {
         getComps();
         rb.setVelocity(new Vector2(0, 0));
     }
+
+    // Overrides for steerable
 
     @Override
     public Vector2 getLinearVelocity() {

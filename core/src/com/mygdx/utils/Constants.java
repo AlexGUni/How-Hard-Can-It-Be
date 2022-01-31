@@ -4,8 +4,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 
+/**
+ * creates game constants and is updated when appropriate (I know some aren't technically constants)
+ */
 public final class Constants {
-
+    /**
+     * Create constants need so it can properly source screen dimensions
+     */
     public static void INIT_CONSTANTS() {
         // FULLSCREEN = !Boolean.parseBoolean(System.getProperty("windowed"));
         FULLSCREEN = false;
@@ -32,6 +37,11 @@ public final class Constants {
         TILE_SIZE = 32;
     }
 
+    /**
+     * Update viewport data on resize
+     * @param x new dim x
+     * @param y new dim y
+     */
     public static void UPDATE_VIEWPORT(int x, int y) {
         VIEWPORT_HEIGHT = y;
         VIEWPORT_WIDTH = x;
@@ -54,7 +64,7 @@ public final class Constants {
     public static Vector2 HALF_DIMENSIONS;
     public static String VIEWPORT_TITLE;
     public static float PHYSICS_TIME_STEP;
-    public static final float ZOOM = 1f;
+    public static final float ZOOM = 2.15f;
     public static final boolean VSYNC = true;
     public static final float BUILDING_SCALE = 1.5f;
 

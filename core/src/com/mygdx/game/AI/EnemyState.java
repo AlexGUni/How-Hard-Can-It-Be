@@ -6,6 +6,9 @@ import com.badlogic.gdx.ai.msg.Telegram;
 import com.mygdx.game.Components.Pirate;
 import com.mygdx.game.Entitys.NPCShip;
 
+/**
+ * State machine used for NPC ships' behaviour
+ */
 public enum EnemyState implements State<NPCShip> {
     /**
      * Picks random pos and travels to it
@@ -64,11 +67,10 @@ public enum EnemyState implements State<NPCShip> {
         }
     };
 
-    @Override
-    public void enter(NPCShip e) {
-
-    }
-
+    /**
+     * Called every from for every NPC ship (there or there abouts)
+     * @param e the sender
+     */
     @Override
     public void update(NPCShip e) {
         StateMachine<NPCShip, EnemyState> m = e.stateMachine;
@@ -114,11 +116,27 @@ public enum EnemyState implements State<NPCShip> {
         }
     }
 
+    /**
+     * Called when a state is left
+     * @param e the sender
+     */
     @Override
     public void exit(NPCShip e) {
 
     }
 
+    /**
+     * Called when a state is entered
+     * @param entity the sender
+     */
+    @Override
+    public void enter(NPCShip entity) {
+
+    }
+
+    /**
+     * not used
+     */
     @Override
     public boolean onMessage(NPCShip e, Telegram telegram) {
         return false;

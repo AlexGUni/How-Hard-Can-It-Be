@@ -2,6 +2,9 @@ package com.mygdx.game.Quests;
 
 import com.mygdx.game.Entitys.Player;
 
+/**
+ * Base class for all quests facilitates the checking of completion
+ */
 public abstract class Quest {
     protected String name;
     protected String description;
@@ -15,6 +18,11 @@ public abstract class Quest {
         isCompleted = false;
     }
 
+    /**
+     * Checks if the given player has met the complete condition
+     * @param p the player
+     * @return has completed
+     */
     public abstract boolean checkCompleted(Player p);
 
     public int getReward() {

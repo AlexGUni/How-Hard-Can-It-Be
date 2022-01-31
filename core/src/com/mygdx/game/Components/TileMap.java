@@ -24,6 +24,10 @@ public class TileMap extends Component {
         // CollisionManager.addTileMap(this);
     }
 
+    /**
+     * @param id resource id of the tilemap
+     * @param layer rendering layer
+     */
     public TileMap(int id, RenderLayer layer) {
         this();
         map = ResourceManager.getTileMap(id);
@@ -33,6 +37,11 @@ public class TileMap extends Component {
         TILE_SIZE = getTileDim().x;
     }
 
+    /**
+     * Gets cell at position (in world space, must be n the maps range)
+     * @param pos pos in world space
+     * @return the cell found
+     */
     public TiledMapTileLayer.Cell getCell(Vector2 pos) {
         Vector2 p = pos.cpy();
         TiledMapTileLayer l = (TiledMapTileLayer) map.getLayers().get(1);
@@ -52,12 +61,18 @@ public class TileMap extends Component {
         return map;
     }
 
+    /**
+     * Updates the renderer's view with the rendering camera
+     */
     @Override
     public void update() {
         super.update();
         renderer.setView(RenderingManager.getCamera());
     }
 
+    /**
+     * draws the first 2 layers
+     */
     @Override
     public void render() {
         super.render();

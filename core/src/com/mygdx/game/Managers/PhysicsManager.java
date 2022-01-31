@@ -15,9 +15,6 @@ import java.util.Objects;
 
 import static com.mygdx.utils.Constants.PHYSICS_TIME_STEP;
 
-// TODO: Tweak Physics settings
-// TODO: Map collision
-
 /**
  * Manages the box2D world and bodies for the collision detection and physics
  */

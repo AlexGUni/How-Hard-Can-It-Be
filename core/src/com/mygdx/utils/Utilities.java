@@ -8,6 +8,9 @@ import java.util.Random;
 
 import static com.mygdx.utils.Constants.TILE_SIZE;
 
+/**
+ * Helper functions
+ */
 public final class Utilities {
     public static float vectorToAngle(Vector2 v) {
         return (float) Math.atan2(-v.x, v.y);
@@ -71,28 +74,63 @@ public final class Utilities {
         return x;
     }
 
+    /**
+     * Random Vec2 in range
+     * @param min inclusive
+     * @param max exclusive
+     * @return rand Vector2
+     */
     public static Vector2 randomPos(float min, float max) {
         Random r = new Random();
         return new Vector2(min + r.nextFloat() * (max - min), min + r.nextFloat() * (max - min));
     }
 
+    /**
+     * Chooses a random element
+     * @param list source
+     * @param choice the index of the chosen element
+     * @param <T> type of element to return
+     * @return the random element
+     */
     public static <T> T randomChoice(ArrayList<T> list, Integer choice) {
         choice = new Random().nextInt(list.size());
         return list.get(choice);
     }
 
-    public static Vector2 floor(Vector2 a) {
+    /**
+     * floors the vector
+     * @param a given vector
+     * @return new vector floored
+     */
+    public static Vector2 floor(final Vector2 a) {
         return new Vector2(MathUtils.floor(a.x), MathUtils.floor(a.y));
     }
 
+    /**
+     * helper for System.out.print
+     * @param v string
+     * @param eol eol msg
+     */
     public static void print(String v, String eol) {
         System.out.print(v + eol);
     }
 
+
+    /**
+     * helper for System.out.println
+     * @param v string
+     */
     public static void print(String v) {
         System.out.println(v);
     }
 
+    /**
+     * does array contain a
+     * @param array source
+     * @param a desired
+     * @param <T> type of element looking for
+     * @return true if contained otherwise false
+     */
     public static <T> boolean contains(ArrayList<T> array, T a) {
         for(T b : array) {
             if (b == a) {

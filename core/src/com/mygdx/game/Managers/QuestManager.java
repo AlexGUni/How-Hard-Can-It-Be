@@ -20,6 +20,9 @@ import java.util.stream.IntStream;
 import static com.mygdx.utils.Constants.TILE_SIZE;
 import static com.mygdx.utils.Constants.ZOOM;
 
+/**
+ * Creates the quests and manages their completion and order
+ */
 public class QuestManager {
     private static boolean initialized = false;
     private static ArrayList<Quest> allQuests;
@@ -33,6 +36,11 @@ public class QuestManager {
         createRandomQuests();
     }
 
+    /**
+     * Creates a random kill quest on a random college
+     * @param exclude the id of factions to not kill
+     * @return the id of the faction targeted
+     */
     private static int rndKillQuest(ArrayList<Integer> exclude) {
         int id = 0;
         College enemy;
@@ -50,11 +58,17 @@ public class QuestManager {
         return id;
     }
 
+    /**
+     * Creates a locate quest for a random position sourced from game settings
+     */
     private static void rndLocateQuest() {
         final ArrayList<Float> locations = new ArrayList<>();
         for(float f : GameManager.getSettings().get("quests").get("locations").asFloatArray()) {
             locations.add(f);
         }
+        // in game settings the positions are stored as ints with y following x it doesnt wrap
+        // eg. a, b, c, d
+        // v1: (a, b) v2: (c, d)
         Integer choice = -1;
         float x = Utilities.randomChoice(locations, choice);
         float y = 0;
@@ -71,8 +85,12 @@ public class QuestManager {
         addQuest(new LocateQuest(new Vector2(x, y), 5 * TILE_SIZE));
     }
 
+    /**
+     * 50/50 chance of kill quest or locate quest
+     * @param exclude list of factions to exclude from killing
+     */
     private static void rndQuest(ArrayList<Integer> exclude) {
-        if(new Random().nextFloat() >= 0) {
+        if(new Random().nextFloat() > 0.5) {
             rndLocateQuest();
         }
         else {
@@ -80,6 +98,9 @@ public class QuestManager {
         }
     }
 
+    /**
+     * Creates the quest line with the final quest being to kill a college
+     */
     private static void createRandomQuests() {
         // the last quest added is the final quest
         int primaryEnemyId = new Random().nextInt(4) + 2;
@@ -97,6 +118,10 @@ public class QuestManager {
         allQuests.add(q);
     }
 
+    /**
+     * checks quests for completion and gives rewards, teleports the chest when appropriate.
+     * Stops checking the quest after the first no completed quest (prevents quests being completed in any order)
+     */
     public static void checkCompleted() {
         tryInit();
         Player p = GameManager.getPlayer();
@@ -127,6 +152,7 @@ public class QuestManager {
 
     /**
      * Returns the next un-completed quest
+     * @return the quest null if no un-completed quests found
      */
     public static Quest currentQuest() {
         tryInit();
@@ -138,6 +164,10 @@ public class QuestManager {
         return null;
     }
 
+    /**
+     * Are there any quests
+     * @return true if any non completed quest exirs
+     */
     public static boolean anyQuests() {
         tryInit();
         return currentQuest() != null;

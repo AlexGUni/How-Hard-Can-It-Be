@@ -20,14 +20,12 @@ public class PirateGame extends Game {
     public Stage stage;
     public Skin skin;
 
-    private void loadRes() {
-    }
-
     /**
      * Create instances of game stage and UI screens.
      */
     @Override
     public void create() {
+        // load resources
         int id_ship = ResourceManager.addTexture("ship.png");
         int id_map = ResourceManager.addTileMap("Map.tmx");
         int atlas_id = ResourceManager.addTextureAtlas("Boats.txt");
@@ -36,7 +34,7 @@ public class PirateGame extends Game {
         ResourceManager.addTexture("menuBG.jpg");
         ResourceManager.addTexture("Chest.png");
         ResourceManager.loadAssets();
-
+        // cant load any more resources after this point (just functionally I choose not to implement)
         stage = new Stage(new ScreenViewport());
         createSkin();
         menu = new MenuScreen(this);
@@ -45,6 +43,9 @@ public class PirateGame extends Game {
         setScreen(menu);
     }
 
+    /**
+     * Clean up prevent memory leeks
+     */
     @Override
     public void dispose() {
         menu.dispose();
@@ -53,6 +54,9 @@ public class PirateGame extends Game {
         skin.dispose();
     }
 
+    /**
+     * load ui skin from assets
+     */
     private void createSkin() {
         skin = new Skin(Gdx.files.internal("UISkin/skin.json"));
     }

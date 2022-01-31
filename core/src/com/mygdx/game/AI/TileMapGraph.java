@@ -18,7 +18,6 @@ import static com.mygdx.utils.TileMapCells.*;
 
 /**
  * The Graphical representation of the tilemap with each cell being bidirectionally to the adjacent nodes.
- * (It was an accident, however you can path out of an obstacle but not into one) not fully tested tho
  */
 public class TileMapGraph implements IndexedGraph<Node> {
     private final NodeHeuristic heuristic;
@@ -37,8 +36,10 @@ public class TileMapGraph implements IndexedGraph<Node> {
         mapDim = new Vector2();
     }
 
-    // TODO: don't store obstacle nodes
-
+    /**
+     * Creates a Graph from the given tilemap
+     * @param map the source tilemap
+     */
     public TileMapGraph(TiledMap map) {
         this();
 
@@ -104,6 +105,12 @@ public class TileMapGraph implements IndexedGraph<Node> {
         }
     }
 
+    /**
+     * Node a position (x, y)
+     * @param x co-ord
+     * @param y co-ord
+     * @return Node at (x, y) or null
+     */
     public Node getNode(float x, float y) {
         Node n = nodes.get(getIndex(x, y));
         if (n.cost == -1) {
@@ -116,6 +123,9 @@ public class TileMapGraph implements IndexedGraph<Node> {
         return (int) (mapDim.x * y + x);
     }
 
+    /**
+     * @return type of cell as far as the tile map is condensed
+     */
     private int getType(TiledMapTileLayer.Cell c) {
         return c.getTile().getId();
     }
@@ -125,7 +135,7 @@ public class TileMapGraph implements IndexedGraph<Node> {
     }
 
     /**
-     * doesnt add if already there
+     * doesn't add if already there
      *
      * @param x          x pos
      * @param y          y pos
@@ -139,10 +149,13 @@ public class TileMapGraph implements IndexedGraph<Node> {
         n.cost = 1;
     }
 
+    /**
+     * Adds path to map doesn't check for duplicates
+     * @param a src
+     * @param b dst
+     */
     private void addPath(Node a, Node b) {
         Path path = new Path(a, b);
-
-        // check if b to a exists
 
         if (!nodePaths.containsKey(a)) {
             nodePaths.put(a, new Array<>());
@@ -151,6 +164,13 @@ public class TileMapGraph implements IndexedGraph<Node> {
         paths.add(path);
     }
 
+    /**
+     * Adds path to map doesn't check for duplicates
+     * @param x1 src.x
+     * @param y1 src.y
+     * @param x2 dst.x
+     * @param y2 dst.y
+     */
     private void addPath(float x1, float y1, float x2, float y2) {
         Node a = getNode(x1, y1);
         Node b = getNode(x2, y2);
@@ -163,7 +183,7 @@ public class TileMapGraph implements IndexedGraph<Node> {
      *
      * @param start the starting node
      * @param goal  the ending node
-     * @return a queue of the nodes to visit
+     * @return a queue of the nodes to visit null if no path id found
      */
     public GraphPath<Node> findPath(Node start, Node goal) {
         if (start == null || goal == null) {
@@ -175,7 +195,7 @@ public class TileMapGraph implements IndexedGraph<Node> {
     }
 
     /**
-     * Finds a sequence on locations which can be travelled to without collision
+     * Finds a sequence of locations which can be travelled to without collision
      *
      * @param a starting node
      * @param b destination node

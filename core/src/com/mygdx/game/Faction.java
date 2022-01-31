@@ -3,7 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.math.Vector2;
 
 /**
- * Represents a rival college as an in-game faction.
+ * Represents a faction contains data largly sourced from GameSettings
  */
 public class Faction {
     private String name;

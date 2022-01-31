@@ -8,7 +8,7 @@ import java.util.Iterator;
 import java.util.Queue;
 
 /**
- * I wonder what this is
+ * A First in first out queue
  *
  * @param <T> Data type to store
  */

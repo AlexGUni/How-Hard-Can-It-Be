@@ -80,6 +80,6 @@ public class MenuScreen extends Page {
     public void resize(int width, int height) {
         super.resize(width, height);
         Table t = (Table) actors.get(0);
-        t.setBackground(new TextureRegionDrawable(ResourceManager.getTexture("menuBG.jpg")));
+        t.setBackground(new TextureRegionDrawable(ResourceManager.getTexture("menuBG.jpg"))); // prevent the bg being stretched
     }
 }

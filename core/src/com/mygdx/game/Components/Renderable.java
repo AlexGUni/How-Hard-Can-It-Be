@@ -8,7 +8,7 @@ import com.mygdx.game.Managers.RenderingManager;
 import com.mygdx.game.Managers.ResourceManager;
 
 /**
- * Add the ability for the object to be shown and positioned
+ * Add the ability for the object to be shown
  */
 public class Renderable extends Component {
     protected Sprite sprite;
@@ -89,6 +89,10 @@ public class Renderable extends Component {
         return sprite;
     }
 
+    /**
+     * Asignes a new texture compatible with textures sourced from atlas
+     * @param s the sprite contain the texture
+     */
     public void setTexture(Sprite s) {
         Sprite a = getSprite();
         a.setTexture(s.getTexture());

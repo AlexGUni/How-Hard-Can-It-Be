@@ -103,7 +103,10 @@ public class GameScreen extends Page {
 
     private float accumulator;
 
-    //TODO: I think I get it but I don't really get it...
+    /**
+     * Called every frame calls all other function that need to be called every frame by rasing events and update methods
+     * @param delta
+     */
     @Override
     public void render(float delta) {
         ScreenUtils.clear(BACKGROUND_COLOUR.x, BACKGROUND_COLOUR.y, BACKGROUND_COLOUR.z, 1);
@@ -112,19 +115,23 @@ public class GameScreen extends Page {
 
         accumulator += EntityManager.getDeltaTime();
 
+        // fixed update loop so that physics manager is called regally rather than somewhat randomly
         while (accumulator >= PHYSICS_TIME_STEP) {
             PhysicsManager.update();
             accumulator -= PHYSICS_TIME_STEP;
         }
 
         GameManager.update();
-
-        if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
+        // show end screen if esc is pressed
+        if (Gdx.input.isKeyJustPressed(Input.Keys.ESCAPE)) {
             parent.setScreen(parent.end);
         }
         super.render(delta);
     }
 
+    /**
+     * disposed of all stuff it something is missing from this method you will get memory leaks
+     */
     @Override
     public void dispose() {
         super.dispose();
@@ -155,6 +162,7 @@ public class GameScreen extends Page {
 
     /**
      * Update the UI with new values for health, quest status, etc.
+     * also called once per frame but used for actors by my own convention
      */
     //private String prevQuest = "";
     @Override

@@ -22,6 +22,9 @@ public class NPCShip extends Ship implements CollisionCallBack {
     private static JsonValue AISettings;
     private final QueueFIFO<Vector2> path;
 
+    /**
+     * Creates an initial state machine
+     */
     public NPCShip() {
         super();
         path = new QueueFIFO<>();
@@ -48,10 +51,17 @@ public class NPCShip extends Ship implements CollisionCallBack {
 
     }
 
+    /**
+     * gets the top of targets from pirate component
+     * @return the top target
+     */
     private Ship getTarget() {
         return getComponent(Pirate.class).getTarget();
     }
 
+    /**
+     * updates the state machine
+     */
     @Override
     public void update() {
         super.update();
@@ -60,12 +70,18 @@ public class NPCShip extends Ship implements CollisionCallBack {
         // System.out.println(getComponent(Pirate.class).targetCount());
     }
 
+    /**
+     * is meant to path find to the target but didn't work
+     */
     public void goToTarget() {
         /*path = GameManager.getPath(
                 Utilities.distanceToTiles(getPosition()),
                 Utilities.distanceToTiles(getTarget().getPosition()));*/
     }
 
+    /**
+     * creates a new steering behaviour that will make the NPC beeline for the target doesn't factor in obstetrical
+     */
     public void followTarget() {
         if (getTarget() == null) {
             stopMovement();
@@ -82,12 +98,18 @@ public class NPCShip extends Ship implements CollisionCallBack {
         nav.setBehavior(arrives);
     }
 
+    /**
+     * stops all movement and sets the behaviour to null
+     */
     public void stopMovement() {
         AINavigation nav = getComponent(AINavigation.class);
         nav.setBehavior(null);
         nav.stop();
     }
 
+    /**
+     * Meant to cause the npc to wander
+     */
     public void wander() {
 
     }
@@ -123,8 +145,7 @@ public class NPCShip extends Ship implements CollisionCallBack {
     }
 
     /**
-     * Will set the target to null
-     *
+     * if a taget has left remove it from the potential targets Queue
      * @param info collision info
      */
     @Override
