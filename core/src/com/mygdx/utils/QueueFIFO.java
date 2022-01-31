@@ -1,6 +1,6 @@
 package com.mygdx.utils;
 
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+import java.lang.UnsupportedOperationException;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -125,7 +125,7 @@ public class QueueFIFO<T> implements Queue<T> {
      */
     @Override
     public boolean offer(T t) {
-        throw new NotImplementedException();
+        throw new UnsupportedOperationException();
     }
 
     @Override
