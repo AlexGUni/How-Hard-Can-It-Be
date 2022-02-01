@@ -39,9 +39,9 @@ public class LocateQuest extends Quest {
             description += "South ";
         }
         if (pos.x > 0) {
-            description += "West";
-        } else if (pos.x < 0) {
             description += "East";
+        } else if (pos.x < 0) {
+            description += "West";
         }
 
     }
