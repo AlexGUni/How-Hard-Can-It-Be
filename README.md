@@ -1,8 +1,7 @@
-# How-Hard-Can-it-be
+# How-Hard-Can-It-Be
 
-if someone knows if the git ignore can ignore more files than feel free to do it
+![Screenshot of game](game.png)
 
-WHEN USING THIS REPO LOCALY BE AWARE IT DOESNT HAVE A THE FILE gradle.properties THIS FILE IS REQUIRED FOR THE CODE TO
-RUN. PLEASE LOOK AT OTHER BRACHES TO SEE WHAT THIS FILE SHOULD LOOK LIKE
+You control a ship sailing the Lake of York and are tasked with fulfilling certain quests along the way.
 
-To run in windowed mode, add `-Dwindowed="true"` to VM properties in run configuration
+You use WASD keys to control the direction of the ship. The cannon can be fired in the direction of the mouse with a left click, or in the direction of the ship with the spacebar.
