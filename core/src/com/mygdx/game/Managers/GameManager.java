@@ -13,8 +13,9 @@ import com.mygdx.utils.Utilities;
 
 import java.util.ArrayList;
 
-import static com.mygdx.utils.Constants.TILE_SIZE;
-
+/**
+ * Responsible for creating most entity's associated with the game. Also the cached chest and cannonballs
+ */
 public final class GameManager {
     private static boolean initialized = false;
     private static ArrayList<Faction> factions;
@@ -27,9 +28,11 @@ public final class GameManager {
 
     private static JsonValue settings;
 
-    private static WorldMap map;
     private static TileMapGraph mapGraph;
 
+    /**
+     * facilitates creation of the game
+     */
     public static void Initialize() {
         initialized = true;
         currentElement = 0;
@@ -50,30 +53,48 @@ public final class GameManager {
             String col = v.getString("colour");
             Vector2 pos = new Vector2(v.get("position").getFloat("x"), v.get("position").getFloat("y"));
             pos = Utilities.tilesToDistance(pos);
-            factions.add(new Faction(name, col, pos));
+            Vector2 spawn = new Vector2(v.get("shipSpawn").getFloat("x"), v.get("shipSpawn").getFloat("y"));
+            spawn = Utilities.tilesToDistance(spawn);
+            factions.add(new Faction(name, col, pos, spawn, factions.size() + 1));
         }
     }
 
+    /**
+     * called every fram checks id the quests are completed
+     */
     public static void update() {
         QuestManager.checkCompleted();
     }
 
+    /**
+     * Player is always in ships at index 0
+     *
+     * @return the ship
+     */
     public static Player getPlayer() {
         return (Player) ships.get(0);
     }
 
+    /**
+     * Creates the game with player maps, NPCs, colleges
+     *
+     * @param mapId the resource id of the tilemap
+     */
     public static void SpawnGame(int mapId) {
         CreateWorldMap(mapId);
         CreatePlayer();
+        final int cnt = settings.get("factionDefaults").getInt("shipCount");
         for (int i = 0; i < factions.size(); i++) {
             CreateCollege(i + 1);
-            for (int j = 0; j < settings.get("factionDefaults").getInt("shipCount"); j++) {
-                // CreateNPCShip(i + 1);
+            for (int j = 0; j < cnt; j++) {
+                // prevents halifax from having shipcount + player
+                if (i == 0 && j > cnt - 2) {
+                    break;
+                }
+                NPCShip s = CreateNPCShip(i + 1);
+                s.getComponent(Transform.class).setPosition(getFaction(i + 1).getSpawnPos());
             }
         }
-        CreateNPCShip(2);
-        CreateNPCShip(3);
-
     }
 
     /**
@@ -86,19 +107,36 @@ public final class GameManager {
         ships.add(p);
     }
 
-    public static void CreateNPCShip(int factionId) {
+    /**
+     * Creates an NPC ship with the given faction
+     *
+     * @param factionId desired faction
+     * @return the created ship
+     */
+    public static NPCShip CreateNPCShip(int factionId) {
         tryInit();
         NPCShip e = new NPCShip();
         e.setFaction(factionId);
         ships.add(e);
+        return e;
     }
 
+    /**
+     * Creates the world map
+     *
+     * @param mapId resource id
+     */
     public static void CreateWorldMap(int mapId) {
         tryInit();
-        map = new WorldMap(mapId);
+        WorldMap map = new WorldMap(mapId);
         mapGraph = new TileMapGraph(map.getTileMap());
     }
 
+    /**
+     * Creates the college with it's building for the desired college
+     *
+     * @param factionId desired faction
+     */
     public static void CreateCollege(int factionId) {
         tryInit();
         College c = new College(factionId);
@@ -116,6 +154,11 @@ public final class GameManager {
         return factions.get(factionId - 1);
     }
 
+    /**
+     * Gets the setting object from the GameSetting.json
+     *
+     * @return the JSON representation fo settings
+     */
     public static JsonValue getSettings() {
         tryInit();
         return settings;
@@ -126,13 +169,26 @@ public final class GameManager {
         return colleges.get(factionId - 1);
     }
 
+    /**
+     * Utilises the cached cannonballs to fire one
+     *
+     * @param p   parent
+     * @param dir shoot direction
+     */
     public static void shoot(Ship p, Vector2 dir) {
         Vector2 pos = p.getComponent(Transform.class).getPosition().cpy();
-        pos.add(dir.x * TILE_SIZE * 1.25f, dir.y * TILE_SIZE * 1.25f);
+        //pos.add(dir.x * TILE_SIZE * 0.5f, dir.y * TILE_SIZE * 0.5f);
         ballCache.get(currentElement++).fire(pos, dir, p);
         currentElement %= cacheSize;
     }
 
+    /**
+     * uses a* not sure if it works but i think it does
+     *
+     * @param loc src
+     * @param dst dst
+     * @return queue of delta postions
+     */
     public static QueueFIFO<Vector2> getPath(Vector2 loc, Vector2 dst) {
         return mapGraph.findOptimisedPath(loc, dst);
     }

@@ -19,10 +19,15 @@ public class Entity {
 
     public Entity() {
         components = new ArrayList<>();
-        entityName = "Entity (" + ++entityCount + ")";
+        entityName = "Entity (" + ++entityCount + ")"; // makes ure by default every entity has a unique name (although it's not automatically important if they don't)
         EntityManager.addEntity(this);
     }
 
+    /**
+     * Allocates the correct amount of memory for components
+     *
+     * @param numComponents number of components to allocate memory for
+     */
     public Entity(int numComponents) {
         this();
         components.ensureCapacity(numComponents);
@@ -48,6 +53,12 @@ public class Entity {
         }
     }
 
+    /**
+     * gets component of type
+     *
+     * @param type the type of the desired component
+     * @return the component not cast
+     */
     public Component getComponent(ComponentType type) {
         for (Component c : components) {
             if (c.getType() == type) {
@@ -108,25 +119,21 @@ public class Entity {
                     case Update:
                         c.update();
                         break;
-                    case OnKeyUp:
-                        c.onKeyUp();
-                        break;
-                    case OnKeyDown:
-                        c.onKeyDown();
-                        break;
-                    case OnMouseMove:
-                        c.onMouseMove();
-                        break;
                 }
             }
         }
     }
 
+    /**
+     * Similar to the Component's cleanUp event
+     */
     public void cleanUp() {
 
     }
 
-
+    /**
+     * Similar to the Component's update event
+     */
     public void update() {
 
     }

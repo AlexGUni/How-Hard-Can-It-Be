@@ -10,7 +10,8 @@ import java.util.ArrayList;
 import static com.mygdx.utils.Constants.*;
 
 /**
- * Responsible for all rending. Renders in layers render items' layers can't be changed
+ * Responsible for all rending. Renders in layers render item layers can't be changed
+ * holds the primary sprite batch and rendering camera
  */
 public final class RenderingManager {
     private static boolean initialized = false;

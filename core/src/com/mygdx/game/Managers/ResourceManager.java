@@ -85,7 +85,7 @@ public final class ResourceManager {
     }
 
     /**
-     * loads the font file this doesn't create a font
+     * loads the font file this doesn't create a font (MAY NOT WORK)
      *
      * @param fontPath the path of the font file
      * @return the id of the font generator
@@ -103,7 +103,7 @@ public final class ResourceManager {
     }
 
     /**
-     * Actually creates a font. Can be created after the final load request
+     * Actually creates a font. Can be created after the final load request (MAY NOT WORK)
      *
      * @param font_generator_id the id of the font generator
      * @param fontSize          the size of the desired font this can't be changed later (would have load another font)
@@ -130,7 +130,7 @@ public final class ResourceManager {
     }
 
     /**
-     * Actually creates a font.  Can be created after the final load request
+     * Actually creates a font.  Can be created after the final load request (MAY NOT WORK)
      *
      * @param fontName the file name of the font
      * @param fontSize the size of the desired font this can't be changed later (would have load another font)
@@ -169,8 +169,7 @@ public final class ResourceManager {
 
     public static Texture getTexture(String fPath) {
         tryInit();
-        Texture t = manager.get(fPath);
-        return t;
+        return manager.get(fPath);
     }
 
     public static TextureAtlas getTextureAtlas(String fPath) {
@@ -255,7 +254,14 @@ public final class ResourceManager {
         return tileMaps.get(id_ - 1);
     }
 
+    /**
+     * only looks for simple assets not specialty ones so largely only textures
+     *
+     * @param name the desired asset name
+     * @return the id of the asset found if found
+     */
     public static int getId(String name) {
+        //tryInit();
         return ids.indexOf(name) + 1;
     }
 
@@ -271,7 +277,7 @@ public final class ResourceManager {
     }
 
     /**
-     * It is imperative that this is called
+     * It is imperative that this is called unless you want memory leeks
      */
     public static void cleanUp() {
         tryInit();

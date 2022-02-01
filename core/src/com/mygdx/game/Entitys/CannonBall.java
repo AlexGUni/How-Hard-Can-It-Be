@@ -11,9 +11,17 @@ import com.mygdx.game.Physics.CollisionCallBack;
 import com.mygdx.game.Physics.CollisionInfo;
 import com.mygdx.game.Physics.PhysicsBodyType;
 
+import static com.mygdx.utils.Constants.TILE_SIZE;
+
+/**
+ * Cannonball entity and the methods to get it flying.
+ */
 public class CannonBall extends Entity implements CollisionCallBack {
     private static float speed;
     private boolean toggleLife;
+    private static final int MAX_AGE = 5;
+    // private float age = 0;
+    private Ship shooter;
 
     public CannonBall() {
         super(3);
@@ -35,6 +43,13 @@ public class CannonBall extends Entity implements CollisionCallBack {
     @Override
     public void update() {
         super.update();
+        removeOnCollision();
+    }
+
+    /**
+     * Removes the cannonball offscreen once it hits a target.
+     */
+    private void removeOnCollision() {
         if (toggleLife) {
             getComponent(Renderable.class).hide();
             Transform t = getComponent(Transform.class);
@@ -45,20 +60,46 @@ public class CannonBall extends Entity implements CollisionCallBack {
             rb.setVelocity(0, 0);
             toggleLife = false;
         }
+        /*else{
+            age += EntityManager.getDeltaTime();
+        }
+        if(age > MAX_AGE) {
+            age = 0;
+            kill();
+        }*/
     }
 
+    /**
+     * Teleport the cannonball in from offscreen and set in flying away from the ship.
+     *
+     * @param pos    2D vector location from where it sets off
+     * @param dir    2D vector direction for its movement
+     * @param sender ship entity firing it
+     */
     public void fire(Vector2 pos, Vector2 dir, Ship sender) {
         Transform t = getComponent(Transform.class);
         t.setPosition(pos);
 
         RigidBody rb = getComponent(RigidBody.class);
-        rb.setVelocity(dir.cpy().scl(speed * EntityManager.getDeltaTime()));
+        Vector2 ta = dir.cpy().scl(speed * EntityManager.getDeltaTime());
+        Vector2 o = new Vector2(TILE_SIZE * t.getScale().x, TILE_SIZE * t.getScale().y);
+        Vector2 v = ta.cpy().sub(o);
+
+        rb.setVelocity(v);
 
         getComponent(Renderable.class).show();
+        shooter = sender;
     }
 
+    /**
+     * Marks cannonball for removal on next update.
+     */
     public void kill() {
-        toggleLife = true;
+        toggleLife = false;
+    }
+
+    public Ship getShooter() {
+        return shooter;
     }
 
     @Override

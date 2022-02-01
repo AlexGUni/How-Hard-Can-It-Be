@@ -9,8 +9,9 @@ import com.mygdx.game.Managers.RenderingManager;
 
 /**
  * Renders text with give font and colour.
- * Uses transform component for position but if not present then internal position
- * position is the bottom left
+ * Uses transform component for position but if not present then internal position is the bottom left
+ * mainly used for debug
+ * doen't fully work but is usable
  */
 public class Text extends Component {
     BitmapFont font;

@@ -6,13 +6,12 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.Vector3;
 import com.mygdx.game.Entitys.Player;
 import com.mygdx.game.Entitys.Ship;
-import com.mygdx.game.Managers.EntityManager;
 import com.mygdx.game.Managers.RenderingManager;
 
 import static com.mygdx.utils.Constants.HALF_DIMENSIONS;
 
 /**
- * Responsible for the keyboard control of the player
+ * Responsible for the keyboard/mouse control of the player
  */
 public class PlayerController extends Component {
     private Player player;
@@ -24,37 +23,26 @@ public class PlayerController extends Component {
         setRequirements(ComponentType.RigidBody);
     }
 
+    /**
+     * @param player the parent
+     * @param speed  speed
+     */
     public PlayerController(Player player, float speed) {
         this();
         this.player = player;
         this.speed = speed;
     }
 
+    /**
+     * Reads keyboard and mouse inputs, moving and shooting as required.
+     */
     @Override
     public void update() {
         super.update();
         final float s = speed;
 
-        Vector2 dir = new Vector2(0, 0);
-
-        if (Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.DPAD_UP)) {
-            dir.y += 1;
-        }
-
-        if (Gdx.input.isKeyPressed(Input.Keys.S) || Gdx.input.isKeyPressed(Input.Keys.DPAD_DOWN)) {
-            dir.y -= 1;
-        }
-
-        if (Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT)) {
-            dir.x -= 1;
-        }
-
-        if (Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT)) {
-            dir.x += 1;
-        }
-
+        Vector2 dir = getDirFromWASDInput();
         ((Ship) parent).setShipDirection(dir);
-
         dir.scl(s);
 
         RigidBody rb = parent.getComponent(RigidBody.class);
@@ -75,8 +63,36 @@ public class PlayerController extends Component {
             // unit dir to fire
             ((Ship) parent).shoot(delta);
         }
-        else if(Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
-            ((Ship) parent).shoot(dir);
+
+        if (Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
+            // unit dir to fire
+            ((Ship) parent).shoot();
         }
+    }
+
+    /**
+     * Converts WASD or arrows to direction of travel
+     *
+     * @return -1 <= (x, y) <= 1
+     */
+    private Vector2 getDirFromWASDInput() {
+        Vector2 dir = new Vector2(0, 0);
+
+        if (Gdx.input.isKeyPressed(Input.Keys.W) || Gdx.input.isKeyPressed(Input.Keys.DPAD_UP)) {
+            dir.y += 1;
+        }
+
+        if (Gdx.input.isKeyPressed(Input.Keys.S) || Gdx.input.isKeyPressed(Input.Keys.DPAD_DOWN)) {
+            dir.y -= 1;
+        }
+
+        if (Gdx.input.isKeyPressed(Input.Keys.A) || Gdx.input.isKeyPressed(Input.Keys.DPAD_LEFT)) {
+            dir.x -= 1;
+        }
+
+        if (Gdx.input.isKeyPressed(Input.Keys.D) || Gdx.input.isKeyPressed(Input.Keys.DPAD_RIGHT)) {
+            dir.x += 1;
+        }
+        return dir;
     }
 }

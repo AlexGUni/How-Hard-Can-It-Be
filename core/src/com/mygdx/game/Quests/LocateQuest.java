@@ -5,6 +5,9 @@ import com.mygdx.game.Entitys.Player;
 
 import static com.mygdx.utils.Constants.TILE_SIZE;
 
+/**
+ * Competed once the player has gone to a specific position
+ */
 public class LocateQuest extends Quest {
     private final Vector2 loc;
     private float radius;
@@ -18,26 +21,30 @@ public class LocateQuest extends Quest {
         radius = -1;
     }
 
+    /**
+     * The loc to go to and radius that the play has to be in to completed it
+     *
+     * @param pos location to find
+     * @param r   leeway in completion
+     */
     public LocateQuest(Vector2 pos, float r) {
         this();
         loc.set(pos);
         radius = r * r;
-        pos.scl(1/TILE_SIZE).sub(50, 50); // centres on 0, 0
+        pos.scl(1 / TILE_SIZE).sub(50, 50); // centres on 0, 0
         description = "";
-        if(pos.y > 0) {
+        if (pos.y > 0) {
             description += "North ";
-        }
-        else if(pos.y < 0) {
+        } else if (pos.y < 0) {
             description += "South ";
         }
-        if(pos.x > 0) {
+        if (pos.x > 0) {
             description += "West";
-        }
-        else if(pos.x < 0) {
+        } else if (pos.x < 0) {
             description += "East";
         }
 
-        }
+    }
 
     @Override
     public boolean checkCompleted(Player p) {
@@ -51,4 +58,7 @@ public class LocateQuest extends Quest {
         return isCompleted;
     }
 
+    public Vector2 getLocation() {
+        return loc;
+    }
 }

@@ -5,6 +5,9 @@ import com.mygdx.game.Entitys.Entity;
 import com.mygdx.game.Physics.CollisionCallBack;
 import com.mygdx.game.Physics.CollisionInfo;
 
+/**
+ * Handels collision callbacks for box2d
+ */
 public class CollisionManager implements ContactListener {
     private static boolean initialized = false;
 
@@ -15,8 +18,14 @@ public class CollisionManager implements ContactListener {
         initialized = true;
     }
 
+    /**
+     * called for every contact that box2d detects prior to collision restitution (doesn't matter if it is a trigger/sensor)
+     *
+     * @param contact the contact data
+     */
     @Override
     public void beginContact(Contact contact) {
+        // generally calls the correct callback on the appropriate objects (not as intuitive as id like though)
         Fixture fa = contact.getFixtureA();
         Body ba = fa.getBody();
         Object oa = ba.getUserData();
@@ -55,8 +64,14 @@ public class CollisionManager implements ContactListener {
         }
     }
 
+    /**
+     * called for every contact that box2d detects after collision restitution (doesn't matter if it is a trigger/sensor)
+     *
+     * @param contact the contact data
+     */
     @Override
     public void endContact(Contact contact) {
+        // generally calls the correct callback on the appropriate objects (not as intuitive as id like though)
         Fixture fa = contact.getFixtureA();
         Body ba = fa.getBody();
         Object oa = ba.getUserData();

@@ -32,7 +32,7 @@ public abstract class Component {
     }
 
     /**
-     * Sets the required components will crash if they aren't present
+     * Sets the required components
      *
      * @param reqs take a guess
      */
@@ -40,6 +40,9 @@ public abstract class Component {
         requirements.addAll(Arrays.asList(reqs));
     }
 
+    /**
+     * Checks if the passed requirements exist will crash if they aren't
+     */
     private void checkRequirements() {
         if (reqsMet) {
             return;
@@ -82,18 +85,6 @@ public abstract class Component {
      * Called once per frame
      */
     public void update() {
-        checkRequirements();
-    }
-
-    public void onKeyUp() {
-        checkRequirements();
-    }
-
-    public void onKeyDown() {
-        checkRequirements();
-    }
-
-    public void onMouseMove() {
         checkRequirements();
     }
 

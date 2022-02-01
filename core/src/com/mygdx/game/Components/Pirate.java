@@ -7,6 +7,9 @@ import com.mygdx.game.Faction;
 import com.mygdx.game.Managers.GameManager;
 import com.mygdx.utils.QueueFIFO;
 
+/**
+ * Gives the concepts of health plunder, etc. Allows for firing of cannonballs, factions, death, targets
+ */
 public class Pirate extends Component {
     private int factionId;
     private int plunder;
@@ -16,9 +19,9 @@ public class Pirate extends Component {
     private final int attackDmg;
 
     /**
-     * The enemy that is being targeted not used for player
+     * The enemy that is being targeted by the AI.
      */
-    private QueueFIFO<Ship> targets;
+    private final QueueFIFO<Ship> targets;
 
     public Pirate() {
         super();
@@ -61,6 +64,11 @@ public class Pirate extends Component {
         }
     }
 
+    /**
+     * Will shoot a cannonball assigning this.parent as the cannonball's parent (must be Ship atm)
+     *
+     * @param dir the direction to shoot in
+     */
     public void shoot(Vector2 dir) {
         if (ammo == 0) {
             return;
@@ -69,6 +77,11 @@ public class Pirate extends Component {
         GameManager.shoot((Ship) parent, dir);
     }
 
+    /**
+     * Adds ammo
+     *
+     * @param ammo amount to add
+     */
     public void reload(int ammo) {
         this.ammo += ammo;
     }
@@ -78,7 +91,7 @@ public class Pirate extends Component {
     }
 
     /**
-     * if dst to target is less then attack range
+     * if dst to target is less than attack range
      * target will be null if not in agro range
      */
     public boolean canAttack() {
@@ -110,6 +123,7 @@ public class Pirate extends Component {
     public Ship getTarget() {
         return targets.peek();
     }
+
     public void removeTarget() {
         targets.pop();
     }
@@ -118,6 +132,9 @@ public class Pirate extends Component {
         return isAlive;
     }
 
+    /**
+     * Kill its self
+     */
     public void kill() {
         health = 0;
         isAlive = false;

@@ -6,6 +6,9 @@ import com.mygdx.game.Managers.PhysicsManager;
 import com.mygdx.game.Physics.CollisionCallBack;
 import com.mygdx.game.Physics.PhysicsBodyType;
 
+/**
+ * Defines parameters related to collisions of sprites.
+ */
 public class RigidBody extends Component {
     int bodyId;
     private final Vector2 halfDim;
@@ -17,10 +20,25 @@ public class RigidBody extends Component {
         setRequirements(ComponentType.Transform, ComponentType.Renderable);
     }
 
+    /**
+     * Calls constructor with is trigger false
+     *
+     * @param type defines how it interacts with other objects
+     * @param r    used for creating the fixture (aka the collider)
+     * @param t    used for positioning and scaling the collider
+     */
     public RigidBody(PhysicsBodyType type, Renderable r, Transform t) {
         this(type, r, t, false);
     }
 
+    /**
+     * Can create body that is trigger or callable
+     *
+     * @param type      defines how it interacts with other objects
+     * @param r         used for creating the fixture (aka the collider)
+     * @param t         used for positioning and scaling the collider
+     * @param isTrigger false allows for collision true doesn't
+     */
     public RigidBody(PhysicsBodyType type, Renderable r, Transform t, boolean isTrigger) {
         this();
         BodyDef def = new BodyDef();
@@ -81,6 +99,11 @@ public class RigidBody extends Component {
         f.setUserData(data);
     }
 
+    /**
+     * Is used during collision phase to add more functionality
+     *
+     * @param data class that inherits from CollisionCallBack
+     */
     public void setCallback(CollisionCallBack data) {
         getBody().setUserData(data);
     }
@@ -94,11 +117,18 @@ public class RigidBody extends Component {
         setVelocity(new Vector2(x, y));
     }
 
+    /**
+     * Sets the center pos of the object
+     */
     public void setPosition(Vector2 position) {
-        Body b = PhysicsManager.getBody(bodyId);
-        b.setTransform(position, 0);
+        setPosition(position, false);
     }
 
+    /**
+     * Sets the bottom left position of the object
+     *
+     * @param offset should plly offset
+     */
     public void setPosition(Vector2 position, boolean offset) {
         Body b = PhysicsManager.getBody(bodyId);
         if (offset) {
@@ -111,6 +141,9 @@ public class RigidBody extends Component {
         return PhysicsManager.getBody(bodyId);
     }
 
+    /**
+     * Called every frame translates the transform to match with the box2d body's position factoring offset
+     */
     @Override
     public void update() {
         super.update();

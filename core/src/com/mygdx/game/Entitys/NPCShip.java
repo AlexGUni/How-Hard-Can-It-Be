@@ -4,21 +4,31 @@ import com.badlogic.gdx.ai.fsm.DefaultStateMachine;
 import com.badlogic.gdx.ai.fsm.StateMachine;
 import com.badlogic.gdx.ai.steer.behaviors.Arrive;
 import com.badlogic.gdx.math.Vector2;
-import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.JsonValue;
 import com.mygdx.game.AI.EnemyState;
-import com.mygdx.game.Components.*;
+import com.mygdx.game.Components.AINavigation;
+import com.mygdx.game.Components.Pirate;
+import com.mygdx.game.Components.RigidBody;
+import com.mygdx.game.Components.Transform;
 import com.mygdx.game.Managers.GameManager;
 import com.mygdx.game.Physics.CollisionCallBack;
 import com.mygdx.game.Physics.CollisionInfo;
 import com.mygdx.utils.QueueFIFO;
 import com.mygdx.utils.Utilities;
 
+import java.util.Objects;
+
+/**
+ * NPC ship entity class.
+ */
 public class NPCShip extends Ship implements CollisionCallBack {
     public StateMachine<NPCShip, EnemyState> stateMachine;
     private static JsonValue AISettings;
     private final QueueFIFO<Vector2> path;
 
+    /**
+     * Creates an initial state machine
+     */
     public NPCShip() {
         super();
         path = new QueueFIFO<>();
@@ -29,14 +39,10 @@ public class NPCShip extends Ship implements CollisionCallBack {
 
         stateMachine = new DefaultStateMachine<>(this, EnemyState.WANDER);
 
-        setName("Enemy");
-
-        Text text = new Text(new Vector3(1, 0, 0));
-        text.setText(getName());
-
+        setName("NPC");
         AINavigation nav = new AINavigation();
 
-        addComponents(nav, text);
+        addComponent(nav);
 
 
         RigidBody rb = getComponent(RigidBody.class);
@@ -49,10 +55,18 @@ public class NPCShip extends Ship implements CollisionCallBack {
 
     }
 
+    /**
+     * gets the top of targets from pirate component
+     *
+     * @return the top target
+     */
     private Ship getTarget() {
         return getComponent(Pirate.class).getTarget();
     }
 
+    /**
+     * updates the state machine
+     */
     @Override
     public void update() {
         super.update();
@@ -61,12 +75,18 @@ public class NPCShip extends Ship implements CollisionCallBack {
         // System.out.println(getComponent(Pirate.class).targetCount());
     }
 
+    /**
+     * is meant to path find to the target but didn't work
+     */
     public void goToTarget() {
         /*path = GameManager.getPath(
                 Utilities.distanceToTiles(getPosition()),
                 Utilities.distanceToTiles(getTarget().getPosition()));*/
     }
 
+    /**
+     * creates a new steering behaviour that will make the NPC beeline for the target doesn't factor in obstetrical
+     */
     public void followTarget() {
         if (getTarget() == null) {
             stopMovement();
@@ -83,12 +103,18 @@ public class NPCShip extends Ship implements CollisionCallBack {
         nav.setBehavior(arrives);
     }
 
+    /**
+     * stops all movement and sets the behaviour to null
+     */
     public void stopMovement() {
         AINavigation nav = getComponent(AINavigation.class);
         nav.setBehavior(null);
         nav.stop();
     }
 
+    /**
+     * Meant to cause the npc to wander
+     */
     public void wander() {
 
     }
@@ -110,13 +136,13 @@ public class NPCShip extends Ship implements CollisionCallBack {
      */
     @Override
     public void EnterTrigger(CollisionInfo info) {
-        if(!(info.a instanceof Ship)) {
+        if (!(info.a instanceof Ship)) {
             return;
         }
         Ship other = (Ship) info.a;
-        if (other.getComponent(Pirate.class).getFaction().getName() == getComponent(Pirate.class).getFaction().getName()) {
-           // is the same faction
-           return;
+        if (Objects.equals(other.getComponent(Pirate.class).getFaction().getName(), getComponent(Pirate.class).getFaction().getName())) {
+            // is the same faction
+            return;
         }
         // add the new collision as a new target
         Pirate pirate = getComponent(Pirate.class);
@@ -124,20 +150,20 @@ public class NPCShip extends Ship implements CollisionCallBack {
     }
 
     /**
-     * Will set the target to null
+     * if a taget has left remove it from the potential targets Queue
      *
      * @param info collision info
      */
     @Override
     public void ExitTrigger(CollisionInfo info) {
-        if(!(info.a instanceof Ship)) {
+        if (!(info.a instanceof Ship)) {
             return;
         }
         Pirate pirate = getComponent(Pirate.class);
         Ship o = (Ship) info.a;
         // remove the object from the targets list
         for (Ship targ : pirate.getTargets()) {
-            if(targ == o) {
+            if (targ == o) {
                 pirate.getTargets().remove(targ);
                 break;
             }

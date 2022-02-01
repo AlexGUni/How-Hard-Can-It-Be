@@ -14,6 +14,9 @@ import com.mygdx.game.Physics.PhysicsBodyType;
 
 import static com.mygdx.utils.Constants.BUILDING_SCALE;
 
+/**
+ * Buildings that you see in game.
+ */
 public class Building extends Entity implements CollisionCallBack {
     private String buildingName;
     private static int atlas_id;
@@ -30,11 +33,22 @@ public class Building extends Entity implements CollisionCallBack {
         addComponents(t, p, r);
     }
 
-    Building(boolean isflag) {
+    /**
+     * Flags are indestructible and mark college locations.
+     *
+     * @param isFlag set to true to create a flag
+     */
+    Building(boolean isFlag) {
         this();
-        this.isFlag = isflag;
+        this.isFlag = isFlag;
     }
 
+    /**
+     * Creates a building with the given name at the specified location.
+     *
+     * @param pos  2D position vector
+     * @param name name of building
+     */
     public void create(Vector2 pos, String name) {
         Sprite s = ResourceManager.getSprite(atlas_id, name);
         Renderable r = getComponent(Renderable.class);
@@ -47,6 +61,9 @@ public class Building extends Entity implements CollisionCallBack {
         addComponent(rb);
     }
 
+    /**
+     * Replace the building with ruins and mark as broken.
+     */
     private void destroy() {
         if (isFlag) {
             return;
@@ -71,9 +88,20 @@ public class Building extends Entity implements CollisionCallBack {
 
     }
 
+    /**
+     * Destroys the building and marks cannonball for removal.
+     *
+     * @param info CollisionInfo container
+     */
     @Override
     public void EnterTrigger(CollisionInfo info) {
         if (info.a instanceof CannonBall && isAlive()) {
+            CannonBall b = (CannonBall) info.a;
+            // the ball if from the same faction
+            /*if(Objects.equals(b.getShooter().getComponent(Pirate.class).getFaction().getName(),
+                    getComponent(Pirate.class).getFaction().getName())) {
+                return;
+            }*/
             destroy();
             ((CannonBall) info.a).kill();
         }
