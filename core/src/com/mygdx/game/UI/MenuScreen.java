@@ -7,6 +7,8 @@ import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.badlogic.gdx.scenes.scene2d.utils.TextureRegionDrawable;
+import com.mygdx.game.Components.Pirate;
+import com.mygdx.game.Managers.GameManager;
 import com.mygdx.game.Managers.ResourceManager;
 import com.mygdx.game.PirateGame;
 
@@ -16,8 +18,10 @@ import static com.mygdx.utils.Constants.VIEWPORT_HEIGHT;
  * Contains widgets defining the start-of-game menu screen.
  */
 public class MenuScreen extends Page {
+    public int difficulty;
     public MenuScreen(PirateGame parent) {
         super(parent);
+        difficulty = 1;
     }
 
     /**
@@ -25,6 +29,7 @@ public class MenuScreen extends Page {
      */
     @Override
     protected void CreateActors() {
+
         Table t = new Table();
         t.setFillParent(true);
 
@@ -40,10 +45,21 @@ public class MenuScreen extends Page {
         play.addListener(new ChangeListener() {
             @Override
             public void changed(ChangeEvent event, Actor actor) {
+                GameManager.getPlayer().getComponent(Pirate.class).updateSettings(difficulty);
                 parent.setScreen(parent.game);
             }
         });
         t.add(play).top().size(100, 25).spaceBottom(space);
+        t.row();
+
+        TextButton difficulty = new TextButton("Difficulty", parent.skin);
+        difficulty.addListener(new ChangeListener() {
+            @Override
+            public void changed(ChangeEvent event, Actor actor) {
+                parent.setScreen(parent.difficulty);
+            }
+        });
+        t.add(difficulty).top().size(100, 25).spaceBottom(space);
         t.row();
 
         TextButton quit = new TextButton("Quit", parent.skin);
@@ -60,6 +76,8 @@ public class MenuScreen extends Page {
 
         actors.add(t);
     }
+
+
 
     @Override
     public void show() {

@@ -9,6 +9,7 @@
     "attackRange_tiles": 4.0,
     "ammo": 50
   },
+  
   "AI": {
     "maxSpeed": 500.0,
     "accelerationTime": 0.01,

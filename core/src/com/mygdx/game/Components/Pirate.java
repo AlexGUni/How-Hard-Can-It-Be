@@ -16,7 +16,7 @@ public class Pirate extends Component {
     protected boolean isAlive;
     private int health;
     private int ammo;
-    private final int attackDmg;
+    private int attackDmg;
 
     /**
      * The enemy that is being targeted by the AI.
@@ -34,6 +34,20 @@ public class Pirate extends Component {
         health = starting.getInt("health");
         attackDmg = starting.getInt("damage");
         ammo = starting.getInt("ammo");
+    }
+
+
+    public void updateSettings (int difficulty) {
+        if (difficulty == 0) {
+            health = 200;
+            ammo = 100;
+            attackDmg = 20;
+        } else if (difficulty == 2) {
+            health = 50;
+            ammo = 25;
+            attackDmg = 5;
+        }
+
     }
 
     public void addTarget(Ship target) {
